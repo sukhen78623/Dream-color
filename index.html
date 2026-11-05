@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Dream Color — Your Complete Color Solution</title>
+<meta name="description" content="Dream Color is a complete color solution platform: palettes, gradients, color psychology, accessibility checks, converters and design tools in one place.">
+<meta property="og:title" content="Dream Color — Your Complete Color Solution">
+<meta property="og:description" content="Discover, create, understand and work with colors effortlessly.">
+<meta property="og:type" content="website">
+<meta name="theme-color" content="#5b3df5">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/assets/css/styles.css">
+<script src="/assets/js/components.js" defer></script>
+<script src="/assets/js/home.js" defer></script>
+</head>
+<body>
+<dc-header></dc-header>
+<main>
+<section class="hero">
+<div class="mesh"></div>
+<div class="waves" aria-hidden="true">
+<svg viewBox="0 0 2880 150" preserveAspectRatio="none"><defs><linearGradient id="g1"><stop offset="0" stop-color="#f43f5e" stop-opacity=".35"/><stop offset=".5" stop-color="#8b5cf6" stop-opacity=".35"/><stop offset="1" stop-color="#3b82f6" stop-opacity=".35"/></linearGradient></defs><path fill="url(#g1)" d="M0 80Q360 10 720 80T1440 80T2160 80T2880 80V150H0Z"/></svg>
+<svg viewBox="0 0 2880 150" preserveAspectRatio="none"><defs><linearGradient id="g2"><stop offset="0" stop-color="#f59e0b" stop-opacity=".3"/><stop offset=".5" stop-color="#ec4899" stop-opacity=".3"/><stop offset="1" stop-color="#10b981" stop-opacity=".3"/></linearGradient></defs><path fill="url(#g2)" d="M0 100Q360 40 720 100T1440 100T2160 100T2880 100V150H0Z"/></svg>
+</div>
+<div class="w">
+<div>
+<p class="eyebrow">Your Complete Color Solution</p>
+<h1>Every Color Possibility. One Beautiful Place.</h1>
+<p class="lead">Discover, create, understand and work with colors effortlessly. From beautiful palettes and gradients to color psychology, accessibility and professional design tools — everything you need to make better color decisions is here.</p>
+<div class="cta"><a class="btn p" href="#tools">Explore Color Tools</a><a class="btn" href="#color-of-the-day">Discover Colors</a></div>
+<div class="trust"><span>36 color tools</span><span>Psychology &amp; meaning</span><span>Accessibility checks</span></div>
+</div>
+<div class="mock" aria-hidden="true">
+<div class="tb"><i></i><i></i><i></i></div>
+<div class="pal"><i style="background:#4F2FE0"></i><i style="background:#C026D3"></i><i style="background:#F43F5E"></i><i style="background:#F59E0B"></i><i style="background:#10B981"></i></div>
+<div class="mr"><div><span>HEX</span><b>#4F2FE0</b></div><div><span>RGB</span><b>79, 47, 224</b></div><div><span>Contrast on white</span><b>7.4:1 · AAA</b></div></div>
+</div>
+</div>
+</section>
+
+<section id="tools"><div class="w">
+<p class="eyebrow">The Platform</p>
+<h2>A complete toolkit for every color task</h2>
+<p class="lead">Seven families of tools in one place, from finding inspiration to checking accessibility and exporting code.</p>
+<div class="grid" id="cats"></div>
+<div class="ctr"><a class="btn p" href="#tools">Explore All Color Tools</a></div>
+</div></section>
+
+<section id="color-of-the-day" class="alt"><div class="w">
+<p class="eyebrow">Color of the Day</p>
+<h2>One featured color, every day</h2>
+<p class="lead" id="codDate"></p>
+<div class="cod">
+<div class="big" id="codBig"><small>Today</small><b id="codName"></b><span id="codHex"></span></div>
+<div class="panel">
+<div class="vals" id="codVals"></div>
+<button class="btn sm" id="dl" type="button"></button>
+<h3>Meaning</h3><p id="codM"></p>
+<h3>Positive associations</h3><p id="codP"></p>
+<h3>Possible negative associations</h3><p id="codN"></p>
+<h3>Suggested combinations</h3><div class="combo" id="codC"></div>
+</div></div>
+</div></section>
+
+<section id="psychology"><div class="w">
+<p class="eyebrow">Color Psychology</p>
+<h2>How colors can make people feel</h2>
+<p class="lead">A starting point for thinking about the mood a color may carry.</p>
+<div class="grid" id="psyGrid"></div>
+<p class="note">Color meanings are not universal scientific rules. Reactions vary with culture, context and personal experience, so treat these as common associations, not guarantees.</p>
+<div class="ctr"><a class="btn p" href="#cat-psychology">Explore More Color Psychology</a></div>
+</div></section>
+
+<section id="solutions" class="alt"><div class="w">
+<p class="eyebrow">Creative Needs</p>
+<h2>Color decisions for every kind of project</h2>
+<p class="lead">Whatever you are making, Dream Color helps you choose with more confidence.</p>
+<div class="grid" id="uses"></div>
+</div></section>
+
+<section id="export"><div class="w ex">
+<div>
+<p class="eyebrow">Create, Customize &amp; Export</p>
+<h2>Take your colors anywhere</h2>
+<p class="lead">Copy values in the format your project needs, or save your colors as images and code-ready snippets.</p>
+<div class="fm"><span>HEX</span><span>RGB</span><span>HSL</span><span>CMYK</span><span>PNG</span><span>CSS variables</span><span>CSS gradients</span></div>
+</div>
+<div class="win"><div class="bar"></div><div class="bd" id="exRows"></div></div>
+</div></section>
+
+<section id="how" class="alt"><div class="w">
+<p class="eyebrow">How Dream Color Helps</p>
+<h2>Discover. Understand. Create.</h2>
+<div class="steps">
+<div class="step"><svg viewBox="0 0 48 48" fill="none" stroke="#f43f5e" stroke-width="2.5" stroke-linecap="round"><circle cx="21" cy="21" r="12"/><path d="M30 30l11 11"/></svg><h3>Discover</h3><p>Explore colors, meanings, combinations and inspiration.</p></div>
+<div class="step"><svg viewBox="0 0 48 48" fill="none" stroke="#3b82f6" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M24 6C14 6 8 13 8 21c0 6 4 9 7 11v6h18v-6c3-2 7-5 7-11 0-8-6-15-16-15zM18 42h12"/></svg><h3>Understand</h3><p>Learn about color psychology, harmony, accessibility and color values.</p></div>
+<div class="step"><svg viewBox="0 0 48 48" fill="none" stroke="#f97316" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M10 38l4-12L34 6l8 8-20 20z"/><path d="M28 12l8 8"/></svg><h3>Create</h3><p>Generate, customize, convert, mix and export colors for your projects.</p></div>
+</div></div></section>
+
+<section><div class="w"><div class="fin">
+<h2>Ready to Explore the World of Colors?</h2>
+<p>Discover new colors, explore powerful tools and bring your creative ideas to life with Dream Color.</p>
+<a class="btn" href="#tools">Explore Dream Color</a>
+</div></div></section>
+</main>
+<dc-footer></dc-footer>
+<div id="toast" role="status" aria-live="polite"></div>
+</body>
+</html>
