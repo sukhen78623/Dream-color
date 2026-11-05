@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<!--
+  ==========================================================================
+  DREAM COLOR – PAGE TEMPLATE
+  ==========================================================================
+  Copy this file to create any new page (Home, Blog, About, a blog post…).
+  The shared header and footer, branding, typography and animations come
+  from the site-wide files below. You never copy header/footer markup.
+
+  1. Copy the file to its new location, e.g. about.html or blog/index.html.
+  2. Fix the "../" prefix on the 3 asset lines to match the page depth:
+        site root (about.html)        ->  assets/…
+        one folder deep (blog/index)  ->  ../assets/…
+        two folders deep (blog/a/b)   ->  ../../assets/…
+     (This template sits one folder deep, so it uses "../".)
+  3. Replace the title, description, canonical, Open Graph and <h1>.
+  4. Delete the <meta name="robots" content="noindex"> line (it only keeps
+     this template itself out of search engines).
+  5. Add the page link to assets/js/site-config.js (nav and/or footer).
+  ==========================================================================
+-->
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Page Title | Dream Color</title>
+  <meta name="description" content="A short, useful description of this page (about 150 characters).">
+  <meta name="robots" content="noindex"><!-- DELETE this line on real pages -->
+  <link rel="canonical" href="https://example.com/your-page-path/">
+
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Dream Color">
+  <meta property="og:title" content="Page Title | Dream Color">
+  <meta property="og:description" content="A short, useful description of this page.">
+  <meta property="og:url" content="https://example.com/your-page-path/">
+  <meta property="og:image" content="https://example.com/assets/img/og-image.png">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <!-- Shared design system (same file on every page) -->
+  <link rel="stylesheet" href="../assets/css/base.css">
+  <!-- Optional: your page-specific stylesheet, built on the shared tokens -->
+
+  <!-- Shared layout: injects the common header and footer -->
+  <script src="../assets/js/site-config.js" defer></script>
+  <script src="../assets/js/layout.js" defer></script>
+</head>
+<body>
+  <!-- Shared header is rendered here -->
+  <div data-site-header></div>
+
+  <main id="main" class="page-main">
+    <div class="container">
+      <h1>Page heading</h1>
+      <div class="prose">
+        <p>Write your page content here. The <code>prose</code> class gives long-form text a readable width and spacing.</p>
+        <h2>A section heading</h2>
+        <p>More content.</p>
+      </div>
+    </div>
+  </main>
+
+  <!-- Shared footer is rendered here -->
+  <div data-site-footer></div>
+</body>
+</html>
