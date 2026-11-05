@@ -1,0 +1,100 @@
+/* ==========================================================================
+   Dream Color – animation system (reusable on every page)
+   Only lightweight CSS: compositor-friendly transforms for large areas,
+   tiny repaints for small elements. No JavaScript animation.
+
+   Parts:
+   1 Registered hue property
+   2 Signature animated logo
+   3 Accent line under the header
+   4 Soft colour glow (hero backgrounds)
+   5 Primary button colour ring
+   6 Palette transitions + feedback
+   7 Reduced motion
+   ========================================================================== */
+
+/* 1. Registered hue property (lets CSS animate a hue smoothly) ------------- */
+@property --lh {
+  syntax: "<number>";
+  inherits: false;
+  initial-value: 0;
+}
+
+/* 2. Signature logo: "Dream" stays still, "Color" flows through every hue --- */
+.dc-logo { display: inline-flex; align-items: baseline; gap: 0.28em; white-space: nowrap; }
+.dc-logo-dream { color: var(--ink); }
+.dc-logo-color span {
+  display: inline-block;
+  color: #6d55f0; /* fallback for very old browsers */
+}
+@supports (color: oklch(0.6 0.1 20)) {
+  /* Same perceived lightness for every hue keeps the logo readable at all times */
+  .dc-logo-color span {
+    color: oklch(0.58 0.16 var(--lh));
+    animation: dc-hue 18s linear infinite;
+  }
+}
+/* Each letter starts at a different point of the cycle: a slow colour wave */
+.dc-logo-color span:nth-child(1) { --n: 0; animation-delay: 0s; }
+.dc-logo-color span:nth-child(2) { --n: 1; animation-delay: -1.6s; }
+.dc-logo-color span:nth-child(3) { --n: 2; animation-delay: -3.2s; }
+.dc-logo-color span:nth-child(4) { --n: 3; animation-delay: -4.8s; }
+.dc-logo-color span:nth-child(5) { --n: 4; animation-delay: -6.4s; }
+
+@keyframes dc-hue { to { --lh: 360; } }
+
+/* 3. Accent line ------------------------------------------------------------ */
+.accent-line {
+  height: 3px;
+  background: linear-gradient(90deg, #ff6b8b, #ffb347, #6ee7a8, #5ec8f2, #a99bff, #ff6b8b);
+  background-size: 200% 100%;
+  animation: dc-slide 20s linear infinite;
+}
+@keyframes dc-slide { to { background-position: 200% 0; } }
+
+/* 4. Soft colour glow behind hero areas ------------------------------------- */
+.glow {
+  position: absolute; inset: 0; z-index: 0; overflow: hidden; pointer-events: none;
+  -webkit-mask-image: radial-gradient(ellipse at 50% 25%, #000 15%, transparent 70%);
+  mask-image: radial-gradient(ellipse at 50% 25%, #000 15%, transparent 70%);
+}
+.glow::before {
+  content: ""; position: absolute; top: -35%;
+  left: calc(50% - min(100vw, 760px) / 2);
+  width: min(100vw, 760px); aspect-ratio: 1;
+  background: conic-gradient(from 0deg, #ff6b8b, #ffb347, #6ee7a8, #5ec8f2, #a99bff, #ff6b8b);
+  filter: blur(60px); opacity: 0.3;
+  will-change: transform;
+  animation: dc-spin 70s linear infinite; /* rotation runs on the GPU: cheap on phones */
+}
+@keyframes dc-spin { to { transform: rotate(360deg); } }
+
+/* 5. Primary button: slowly moving colour ring ------------------------------ */
+.btn-primary::before {
+  content: ""; position: absolute; inset: -3px; z-index: -1; border-radius: 17px;
+  background: linear-gradient(90deg, var(--dc-1), var(--dc-2), var(--dc-3), var(--dc-4), var(--dc-5), var(--dc-1));
+  background-size: 200% 100%;
+  animation: dc-slide 10s linear infinite;
+  transition: inset 0.25s ease;
+}
+.btn-primary:hover::before, .btn-primary:focus-visible::before { inset: -4px; }
+
+/* 6. Palette transitions and small feedback moments ------------------------- */
+.swatch.regen .hex,
+.swatch.regen .values {
+  animation: dc-rise 0.6s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+  animation-delay: calc(var(--i, 0) * 55ms);
+}
+@keyframes dc-rise { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+
+.pop { animation: dc-pop 0.35s ease; }
+@keyframes dc-pop { 40% { transform: scale(0.94); } 100% { transform: scale(1); } }
+
+/* 7. Reduced motion: stop all movement, keep the multicolour look ----------- */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { transition-duration: 0.01ms !important; transition-delay: 0s !important; }
+  .accent-line, .glow::before, .btn-primary::before, .dc-logo-color span,
+  .swatch.regen .hex, .swatch.regen .values, .pop { animation: none !important; }
+  .dc-logo-color span { --lh: calc(var(--n) * 62); } /* static rainbow letters */
+}
