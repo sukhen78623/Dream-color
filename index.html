@@ -1,96 +1,577 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Dream Color – Free Online Color Tools for Designers and Developers</title>
-  <meta name="description" content="Dream Color is a free, private color toolkit. Start with the color palette generator and create beautiful color combinations right in your browser.">
-  <!-- Replace YOUR-DOMAIN.com with your real domain before launch (see README) -->
-  <link rel="canonical" href="https://YOUR-DOMAIN.com/">
-  <meta name="theme-color" content="#fbfaf8">
+  <meta name="color-scheme" content="light dark">
+
+  <title>Dream Color – Free Color Palette Generator &amp; Gradient Tools</title>
+  <meta name="description" content="Create free color palettes, build CSS gradients, convert HEX, RGB and HSL, find color codes and check contrast. All in one page, no sign-up needed.">
+
+  <!-- Replace example.com with your production domain after deploying (see README). -->
+  <link rel="canonical" href="https://example.com/">
 
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Dream Color">
-  <meta property="og:title" content="Dream Color – Free Online Color Tools">
-  <meta property="og:description" content="Create. Explore. Convert. Perfect your colors. Free color tools that run in your browser.">
-  <meta property="og:url" content="https://YOUR-DOMAIN.com/">
-  <meta property="og:image" content="https://YOUR-DOMAIN.com/assets/images/og-image.png">
-  <meta property="og:image:alt" content="Dream Color logo above a row of five harmonious color swatches">
+  <meta property="og:title" content="Dream Color – Free Color Palette Generator &amp; Gradient Tools">
+  <meta property="og:description" content="Generate color palettes, design CSS gradients, convert HEX, RGB and HSL, and check WCAG contrast. Free, fast and private: everything runs in your browser.">
+  <meta property="og:url" content="https://example.com/">
+  <meta property="og:image" content="https://example.com/assets/img/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Dream Color logo above a row of five colorful palette swatches">
   <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Dream Color – Free Color Palette Generator &amp; Gradient Tools">
+  <meta name="twitter:description" content="Generate color palettes, design CSS gradients, convert color codes and check contrast, all in your browser.">
+  <meta name="twitter:image" content="https://example.com/assets/img/og-image.png">
 
-  <link rel="icon" href="/assets/images/favicon.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="/assets/css/style.css">
-  <link rel="stylesheet" href="/assets/css/animations.css">
+  <!-- Shared design system (every page) + styles for this tools page -->
+  <link rel="stylesheet" href="assets/css/base.css">
+  <link rel="stylesheet" href="assets/css/tools.css">
+
+  <!-- Shared layout: renders the common header and footer -->
+  <script src="assets/js/site-config.js" defer></script>
+  <script src="assets/js/layout.js" defer></script>
+
+  <!-- Tool scripts (order matters) -->
+  <script src="assets/js/color-utils.js" defer></script>
+  <script src="assets/js/palette-engine.js" defer></script>
+  <script src="assets/js/gradient-engine.js" defer></script>
+  <script src="assets/js/ui.js" defer></script>
+  <script src="assets/js/palette-generator.js" defer></script>
+  <script src="assets/js/presets.js" defer></script>
+  <script src="assets/js/gradient.js" defer></script>
+  <script src="assets/js/dev-tools.js" defer></script>
 
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
-    "@type": "WebSite",
+    "@type": "WebApplication",
     "name": "Dream Color",
-    "url": "https://YOUR-DOMAIN.com/",
-    "description": "A free, simple and creative online destination for generating, exploring and working with colors."
+    "url": "https://example.com/",
+    "description": "Free color palette generator, CSS gradient studio and developer color utilities that run entirely in the browser.",
+    "applicationCategory": "DesignApplication",
+    "operatingSystem": "Any",
+    "browserRequirements": "Requires JavaScript",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Is Dream Color really free, and do I need an account?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Yes. Every tool is free, there is no sign-up or login, and there is no limit on how many palettes or gradients you can generate." }
+      },
+      {
+        "@type": "Question",
+        "name": "Are the colors I pick stored or sent anywhere?",
+        "acceptedAnswer": { "@type": "Answer", "text": "No. All calculations, copying and downloads happen in your browser. Dream Color has no backend or database, and it does not collect or transmit the colors you choose or generate." }
+      },
+      {
+        "@type": "Question",
+        "name": "How do I lock a color in the palette generator?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Select the lock icon on a color. Locked colors stay in place when you press the space bar or the Generate button, and the first locked color sets the base hue for the harmony modes. Picking a color manually locks it automatically." }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I use the generated palettes in commercial projects?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Individual colors and simple color combinations are generally not protected by copyright, so you can use palettes you generate in your own work. If you are imitating a specific brand identity, check trademark rules. This is general information, not legal advice." }
+      },
+      {
+        "@type": "Question",
+        "name": "What is the difference between HEX, RGB and HSL?",
+        "acceptedAnswer": { "@type": "Answer", "text": "They describe the same colors in different ways. HEX is a compact six-digit code, RGB gives the amount of red, green and blue from 0 to 255, and HSL describes hue, saturation and lightness, which makes it easiest to adjust a color by hand." }
+      },
+      {
+        "@type": "Question",
+        "name": "What contrast ratio do I need for accessible text?",
+        "acceptedAnswer": { "@type": "Answer", "text": "WCAG level AA asks for at least 4.5:1 for normal text and 3:1 for large text. Level AAA asks for 7:1 and 4.5:1. User interface components and graphics need at least 3:1." }
+      },
+      {
+        "@type": "Question",
+        "name": "How do I make a gradient fade to transparent?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Open the Transparent tab, keep the same color on both stops and set the opacity of the last stop to 0. The CSS uses rgba() values so the fade stays clean, and the PNG download keeps the transparency." }
+      }
+    ]
   }
   </script>
 </head>
 <body>
-  <header class="site-header" id="site-header"></header>
-  <script src="/shared/site.js"></script>
-  <script src="/shared/header.js"></script>
+
+  <!-- SVG icon sprite used by the tools -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+    <symbol id="i-lock" viewBox="0 0 24 24"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></symbol>
+    <symbol id="i-unlock" viewBox="0 0 24 24"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 0 1 7.5-2"/></symbol>
+    <symbol id="i-copy" viewBox="0 0 24 24"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V6a2 2 0 0 1 2-2h9"/></symbol>
+    <symbol id="i-edit" viewBox="0 0 24 24"><path d="M4 20l1-4L16 5a2.1 2.1 0 0 1 3 3L8 19l-4 1z"/></symbol>
+    <symbol id="i-download" viewBox="0 0 24 24"><path d="M12 4v12m0 0l-4-4m4 4l4-4M5 20h14"/></symbol>
+    <symbol id="i-refresh" viewBox="0 0 24 24"><path d="M20 12a8 8 0 1 1-2.5-5.8"/><path d="M20 4v5h-5"/></symbol>
+    <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
+    <symbol id="i-close" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></symbol>
+    <symbol id="i-swap" viewBox="0 0 24 24"><path d="M7 4L3 8l4 4M3 8h14M17 20l4-4-4-4M21 16H7"/></symbol>
+    <symbol id="i-eyedropper" viewBox="0 0 24 24"><path d="M14 6l4 4M4 20l1-4 9-9 3 3-9 9-4 1z"/><path d="M15.5 4.5a2.1 2.1 0 0 1 3 0l1 1a2.1 2.1 0 0 1 0 3L18 10"/></symbol>
+  </svg>
+
+  <!-- Shared header is rendered here by layout.js -->
+  <div data-site-header></div>
 
   <main id="main">
-    <section class="hero">
-      <div class="glow" aria-hidden="true"></div>
-      <div class="wrap">
-        <span class="eyebrow">Free color tools</span>
-        <h1>Create. Explore. Convert. Perfect your colors.</h1>
-        <p class="lede">Dream Color is a free, simple and creative home for color tools, made for designers, developers, students, artists and anyone who works with color.</p>
-        <div class="hero-actions">
-          <a class="btn btn-primary" href="/color-palette-generator/">Open the Color Palette Generator</a>
-          <p class="hero-note">No sign-up. Nothing uploaded.</p>
+
+    <!-- ============ Hero ============ -->
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="hero__orbs" aria-hidden="true"><span></span><span></span><span></span></div>
+      <div class="container hero__inner">
+        <h1 id="hero-title">Free Color Palette Generator &amp; <span class="gradient-text">Color Tools</span></h1>
+        <p class="hero__lead">Dream Color puts a palette generator, a gradient studio and a set of developer color utilities on one page. Press the space bar to find new color combinations, lock the ones you love, then copy the codes or export them. There is nothing to install and no account to create: everything runs in your browser.</p>
+        <div class="hero__cta">
+          <a class="btn btn--primary" href="#palette">Generate a palette</a>
+          <a class="btn" href="#gradient">Open Gradient Studio</a>
+        </div>
+        <ul class="hero__chips" aria-label="What is on this page">
+          <li><a href="#palette">Palette generator</a></li>
+          <li><a href="#presets">Palette presets</a></li>
+          <li><a href="#gradient">Gradient studio</a></li>
+          <li><a href="#developer">HEX, RGB &amp; HSL converters</a></li>
+          <li><a href="#tool-contrast">Contrast checker</a></li>
+        </ul>
+        <noscript><p class="noscript">The Dream Color tools need JavaScript. Please enable it in your browser settings to use them.</p></noscript>
+      </div>
+    </section>
+
+    <!-- ============ 2. Color Palette Generator ============ -->
+    <section id="palette" class="section" aria-labelledby="palette-title">
+      <div class="container">
+        <div class="section-head">
+          <h2 id="palette-title" class="section-title">Color Palette Generator</h2>
+          <p class="section-lead">A color scheme generator that works the way designers do: generate, lock what works and regenerate the rest. Press <kbd>Space</kbd> for a new color combination, or choose a harmony mode to control how the colors relate to each other.</p>
         </div>
 
-        <a class="preview" id="home-preview" href="/color-palette-generator/" aria-label="Open the Color Palette Generator">
-          <span style="background-color:#264653;color:#ffffff">#264653</span>
-          <span style="background-color:#2A9D8F;color:#17151f">#2A9D8F</span>
-          <span style="background-color:#E9C46A;color:#17151f">#E9C46A</span>
-          <span style="background-color:#F4A261;color:#17151f">#F4A261</span>
-          <span style="background-color:#E76F51;color:#17151f">#E76F51</span>
-        </a>
-      </div>
-    </section>
+        <div class="toolbar">
+          <fieldset class="chips">
+            <legend class="sr-only">Color harmony mode</legend>
+            <label class="chip"><input type="radio" name="harmony" value="random" checked><span>Random</span></label>
+            <label class="chip"><input type="radio" name="harmony" value="complementary"><span>Complementary</span></label>
+            <label class="chip"><input type="radio" name="harmony" value="analogous"><span>Analogous</span></label>
+            <label class="chip"><input type="radio" name="harmony" value="triadic"><span>Triadic</span></label>
+            <label class="chip"><input type="radio" name="harmony" value="monochromatic"><span>Monochromatic</span></label>
+          </fieldset>
+          <div class="toolbar__actions">
+            <button type="button" id="btnGenerate" class="btn btn--primary"><svg class="icon" aria-hidden="true"><use href="#i-refresh"/></svg>Generate <kbd class="kbd-hint">Space</kbd></button>
+            <button type="button" id="btnCopyPalette" class="btn"><svg class="icon" aria-hidden="true"><use href="#i-copy"/></svg>Copy palette</button>
+            <button type="button" id="btnDownloadPalette" class="btn"><svg class="icon" aria-hidden="true"><use href="#i-download"/></svg>Download PNG</button>
+          </div>
+        </div>
+        <p id="harmonyHint" class="hint"></p>
 
-    <section class="home-section" aria-labelledby="tools-title">
-      <div class="wrap">
-        <h2 id="tools-title">Start with the Color Palette Generator</h2>
-        <p>Generate five-color palettes using real color-theory harmonies: complementary, analogous, triadic and monochromatic, or just go random. Lock the colors you love, fine-tune any color with your device's color picker, then copy HEX, RGB and HSL values, grab CSS variables or download a PNG.</p>
-        <p>A gradient generator, color picker, color converter and contrast checker are planned next.</p>
-      </div>
-    </section>
+        <div id="paletteGrid" class="palette" role="list" aria-label="Generated color palette"></div>
+        <p class="hint">Tip: click any color code to copy it. Use the pencil to choose a color yourself; it locks automatically so it stays put.</p>
 
-    <section class="home-section" aria-labelledby="why-title">
-      <div class="wrap">
-        <h2 id="why-title">Why Dream Color</h2>
-        <div class="points">
-          <div class="point">
-            <h3>Free and simple</h3>
-            <p>No account, no paywall and no clutter. Open a tool and start working.</p>
+        <div class="code-card">
+          <div class="code-card__head">
+            <h3 class="code-card__title">Export as CSS variables</h3>
+            <button type="button" id="btnCopyCss" class="btn btn--sm"><svg class="icon" aria-hidden="true"><use href="#i-copy"/></svg>Copy CSS</button>
           </div>
-          <div class="point">
-            <h3>Private by design</h3>
-            <p>Every calculation happens in your browser. Your colors are never sent to a server or stored.</p>
-          </div>
-          <div class="point">
-            <h3>Light and fast</h3>
-            <p>Built with plain HTML, CSS and JavaScript, so pages load quickly, even on a phone.</p>
-          </div>
+          <pre class="code-block"><code id="cssVars"></code></pre>
         </div>
       </div>
     </section>
+
+    <!-- ============ 3. Specific-purpose Palette Presets ============ -->
+    <section id="presets" class="section section--tint" aria-labelledby="presets-title">
+      <div class="container">
+        <div class="section-head">
+          <h2 id="presets-title" class="section-title">Palette Presets for Specific Projects</h2>
+          <p class="section-lead">Each preset follows rules suited to its purpose, such as soft lightness for pastels or a text, primary, accent and background structure for websites. Generate until one fits, copy it, or open it in the generator above to fine-tune.</p>
+        </div>
+
+        <div class="preset-grid">
+          <article class="preset-card" data-preset="pastel">
+            <h3>Pastel Color Palette Generator</h3>
+            <p>Light, airy colors with high lightness and gentle saturation, spaced around the color wheel. Good for illustrations, spring and baby themes, and soft interface backgrounds.</p>
+            <div class="preset-strip" role="group" aria-label="Pastel palette colors"></div>
+            <div class="preset-actions">
+              <button type="button" class="btn btn--sm" data-action="generate"><svg class="icon" aria-hidden="true"><use href="#i-refresh"/></svg>New palette</button>
+              <button type="button" class="btn btn--sm" data-action="copy"><svg class="icon" aria-hidden="true"><use href="#i-copy"/></svg>Copy</button>
+              <button type="button" class="btn btn--sm" data-action="edit"><svg class="icon" aria-hidden="true"><use href="#i-edit"/></svg>Open in generator</button>
+            </div>
+          </article>
+
+          <article class="preset-card" data-preset="wedding">
+            <h3>Wedding Color Palette Generator</h3>
+            <p>Romantic combinations built from blush, sage, champagne, ivory and dusty blue, with deeper accents such as burgundy. Every palette includes a light neutral and runs from light to dark.</p>
+            <div class="preset-strip" role="group" aria-label="Wedding palette colors"></div>
+            <div class="preset-actions">
+              <button type="button" class="btn btn--sm" data-action="generate"><svg class="icon" aria-hidden="true"><use href="#i-refresh"/></svg>New palette</button>
+              <button type="button" class="btn btn--sm" data-action="copy"><svg class="icon" aria-hidden="true"><use href="#i-copy"/></svg>Copy</button>
+              <button type="button" class="btn btn--sm" data-action="edit"><svg class="icon" aria-hidden="true"><use href="#i-edit"/></svg>Open in generator</button>
+            </div>
+          </article>
+
+          <article class="preset-card" data-preset="website">
+            <h3>Website Color Palette Generator</h3>
+            <p>A ready-made interface structure: a dark text color, a primary, a secondary, a high-energy accent and a light background. A useful starting point for design tokens and CSS variables.</p>
+            <div class="preset-strip" role="group" aria-label="Website palette colors"></div>
+            <div class="preset-actions">
+              <button type="button" class="btn btn--sm" data-action="generate"><svg class="icon" aria-hidden="true"><use href="#i-refresh"/></svg>New palette</button>
+              <button type="button" class="btn btn--sm" data-action="copy"><svg class="icon" aria-hidden="true"><use href="#i-copy"/></svg>Copy</button>
+              <button type="button" class="btn btn--sm" data-action="edit"><svg class="icon" aria-hidden="true"><use href="#i-edit"/></svg>Open in generator</button>
+            </div>
+          </article>
+
+          <article class="preset-card" data-preset="minimalist">
+            <h3>Minimalist Color Palette Generator</h3>
+            <p>Near-white and grey neutrals with a single accent color. The restraint is deliberate: let one color do the work and keep everything else quiet.</p>
+            <div class="preset-strip" role="group" aria-label="Minimalist palette colors"></div>
+            <div class="preset-actions">
+              <button type="button" class="btn btn--sm" data-action="generate"><svg class="icon" aria-hidden="true"><use href="#i-refresh"/></svg>New palette</button>
+              <button type="button" class="btn btn--sm" data-action="copy"><svg class="icon" aria-hidden="true"><use href="#i-copy"/></svg>Copy</button>
+              <button type="button" class="btn btn--sm" data-action="edit"><svg class="icon" aria-hidden="true"><use href="#i-edit"/></svg>Open in generator</button>
+            </div>
+          </article>
+
+          <article class="preset-card" data-preset="monochromatic">
+            <h3>Monochromatic Color Palette Generator</h3>
+            <p>One hue in five tints and shades, from deep to pale. Naturally harmonious, and handy for charts, dashboards and branding that needs to feel unified.</p>
+            <div class="preset-strip" role="group" aria-label="Monochromatic palette colors"></div>
+            <div class="preset-actions">
+              <button type="button" class="btn btn--sm" data-action="generate"><svg class="icon" aria-hidden="true"><use href="#i-refresh"/></svg>New palette</button>
+              <button type="button" class="btn btn--sm" data-action="copy"><svg class="icon" aria-hidden="true"><use href="#i-copy"/></svg>Copy</button>
+              <button type="button" class="btn btn--sm" data-action="edit"><svg class="icon" aria-hidden="true"><use href="#i-edit"/></svg>Open in generator</button>
+            </div>
+          </article>
+
+          <article class="preset-card" data-preset="vintage">
+            <h3>Vintage Color Palette Generator</h3>
+            <p>Muted, sun-faded tones such as mustard, terracotta, faded teal, cream and cocoa. They recall retro posters, old print and well-loved packaging.</p>
+            <div class="preset-strip" role="group" aria-label="Vintage palette colors"></div>
+            <div class="preset-actions">
+              <button type="button" class="btn btn--sm" data-action="generate"><svg class="icon" aria-hidden="true"><use href="#i-refresh"/></svg>New palette</button>
+              <button type="button" class="btn btn--sm" data-action="copy"><svg class="icon" aria-hidden="true"><use href="#i-copy"/></svg>Copy</button>
+              <button type="button" class="btn btn--sm" data-action="edit"><svg class="icon" aria-hidden="true"><use href="#i-edit"/></svg>Open in generator</button>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 4. Gradient Studio ============ -->
+    <section id="gradient" class="section" aria-labelledby="gradient-title">
+      <div class="container">
+        <div class="section-head">
+          <h2 id="gradient-title" class="section-title">Gradient Studio</h2>
+          <p class="section-lead">Design a gradient visually, then copy production-ready CSS or download a PNG of the preview. Pick a mode, edit the colors and stops, and the preview updates instantly.</p>
+        </div>
+
+        <div class="tabs" role="tablist" aria-label="Gradient type">
+          <button type="button" role="tab" id="tab-linear" class="tab" data-mode="linear" aria-selected="true" aria-controls="panel-linear">Linear</button>
+          <button type="button" role="tab" id="tab-radial" class="tab" data-mode="radial" aria-selected="false" aria-controls="panel-radial" tabindex="-1">Radial</button>
+          <button type="button" role="tab" id="tab-three" class="tab" data-mode="three" aria-selected="false" aria-controls="panel-three" tabindex="-1">3-Color</button>
+          <button type="button" role="tab" id="tab-transparent" class="tab" data-mode="transparent" aria-selected="false" aria-controls="panel-transparent" tabindex="-1">Transparent</button>
+          <button type="button" role="tab" id="tab-background" class="tab" data-mode="background" aria-selected="false" aria-controls="panel-background" tabindex="-1">Background</button>
+        </div>
+
+        <div id="panel-linear" role="tabpanel" aria-labelledby="tab-linear" class="tab-panel">
+          <h3>CSS Linear Gradient Generator</h3>
+          <p>Blend colors along a straight line. Set the angle, add as many stops as you need and copy the <code>linear-gradient()</code> code.</p>
+        </div>
+        <div id="panel-radial" role="tabpanel" aria-labelledby="tab-radial" class="tab-panel" hidden>
+          <h3>Radial Gradient Generator</h3>
+          <p>Spread colors outward from a center point as a circle or an ellipse. Choose the shape and where the gradient starts.</p>
+        </div>
+        <div id="panel-three" role="tabpanel" aria-labelledby="tab-three" class="tab-panel" hidden>
+          <h3>3 Color Gradient Generator</h3>
+          <p>A start, a middle and an end color, each with its own position. A reliable recipe for hero sections and smooth sunset blends.</p>
+        </div>
+        <div id="panel-transparent" role="tabpanel" aria-labelledby="tab-transparent" class="tab-panel" hidden>
+          <h3>Transparent Gradient Generator</h3>
+          <p>Fade a color out using per-stop opacity. Ideal for image overlays, text scrims and edge fades. The PNG download keeps the transparency.</p>
+        </div>
+        <div id="panel-background" role="tabpanel" aria-labelledby="tab-background" class="tab-panel" hidden>
+          <h3>Gradient Background Generator</h3>
+          <p>Build a full-section background. The CSS includes a solid fallback color, no-repeat and cover sizing, ready to paste into your stylesheet.</p>
+        </div>
+
+        <div class="studio">
+          <div class="studio__preview">
+            <div class="checker">
+              <div id="gradPreview" class="gradient-preview" role="img" aria-label="Live gradient preview"></div>
+            </div>
+            <div class="studio__actions">
+              <button type="button" id="btnDownloadGradient" class="btn"><svg class="icon" aria-hidden="true"><use href="#i-download"/></svg>Download PNG</button>
+            </div>
+          </div>
+
+          <div class="studio__controls">
+            <div class="field" id="rowKind" hidden>
+              <label for="gradKind">Gradient type</label>
+              <select id="gradKind">
+                <option value="linear">Linear</option>
+                <option value="radial">Radial</option>
+              </select>
+            </div>
+
+            <div class="field" id="rowAngle">
+              <label for="gradAngle">Angle</label>
+              <div class="field-inline">
+                <input type="range" id="gradAngle" min="0" max="360" step="1" value="135">
+                <input type="number" id="gradAngleNum" min="0" max="360" step="1" value="135" inputmode="numeric" aria-label="Angle in degrees">
+                <span class="unit" aria-hidden="true">deg</span>
+              </div>
+            </div>
+
+            <div class="field-grid" id="rowRadial" hidden>
+              <div class="field">
+                <label for="gradShape">Shape</label>
+                <select id="gradShape">
+                  <option value="circle">Circle</option>
+                  <option value="ellipse">Ellipse</option>
+                </select>
+              </div>
+              <div class="field">
+                <label for="gradPosition">Center position</label>
+                <select id="gradPosition">
+                  <option value="center">Center</option>
+                  <option value="top">Top</option>
+                  <option value="bottom">Bottom</option>
+                  <option value="left">Left</option>
+                  <option value="right">Right</option>
+                  <option value="top left">Top left</option>
+                  <option value="top right">Top right</option>
+                  <option value="bottom left">Bottom left</option>
+                  <option value="bottom right">Bottom right</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="stops">
+              <div class="stops__head">
+                <h4>Color stops</h4>
+                <button type="button" id="btnAddStop" class="btn btn--sm"><svg class="icon" aria-hidden="true"><use href="#i-plus"/></svg>Add stop</button>
+              </div>
+              <ul id="stopList" class="stop-list"></ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="code-card">
+          <div class="code-card__head">
+            <h3 class="code-card__title">CSS code</h3>
+            <button type="button" id="btnCopyGradient" class="btn btn--sm"><svg class="icon" aria-hidden="true"><use href="#i-copy"/></svg>Copy CSS</button>
+          </div>
+          <pre class="code-block"><code id="gradCss"></code></pre>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 5. Developer Color Utilities ============ -->
+    <section id="developer" class="section section--tint" aria-labelledby="developer-title">
+      <div class="container">
+        <div class="section-head">
+          <h2 id="developer-title" class="section-title">Developer Color Utilities</h2>
+          <p class="section-lead">Convert between color formats as you type. Each tool validates its input, explains mistakes in plain language and processes everything locally in your browser.</p>
+        </div>
+
+        <div class="tool-grid">
+
+          <article class="tool-card" id="tool-hex-to-rgb">
+            <h3>HEX to RGB Converter</h3>
+            <p class="tool-desc">Turn a HEX code into RGB and HSL. Codes with 3, 4, 6 or 8 digits work, with or without the #.</p>
+            <div class="field">
+              <label for="hexRgbIn">HEX code</label>
+              <div class="input-with-dot">
+                <span class="dot" id="hexRgbDot" aria-hidden="true"></span>
+                <input id="hexRgbIn" type="text" value="#FF6347" autocomplete="off" spellcheck="false" aria-describedby="hexRgbErr">
+              </div>
+              <p class="field-error" id="hexRgbErr" aria-live="polite" hidden></p>
+            </div>
+            <div class="outputs" id="hexRgbOut"></div>
+          </article>
+
+          <article class="tool-card" id="tool-rgb-to-hex">
+            <h3>RGB to HEX Converter</h3>
+            <p class="tool-desc">Enter red, green and blue values from 0 to 255 to get the HEX code and HSL equivalent.</p>
+            <div class="field-grid field-grid--3">
+              <div class="field"><label for="rgbHexR">Red</label><input id="rgbHexR" type="text" inputmode="numeric" value="255" autocomplete="off" aria-describedby="rgbHexErr"></div>
+              <div class="field"><label for="rgbHexG">Green</label><input id="rgbHexG" type="text" inputmode="numeric" value="99" autocomplete="off" aria-describedby="rgbHexErr"></div>
+              <div class="field"><label for="rgbHexB">Blue</label><input id="rgbHexB" type="text" inputmode="numeric" value="71" autocomplete="off" aria-describedby="rgbHexErr"></div>
+            </div>
+            <p class="field-error" id="rgbHexErr" aria-live="polite" hidden></p>
+            <div class="swatch-line"><span class="dot" id="rgbHexDot" aria-hidden="true"></span><span class="swatch-line__text">Preview</span></div>
+            <div class="outputs" id="rgbHexOut"></div>
+          </article>
+
+          <article class="tool-card" id="tool-hsl-to-hex">
+            <h3>HSL to HEX Converter</h3>
+            <p class="tool-desc">Hue in degrees (0 to 360), saturation and lightness in percent (0 to 100). Decimals are fine.</p>
+            <div class="field-grid field-grid--3">
+              <div class="field"><label for="hslHexH">Hue</label><input id="hslHexH" type="text" inputmode="decimal" value="9" autocomplete="off" aria-describedby="hslHexErr"></div>
+              <div class="field"><label for="hslHexS">Saturation %</label><input id="hslHexS" type="text" inputmode="decimal" value="100" autocomplete="off" aria-describedby="hslHexErr"></div>
+              <div class="field"><label for="hslHexL">Lightness %</label><input id="hslHexL" type="text" inputmode="decimal" value="64" autocomplete="off" aria-describedby="hslHexErr"></div>
+            </div>
+            <p class="field-error" id="hslHexErr" aria-live="polite" hidden></p>
+            <div class="swatch-line"><span class="dot" id="hslHexDot" aria-hidden="true"></span><span class="swatch-line__text">Preview</span></div>
+            <div class="outputs" id="hslHexOut"></div>
+          </article>
+
+          <article class="tool-card" id="tool-hex-to-css">
+            <h3>HEX to CSS Generator</h3>
+            <p class="tool-desc">Get a ready-to-paste CSS snippet with a custom property and the same color written as HEX, RGB and HSL.</p>
+            <div class="field">
+              <label for="hexCssIn">HEX code</label>
+              <div class="input-with-dot">
+                <span class="dot" id="hexCssDot" aria-hidden="true"></span>
+                <input id="hexCssIn" type="text" value="#5A4AF0" autocomplete="off" spellcheck="false" aria-describedby="hexCssErr">
+              </div>
+              <p class="field-error" id="hexCssErr" aria-live="polite" hidden></p>
+            </div>
+            <div id="hexCssOut"></div>
+          </article>
+
+          <article class="tool-card" id="tool-finder">
+            <h3>Color Code Finder</h3>
+            <p class="tool-desc">Find every code for a color. Type any HEX, RGB or HSL value or a color name, or use the picker<span id="finderEyeNote"></span>.</p>
+            <div class="field">
+              <label for="finderIn">Color</label>
+              <div class="input-with-picker">
+                <span class="dot" id="finderDot" aria-hidden="true"></span>
+                <input id="finderIn" type="text" value="#5A4AF0" autocomplete="off" spellcheck="false" aria-describedby="finderErr">
+                <input type="color" id="finderPicker" value="#5a4af0" aria-label="Open color picker">
+                <button type="button" id="finderEye" class="btn btn--sm" hidden><svg class="icon" aria-hidden="true"><use href="#i-eyedropper"/></svg>Pick from screen</button>
+              </div>
+              <p class="field-error" id="finderErr" aria-live="polite" hidden></p>
+            </div>
+            <div class="outputs" id="finderOut"></div>
+          </article>
+
+          <article class="tool-card tool-card--wide" id="tool-contrast">
+            <h3>Color Contrast Checker</h3>
+            <p class="tool-desc">Check the WCAG contrast ratio between a text color and a background color, and see which accessibility levels it meets.</p>
+            <div class="contrast-layout">
+              <div class="contrast-inputs">
+                <div class="field">
+                  <label for="cFg">Text color</label>
+                  <div class="input-with-picker">
+                    <input id="cFg" type="text" value="#5A4AF0" autocomplete="off" spellcheck="false" aria-describedby="cErr">
+                    <input type="color" id="cFgPick" value="#5a4af0" aria-label="Pick text color">
+                  </div>
+                </div>
+                <button type="button" id="cSwap" class="btn btn--sm contrast-swap"><svg class="icon" aria-hidden="true"><use href="#i-swap"/></svg>Swap colors</button>
+                <div class="field">
+                  <label for="cBg">Background color</label>
+                  <div class="input-with-picker">
+                    <input id="cBg" type="text" value="#FFFFFF" autocomplete="off" spellcheck="false" aria-describedby="cErr">
+                    <input type="color" id="cBgPick" value="#ffffff" aria-label="Pick background color">
+                  </div>
+                </div>
+                <p class="field-error" id="cErr" aria-live="polite" hidden></p>
+                <p class="hint" id="cNote" hidden>Semi-transparent colors are blended first: the background over white, then the text over the background.</p>
+              </div>
+
+              <div class="contrast-result">
+                <p class="ratio-label">Contrast ratio</p>
+                <p class="ratio" id="cRatio" aria-live="polite">—</p>
+                <ul class="wcag-list" id="cResults"></ul>
+              </div>
+
+              <div id="cPreview" class="contrast-preview">
+                <p class="cp-large">Large text sample</p>
+                <p class="cp-normal">Normal text sample. The quick brown fox jumps over the lazy dog.</p>
+              </div>
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 6. Guide and FAQs ============ -->
+    <section id="guide" class="section" aria-labelledby="guide-title">
+      <div class="container">
+        <div class="section-head">
+          <h2 id="guide-title" class="section-title">Color Guide: Using These Tools Well</h2>
+          <p class="section-lead">A short, practical background on palettes, gradients, color formats and accessibility, so the numbers on screen turn into good design decisions.</p>
+        </div>
+
+        <div class="guide-grid">
+          <article class="guide-card">
+            <h3>How to build a balanced palette</h3>
+            <p>Start with one color you are sure about, usually the one that carries your brand or mood. Lock it, then let the generator suggest the rest. A dependable proportion is the 60-30-10 rule: about 60% a calm dominant color, 30% a supporting color and 10% a bold accent.</p>
+            <p>Keep at least one very light and one very dark color in the set. They give you backgrounds and text, and they make the saturated colors look intentional instead of loud.</p>
+          </article>
+
+          <article class="guide-card">
+            <h3>Color harmony modes explained</h3>
+            <ul>
+              <li><strong>Random</strong> ignores relationships entirely. Use it to break out of a rut.</li>
+              <li><strong>Complementary</strong> pairs opposite hues. It is high contrast, so use one side as the accent.</li>
+              <li><strong>Analogous</strong> uses neighbors on the wheel. It feels calm and is hard to get wrong.</li>
+              <li><strong>Triadic</strong> spaces three hues evenly. It is lively; let one hue dominate.</li>
+              <li><strong>Monochromatic</strong> varies only lightness and saturation of one hue, for a unified look.</li>
+            </ul>
+          </article>
+
+          <article class="guide-card">
+            <h3>CSS gradients explained</h3>
+            <p>A linear gradient blends colors along a line at an angle you choose; <code>0deg</code> points up and <code>90deg</code> points right. A radial gradient spreads outward from a point as a circle or ellipse. Each color has a stop position, and moving stops closer together makes a sharper transition.</p>
+            <p>For a gradient that fades out, keep the same color on both stops and lower the opacity of the last one, rather than fading to the word <code>transparent</code>. For page backgrounds, include a solid fallback color and <code>background-size: cover</code>, as the Background mode does.</p>
+          </article>
+
+          <article class="guide-card">
+            <h3>HEX, RGB and HSL: which to use</h3>
+            <p><strong>HEX</strong> (<code>#5A4AF0</code>) is short and universal, so it is the usual choice for design handoff. <strong>RGB</strong> (<code>rgb(90, 74, 240)</code>) matches how screens mix light and is convenient when scripting or adding opacity. <strong>HSL</strong> (<code>hsl(246, 85%, 60%)</code>) is the easiest to reason about: raise lightness for a tint, lower it for a shade, reduce saturation for a muted tone.</p>
+            <p>All three describe the same sRGB colors, so converting between them loses nothing apart from rounding to whole numbers.</p>
+          </article>
+
+          <article class="guide-card">
+            <h3>Contrast and accessibility</h3>
+            <p>Contrast ratio compares the lightness of text and its background, from 1:1 (identical) to 21:1 (black on white). WCAG level AA needs 4.5:1 for normal text and 3:1 for large text, which means roughly 24px regular or 18.7px bold and above. Level AAA raises those to 7:1 and 4.5:1.</p>
+            <p>Interface parts such as input borders, icons and chart lines need 3:1 against their surroundings. A passing ratio is a strong start, but it is not a full accessibility review: font size, weight and context still matter.</p>
+          </article>
+        </div>
+
+        <div id="faq" class="faq">
+          <h3>Frequently asked questions</h3>
+
+          <details>
+            <summary>Is Dream Color really free, and do I need an account?</summary>
+            <p>Yes. Every tool is free, there is no sign-up or login, and there is no limit on how many palettes or gradients you can generate.</p>
+          </details>
+          <details>
+            <summary>Are the colors I pick stored or sent anywhere?</summary>
+            <p>No. All calculations, copying and downloads happen in your browser. Dream Color has no backend or database, and it does not collect or transmit the colors you choose or generate.</p>
+          </details>
+          <details>
+            <summary>How do I lock a color in the palette generator?</summary>
+            <p>Select the lock icon on a color. Locked colors stay in place when you press the space bar or the Generate button, and the first locked color sets the base hue for the harmony modes. Picking a color manually locks it automatically.</p>
+          </details>
+          <details>
+            <summary>Can I use the generated palettes in commercial projects?</summary>
+            <p>Individual colors and simple color combinations are generally not protected by copyright, so you can use palettes you generate in your own work. If you are imitating a specific brand identity, check trademark rules. This is general information, not legal advice.</p>
+          </details>
+          <details>
+            <summary>What is the difference between HEX, RGB and HSL?</summary>
+            <p>They describe the same colors in different ways. HEX is a compact six-digit code, RGB gives the amount of red, green and blue from 0 to 255, and HSL describes hue, saturation and lightness, which makes it easiest to adjust a color by hand.</p>
+          </details>
+          <details>
+            <summary>What contrast ratio do I need for accessible text?</summary>
+            <p>WCAG level AA asks for at least 4.5:1 for normal text and 3:1 for large text. Level AAA asks for 7:1 and 4.5:1. User interface components and graphics need at least 3:1.</p>
+          </details>
+          <details>
+            <summary>How do I make a gradient fade to transparent?</summary>
+            <p>Open the Transparent tab, keep the same color on both stops and set the opacity of the last stop to 0. The CSS uses rgba() values so the fade stays clean, and the PNG download keeps the transparency.</p>
+          </details>
+        </div>
+      </div>
+    </section>
+
   </main>
 
-  <footer class="site-footer" id="site-footer"></footer>
-  <script src="/shared/footer.js"></script>
-  <script src="/assets/js/color-utils.js"></script>
-  <script src="/assets/js/home.js"></script>
+  <!-- Shared footer is rendered here by layout.js -->
+  <div data-site-footer></div>
+
 </body>
 </html>
