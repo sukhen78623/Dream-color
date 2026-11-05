@@ -3,123 +3,16 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Dream Color – Color Palette Generator, Presets &amp; Gradient Tools</title>
-<meta name="description" content="Explore beautiful color combinations, generate custom palettes, mix gradients and convert HEX, RGB and HSL. Discover the perfect colors for every creative idea.">
+<title>Dream Color – Free Color Tools for People Who Love Color</title>
+<meta name="description" content="A playground for color lovers: palette generator, image color picker, gradient mixer, HEX/RGB/HSL converter, ready-made palettes and more.">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Dream Color – Find Your Perfect Colors">
-<meta property="og:description" content="Color palettes, presets, gradients and converters for every creative idea.">
+<meta property="og:description" content="A playground for color lovers: palettes, image color picker, gradients, converters and more.">
 <meta name="twitter:card" content="summary">
 <meta name="theme-color" content="#6d4aff">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E🎨%3C/text%3E%3C/svg%3E">
-<style>
-:root{--bg:#faf8f5;--fg:#1d1b20;--mut:#6b6670;--card:#fff;--bd:#0000001a;--ac:#6d4aff;--sh:0 8px 30px #0000000f;--r:20px}
-@media(prefers-color-scheme:dark){:root:not([data-theme=light]){--bg:#0f0e13;--fg:#f3f1f6;--mut:#a29cab;--card:#18161e;--bd:#ffffff1f;--sh:0 8px 30px #0006;color-scheme:dark}}
-:root[data-theme=dark]{--bg:#0f0e13;--fg:#f3f1f6;--mut:#a29cab;--card:#18161e;--bd:#ffffff1f;--sh:0 8px 30px #0006;color-scheme:dark}
-*{box-sizing:border-box;margin:0}
-:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
-html{scroll-behavior:smooth;scroll-padding-top:80px}
-body{background:var(--bg);color:var(--fg);font:16px/1.6 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;-webkit-font-smoothing:antialiased}
-h1,h2,h3,.logo{font-family:ui-serif,Georgia,"Times New Roman",serif;letter-spacing:-.02em;line-height:1.15}
-a{color:inherit;text-decoration:none}
-button{font:inherit;color:inherit;cursor:pointer}
-:focus-visible{outline:3px solid var(--ac);outline-offset:2px;border-radius:8px}
-.wrap{max-width:1120px;margin:0 auto;padding:0 20px}
-section{padding:72px 0}
-.eyebrow{font-size:.78rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--ac)}
-h2{font-size:clamp(1.8rem,5vw,2.6rem);margin:6px 0 10px}
-.lead{color:var(--mut);max-width:620px}
-/* header */
-header.site{position:sticky;top:0;z-index:50;background:color-mix(in srgb,var(--bg) 85%,transparent);backdrop-filter:blur(14px);border-bottom:1px solid var(--bd)}
-header .wrap{display:flex;align-items:center;gap:8px;height:64px}
-.logo{font-size:1.45rem;font-weight:700;margin-right:auto}
-.cyc{background:linear-gradient(90deg,#ff5f6d,#ffb347,#2ed8a3,#4facfe,#a770ef,#ff5f6d);background-size:300% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;animation:cyc 8s linear infinite}
-@keyframes cyc{to{background-position:300% 0}}
-nav.main{display:none;gap:4px}
-nav.main a{padding:8px 14px;border-radius:99px;color:var(--mut);font-weight:500}
-nav.main a:hover{background:var(--bd);color:var(--fg)}
-.ib{width:42px;height:42px;border-radius:50%;border:1px solid var(--bd);background:var(--card);display:grid;place-items:center;font-size:1.05rem}
-.ib:hover{border-color:var(--ac)}
-#mnav{display:none;border-top:1px solid var(--bd);padding:8px 20px 14px}
-#mnav.open{display:grid}
-#mnav a{padding:12px 4px;font-weight:500;border-bottom:1px solid var(--bd)}
-@media(min-width:800px){nav.main{display:flex}#menuBtn{display:none}#mnav{display:none!important}}
-/* hero */
-.hero{position:relative;overflow:hidden;padding:84px 0 96px;text-align:center}
-.blob{position:absolute;border-radius:50%;filter:blur(70px);opacity:.5;animation:drift 20s ease-in-out infinite alternate}
-.b1{width:60vmax;height:60vmax;left:-20vmax;top:-25vmax;background:#ff8fab}
-.b2{width:55vmax;height:55vmax;right:-20vmax;top:-10vmax;background:#7aa2ff;animation-delay:-7s}
-.b3{width:50vmax;height:50vmax;left:20vmax;bottom:-35vmax;background:#5eead4;animation-delay:-13s}
-[data-theme=dark] .blob{opacity:.28}
-@keyframes drift{to{transform:translate(6vmax,4vmax) scale(1.12)}}
-.hero .wrap{position:relative}
-.hero h1{font-size:clamp(2.3rem,8vw,4.4rem);max-width:860px;margin:14px auto 18px}
-.hero p{font-size:1.1rem;max-width:600px;margin:0 auto 30px;color:var(--fg);opacity:.82}
-.btn{display:inline-block;background:var(--fg);color:var(--bg);padding:15px 30px;border-radius:99px;font-weight:600;border:0;transition:transform .2s}
-.btn:hover{transform:translateY(-2px)}
-.chips{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-top:26px}
-.chip{border:1px solid var(--bd);background:var(--card);padding:7px 14px;border-radius:99px;font-size:.88rem}
-.chip:hover,.chip[aria-pressed=true]{background:var(--fg);color:var(--bg)}
-/* cards */
-.card{background:var(--card);border:1px solid var(--bd);border-radius:var(--r);box-shadow:var(--sh)}
-.cotd{display:grid;gap:0;overflow:hidden;margin-top:28px}
-.cotd .sw{min-height:240px;display:flex;align-items:flex-end;padding:20px}
-.cotd .body{padding:24px;display:grid;gap:14px}
-.cotd h3{font-size:1.8rem}
-.codes{display:flex;flex-wrap:wrap;gap:8px}
-.code{border:1px solid var(--bd);background:var(--bg);border-radius:12px;padding:8px 12px;font:600 .85rem ui-monospace,Menlo,monospace}
-.code:hover{border-color:var(--ac)}
-.cols{display:grid;gap:12px}
-.cols div{background:var(--bg);border-radius:14px;padding:14px;font-size:.93rem}
-.cols b{display:block;font-size:.75rem;letter-spacing:.08em;text-transform:uppercase;color:var(--mut);margin-bottom:3px}
-.note{font-size:.82rem;color:var(--mut)}
-@media(min-width:800px){.cotd{grid-template-columns:.8fr 1.2fr}.cotd .sw{min-height:100%}.cols{grid-template-columns:1fr 1fr}.cols .full{grid-column:1/-1}}
-.tools{display:grid;gap:16px;margin-top:30px}
-@media(min-width:640px){.tools{grid-template-columns:1fr 1fr}}
-@media(min-width:960px){.tools{grid-template-columns:repeat(3,1fr)}}
-.tool{padding:20px;display:grid;gap:12px;align-content:start;transition:transform .25s}
-.tool:hover{transform:translateY(-4px)}
-.tool h3{font-size:1.25rem}.tool p{color:var(--mut);font-size:.95rem}
-.pv{height:84px;border-radius:14px;overflow:hidden;display:flex;align-items:center;justify-content:center;gap:6px;background:var(--bg);padding:10px}
-.pv i{flex:1;height:100%;border-radius:10px}
-.pv.col{flex-direction:column;align-items:stretch;gap:4px}.pv.col i{border-radius:6px}
-.tag{font-size:.72rem;font-weight:700;color:var(--ac);letter-spacing:.06em;text-transform:uppercase}
-.grid{display:grid;gap:16px;margin-top:22px}
-@media(min-width:640px){.grid{grid-template-columns:1fr 1fr}}
-@media(min-width:960px){.grid{grid-template-columns:repeat(3,1fr)}}
-.pal{overflow:hidden;display:flex;flex-direction:column}
-.bar{display:flex;height:96px}.bar i{flex:1}
-.pal .in{padding:16px;display:grid;gap:8px;flex:1}
-.pal h3{font-size:1.1rem}.pal p{color:var(--mut);font-size:.9rem}
-.hex{display:flex;flex-wrap:wrap;gap:4px 8px;font:.75rem ui-monospace,Menlo,monospace;color:var(--mut)}
-.hex button{border:0;background:none;padding:2px 0;font:inherit;color:inherit}.hex button:hover{color:var(--ac)}
-.pal .cat{font-size:.72rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--ac)}
-.cp{justify-self:start;border:1px solid var(--bd);background:none;border-radius:99px;padding:6px 14px;font-size:.85rem}
-.cp:hover{background:var(--fg);color:var(--bg)}
-details{border-bottom:1px solid var(--bd);padding:16px 0}
-summary{cursor:pointer;font-weight:600;list-style:none;display:flex;justify-content:space-between;gap:12px}
-summary::after{content:"+";color:var(--ac);font-size:1.3rem;line-height:1}
-details[open] summary::after{content:"–"}
-details p{color:var(--mut);margin-top:10px}
-/* search */
-#srch{position:fixed;inset:0;z-index:100;background:color-mix(in srgb,var(--bg) 94%,transparent);backdrop-filter:blur(10px);overflow:auto;padding:calc(20px + env(safe-area-inset-top,0px)) 20px 40px}
-#srch[hidden]{display:none}
-.sbox{max-width:760px;margin:0 auto}
-.srow{display:flex;gap:10px}
-#q{flex:1;min-width:0;font:inherit;font-size:1.1rem;padding:15px 20px;border-radius:99px;border:2px solid var(--bd);background:var(--card);color:var(--fg)}
-#q:focus{outline:none;border-color:var(--ac)}
-.empty{text-align:center;padding:40px 10px;color:var(--mut)}
-#toast{position:fixed;left:50%;bottom:calc(24px + env(safe-area-inset-bottom,0px));transform:translate(-50%,40px);background:var(--fg);color:var(--bg);padding:10px 20px;border-radius:99px;opacity:0;transition:.25s;z-index:200;pointer-events:none;font-size:.9rem}
-#toast.on{opacity:1;transform:translate(-50%,0)}
-/* footer */
-footer.site{border-top:1px solid var(--bd);padding:56px 0 30px;background:var(--card)}
-.fg{display:grid;gap:32px}
-@media(min-width:800px){.fg{grid-template-columns:1.5fr 1fr 1fr 1fr}}
-footer h4{font-size:.8rem;letter-spacing:.1em;text-transform:uppercase;color:var(--mut);margin-bottom:12px}
-footer ul{list-style:none;padding:0;display:grid;gap:8px}
-footer li a:hover{color:var(--ac)}
-.fb{margin-top:36px;padding-top:20px;border-top:1px solid var(--bd);display:flex;flex-wrap:wrap;gap:12px 24px;justify-content:space-between;color:var(--mut);font-size:.88rem}
-@media(prefers-reduced-motion:reduce){*{animation:none!important;scroll-behavior:auto!important;transition:none!important}}
-</style>
+<link rel="icon" href="/images/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/css/style.css">
+<script>var t=null;try{t=localStorage.getItem("dc-theme")}catch(e){}document.documentElement.dataset.theme=t||(matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light")</script>
 </head>
 <body>
 <div id="site-header"></div>
@@ -127,14 +20,20 @@ footer li a:hover{color:var(--ac)}
 <section class="hero" id="top">
  <div class="blob b1"></div><div class="blob b2"></div><div class="blob b3"></div>
  <div class="wrap">
-  <span class="eyebrow">Palettes · Gradients · Converters</span>
+  <span class="eyebrow">A playground for color lovers</span>
   <h1>Find Your Perfect Colors. Create Something Beautiful.</h1>
-  <p>Explore beautiful color combinations, generate custom palettes, mix gradients, and discover the perfect colors for every creative idea.</p>
+  <p>Dream Color is your playground for color. Generate palettes, pick colors from images, mix gradients, convert formats and discover the perfect colors for every creative idea.</p>
   <a class="btn" href="#tools">Generate Your Palette</a>
   <div class="chips" id="heroChips" aria-label="Popular searches"></div>
  </div>
 </section>
 
+<section id="tools"><div class="wrap">
+ <span class="eyebrow">Color Tools</span>
+ <h2>What You Can Do Here</h2>
+ <p class="lead">Dream Color is a growing set of tools for anyone who loves playing with color. Pick a tool and start experimenting. New ones keep joining.</p>
+ <div class="tools" id="toolGrid"></div>
+</div></section>
 <section id="cotd"><div class="wrap">
  <span class="eyebrow">Color of the Day</span>
  <h2>Meet today’s color</h2>
@@ -142,12 +41,6 @@ footer li a:hover{color:var(--ac)}
  <article class="card cotd" id="cotdBox"></article>
 </div></section>
 
-<section id="tools"><div class="wrap">
- <span class="eyebrow">Color Tools</span>
- <h2>What You Can Do Here</h2>
- <p class="lead">Five simple tools for choosing, building and converting colors.</p>
- <div class="tools" id="toolGrid"></div>
-</div></section>
 
 <section id="palettes"><div class="wrap">
  <span class="eyebrow">Palette Presets</span>
@@ -165,168 +58,10 @@ footer li a:hover{color:var(--ac)}
 </main>
 <div id="site-footer"></div>
 
-<div id="srch" role="dialog" aria-modal="true" aria-label="Search color palettes" hidden>
- <div class="sbox">
-  <div class="srow">
-   <input id="q" type="search" placeholder="Try “luxury wedding colors”" autocomplete="off" aria-label="Search palettes">
-   <button class="ib" id="sx" aria-label="Close search">✕</button>
-  </div>
-  <div class="chips" id="sChips" style="justify-content:flex-start"></div>
-  <div class="grid" id="sRes" style="grid-template-columns:1fr"></div>
- </div>
-</div>
-<div id="toast" role="status" aria-live="polite"></div>
-
-<script>
-/* ===== SHARED COMPONENTS (header + footer) =====
-   Later: move this block into shared.js and load it on every page. */
-const NAV=[["Tools","#tools"],["Palettes","#palettes"],["Color of the Day","#cotd"],["FAQ","#faq"]];
-const H=location.pathname.endsWith("index.html")||location.pathname.endsWith("/")?"":"index.html";
-document.getElementById("site-header").innerHTML=`<header class="site"><div class="wrap">
-<a class="logo" href="${H||"#top"}" aria-label="Dream Color home">Dream <span class="cyc">Color</span></a>
-<nav class="main" aria-label="Main">${NAV.map(n=>`<a href="${H+n[1]}">${n[0]}</a>`).join("")}</nav>
-<button class="ib" id="sBtn" aria-label="Search palettes">🔍</button>
-<button class="ib" id="thBtn" aria-label="Toggle theme">◐</button>
-<button class="ib" id="menuBtn" aria-label="Open menu" aria-expanded="false">☰</button></div>
-<nav id="mnav" aria-label="Mobile">${NAV.map(n=>`<a href="${H+n[1]}">${n[0]}</a>`).join("")}</nav></header>`;
-const FC=["Wedding","Website","Minimalist","Monochromatic","Vintage","Modern House","Pastel","Luxury","Nature-Inspired","Aesthetic"];
-document.getElementById("site-footer").innerHTML=`<footer class="site"><div class="wrap"><div class="fg">
-<div><a class="logo" href="${H||"#top"}">Dream <span class="cyc">Color</span></a><p class="note" style="margin-top:10px;max-width:300px">Dream Color helps you discover color combinations, build palettes, mix gradients and convert color formats.</p></div>
-<div><h4>Quick Links</h4><ul>${NAV.map(n=>`<li><a href="${H+n[1]}">${n[0]}</a></li>`).join("")}<li><a href="#">About</a></li><li><a href="#">Contact</a></li><li><a href="#">Blog</a></li></ul></div>
-<div><h4>Explore Color Palettes</h4><ul>${FC.slice(0,6).map(c=>`<li><a href="${H}#palettes" data-cat="${c}">${c} Palettes</a></li>`).join("")}</ul></div>
-<div><h4>Color Tools</h4><ul><li><a href="${H}#tools">Palette Generator</a></li><li><a href="${H}#tools">Palette Presets</a></li><li><a href="${H}#tools">Image Picker</a></li><li><a href="${H}#tools">Gradient Mixer</a></li><li><a href="${H}#tools">HEX, RGB &amp; HSL Converter</a></li></ul></div>
-</div><div class="fb"><span>© ${new Date().getFullYear()} Dream Color. All rights reserved.</span><span><a href="#">Privacy Policy</a> · <a href="#">Terms of Service</a></span></div></div></footer>`;
-
-/* ===== DATA ===== */
-const P=[
-["Wedding","Blush Garden","F8E1E4 F2B8C6 E8D5B7 A9B89A 5F7161","Soft pink with sage for a romantic garden ceremony.","bridal romantic spring floral"],
-["Wedding","Ivory & Gold","FBF6EC E9D8A6 C9A24D 8C6A3F 3B2F2F","Warm ivory and gold for a classic evening wedding.","bridal luxury elegant gold"],
-["Website","Clean SaaS","F7F9FC 4F6EF7 1E2A5A 22C58B FFB84D","Trustworthy blue with a fresh green accent for product sites.","web ui app brand startup"],
-["Website","Creative Studio","111111 F5F1EA FF5A36 7B61FF 2DD4BF","A bold, high-contrast set for portfolios and agencies.","web portfolio ui bold"],
-["Minimalist","Quiet Stone","FAFAF8 E6E3DE B8B2AA 6F6A64 24221F","Calm neutrals with soft contrast.","simple neutral clean website"],
-["Minimalist","Soft Paper","FFFFFF F1EFEA D9D4CC 9A948B 2B2B2B","Paper-white tones for clean, airy layouts.","simple neutral clean website"],
-["Monochromatic","Ocean Blues","E3F0FA B5D6F0 6FA8DC 2F6FA8 12385C","Five steps of one blue, from mist to deep sea.","blue single hue shades"],
-["Monochromatic","Plum Tones","F3E8F5 DDB9E3 B070BE 7A3F8A 3E1F4A","Light-to-dark purples that always feel harmonious.","purple single hue shades"],
-["Vintage","Retro Diner","F4E3C1 D9A066 C4573B 5B7B7A 2F3E46","Cream, mustard and brick with a teal anchor.","retro classic 70s old"],
-["Vintage","Old Postcard","EADBC8 C8A27A 9C6B4E 6F7D6A 3F4A3C","Faded, sun-worn tones with a nostalgic mood.","retro antique sepia old"],
-["Modern House","Warm Modern","F2EDE6 D6C7B5 A68B6C 5E6B5A 2A2D2C","Earthy neutrals for living rooms and exteriors.","home interior exterior living bedroom"],
-["Modern House","Calm Bedroom","EEF0EC C9D3CB 9FB3A9 7D8B93 3C4650","Muted greens and slate for a restful bedroom.","home interior bedroom relaxing"],
-["Pastel","Cotton Candy","FFD6E0 FFEFB5 D4F0C0 BFE3F5 E2D4F5","Light, playful tones for friendly designs.","soft cute light baby"],
-["Pastel","Soft Sorbet","FFE5D0 FFD1DC C8F0E0 D6E4FF F3E5FF","Gentle peach, mint and lilac.","soft gentle light spring"],
-["Luxury","Midnight Gold","0B0B12 2A2540 6B4C93 C9A24D F5E9C8","Deep night tones lit by gold.","premium elegant dark wedding gold"],
-["Luxury","Emerald Estate","07241C 0F5132 B8963E E8DCC0 F7F3EA","Rich emerald with brass and cream.","premium elegant green gold wedding"],
-["Nature-Inspired","Forest Floor","2F4B34 5E7F4A A8B97A D7C9A0 8B5E3C","Moss, fern and bark from a woodland walk.","earthy green forest outdoors earth"],
-["Nature-Inspired","Coastal Dawn","0E4D64 2A8C9A 8FD0C8 F3E3C3 E7A977","Sea blues meeting warm sand.","earthy ocean beach sunrise"],
-["Aesthetic","Dreamy Sunset","2B1B3D 8E3B7A E26D8C FF9E80 FFD8A8","Plum to peach, like the sky after sunset.","sunset warm gradient mood"],
-["Aesthetic","Lo-fi Lavender","EFE6F8 CBB8E8 8F7BC4 4D4373 1F1B33","Soft purples for a quiet, cozy vibe.","purple cozy mood night"]
-].map(a=>({cat:a[0],name:a[1],cols:a[2].split(" ").map(h=>"#"+h),desc:a[3],tags:a[4]}));
-
-const CD=[
-["Coral","#E9694F","A warm pink-orange that feels lively and friendly.","Energy, warmth, friendliness.","Can feel loud or urgent in large amounts.","Warm hues like coral sit at longer visible wavelengths (about 590–700 nm). Meanings people attach to them are cultural, not universal."],
-["Ocean Blue","#1F6FB2","A confident mid-blue like deep water under daylight.","Calm, trust, stability.","Can read as cold or distant.","The sky looks blue because air scatters short wavelengths more than long ones (Rayleigh scattering). Blue’s link to trust comes from branding and culture."],
-["Sage Green","#9CAF88","A soft grey-green found on herbs and leaves.","Balance, calm, nature.","May feel muted or lifeless.","Human eyes are especially sensitive to greens, which sit near the middle of the visible spectrum. Feelings about green vary by person."],
-["Sunflower Yellow","#F5C518","A bright, sunny yellow that draws the eye fast.","Optimism, joy, attention.","Can feel anxious or glaring in excess.","Yellow appears bright because it strongly stimulates both our red- and green-sensitive cones. Its symbolism differs widely across cultures."],
-["Royal Purple","#6A3FA0","A deep violet long tied to royalty and creativity.","Creativity, imagination, luxury.","Can feel distant or pretentious.","Purple isn’t a single spectral wavelength; the brain builds it from mixed red and blue light. Its status link comes from costly historical dyes."],
-["Blush Pink","#F4B6C2","A gentle pink with a soft, caring feel.","Tenderness, romance, softness.","Can feel overly sweet or stereotyped.","Pink is a tint of red. Its gendered associations are fairly recent and differ by culture."],
-["Charcoal","#36454F","A dark slate grey that feels grounded.","Sophistication, seriousness, focus.","Can feel heavy or gloomy.","Dark neutrals give strong contrast against light text, which helps readability. Emotional meanings are shaped by context."],
-["Terracotta","#C8654A","A baked-clay orange-brown with earthy warmth.","Groundedness, comfort, craft.","Can feel dusty or dated.","Terracotta’s color comes from iron oxides in clay, an established chemistry. Its cozy feeling is an association, not a measured effect."]
-];
-const FQ=[
-["What is a color palette?","A color palette is a small set of colors chosen to work together in a design, such as a brand, website, room or wedding. Most palettes use three to six colors."],
-["How to generate a color palette?","Pick a base color, then build around it using harmonies like complementary, analogous or triadic colors. Dream Color’s Palette Generator does this from one base color."],
-["How to choose the best color combinations?","Start with your goal and mood, choose one dominant color, then add a supporting color and a neutral. Check contrast so text stays easy to read."],
-["What are the best website color palettes?","Strong website palettes pair a clear primary color with neutrals and one accent for buttons. Try the Website color palettes in our presets for tested starting points."],
-["How to create a wedding color palette?","Begin with the season and venue, pick two main colors, then add a neutral like ivory and a metallic or green accent. Browse our wedding palettes for ideas."],
-["What is a monochromatic color palette?","A monochromatic palette uses one hue in different tints, tones and shades. It looks harmonious and is easy to get right."],
-["How to find HEX color codes?","Use a color picker or the HEX code shown on any palette. A HEX code starts with # and has six characters, like #6D4AFF. Tap a code on Dream Color to copy it."],
-["What is the difference between HEX, RGB, and HSL?","They describe the same color differently. HEX is a compact code, RGB gives red, green and blue values from 0 to 255, and HSL uses hue, saturation and lightness, which is easier to adjust by hand."],
-["How to extract a color palette from an image?","A color extractor samples the pixels of a photo and groups similar ones to find dominant colors. Dream Color’s Image Picker is built for this."],
-["How to create a gradient color combination?","Choose two or more colors that sit close together on the color wheel, set a direction, and preview it. Gradients that pass through very different hues can look muddy."],
-["What are the best minimalist color palettes?","Minimalist palettes use mostly neutrals such as off-white, warm grey and charcoal, with at most one accent. See our Minimalist presets."],
-["How do I find colors that work well together?","Use the color wheel: analogous colors sit side by side, complementary ones sit opposite. Or start from a ready-made preset that already works."]
-];
-const EX=["Modern house color palette","Luxury wedding colors","Minimalist website colors","Pastel color combinations","Vintage color palette","Modern bedroom colors","Earthy color palette"];
-
-/* ===== HELPERS ===== */
-const $=s=>document.querySelector(s);
-const toast=m=>{const t=$("#toast");t.textContent=m;t.classList.add("on");clearTimeout(toast.t);toast.t=setTimeout(()=>t.classList.remove("on"),1600)};
-const copy=(txt,msg)=>{const done=()=>toast(msg||"Copied "+txt);try{navigator.clipboard.writeText(txt).then(done,fb)}catch(e){fb()}
- function fb(){const a=document.createElement("textarea");a.value=txt;document.body.appendChild(a);a.select();try{document.execCommand("copy")}catch(e){}a.remove();done()}};
-const rgb=h=>[1,3,5].map(i=>parseInt(h.slice(i,i+2),16));
-function hsl(h){let[r,g,b]=rgb(h).map(v=>v/255);const mx=Math.max(r,g,b),mn=Math.min(r,g,b),l=(mx+mn)/2,d=mx-mn;let s=0,H=0;
- if(d){s=d/(1-Math.abs(2*l-1));H=mx==r?((g-b)/d+6)%6:mx==g?(b-r)/d+2:(r-g)/d+4;H*=60}return[Math.round(H),Math.round(s*100),Math.round(l*100)]}
-const hs=(h,s,l)=>`hsl(${(h+360)%360} ${s}% ${l}%)`;
-const bar=c=>`<div class="bar">${c.map(x=>`<i style="background:${x}"></i>`).join("")}</div>`;
-function palCard(p){const e=document.createElement("article");e.className="card pal";
- e.innerHTML=`${bar(p.cols)}<div class="in"><span class="cat">${p.cat}</span><h3>${p.name}</h3><p>${p.desc}</p><div class="hex">${p.cols.map(c=>`<button data-h="${c}" aria-label="Copy ${c}">${c.toUpperCase()}</button>`).join("")}</div><button class="cp">Copy palette</button></div>`;
- e.querySelectorAll("[data-h]").forEach(b=>b.onclick=()=>copy(b.dataset.h.toUpperCase()));
- e.querySelector(".cp").onclick=()=>copy(p.cols.join(", ").toUpperCase(),"Palette copied");return e}
-
-/* ===== THEME ===== */
-const root=document.documentElement,mq=matchMedia("(prefers-color-scheme: dark)");
-let saved=null;try{saved=localStorage.getItem("dc-theme")}catch(e){}
-const setTheme=t=>root.dataset.theme=t;
-setTheme(saved||(mq.matches?"dark":"light"));
-mq.addEventListener("change",e=>{let s=null;try{s=localStorage.getItem("dc-theme")}catch(x){}if(!s)setTheme(e.matches?"dark":"light")});
-$("#thBtn").onclick=()=>{const t=root.dataset.theme=="dark"?"light":"dark";setTheme(t);try{localStorage.setItem("dc-theme",t)}catch(e){}};
-$("#menuBtn").onclick=e=>{const o=$("#mnav").classList.toggle("open");e.currentTarget.setAttribute("aria-expanded",o)};
-$("#mnav").onclick=()=>$("#mnav").classList.remove("open");
-
-/* ===== COLOR OF THE DAY ===== */
-(()=>{const d=new Date(),n=Math.floor(Date.UTC(d.getFullYear(),d.getMonth(),d.getDate())/864e5);
- const[nm,hex,desc,pos,neg,sci]=CD[n%CD.length],[r,g,b]=rgb(hex),[h,s,l]=hsl(hex);
- const dark=(r*299+g*587+b*114)/1000<150,vals=[hex,`rgb(${r}, ${g}, ${b})`,`hsl(${h}, ${s}%, ${l}%)`];
- $("#cotdBox").innerHTML=`<div class="sw" style="background:${hex};color:${dark?"#fff":"#111"}"><b style="font-size:.85rem;letter-spacing:.1em">${d.toLocaleDateString(undefined,{month:"long",day:"numeric"}).toUpperCase()}</b></div>
- <div class="body"><h3>${nm}</h3><p>${desc}</p>
- <div class="codes">${vals.map(v=>`<button class="code" data-c="${v}" aria-label="Copy ${v}">${v.toUpperCase().replace("RGB","rgb").replace("HSL","hsl")} ⧉</button>`).join("")}</div>
- <div class="cols"><div><b>Positive associations</b>${pos}</div><div><b>Possible negatives</b>${neg}</div>
- <div class="full"><b>Science &amp; psychology</b>${sci}</div></div>
- <p class="note">Color science (wavelengths, how eyes see) is well established. Emotional associations are tendencies that vary by culture and person.</p></div>`;
- document.querySelectorAll("[data-c]").forEach(b=>b.onclick=()=>copy(b.dataset.c));})();
-
-/* ===== TOOLS ===== */
-(()=>{const B="#6D4AFF",[h,s,l]=hsl(B),[r,g,b]=rgb(B);
- const sw=a=>a.map(c=>`<i style="background:${c}"></i>`).join("");
- const T=[
- ["Color Palette Generator","Generate beautiful color combinations from a selected base color.",`<div class="pv">${sw([hs(h,s,92),hs(h-30,s,70),B,hs(h+30,s,55),hs(h+180,s-20,45)])}</div>`],
- ["Palette Presets","Explore ready-made color combinations for different purposes and styles.",`<div class="pv col">${[0,6,14].map(i=>`<div class="bar" style="height:22px;border-radius:6px;overflow:hidden">${sw(P[i].cols)}</div>`).join("")}</div>`],
- ["Image Picker","Upload or select an image and extract its dominant colors to create a palette.",`<div class="pv" style="border:2px dashed var(--bd);flex-direction:column;gap:6px"><span style="font-size:1.3rem">🖼️</span><span style="display:flex;gap:6px">${["#E26D8C","#FFD8A8","#5E7F4A","#2A8C9A"].map(c=>`<i style="flex:none;width:18px;height:18px;border-radius:50%;background:${c}"></i>`).join("")}</span></div>`],
- ["Gradient Mixer","Create and customize beautiful gradients using multiple colors.",`<div class="pv"><i style="background:linear-gradient(90deg,#FF8FAB,#7AA2FF,#5EEAD4)"></i></div>`],
- ["HEX, RGB & HSL Converter","Convert colors between HEX, RGB, and HSL formats.",`<div class="pv col" style="font:600 .78rem ui-monospace,monospace;justify-content:center"><span>HEX ${B}</span><span>RGB ${r}, ${g}, ${b}</span><span>HSL ${h}°, ${s}%, ${l}%</span></div>`]];
- $("#toolGrid").innerHTML=T.map((t,i)=>`<article class="card tool"><span class="tag">Tool 0${i+1}</span>${t[2]}<h3>${t[0].replace("&","&amp;")}</h3><p>${t[1]}</p></article>`).join("");})();
-
-/* ===== PRESETS ===== */
-let cat="All";
-function renderPal(){const g=$("#palGrid");g.innerHTML="";P.filter(p=>cat=="All"||p.cat==cat).forEach(p=>g.appendChild(palCard(p)))}
-function renderCats(){$("#catChips").innerHTML=["All",...FC].map(c=>`<button class="chip" aria-pressed="${c==cat}" data-k="${c}">${c=="All"?"All":c+" Palettes"}</button>`).join("");
- document.querySelectorAll("[data-k]").forEach(b=>b.onclick=()=>{cat=b.dataset.k;renderCats();renderPal()})}
-renderCats();renderPal();
-document.addEventListener("click",e=>{const a=e.target.closest("[data-cat]");if(a){cat=a.dataset.cat;renderCats();renderPal()}});
-
-/* ===== FAQ + structured data ===== */
-$("#faqList").innerHTML=FQ.map(f=>`<details><summary>${f[0]}</summary><p>${f[1]}</p></details>`).join("");
-const ld=document.createElement("script");ld.type="application/ld+json";
-ld.textContent=JSON.stringify({"@context":"https://schema.org","@type":"FAQPage",mainEntity:FQ.map(f=>({"@type":"Question",name:f[0],acceptedAnswer:{"@type":"Answer",text:f[1]}}))});
-document.head.appendChild(ld);
-
-/* ===== SEARCH ===== */
-const STOP=new Set("palette palettes color colors colour colours combination combinations scheme schemes for the a an and of in ideas".split(" "));
-const stem=w=>w.replace(/s$/,"");
-function find(q){const t=q.toLowerCase().split(/[^a-z0-9-]+/).filter(w=>w&&!STOP.has(w)).map(stem);if(!t.length)return P;
- return P.map(p=>{const hay=(p.cat+" "+p.name+" "+p.tags+" "+p.desc).toLowerCase().replace(/s\b/g,"");
-  const sc=t.reduce((n,w)=>n+(hay.includes(w)?1:0),0);return{p,sc}}).filter(x=>x.sc).sort((a,b)=>b.sc-a.sc).map(x=>x.p)}
-function doSearch(){const q=$("#q").value.trim(),box=$("#sRes");box.innerHTML="";if(!q)return;
- const r=find(q);if(!r.length){box.innerHTML=`<div class="empty"><div style="font-size:2rem">🎨</div><h3>No palettes found for “${q.replace(/[<>&]/g,"")}”</h3><p>Try a style or purpose like “pastel”, “wedding” or “website”.</p></div>`;return}
- r.slice(0,8).forEach(p=>box.appendChild(palCard(p)))}
-const openS=()=>{$("#srch").hidden=false;$("#q").focus();document.body.style.overflow="hidden"};
-const closeS=()=>{$("#srch").hidden=true;document.body.style.overflow=""};
-$("#sBtn").onclick=openS;$("#sx").onclick=closeS;$("#q").oninput=doSearch;
-document.addEventListener("keydown",e=>{if(e.key=="Escape")closeS();if((e.metaKey||e.ctrlKey)&&e.key=="k"){e.preventDefault();openS()}});
-const setQ=q=>{$("#q").value=q;doSearch()};
-$("#sChips").innerHTML=EX.map(x=>`<button class="chip">${x}</button>`).join("");
-$("#sChips").onclick=e=>{if(e.target.classList.contains("chip"))setQ(e.target.textContent)};
-$("#heroChips").innerHTML=EX.slice(0,4).map(x=>`<button class="chip">${x}</button>`).join("");
-$("#heroChips").onclick=e=>{if(e.target.classList.contains("chip")){openS();setQ(e.target.textContent)}};
-</script>
+<script defer src="/js/shared.js"></script>
+<script defer src="/js/data.js"></script>
+<script defer src="/js/core.js"></script>
+<script defer src="/js/search.js"></script>
+<script defer src="/js/landing.js"></script>
 </body>
 </html>
