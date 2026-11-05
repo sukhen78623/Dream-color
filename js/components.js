@@ -1,7 +1,7 @@
 /* Shared site shell. Every page loads this file, so header/footer/nav are defined once. */
 const NAV=[["Home","/"],["Tools","/#tools"],["Blog","/blog/"],["About","/about/"]];
 const LEGAL=[["Privacy Policy","/privacy/"],["Terms &amp; Conditions","/terms/"]];
-const brand=()=>'<a class="brand" href="/" aria-label="Dream Color home">Dream <span class="c" aria-hidden="true">'+"Color".split("").map((ch,i)=>'<i style="--i:'+i+'">'+ch+"</i>").join("")+"</span></a>";
+const brand=()=>'<a class="brand" href="/" aria-label="Dream Color home">Dream <span class="c">Color</span></a>';
 const list=a=>a.map(([t,h])=>'<a href="'+h+'">'+t+'</a>').join("");
 customElements.define("dc-header",class extends HTMLElement{connectedCallback(){
 const cta='<a class="btn p sm" href="/#color-of-the-day">Explore Colors</a>';
