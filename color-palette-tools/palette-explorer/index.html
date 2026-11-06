@@ -83,6 +83,17 @@ dc-header,dc-footer{display:block}
 .seo details{border-bottom:1px solid rgba(128,128,128,.28);padding:14px 0;max-width:70ch}
 .seo summary{cursor:pointer;font-weight:600}
 .seo details p{margin:10px 0 0}
+/* Layout guard: keep header, hero and sections full width on this page */
+html,body{width:100%;max-width:100%;overflow-x:hidden}
+body>dc-header,body>dc-footer,body>main{display:block;width:100%;min-width:0;align-self:stretch}
+main>section{display:block;width:100%;min-width:0}
+main>section>.w{width:100%;max-width:1120px;margin-left:auto;margin-right:auto;padding-left:16px;padding-right:16px;box-sizing:border-box}
+.ph h1,.ph .lead,.ph .crumb,.ph .eyebrow{max-width:none;width:auto}
+.ph .lead{max-width:62ch}
+.ex-panel,.ex-bar,.ex-chips,.ex-hues,.ex-near,.ex-grid{min-width:0;max-width:100%}
+.ex,.ex>.w{min-width:0;max-width:100%;overflow-x:clip}
+.ex-chips,.ex-hues{width:100%;contain:inline-size;-webkit-overflow-scrolling:touch}
+.ex-bar select{flex:0 1 auto;max-width:45%}
 </style>
 
 <script>(function(){var s=document.createElement("script");s.type="application/ld+json";s.text=JSON.stringify({"@context":"https://schema.org","@graph":[{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"__O__/"},{"@type":"ListItem","position":2,"name":"Tools","item":"__O__/#tools"},{"@type":"ListItem","position":3,"name":"Color Palette Tools","item":"__O__/color-palette-tools/"},{"@type":"ListItem","position":4,"name":"Palette Explorer","item":"__O__/color-palette-tools/palette-explorer/"}]},{"@type":"WebApplication","name":"Color Palette Explorer","url":"__O__/color-palette-tools/palette-explorer/","description":"Browse ready-made color palettes by category, color family and mood, find the closest match to your color, and copy HEX, RGB or CSS.","applicationCategory":"DesignApplication","operatingSystem":"Any","browserRequirements":"Requires JavaScript","isAccessibleForFree":true,"offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}]}).split("__O__").join(location.origin);document.head.appendChild(s)})();</script>
@@ -199,7 +210,14 @@ function open(i){var p=P[i];st.cur=p;$("dN").textContent=p.name;
 function png(p){var W=1500,H=900,c=document.createElement("canvas"),x,w=W/5;c.width=W;c.height=H;x=c.getContext("2d");
  p.cols.forEach(function(h,i){x.fillStyle=h;x.fillRect(i*w,0,w,740);x.fillStyle=ink(h);x.textAlign="center";x.font="600 36px system-ui,Arial,sans-serif";x.fillText(h,i*w+w/2,688)});
  x.fillStyle="#fff";x.fillRect(0,740,W,160);x.fillStyle="#111";x.textAlign="left";x.font="700 48px Georgia,serif";x.fillText(p.name,60,836);
- x.save();x.textAlign="right";x.fillStyle="#5b3df5";x.globalAlpha=.9;x.font="700 38px system-ui,Arial,sans-serif";x.fillText("yourColorsss",W-60,832);x.restore();
+ (function(){var F1="800 46px system-ui,Arial,sans-serif",F2="italic 700 54px Georgia,'Times New Roman',serif",F3="800 46px system-ui,Arial,sans-serif",a="your",b="Color",c="sss",w1,w2,w3,sx,y=832,g;
+  x.save();x.globalAlpha=.4;x.textAlign="left";
+  x.font=F1;w1=x.measureText(a).width;x.font=F2;w2=x.measureText(b).width;x.font=F3;w3=x.measureText(c).width;
+  sx=W-60-(w1+w2+w3);
+  x.font=F1;x.fillStyle="#111";x.fillText(a,sx,y);
+  x.font=F2;g=x.createLinearGradient(sx+w1,0,sx+w1+w2,0);g.addColorStop(0,"#FF8A3D");g.addColorStop(1,"#E83E8C");x.fillStyle=g;x.fillText(b,sx+w1,y);
+  x.font=F3;g=x.createLinearGradient(sx+w1+w2,0,sx+w1+w2+w3,0);g.addColorStop(0,"#6D4AFF");g.addColorStop(1,"#D946EF");x.fillStyle=g;x.fillText(c,sx+w1+w2,y);
+  x.restore()})();
  c.toBlob(function(b){if(!b){say("Download not supported");return}var a=document.createElement("a");a.href=URL.createObjectURL(b);a.download="palette-"+p.name.toLowerCase().replace(/[^a-z0-9]+/g,"-")+".png";document.body.appendChild(a);a.click();a.remove();setTimeout(function(){URL.revokeObjectURL(a.href)},2000);say("PNG downloaded")},"image/png")}
 function parse(v){v=(v||"").trim().replace(/^#/,"");if(/^[0-9a-f]{3}$/i.test(v))v=v.replace(/./g,"$&$&");return/^[0-9a-f]{6}$/i.test(v)?"#"+v.toUpperCase():null}
 function go(){st.n=12;render()}
