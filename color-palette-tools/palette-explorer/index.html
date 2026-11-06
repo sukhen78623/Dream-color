@@ -3,88 +3,204 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Palette Explorer — Browse Curated Color Palettes | yourColorsss</title>
-<meta name="description" content="Browse 48 hand-picked color palettes by style, from warm and pastel to dark, earthy, neon and vintage. Search, save and copy HEX codes in one tap.">
-<meta property="og:title" content="Palette Explorer — Browse Curated Color Palettes | yourColorsss">
-<meta property="og:description" content="Browse 48 hand-picked color palettes by style, from warm and pastel to dark, earthy, neon and vintage. Search, save and copy HEX codes in one tap.">
+<title>Palette Explorer: Browse Ready-Made Color Palettes — yourColorsss</title>
+<meta name="description" content="Browse 60 ready-made color palettes by category, color family and mood. Find palettes closest to your color, save favorites, and copy HEX, RGB or CSS.">
+<meta property="og:title" content="Palette Explorer: Browse Ready-Made Color Palettes — yourColorsss">
+<meta property="og:description" content="Browse 60 ready-made color palettes by category, color family and mood. Find palettes closest to your color, save favorites, and copy HEX, RGB or CSS.">
 <meta property="og:type" content="website">
+<meta property="og:site_name" content="yourColorsss">
+<meta name="twitter:card" content="summary">
 <meta name="theme-color" content="#5b3df5">
+<link rel="canonical" href="/color-palette-tools/palette-explorer/">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="stylesheet" href="/css/styles.css">
-<script src="/js/components.js" defer></script>
-<script src="/color-palette-tools/palette-explorer/tool.js" defer></script>
 <style>
-.prow{border:1px solid var(--line);border-radius:16px;overflow:hidden;background:var(--card)}
-.pstrip{display:flex;height:120px}
-.pstrip button{flex:1;min-width:0;border:0;cursor:pointer;display:flex;align-items:flex-end;justify-content:center;padding:0 0 8px;font:700 .7rem ui-monospace,Menlo,monospace;transition:flex .2s}
-.pstrip button:hover{flex:1.35}
-.pfoot{display:flex;gap:8px;align-items:center;justify-content:space-between;flex-wrap:wrap;padding:10px 12px}
-.pfoot small{color:var(--mut);font-weight:600}
-.rows{display:grid;gap:16px}
-.chp{display:flex;flex-wrap:wrap;gap:8px}
-.chp button{min-height:40px;padding:0 16px;border-radius:999px;border:1px solid var(--line);background:var(--card);color:var(--mut);font:600 .88rem inherit;cursor:pointer}
-.chp button[aria-pressed=true]{background:var(--acc);border-color:var(--acc);color:#fff}
-.info{padding:18px 20px;border:1px solid var(--line);border-radius:16px;background:var(--card);margin:20px 0 24px}
-.info b{display:block;font-size:1.05rem;margin-bottom:4px}.info p{color:var(--mut);font-size:.95rem}
-.gh2{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;margin:8px 0 14px}
-.gh2 h2{font-size:1.4rem;margin:0}
-
-.vh{position:absolute;width:1px;height:1px;opacity:0;overflow:hidden}
-.xp{display:grid;gap:14px;margin-bottom:10px}
-.srch{width:100%;max-width:420px;height:46px}
-.pgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:18px;margin-top:14px}
-.pc .pstrip{height:96px}
-.pc .phex{display:grid;grid-template-columns:repeat(5,1fr);padding:8px 8px 0;font:500 .62rem ui-monospace,Menlo,monospace;color:var(--mut);text-align:center}
-.pc .pfoot{padding:8px 12px 12px}
-.pn{display:grid;gap:0}.pn b{font-size:1rem}.pn small{color:var(--mut);font-weight:600;font-size:.78rem}
-.pa{display:flex;gap:6px}
-.pa .btn.sm{min-height:36px;padding:0 12px}
-.pa .heart[aria-pressed=true]{background:var(--acc);border-color:var(--acc);color:#fff}
-.empty{margin-top:30px;color:var(--mut);text-align:center}
+.ex{padding:8px 0 24px}
+.ex-panel{border:1px solid rgba(128,128,128,.3);border-radius:16px;padding:16px;margin-bottom:20px}
+.ex-bar{display:flex;gap:10px;margin-bottom:12px}
+.ex-bar input,.ex-bar select,.ex-near input[type=text]{padding:11px 12px;border:1px solid rgba(128,128,128,.4);border-radius:10px;background:transparent;color:inherit;font:inherit;box-sizing:border-box;min-width:0}
+.ex-bar input{flex:1}
+.ex-chips,.ex-hues{display:flex;gap:8px;overflow-x:auto;padding-bottom:4px;margin-bottom:10px;scrollbar-width:none}
+.ex-chips::-webkit-scrollbar,.ex-hues::-webkit-scrollbar{display:none}
+.ex-chip{flex:none;border:1px solid rgba(128,128,128,.4);background:transparent;color:inherit;border-radius:999px;padding:7px 14px;font:inherit;font-size:.9rem;cursor:pointer}
+.ex-chip[aria-pressed=true]{background:#5b3df5;border-color:#5b3df5;color:#fff}
+.ex-hue{flex:none;width:34px;height:34px;border-radius:50%;border:2px solid transparent;box-shadow:inset 0 0 0 1px rgba(128,128,128,.35);cursor:pointer}
+.ex-hue[aria-pressed=true]{border-color:#5b3df5;outline:2px solid #5b3df5;outline-offset:1px}
+.ex-near{display:flex;flex-wrap:wrap;gap:8px;align-items:center;font-size:.88rem}
+.ex-near input[type=color]{width:42px;height:38px;padding:2px;border:1px solid rgba(128,128,128,.4);border-radius:10px;background:transparent}
+.ex-near input[type=text]{width:104px}
+.ex-count{margin:12px 0 0;font-size:.9rem;opacity:.8}
+.ex-grid{display:grid;grid-template-columns:1fr;gap:14px}
+@media(min-width:640px){.ex-grid{grid-template-columns:1fr 1fr}}
+@media(min-width:980px){.ex-grid{grid-template-columns:repeat(3,1fr)}}
+.ex-card{border:1px solid rgba(128,128,128,.3);border-radius:16px;overflow:hidden}
+.ex-strip{display:flex}
+.ex-strip button{flex:1;height:92px;border:0;padding:0;cursor:pointer;font:600 .62rem/1 inherit;letter-spacing:.02em;display:flex;align-items:flex-end;justify-content:center;padding-bottom:8px;opacity:1}
+.ex-strip button span{opacity:0;transition:opacity .15s}
+.ex-strip button:hover span,.ex-strip button:focus-visible span{opacity:1}
+.ex-meta{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:12px 14px}
+.ex-meta b{display:block;font-size:.98rem}.ex-meta span.t{display:block;font-size:.74rem;opacity:.7}
+.ex-act{display:flex;gap:8px;align-items:center}
+.ex-act button,.ex-dact button,.ex-more button.ghost,#exClr{border:1px solid rgba(128,128,128,.4);background:transparent;color:inherit;border-radius:999px;padding:6px 13px;font:inherit;font-size:.82rem;cursor:pointer}
+.ex-act .ex-fav{font-size:1rem;padding:5px 11px;opacity:.7}.ex-fav[aria-pressed=true]{color:#e0245e;border-color:#e0245e;opacity:1}
+.ex-more{text-align:center;margin:22px 0}
+.ex-empty{grid-column:1/-1;text-align:center;padding:40px 10px;opacity:.8}
+#exDlg{width:min(680px,94vw);max-height:90vh;border:1px solid rgba(128,128,128,.4);border-radius:18px;padding:0;background:Canvas;color:CanvasText}
+#exDlg::backdrop{background:rgba(0,0,0,.5)}
+.ex-dh{display:flex;justify-content:space-between;align-items:center;padding:16px 18px 8px}
+.ex-dh h2{margin:0;font-size:1.3rem}
+#dX{border:1px solid rgba(128,128,128,.4);background:transparent;color:inherit;border-radius:50%;width:38px;height:38px;cursor:pointer;font-size:1rem}
+.ex-db{padding:0 18px 18px}
+.ex-row{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:14px 16px;border:0;width:100%;text-align:left;font:inherit;cursor:pointer}
+.ex-row b{font-size:1.02rem}.ex-row small{font-size:.76rem;opacity:.9;text-align:right}
+.ex-big{border-radius:14px;overflow:hidden;border:1px solid rgba(128,128,128,.3);margin-bottom:14px}
+.ex-dact{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:6px}
+.ex-sim{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.ex-sim button{border:1px solid rgba(128,128,128,.3);border-radius:12px;padding:0;overflow:hidden;background:transparent;color:inherit;cursor:pointer;font:inherit;font-size:.78rem;text-align:left}
+.ex-sim i{display:flex;height:34px}.ex-sim i u{flex:1}.ex-sim span{display:block;padding:6px 8px}
+.ex-msg{min-height:1.4em;margin:8px 0 0;font-size:.88rem}
+.seo{padding:32px 0 56px}
+.seo h2{margin:0 0 12px}
+.seo h3{margin:28px 0 8px}
+.seo p{max-width:70ch;margin:0 0 14px}
+.seo details{border-bottom:1px solid rgba(128,128,128,.28);padding:14px 0;max-width:70ch}
+.seo summary{cursor:pointer;font-weight:600}
+.seo details p{margin:10px 0 0}
 </style>
-<style>.relnote{margin-top:34px;padding:16px 20px;border:1px dashed var(--line);border-radius:14px;background:var(--alt);color:var(--mut);font-size:.95rem}.relnote b{display:block;color:var(--fg);margin-bottom:4px}.relnote a{color:var(--acc);font-weight:650}</style>
+
+<script>(function(){var s=document.createElement("script");s.type="application/ld+json";s.text=JSON.stringify({"@context":"https://schema.org","@graph":[{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"__O__/"},{"@type":"ListItem","position":2,"name":"Tools","item":"__O__/#tools"},{"@type":"ListItem","position":3,"name":"Color Palette Tools","item":"__O__/color-palette-tools/"},{"@type":"ListItem","position":4,"name":"Palette Generator","item":"__O__/color-palette-tools/color-palette-generator/"}]},{"@type":"WebApplication","name":"Color Palette Generator","url":"__O__/color-palette-tools/color-palette-generator/","description":"Browse ready-made color palettes by category, color family and mood, find the closest match to your color, and copy HEX, RGB or CSS.","applicationCategory":"DesignApplication","operatingSystem":"Any","browserRequirements":"Requires JavaScript","isAccessibleForFree":true,"offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}]}).split("__O__").join(location.origin);document.head.appendChild(s)})();</script>
+<script src="/js/components.js" defer></script>
 </head>
 <body>
 <dc-header></dc-header>
 <main>
 <section class="ph"><div class="w">
-<nav class="crumb" aria-label="Breadcrumb"><a href="/">Home</a><span aria-hidden="true">/</span><a href="/color-palette-tools/">Color Palette Tools</a><span aria-hidden="true">/</span><span aria-current="page">Palette Explorer</span></nav>
-<p class="eyebrow">Browse curated palettes</p>
-<h1>Palette Explorer</h1>
-<p class="lead">Browse only: 48 hand-picked palettes you can search, save and copy. When you want new colors made for you, use a generator tool.</p>
+<nav class="crumb" aria-label="Breadcrumb"><a href="/">Home</a><span aria-hidden="true">/</span><a href="/#tools">Tools</a><span aria-hidden="true">/</span><a href="/color-palette-tools/">Color Palette Tools</a><span aria-hidden="true">/</span><span aria-current="page">Palette Explorer</span></nav>
+<p class="eyebrow">Browse ready-made palettes</p>
+<h1>Color Palette Explorer</h1>
+<p class="lead">Explore 60 hand-picked color palettes. Filter by category and color family, or find the palettes closest to your own color.</p>
 </div></section>
 
-<section class="pt"><div class="w">
-<div class="xp">
-<label class="fl sw0"><span class="vh">Search palettes</span><input class="sel srch" id="q" type="search" placeholder="Search palettes by name" autocomplete="off"></label>
-<div class="chp" id="chips" role="group" aria-label="Palette category"><button type="button" data-c="All" aria-pressed="true">All</button><button type="button" data-c="Saved" aria-pressed="false">Saved</button><button type="button" data-c="Warm" aria-pressed="false">Warm</button><button type="button" data-c="Cool" aria-pressed="false">Cool</button><button type="button" data-c="Pastel" aria-pressed="false">Pastel</button><button type="button" data-c="Vivid" aria-pressed="false">Vivid</button><button type="button" data-c="Dark" aria-pressed="false">Dark</button><button type="button" data-c="Earthy" aria-pressed="false">Earthy</button><button type="button" data-c="Neon" aria-pressed="false">Neon</button><button type="button" data-c="Vintage" aria-pressed="false">Vintage</button></div>
+<section class="ex"><div class="w">
+<noscript><p>Please turn on JavaScript to use the palette explorer.</p></noscript>
+<div class="ex-panel">
+<div class="ex-bar"><input type="search" id="exQ" placeholder="Search: sage, wedding, dark" autocomplete="off" aria-label="Search palettes"><select id="exSort" aria-label="Sort palettes"><option value="feat">Featured</option><option value="near">Closest to my color</option><option value="az">A to Z</option><option value="light">Lightest</option><option value="dark">Darkest</option><option value="vivid">Most colorful</option></select></div>
+<div class="ex-chips" id="exCat" role="group" aria-label="Category"></div>
+<div class="ex-hues" id="exHue" role="group" aria-label="Color family"></div>
+<div class="ex-near"><label for="exHex">Closest to</label><input type="color" id="exPick" value="#7C3AED" aria-label="Pick a color"><input type="text" id="exHex" value="" placeholder="#7C3AED" maxlength="7" spellcheck="false" autocomplete="off" aria-label="HEX code"><button type="button" id="exClr">Clear</button></div>
+<p class="ex-count" id="exCount" role="status" aria-live="polite"></p>
 </div>
-<p class="hint" id="cnt" aria-live="polite"></p>
-<div class="pgrid" id="grid"></div>
-<p class="empty" id="empty" hidden>No palettes found. Try another word or category.</p>
-<aside class="relnote"><b>Related tools</b><p>Want new colors made for you instead of browsing? <a href="/color-palette-tools/color-palette-generator/">Color Palette Generator</a>.</p></aside>
+<div class="ex-grid" id="exGrid"></div>
+<div class="ex-more"><button type="button" class="btn" id="exMore">Show more</button></div>
 </div></section>
 
-<section class="alt"><div class="w">
-<p class="eyebrow">How it works</p>
-<h2>Find a palette in three steps</h2>
-<div class="steps"><div class="step"><h3>1. Browse</h3><p>Scroll through 48 hand-picked palettes, or choose a category such as Warm, Pastel, Dark or Vintage.</p></div><div class="step"><h3>2. Search or save</h3><p>Type a name to search. Tap Save on the palettes you like and find them again under Saved.</p></div><div class="step"><h3>3. Copy</h3><p>Tap any color to copy its HEX code, or tap Copy to take all five colors at once.</p></div></div>
-</div></section>
+<dialog id="exDlg" aria-labelledby="dN">
+<div class="ex-dh"><h2 id="dN"></h2><button type="button" id="dX" aria-label="Close">✕</button></div>
+<div class="ex-db"><div class="ex-big" id="dBig"></div>
+<div class="ex-dact"><button type="button" data-k="hex">Copy HEX</button><button type="button" data-k="rgb">Copy RGB</button><button type="button" data-k="css">Copy CSS</button><button type="button" data-k="png">Download PNG</button></div>
+<p class="ex-msg" id="dMsg" role="status" aria-live="polite"></p>
+<h3 style="margin:14px 0 8px;font-size:1rem">Similar palettes</h3><div class="ex-sim" id="dSim"></div></div>
+</dialog>
 
-<section><div class="w">
-<p class="eyebrow">Questions</p>
-<h2>Palette Explorer FAQ</h2>
-<div class="faq"><details><summary>How are the palettes chosen?</summary><p>They are hand-picked sets of five colors that work well together, grouped by look and feel, so you can browse by style instead of starting from scratch.</p></details><details><summary>Where are my saved palettes stored?</summary><p>Saved palettes are stored in your browser on this device. They are not uploaded, and they can be cleared if you clear your browser data.</p></details><details><summary>Can I use these palettes in my projects?</summary><p>Yes. Colors cannot be owned, so you can use them in your own designs, websites and documents.</p></details><details><summary>How do I copy a single color?</summary><p>Tap the color block. Its HEX code is copied and a short message confirms it.</p></details><details><summary>Can I change a palette I like?</summary><p>Yes. Copy the colors and open them in the Color Harmony Generator or Color Palette Generator to adjust them.</p></details></div>
-</div></section>
-
-<section class="alt"><div class="w">
-<p class="eyebrow">Keep exploring</p>
-<h2>More color palette tools</h2>
-<div class="grid"><article class="card tool"><div class="pv sw" aria-hidden="true"><i style="background:#7C3AED"></i><i style="background:#EC4899"></i><i style="background:#F59E0B"></i><i style="background:#10B981"></i></div><p class="tag">Generate matching palettes</p><h3>Color Palette Generator</h3><a class="btn p sm" href="/color-palette-tools/color-palette-generator/" aria-label="Open Color Palette Generator">Open Tool <span aria-hidden="true">→</span></a></article><article class="card tool"><div class="pv sw" aria-hidden="true"><i style="background:#EC4899"></i><i style="background:#F59E0B"></i><i style="background:#10B981"></i><i style="background:#3B82F6"></i></div><p class="tag">Build harmonious schemes</p><h3>Color Harmony Generator</h3><a class="btn p sm" href="/color-palette-tools/color-harmony-generator/" aria-label="Open Color Harmony Generator">Open Tool <span aria-hidden="true">→</span></a></article><article class="card tool"><div class="pv sw" aria-hidden="true"><i style="background:#F59E0B"></i><i style="background:#10B981"></i><i style="background:#3B82F6"></i><i style="background:#7C3AED"></i></div><p class="tag">Extract colors from a photo</p><h3>Image Palette Extractor</h3><a class="btn p sm" href="/color-palette-tools/image-palette-extractor/" aria-label="Open Image Palette Extractor">Open Tool <span aria-hidden="true">→</span></a></article><article class="card tool"><div class="pv sw" aria-hidden="true"><i style="background:#10B981"></i><i style="background:#3B82F6"></i><i style="background:#7C3AED"></i><i style="background:#EC4899"></i></div><p class="tag">Match colors to a feeling</p><h3>Mood-based Palette Generator</h3><a class="btn p sm" href="/color-palette-tools/mood-based-palette-generator/" aria-label="Open Mood-based Palette Generator">Open Tool <span aria-hidden="true">→</span></a></article></div>
-<div class="ctr"><a class="btn" href="/color-palette-tools/">← All color palette tools</a></div>
+<section class="seo"><div class="w">
+<h2>Ready-made color palettes for every project</h2>
+<p>Browse palettes for websites, interiors, brands, weddings, fashion, nature, vintage, pastel and dark designs. Each palette shows five colors that already work together, so you can copy them and start designing.</p>
+<h3>How to use the palette explorer</h3>
+<p>Pick a category, tap a color family dot, or type a HEX code to see the palettes closest to your color. Tap a color to copy its HEX code, tap Details for RGB and HSL values, similar palettes and a PNG download, and tap the heart to save favorites on this device.</p>
+<h3>Frequently asked questions</h3>
+<details><summary>How are the color families chosen?</summary><p>Each palette is grouped by its most colorful shade. Palettes with only soft, grayish colors go under Neutral.</p></details>
+<details><summary>How does closest to my color work?</summary><p>The explorer compares your color with every palette color using a perceptual color model and sorts palettes so the nearest matches come first.</p></details>
+<details><summary>Can I make my own palette?</summary><p>Yes. Use the <a href="/color-palette-tools/color-palette-generator/">Palette Generator</a> to create palettes from any base color.</p></details>
+<h3>Related color tools</h3>
+<p>Create new palettes in the <a href="/color-palette-tools/color-palette-generator/">Palette Generator</a>, test your pairs in the <a href="/accessibility-tools/color-contrast-checker/">Contrast and WCAG Checker</a>, or convert any color with the <a href="/color-picker-converters/color-picker/">Color Picker and Converter</a>.</p>
 </div></section>
 </main>
 <dc-footer></dc-footer>
-<div id="toast" role="status" aria-live="polite"></div>
+<script id="ex-app">
+(function(){"use strict";
+var DATA="Website|Fresh SaaS|F8FAFC 0F172A 4F46E5 A5B4FC F59E0B;Website|Calm Health|F4FBF9 12332E 14B8A6 99F6E4 FB923C;Website|Fintech Trust|F5F8FF 0B1F3A 2563EB 93C5FD 10B981;Website|Creative Studio|FFF7ED 1F1A17 EA580C FDBA74 7C3AED;Website|Dark Dashboard|0B1020 E5E7EB 6366F1 1E293B 22D3EE;Website|Editorial|FAF7F2 1C1917 B45309 D6C7B0 44403C;Website|Eco Startup|F3F8EF 14291B 2F855A A7D7A8 F6AD55;Website|Soft Gradient|FDF4FF 2E1065 A855F7 F0ABFC 38BDF8;"+
+"Interior|Scandi Morning|F5F1EB D9C8B4 8FA39A 5B6B73 2F3A40;Interior|Warm Terracotta|F3E9DC C8805A 8A4B38 D9B99B 4A3428;Interior|Sage Living|EEF1E6 B7C4A3 7E9276 5A6B58 3A4437;Interior|Coastal Calm|F4F7F7 BFD4D6 7FA7B0 3F6C7A E8DCC8;Interior|Modern Charcoal|ECEAE6 BDB8AE 7A756D 3B3A38 1F1F1F;Interior|Mid-century|F2E8D5 D9A441 C65D3B 3E6B5C 2C3B45;Interior|Blush Bedroom|F8EDEB E8C4C0 C9A19A 9C7B72 5E4B47;Interior|Luxe Moody|1E2428 3A4A4F B08D57 E5D9C3 6B4E3D;"+
+"Brand|Bold Startup|FFFFFF 111827 FF4D4F FFD166 3B82F6;Brand|Organic Brand|FAF6EE 3C4A3E 7A9A6B D9A66B B5543C;Brand|Tech Violet|F7F5FF 1B1535 6D4AFF B8A8FF 00D4A6;Brand|Playful Kids|FFF9E8 2D2A4A FF6B6B FFD93D 4D96FF;Brand|Premium Navy|F6F3EE 0E1B33 1F3A68 C8A862 8B2E3C;Brand|Fresh Citrus|FFFDF2 1F2A1F F59E0B 84CC16 EA580C;"+
+"Wedding|Blush and Gold|FFF5F3 F4D3CB E3B5A4 C9A45C 6B4B3E;Wedding|Sage Garden|F7F8F2 DDE5D0 A9BC98 6F8A66 4A3F3A;Wedding|Dusty Romance|F8EEF0 E3C2C8 C28E9B 8E5D6D 4A3640;Wedding|Ivory Classic|FBF8F1 E9DFCB CDB892 8C7A5B 3F3A33;Wedding|Lavender Vow|F6F2FA D9CCEB B09BD1 7C6AA6 3F3358;Wedding|Midnight Wedding|14182B 2D3558 7B86B8 D6B88A F3EDE2;"+
+"Fashion|Parisian Neutrals|F4EFE9 D8CBBE A89684 5E4E43 1E1A17;Fashion|Street Bold|111111 F2F2F2 FF3B30 FFD60A 0A84FF;Fashion|Pastel Boutique|FDF0F3 F7C6D0 C9B6E4 B5DEE6 FFE5B4;Fashion|Autumn Wardrobe|F2E3CF D08C42 A3472C 5B3A29 3C4A3A;Fashion|Monochrome Chic|FFFFFF E0E0E0 9E9E9E 4F4F4F 121212;Fashion|Denim and Cream|F6F0E6 B8CBE0 5F84AB 2B4668 C9A36B;"+
+"Nature|Forest Floor|E8EFE0 9DB88D 4F7A57 2C4A3A 6B4F3A;Nature|Ocean Depth|E6F4F5 8CCFD6 2E94A6 1B5C73 0B2A3F;Nature|Desert Dusk|F8E7D1 EBB78B D2785A 8E4B4A 3E2C3B;Nature|Alpine Lake|EAF4F8 A9D3E8 5B9BC2 3B6A8C 2B3F52;Nature|Spring Meadow|F4F9E9 C5E1A5 8BC34A F8BBD0 FFE082;Nature|Autumn Leaves|F6E6C8 E0A33B C2552C 7F2F25 44352A;Nature|Moss and Stone|EDEEE8 BFC4B6 7F8C74 566050 2F342C;"+
+"Vintage|Retro Diner|FFF4DC E4572E 17BEBB FFC914 2E282A;Vintage|Old Library|F0E4CE BFA37A 8C6A45 5C4331 2E241D;Vintage|Seventies|F6E3B4 E1A133 C8602B 8A3B2A 3F4A3C;Vintage|Faded Postcard|F4EBDD C9D1C8 8FA9A3 C98B6B 6A4C45;Vintage|Sepia Film|F2E6D0 D1B994 A58763 6F5640 3A2D22;"+
+"Pastel|Cotton Candy|FFF1F7 FFC6E0 C9B6FF A8E6FF FFF3B0;Pastel|Mint Cream|F2FBF6 CFF1DF 9ADBC0 BFE3F2 FFE3D0;Pastel|Peach Sorbet|FFF3EA FFD3B6 FFAAA5 FF8B94 C7CEEA;Pastel|Lilac Haze|F7F3FF E3D9FA C8B8F2 A9C7F5 F7D6E8;Pastel|Soft Sunrise|FFF8EE FFE0B8 FFC4A8 F5A7B8 B8A9E8;"+
+"Dark|Midnight Ink|0D1117 161B22 30363D 58A6FF C9D1D9;Dark|Neon Noir|0B0B14 1B1B2F FF2E88 00E5FF F5F5FA;Dark|Deep Forest|0E1512 1A2A22 2F5D46 7BC79A E6F2EA;Dark|Ember|140D0C 2A1714 B8472B F2A154 F6E6D5;Dark|Royal Plum|140F1F 2B2142 5B3F8C C79BF2 F1E9FA;Dark|Slate and Mint|10151A 1F2933 3E4C59 3DDBB0 E4E7EB;"+
+"Food|Coffee House|F4EAD8 C79E73 8B5E3C 4A2F20 1F1410;Food|Berry Smoothie|FFF0F5 E8607E 9B2D5E 5C2A6B FFD3B0;Food|Citrus Grove|FFF8E1 FFD54F FF9800 8BC34A 33691E";
+
+var $=function(i){return document.getElementById(i)},D=Math.PI/180;
+function rgb(h){var n=parseInt(h.slice(1),16);return[n>>16&255,n>>8&255,n&255]}
+function lin(v){v/=255;return v<=.04045?v/12.92:Math.pow((v+.055)/1.055,2.4)}
+function lum(x){var c=rgb(x);return .2126*lin(c[0])+.7152*lin(c[1])+.0722*lin(c[2])}
+function ratio(a,b){var x=lum(a),y=lum(b);return(Math.max(x,y)+.05)/(Math.min(x,y)+.05)}
+function lab(x){var c=rgb(x).map(lin),l=Math.cbrt(.4122214708*c[0]+.5363325363*c[1]+.0514459929*c[2]),m=Math.cbrt(.2119034982*c[0]+.6806995451*c[1]+.1073969566*c[2]),s=Math.cbrt(.0883024619*c[0]+.2817188376*c[1]+.6299787005*c[2]);return[.2104542553*l+.793617785*m-.0040720468*s,1.9779984951*l-2.428592205*m+.4505937099*s,.0259040371*l+.7827717662*m-.808675766*s]}
+function hsl(x){var c=rgb(x).map(function(v){return v/255}),M=Math.max.apply(0,c),m=Math.min.apply(0,c),d=M-m,l=(M+m)/2,s=d?d/(1-Math.abs(2*l-1)):0,h=0;if(d){h=M==c[0]?((c[1]-c[2])/d+6)%6:M==c[1]?(c[2]-c[0])/d+2:(c[0]-c[1])/d+4;h*=60}return"hsl("+Math.round(h)+", "+Math.round(s*100)+"%, "+Math.round(l*100)+"%)"}
+function rgbs(h){var c=rgb(h);return"rgb("+c[0]+", "+c[1]+", "+c[2]+")"}
+function ink(h){return ratio(h,"#FFFFFF")>=ratio(h,"#111111")?"#FFFFFF":"#111111"}
+function dist(a,b){var x=a[0]-b[0],y=a[1]-b[1],z=a[2]-b[2];return Math.sqrt(x*x+y*y+z*z)}
+var FAM=[["Red","#E5484D"],["Orange","#F08A3C"],["Yellow","#E5C03A"],["Green","#46A758"],["Teal","#1FB5A8"],["Blue","#3B82F6"],["Purple","#8B5CF6"],["Pink","#EC6C9C"],["Neutral","#A8A29E"]];
+function fam(h,C){if(C<.035)return"Neutral";return h<15||h>=345?"Pink":h<45?"Red":h<80?"Orange":h<125?"Yellow":h<170?"Green":h<215?"Teal":h<275?"Blue":"Purple"}
+var P=DATA.split(";").map(function(r,i){var p=r.split("|"),cols=p[2].split(" ").map(function(h){return"#"+h}),L=cols.map(lab),best=0,bc=0,sum=0;
+ L.forEach(function(v,j){var c=Math.hypot(v[1],v[2]);sum+=v[0];if(c>bc){bc=c;best=j}});
+ var hue=(Math.atan2(L[best][2],L[best][1])/D+360)%360,f=fam(hue,bc),warm=hue<110||hue>=340;
+ return{i:i,name:p[1],cat:p[0],cols:cols,lab:L,L:sum/5,C:bc,fam:f,tag:p[0]+" · "+(f=="Neutral"?"Neutral":warm?"Warm":"Cool")+" · "+(bc<.1?"Muted":"Vivid")}});
+var CATS=["All"].concat(P.map(function(p){return p.cat}).filter(function(c,i,a){return a.indexOf(c)==i})).concat(["Saved"]);
+var st={cat:"All",fam:"",q:"",sort:"feat",tgt:null,n:12,cur:null},fav=[],tm;
+try{fav=JSON.parse(localStorage.getItem("dc-fav")||"[]")}catch(e){}
+function saveFav(){try{localStorage.setItem("dc-fav",JSON.stringify(fav))}catch(e){}}
+function say(t){var m=$("exDlg").open?$("dMsg"):$("exCount");if(m===$("exCount")){$("exCount").dataset.t=$("exCount").textContent}m.textContent=t;clearTimeout(tm);tm=setTimeout(function(){m.textContent=m===$("dMsg")?"":$("exCount").dataset.t||"";},1800)}
+function cp(t,l){var ok=function(){say("Copied "+l)},fb=function(){var a=document.createElement("textarea");a.value=t;a.style.cssText="position:fixed;opacity:0";document.body.appendChild(a);a.select();try{document.execCommand("copy");ok()}catch(e){say("Copy not supported")}a.remove()};
+ if(navigator.clipboard&&window.isSecureContext)navigator.clipboard.writeText(t).then(ok,fb);else fb()}
+function css(p){return":root {\n"+p.cols.map(function(c,i){return"  --color-"+(i+1)+": "+c+";"}).join("\n")+"\n}"}
+function near(p,t){var m=9;p.lab.forEach(function(v){m=Math.min(m,dist(v,t))});return m}
+function sim(a,b){var s=0;a.lab.forEach(function(v){var m=9;b.lab.forEach(function(w){m=Math.min(m,dist(v,w))});s+=m});return s}
+function list(){
+ var q=st.q.trim().toLowerCase(),r=P.filter(function(p){return(st.cat=="All"||(st.cat=="Saved"?fav.indexOf(p.i)>-1:p.cat==st.cat))&&(!st.fam||p.fam==st.fam)&&(!q||(p.name+" "+p.tag+" "+p.fam).toLowerCase().indexOf(q)>-1)});
+ var s=st.sort;if(s=="near"&&!st.tgt)s="feat";
+ if(s=="near"){var t=lab(st.tgt);r.sort(function(a,b){return near(a,t)-near(b,t)})}
+ else if(s=="az")r.sort(function(a,b){return a.name<b.name?-1:1});
+ else if(s=="light")r.sort(function(a,b){return b.L-a.L});
+ else if(s=="dark")r.sort(function(a,b){return a.L-b.L});
+ else if(s=="vivid")r.sort(function(a,b){return b.C-a.C});
+ return r}
+function mini(p){return'<button type="button" data-o="'+p.i+'"><i>'+p.cols.map(function(c){return'<u style="background:'+c+'"></u>'}).join("")+"</i><span>"+p.name+"</span></button>"}
+function render(){
+ var r=list(),sh=r.slice(0,st.n);
+ $("exGrid").innerHTML=sh.length?sh.map(function(p){var f=fav.indexOf(p.i)>-1;
+  return'<article class="ex-card"><div class="ex-strip">'+p.cols.map(function(c){return'<button type="button" style="background:'+c+";color:"+ink(c)+'" data-h="'+c+'" aria-label="Copy '+c+'"><span>'+c.slice(1)+"</span></button>"}).join("")+'</div><div class="ex-meta"><div><b>'+p.name+'</b><span class="t">'+p.tag+'</span></div><div class="ex-act"><button type="button" class="ex-fav" data-f="'+p.i+'" aria-pressed="'+f+'" aria-label="Save '+p.name+'">♥</button><button type="button" data-d="'+p.i+'">Details</button></div></div></article>'}).join(""):'<p class="ex-empty">No palettes match. Try another category or color.</p>';
+ $("exMore").hidden=r.length<=st.n;
+ $("exCount").textContent=r.length+" palette"+(r.length==1?"":"s")+(st.sort=="near"&&st.tgt?" · closest to "+st.tgt:"")}
+function chips(){
+ $("exCat").innerHTML=CATS.map(function(c){return'<button type="button" class="ex-chip" data-c="'+c+'" aria-pressed="'+(st.cat==c)+'">'+(c=="Saved"?"♥ Saved":c)+"</button>"}).join("");
+ $("exHue").innerHTML=FAM.map(function(f){return'<button type="button" class="ex-hue" data-fam="'+f[0]+'" style="background:'+f[1]+'" aria-label="'+f[0]+'" title="'+f[0]+'" aria-pressed="'+(st.fam==f[0])+'"></button>'}).join("")}
+function open(i){var p=P[i];st.cur=p;$("dN").textContent=p.name;
+ $("dBig").innerHTML=p.cols.map(function(c){return'<button type="button" class="ex-row" style="background:'+c+";color:"+ink(c)+'" data-h="'+c+'"><b>'+c+"</b><small>"+rgbs(c)+"<br>"+hsl(c)+"</small></button>"}).join("");
+ var o=P.filter(function(x){return x!==p}).map(function(x){return[sim(p,x),x]}).sort(function(a,b){return a[0]-b[0]}).slice(0,3);
+ $("dSim").innerHTML=o.map(function(x){return mini(x[1])}).join("");$("dMsg").textContent="";
+ if(!$("exDlg").open)$("exDlg").showModal()}
+function png(p){var W=1500,H=900,c=document.createElement("canvas"),x,w=W/5;c.width=W;c.height=H;x=c.getContext("2d");
+ p.cols.forEach(function(h,i){x.fillStyle=h;x.fillRect(i*w,0,w,740);x.fillStyle=ink(h);x.textAlign="center";x.font="600 36px system-ui,Arial,sans-serif";x.fillText(h,i*w+w/2,688)});
+ x.fillStyle="#fff";x.fillRect(0,740,W,160);x.fillStyle="#111";x.textAlign="left";x.font="700 48px Georgia,serif";x.fillText(p.name,60,836);
+ c.toBlob(function(b){if(!b){say("Download not supported");return}var a=document.createElement("a");a.href=URL.createObjectURL(b);a.download="palette-"+p.name.toLowerCase().replace(/[^a-z0-9]+/g,"-")+".png";document.body.appendChild(a);a.click();a.remove();setTimeout(function(){URL.revokeObjectURL(a.href)},2000);say("PNG downloaded")},"image/png")}
+function parse(v){v=(v||"").trim().replace(/^#/,"");if(/^[0-9a-f]{3}$/i.test(v))v=v.replace(/./g,"$&$&");return/^[0-9a-f]{6}$/i.test(v)?"#"+v.toUpperCase():null}
+function go(){st.n=12;render()}
+$("exQ").addEventListener("input",function(){st.q=this.value;go()});
+$("exSort").addEventListener("change",function(){st.sort=this.value;go()});
+$("exCat").addEventListener("click",function(e){var b=e.target.closest("[data-c]");if(b){st.cat=b.dataset.c;chips();go()}});
+$("exHue").addEventListener("click",function(e){var b=e.target.closest("[data-fam]");if(b){st.fam=st.fam==b.dataset.fam?"":b.dataset.fam;chips();go()}});
+function setT(h){st.tgt=h;st.sort=h?"near":"feat";$("exSort").value=st.sort;go()}
+$("exPick").addEventListener("input",function(){var h=this.value.toUpperCase();$("exHex").value=h;setT(h)});
+$("exHex").addEventListener("input",function(){var h=parse(this.value);if(h){$("exPick").value=h.toLowerCase();setT(h)}});
+$("exClr").addEventListener("click",function(){$("exHex").value="";setT(null)});
+$("exMore").addEventListener("click",function(){st.n+=12;render()});
+$("exGrid").addEventListener("click",function(e){var h=e.target.closest("[data-h]"),f=e.target.closest("[data-f]"),d=e.target.closest("[data-d]");
+ if(h)cp(h.dataset.h,h.dataset.h);else if(d)open(+d.dataset.d);else if(f){var i=+f.dataset.f,k=fav.indexOf(i);k>-1?fav.splice(k,1):fav.push(i);saveFav();render()}});
+$("exDlg").addEventListener("click",function(e){var h=e.target.closest("[data-h]"),k=e.target.closest("[data-k]"),o=e.target.closest("[data-o]");
+ if(e.target===$("exDlg")||e.target.closest("#dX")){$("exDlg").close();return}
+ if(h)cp(h.dataset.h,h.dataset.h);else if(o)open(+o.dataset.o);else if(k){var p=st.cur,t=k.dataset.k;t=="hex"?cp(p.cols.join(", "),"HEX codes"):t=="rgb"?cp(p.cols.map(rgbs).join("\n"),"RGB values"):t=="css"?cp(css(p),"CSS variables"):png(p)}});
+chips();render();
+})();
+</script>
 </body>
 </html>
