@@ -4,7 +4,7 @@ const LEGAL=[["Privacy Policy","/privacy/"],["Terms &amp; Conditions","/terms/"]
 const brand=()=>'<a class="brand" href="/" aria-label="Dream Color home">Dream <span class="c">Color</span></a>';
 const list=a=>a.map(([t,h])=>'<a href="'+h+'">'+t+'</a>').join("");
 customElements.define("dc-header",class extends HTMLElement{connectedCallback(){
-const cta='<a class="btn p sm" href="/#color-of-the-day">Explore Colors</a>';
+const cta='<a class="btn p sm" href="/#tools">Explore Tools</a>';
 this.innerHTML='<div class="w hd">'+brand()+'<nav class="nav" aria-label="Main">'+list(NAV)+cta+'</nav><button class="mb" type="button" aria-label="Open menu" aria-expanded="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button></div><nav class="mp" aria-label="Mobile">'+list(NAV)+cta.replace(" sm","")+"</nav>";
 const b=this.querySelector(".mb"),p=this.querySelector(".mp");
 b.onclick=()=>{b.setAttribute("aria-expanded",p.classList.toggle("o"))};
