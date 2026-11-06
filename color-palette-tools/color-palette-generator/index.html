@@ -38,10 +38,16 @@
 .pg-strip{display:flex}
 .pg-cell{flex:1;min-width:0;height:96px;border:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;padding:0;font:600 .72rem/1.2 inherit;letter-spacing:.02em;cursor:pointer}
 .pg-cell small{font-size:.62rem;font-weight:400;opacity:.85}
-.pg-meta{display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between;padding:12px 14px}
+.pg-meta{display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between;padding:12px 14px 10px}
 .pg-meta b{display:block;font-size:.98rem}
 .pg-meta span{display:block;font-size:.74rem;opacity:.7}
 .pg-btns{display:flex;gap:8px}
+.pg-card.lk{border-color:#5b3df5;box-shadow:0 0 0 1px #5b3df5}
+.pg-lk.on{background:#5b3df5;border-color:#5b3df5;color:#fff}
+.pg-copy{display:flex;align-items:center;gap:8px;padding:0 14px 14px}
+.pg-copy span{font-size:.78rem;opacity:.7;margin-right:2px}
+.pg-copy button{flex:1;border:1px solid rgba(128,128,128,.4);background:transparent;color:inherit;border-radius:999px;padding:7px 0;font:inherit;font-size:.82rem;cursor:pointer}
+.pg-copy button:hover{border-color:#5b3df5}
 .pg-btns button{border:1px solid rgba(128,128,128,.4);background:transparent;color:inherit;border-radius:999px;padding:6px 12px;font:inherit;font-size:.8rem;cursor:pointer}
 .pg-btns button:hover{border-color:#5b3df5}
 .pg-wbox{display:flex;flex-direction:column;align-items:center;gap:18px;margin:6px 0 18px}
@@ -202,25 +208,32 @@ function gen(o){
   if(o.acc&&u.k){var bg=c[u.k[0]];c[u.k[1]]=fix(c[u.k[1]],bg,4.5);if(u.a)c.forEach(function(x,n){if(u.k.indexOf(n)<0)c[n]=fix(x,bg,3)})}
   out.push({name:(pn[0].toUpperCase()+pn.slice(1))+" "+RN[rel],cols:c})}
  return{roles:u.r,pals:out}}
-var mode="base",seed=0,last="#7C3AED",pals=[],roles=[],timer,ro=$("pgOut"),msg=$("pgMsg");
+var mode="base",seed=0,last="#7C3AED",pals=[],roles=[],lk=[],timer,ro=$("pgOut"),msg=$("pgMsg");
 function parse(v){v=(v||"").trim().replace(/^#/,"");if(/^[0-9a-f]{3}$/i.test(v))v=v.replace(/./g,"$&$&");return/^[0-9a-f]{6}$/i.test(v)?"#"+v.toUpperCase():null}
 function say(t){msg.textContent=t;clearTimeout(timer);timer=setTimeout(function(){msg.textContent=""},2200)}
 function cp(txt,label){var ok=function(){say("Copied "+label)},fb=function(){var a=document.createElement("textarea");a.value=txt;a.style.cssText="position:fixed;opacity:0";document.body.appendChild(a);a.select();try{document.execCommand("copy");ok()}catch(e){say("Copy not supported")}a.remove()};
  if(navigator.clipboard&&window.isSecureContext)navigator.clipboard.writeText(txt).then(ok,fb);else fb()}
 function fill(id,d){$(id).innerHTML=d[1].map(function(x){return'<option value="'+x[0]+'">'+x[1]+"</option>"}).join("")}
 function css(p){return":root {\n"+p.cols.map(function(c,i){return"  --"+roles[i].toLowerCase().replace(/&/g,"and").replace(/[^a-z0-9]+/g,"-").replace(/^-|-$/g,"")+": "+c+";"}).join("\n")+"\n}"}
+function rgbs(h){var c=rgb(h);return"rgb("+c[0]+", "+c[1]+", "+c[2]+")"}
+function png(p){var W=1500,H=900,c=document.createElement("canvas"),x,w=W/5;c.width=W;c.height=H;x=c.getContext("2d");
+ p.cols.forEach(function(h,i){var ink=ratio(h,"#FFFFFF")>=ratio(h,"#111111")?"#FFFFFF":"#111111";x.fillStyle=h;x.fillRect(i*w,0,w,740);x.fillStyle=ink;x.textAlign="center";
+  x.font="600 36px system-ui,Arial,sans-serif";x.fillText(h,i*w+w/2,688);x.globalAlpha=.8;x.font="26px system-ui,Arial,sans-serif";x.fillText(roles[i],i*w+w/2,640);x.globalAlpha=1});
+ x.fillStyle="#fff";x.fillRect(0,740,W,160);x.fillStyle="#111";x.textAlign="left";x.font="700 48px Georgia,serif";x.fillText(p.name,60,836);
+ var name="palette-"+p.name.toLowerCase().replace(/[^a-z0-9]+/g,"-")+".png";
+ c.toBlob(function(b){if(!b){say("Download not supported");return}var a=document.createElement("a");a.href=URL.createObjectURL(b);a.download=name;document.body.appendChild(a);a.click();a.remove();setTimeout(function(){URL.revokeObjectURL(a.href)},2000);say("PNG downloaded")},"image/png")}
 function render(){
  var res=gen({mode:mode,sub:$("pgSub").value,use:$("pgUse").value,sty:$("pgSty").value,acc:$("pgAcc").checked,hex:parse($("pgHex").value)||last,seed:seed});
- pals=res.pals;roles=res.roles;
- ro.innerHTML=pals.map(function(p,n){return'<article class="pg-card"><div class="pg-strip">'+p.cols.map(function(c,i){var ink=ratio(c,"#FFFFFF")>=ratio(c,"#111111")?"#FFFFFF":"#111111";
-  return'<button type="button" class="pg-cell" style="background:'+c+";color:"+ink+'" data-h="'+c+'" aria-label="Copy '+roles[i]+" "+c+'">'+c+"<small>Aa "+ratio(c,ink).toFixed(1)+"</small></button>"}).join("")+'</div><div class="pg-meta"><div><b>'+p.name+'</b><span>'+roles.join(" · ")+'</span></div><div class="pg-btns"><button type="button" data-x="hex" data-n="'+n+'">Copy HEX</button><button type="button" data-x="css" data-n="'+n+'">Copy CSS</button></div></div></article>'}).join("");if(mode=="harmony")draw()}
+ var prev=pals;pals=res.pals.map(function(p,i){return lk[i]&&prev[i]?prev[i]:p});roles=res.roles;
+ ro.innerHTML=pals.map(function(p,n){return'<article class="pg-card'+(lk[n]?" lk":"")+'"><div class="pg-strip">'+p.cols.map(function(c,i){var ink=ratio(c,"#FFFFFF")>=ratio(c,"#111111")?"#FFFFFF":"#111111";
+  return'<button type="button" class="pg-cell" style="background:'+c+";color:"+ink+'" data-h="'+c+'" aria-label="Copy '+roles[i]+" "+c+'">'+c+"<small>Aa "+ratio(c,ink).toFixed(1)+"</small></button>"}).join("")+'</div><div class="pg-meta"><div><b>'+p.name+'</b><span>'+roles.join(" · ")+'</span></div><div class="pg-btns"><button type="button" class="pg-lk'+(lk[n]?" on":"")+'" data-x="lock" data-n="'+n+'" aria-pressed="'+!!lk[n]+'">'+(lk[n]?"Locked":"Lock")+'</button><button type="button" data-x="png" data-n="'+n+'">Download PNG</button></div></div><div class="pg-copy"><span>Copy</span><button type="button" data-x="hex" data-n="'+n+'">HEX</button><button type="button" data-x="rgb" data-n="'+n+'">RGB</button><button type="button" data-x="css" data-n="'+n+'">CSS</button></div></article>'}).join("");if(mode=="harmony")draw()}
 function layout(){
  var use=$("pgUse").value,st=STY[use];
  $("pgBaseF").classList.toggle("pg-off",mode=="season");
  $("pgUseF").classList.toggle("pg-off",mode=="brand");
  $("pgWBox").hidden=mode!="harmony";$("pgSubF").hidden=!RULES[mode]||mode=="harmony";if(RULES[mode]){$("pgSubL").textContent=RULES[mode][0];fill("pgSub",RULES[mode]);if(mode=="harmony")chips()}
  $("pgStyF").hidden=!(st&&mode!="brand");if(st){$("pgStyL").textContent=st[0];fill("pgSty",st)}
- $("pgHint").textContent=HINTS[mode];seed=0;render()}
+ $("pgHint").textContent=HINTS[mode];seed=0;lk=[];render()}
 document.querySelectorAll(".pg-tab").forEach(function(b){b.addEventListener("click",function(){mode=b.dataset.mode;document.querySelectorAll(".pg-tab").forEach(function(x){x.setAttribute("aria-selected",x===b?"true":"false")});layout()})});
 $("pgUse").addEventListener("change",layout);
 ["pgSty"].forEach(function(i){$(i).addEventListener("change",function(){seed=0;render()})});
@@ -230,7 +243,8 @@ $("pgHex").addEventListener("input",function(){var h=parse(this.value);if(h){las
 $("pgHex").addEventListener("blur",function(){if(!parse(this.value)){this.value=last;say("Enter a valid HEX code, such as #7C3AED")}});
 $("pgShuffle").addEventListener("click",function(){seed++;render()});
 ro.addEventListener("click",function(e){var x=e.target.closest("[data-x]"),c=e.target.closest("[data-h]");
- if(x){var p=pals[+x.dataset.n];x.dataset.x=="hex"?cp(p.cols.join(", "),"HEX codes"):cp(css(p),"CSS variables")}else if(c)cp(c.dataset.h,c.dataset.h)});
+ if(x){var n=+x.dataset.n,p=pals[n],t=x.dataset.x;
+  if(t=="lock"){lk[n]=!lk[n];render()}else if(t=="png")png(p);else if(t=="hex")cp(p.cols.join(", "),"HEX codes");else if(t=="rgb")cp(p.cols.map(rgbs).join("\n"),"RGB values");else cp(css(p),"CSS variables")}else if(c)cp(c.dataset.h,c.dataset.h)});
 
 /* ===== harmony wheel ===== */
 var wh=$("pgWheel");
