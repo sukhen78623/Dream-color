@@ -19,7 +19,7 @@ h2{font-size:clamp(1.8rem,4.6vw,2.7rem);line-height:1.12;letter-spacing:-.025em;
 .btn.sm{min-height:40px;padding:0 18px;font-size:.9rem}
 .btn svg{width:18px;height:18px;flex:none}
 /* brand */
-.brand{font-family:"Poppins",ui-sans-serif,system-ui,sans-serif;font-weight:700;font-size:1.4rem;letter-spacing:-.02em;text-decoration:none;white-space:nowrap;display:inline-flex;align-items:baseline;gap:.28em}
+.brand{font-family:"Poppins",ui-sans-serif,system-ui,sans-serif;font-weight:700;font-size:1.4rem;letter-spacing:-.02em;text-decoration:none;white-space:nowrap;display:inline-flex;align-items:baseline;gap:.04em}
 .brand .c{font-family:"Pacifico","Brush Script MT",cursive;font-weight:400;font-size:1.3em;letter-spacing:0;padding:0 .12em .12em 0;color:#a855f7;background:linear-gradient(90deg,#f43f5e,#f97316,#10b981,#3b82f6,#a855f7,#f43f5e);background-size:300% 100%;-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;animation:cw 6s linear infinite}
 @keyframes cw{to{background-position:-300% 0}}
 /* header */
@@ -108,3 +108,18 @@ dc-footer{display:block;border-top:1px solid var(--line);padding:56px 0 36px;mar
 .ft ul{list-style:none;margin:0;padding:0;display:grid;gap:10px}.ft ul a{text-decoration:none;color:var(--mut)}.ft ul a:hover{color:var(--fg)}
 .cp{margin-top:40px;padding-top:24px;border-top:1px solid var(--line);color:var(--mut);font-size:.88rem}
 @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+/* families */
+.fam .top{display:flex;justify-content:space-between;align-items:center}
+.fam .cnt{font-size:.78rem;font-weight:600;color:var(--mut)}
+.fam .pv{height:110px}
+.fam h3{font-size:1.3rem}
+.fam p:not(.tag){flex:1}
+.fam .btn{align-self:flex-start}
+/* hub pages */
+section.ph{padding:56px 0 8px;background:radial-gradient(60% 90% at 10% 0%,rgba(168,85,247,.14),transparent 70%),radial-gradient(50% 80% at 95% 0%,rgba(59,130,246,.14),transparent 70%)}
+section.pt{padding:32px 0 88px}
+.ph h1{font-size:clamp(2.2rem,6vw,3.4rem);line-height:1.06;letter-spacing:-.035em;font-weight:800;margin-bottom:16px}
+.crumb{display:flex;flex-wrap:wrap;gap:8px;font-size:.88rem;color:var(--mut);margin-bottom:28px}
+.crumb a{text-decoration:none}.crumb a:hover{color:var(--fg)}
+.gh{font-size:1.5rem;letter-spacing:-.02em;margin:48px 0 0}.gh:first-child{margin-top:0}
+.pt .grid{margin-top:24px}
