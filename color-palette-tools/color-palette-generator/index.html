@@ -220,6 +220,14 @@ function png(p){var W=1500,H=900,c=document.createElement("canvas"),x,w=W/5;c.wi
  p.cols.forEach(function(h,i){var ink=ratio(h,"#FFFFFF")>=ratio(h,"#111111")?"#FFFFFF":"#111111";x.fillStyle=h;x.fillRect(i*w,0,w,740);x.fillStyle=ink;x.textAlign="center";
   x.font="600 36px system-ui,Arial,sans-serif";x.fillText(h,i*w+w/2,688);x.globalAlpha=.8;x.font="26px system-ui,Arial,sans-serif";x.fillText(roles[i],i*w+w/2,640);x.globalAlpha=1});
  x.fillStyle="#fff";x.fillRect(0,740,W,160);x.fillStyle="#111";x.textAlign="left";x.font="700 48px Georgia,serif";x.fillText(p.name,60,836);
+ (function(){var F1="800 46px system-ui,Arial,sans-serif",F2="italic 700 54px Georgia,'Times New Roman',serif",F3="800 46px system-ui,Arial,sans-serif",a="your",b="Color",s3="sss",w1,w2,w3,sx,y=832,g;
+  x.save();x.globalAlpha=.4;x.textAlign="left";
+  x.font=F1;w1=x.measureText(a).width;x.font=F2;w2=x.measureText(b).width;x.font=F3;w3=x.measureText(s3).width;
+  sx=W-60-(w1+w2+w3);
+  x.font=F1;x.fillStyle="#111";x.fillText(a,sx,y);
+  x.font=F2;g=x.createLinearGradient(sx+w1,0,sx+w1+w2,0);g.addColorStop(0,"#FF8A3D");g.addColorStop(1,"#E83E8C");x.fillStyle=g;x.fillText(b,sx+w1,y);
+  x.font=F3;g=x.createLinearGradient(sx+w1+w2,0,sx+w1+w2+w3,0);g.addColorStop(0,"#6D4AFF");g.addColorStop(1,"#D946EF");x.fillStyle=g;x.fillText(s3,sx+w1+w2,y);
+  x.restore()})();
  var name="palette-"+p.name.toLowerCase().replace(/[^a-z0-9]+/g,"-")+".png";
  c.toBlob(function(b){if(!b){say("Download not supported");return}var a=document.createElement("a");a.href=URL.createObjectURL(b);a.download=name;document.body.appendChild(a);a.click();a.remove();setTimeout(function(){URL.revokeObjectURL(a.href)},2000);say("PNG downloaded")},"image/png")}
 function render(){
