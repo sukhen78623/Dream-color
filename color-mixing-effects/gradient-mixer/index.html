@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Gradient Mixer — Create CSS Gradients Online | Dream Color</title>
+<meta name="description" content="Blend two or more colors into a smooth gradient. Choose linear, radial or conic, adjust angle and color stops, then copy the CSS or download a PNG.">
+<meta property="og:title" content="Gradient Mixer — Create CSS Gradients Online | Dream Color">
+<meta property="og:description" content="Blend two or more colors into a smooth gradient. Choose linear, radial or conic, adjust angle and color stops, then copy the CSS or download a PNG.">
+<meta property="og:type" content="website">
+<meta name="theme-color" content="#5b3df5">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/css/styles.css">
+<script src="/js/components.js" defer></script>
+<script src="/color-mixing-effects/gradient-mixer/tool.js" defer></script>
+</head>
+<body>
+<dc-header></dc-header>
+<main>
+<section class="ph"><div class="w">
+<nav class="crumb" aria-label="Breadcrumb"><a href="/">Home</a><span aria-hidden="true">/</span><a href="/color-mixing-effects/">Color Mixing &amp; Effects</a><span aria-hidden="true">/</span><span aria-current="page">Gradient Mixer</span></nav>
+<p class="eyebrow">Create smooth gradients</p>
+<h1>Gradient Mixer</h1>
+<p class="lead">Blend two or more colors into a smooth gradient. Adjust the type, angle and color stops, then copy the CSS or download it as an image.</p>
+</div></section>
+
+<section class="pt"><div class="w gm">
+<div class="gm-l">
+<div id="prev" class="prev" role="img" aria-label="Live gradient preview"></div>
+<p class="sub">Presets</p>
+<div class="presets" id="presets"></div>
+<p class="sub">CSS</p>
+<pre class="code" id="code" tabindex="0"></pre>
+<div class="acts"><button class="btn p sm" id="copy" type="button">Copy CSS</button><button class="btn sm" id="png" type="button">Download PNG</button></div>
+</div>
+<div class="gm-r card">
+<p class="sub">Type</p>
+<div class="seg" role="group" aria-label="Gradient type"><button type="button" data-t="linear" aria-pressed="true">Linear</button><button type="button" data-t="radial" aria-pressed="false">Radial</button><button type="button" data-t="conic" aria-pressed="false">Conic</button></div>
+<div id="angleRow"><label class="sub" for="angle">Angle <output id="angleVal">135°</output></label><input id="angle" class="rg" type="range" min="0" max="360" value="135"></div>
+<p class="sub">Colors</p>
+<div id="stops"></div>
+<div class="acts"><button class="btn sm" id="add" type="button">+ Add color</button><button class="btn sm" id="rev" type="button">Reverse</button><button class="btn sm" id="rnd" type="button">Random</button></div>
+</div>
+</div></section>
+
+<section class="alt"><div class="w">
+<p class="eyebrow">How it works</p>
+<h2>Make a gradient in three steps</h2>
+<div class="steps">
+<div class="step"><h3>1. Pick your colors</h3><p>Choose colors with the color box or type a HEX code. Add up to six colors.</p></div>
+<div class="step"><h3>2. Shape the blend</h3><p>Switch between linear, radial and conic, set the angle and drag each color to its position.</p></div>
+<div class="step"><h3>3. Copy or download</h3><p>Copy the CSS into your project, or download the gradient as a PNG image.</p></div>
+</div></div></section>
+
+<section><div class="w">
+<p class="eyebrow">Questions</p>
+<h2>Gradient Mixer FAQ</h2>
+<div class="faq">
+<details><summary>What is the difference between linear, radial and conic gradients?</summary><p>A linear gradient blends colors along a straight line at an angle. A radial gradient spreads colors outward from the center. A conic gradient sweeps colors around the center, like a color wheel.</p></details>
+<details><summary>How do I use the CSS in my website?</summary><p>Paste the two lines into any rule, for example <code>.hero { ... }</code>. The first line is a solid fallback color for very old browsers, and the second is the gradient.</p></details>
+<details><summary>Is my gradient saved or uploaded?</summary><p>No. The Gradient Mixer runs in your browser, and nothing you create is sent to a server.</p></details>
+<details><summary>Can I use the PNG commercially?</summary><p>The PNG is generated from the colors you choose, so you can use it in your own projects.</p></details>
+</div>
+</div></section>
+
+<section class="alt"><div class="w">
+<p class="eyebrow">Keep exploring</p>
+<h2>More color mixing tools</h2>
+<div class="grid"><article class="card tool"><div class="pv sw" aria-hidden="true"><i style="background:#f43f5e"></i><i style="background:#f59e0b"></i><i style="background:#22c55e"></i><i style="background:#3b82f6"></i></div><p class="tag">Blend two colors</p><h3>Color Mixer</h3><p>Mix any two colors in custom ratios and see the resulting color with its HEX, RGB and HSL values.</p><a class="btn p sm" href="/color-mixing-effects/color-mixer/" aria-label="Open Color Mixer">Open Tool <span aria-hidden="true">→</span></a></article><article class="card tool"><div class="pv sw" aria-hidden="true"><i style="background:#f59e0b"></i><i style="background:#22c55e"></i><i style="background:#3b82f6"></i><i style="background:#a855f7"></i></div><p class="tag">Lighten and darken a color</p><h3>Tint &amp; Shade Generator</h3><p>Generate step-by-step tints (lighter) and shades (darker) of one color for UI scales and backgrounds.</p><a class="btn p sm" href="/color-mixing-effects/tint-shade-generator/" aria-label="Open Tint & Shade Generator">Open Tool <span aria-hidden="true">→</span></a></article><article class="card tool"><div class="pv sw" aria-hidden="true"><i style="background:#22c55e"></i><i style="background:#3b82f6"></i><i style="background:#a855f7"></i><i style="background:#f43f5e"></i></div><p class="tag">Create two-tone effects</p><h3>Duotone Generator</h3><p>Pair two colors to produce bold duotone combinations for images, posters and hero sections.</p><a class="btn p sm" href="/color-mixing-effects/duotone-generator/" aria-label="Open Duotone Generator">Open Tool <span aria-hidden="true">→</span></a></article><article class="card tool"><div class="pv sw" aria-hidden="true"><i style="background:#3b82f6"></i><i style="background:#a855f7"></i><i style="background:#f43f5e"></i><i style="background:#f59e0b"></i></div><p class="tag">Create soft pastel colors</p><h3>Pastel Color Generator</h3><p>Soften any color into gentle pastel tones, perfect for calm, friendly and modern designs.</p><a class="btn p sm" href="/color-mixing-effects/pastel-color-generator/" aria-label="Open Pastel Color Generator">Open Tool <span aria-hidden="true">→</span></a></article></div>
+<div class="ctr"><a class="btn" href="/color-mixing-effects/">← All color mixing tools</a></div>
+</div></section>
+</main>
+<dc-footer></dc-footer>
+<div id="toast" role="status" aria-live="polite"></div>
+</body>
+</html>
