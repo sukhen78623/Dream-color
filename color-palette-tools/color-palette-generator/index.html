@@ -3,72 +3,289 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Color Palette Generator — Create Color Palettes Online | yourColorsss</title>
-<meta name="description" content="Create and fine-tune a 3 to 8 color palette. Lock the colors you like, shuffle the rest, edit any shade, and export HEX codes, CSS variables or a PNG.">
-<meta property="og:title" content="Color Palette Generator — Create Color Palettes Online | yourColorsss">
-<meta property="og:description" content="Create and fine-tune a 3 to 8 color palette. Lock the colors you like, shuffle the rest, edit any shade, and export HEX codes, CSS variables or a PNG.">
+<title>Color Palette Generator: Harmony, Mood &amp; Brand — yourColorsss</title>
+<meta name="description" content="Free color palette generator. Create palettes from a base color, harmony rule, mood, season or brand for websites, apps, logos, interiors and social media.">
+<meta property="og:title" content="Color Palette Generator: Harmony, Mood &amp; Brand — yourColorsss">
+<meta property="og:description" content="Free color palette generator. Create palettes from a base color, harmony rule, mood, season or brand for websites, apps, logos, interiors and social media.">
 <meta property="og:type" content="website">
+<meta property="og:site_name" content="yourColorsss">
+<meta name="twitter:card" content="summary">
 <meta name="theme-color" content="#5b3df5">
+<link rel="canonical" href="/color-palette-tools/color-palette-generator/">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="stylesheet" href="/css/styles.css">
+<style>
+.pg{padding:8px 0 24px}
+.pg-panel{border:1px solid rgba(128,128,128,.3);border-radius:16px;padding:16px;margin-bottom:20px}
+.pg-tabs{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:14px}
+.pg-tab{border:1px solid rgba(128,128,128,.4);background:transparent;color:inherit;border-radius:999px;padding:8px 14px;font:inherit;cursor:pointer}
+.pg-tab[aria-selected=true]{background:#5b3df5;border-color:#5b3df5;color:#fff}
+.pg-hint{margin:0 0 14px;font-size:.92rem;opacity:.85}
+.pg-row{display:grid;grid-template-columns:1fr;gap:12px;margin-bottom:12px}
+@media(min-width:720px){.pg-row{grid-template-columns:repeat(3,1fr)}}
+.pg-f label{display:block;font-size:.85rem;margin-bottom:6px;opacity:.8}
+.pg-f[hidden]{display:none}
+.pg-f.pg-off{opacity:.45}
+.pg-f select,.pg-f input[type=text]{width:100%;padding:10px 12px;border:1px solid rgba(128,128,128,.4);border-radius:10px;background:transparent;color:inherit;font:inherit;box-sizing:border-box}
+.pg-color{display:flex;gap:8px}
+.pg-color input[type=color]{width:46px;height:42px;padding:2px;border:1px solid rgba(128,128,128,.4);border-radius:10px;background:transparent;flex:none}
+.pg-chk{display:flex;gap:8px;align-items:center;margin:4px 0 14px}
+.pg-act{display:flex;flex-wrap:wrap;gap:10px}
+.pg-out{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:10px;margin-bottom:16px}
+.pg-sw{min-height:150px;border:0;border-radius:14px;padding:12px;display:flex;flex-direction:column;justify-content:flex-end;align-items:flex-start;gap:4px;text-align:left;font:inherit;cursor:pointer;box-shadow:inset 0 0 0 1px rgba(128,128,128,.25)}
+.pg-sw b{font-size:1.05rem;letter-spacing:.02em}
+.pg-role{font-size:.8rem;opacity:.9}
+.pg-ct{font-size:.78rem;opacity:.9}
+.pg-code{margin:0;padding:14px;border:1px solid rgba(128,128,128,.3);border-radius:12px;overflow:auto;font-size:.85rem;white-space:pre}
+.pg-msg{min-height:1.4em;margin:10px 0 0;font-size:.9rem}
+.seo{padding:32px 0 56px}
+.seo h2{margin:0 0 12px}
+.seo h3{margin:28px 0 8px}
+.seo p,.seo ol,.seo ul{max-width:70ch}
+.seo p{margin:0 0 14px}
+.seo details{border-bottom:1px solid rgba(128,128,128,.28);padding:14px 0;max-width:70ch}
+.seo summary{cursor:pointer;font-weight:600}
+.seo details p{margin:10px 0 0}
+</style>
+<script>(function(){var s=document.createElement("script");s.type="application/ld+json";s.text=JSON.stringify({"@context":"https://schema.org","@graph":[{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"__O__/"},{"@type":"ListItem","position":2,"name":"Tools","item":"__O__/#tools"},{"@type":"ListItem","position":3,"name":"Color Palette Tools","item":"__O__/color-palette-tools/"},{"@type":"ListItem","position":4,"name":"Palette Generator","item":"__O__/color-palette-tools/color-palette-generator/"}]},{"@type":"WebApplication","name":"Color Palette Generator","url":"__O__/color-palette-tools/color-palette-generator/","description":"Free color palette generator with harmony, mood, season and brand modes for websites, apps, logos, interiors and social media.","applicationCategory":"DesignApplication","operatingSystem":"Any","browserRequirements":"Requires JavaScript","isAccessibleForFree":true,"offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}]}).split("__O__").join(location.origin);document.head.appendChild(s)})();</script>
 <script src="/js/components.js" defer></script>
-<script src="/color-palette-tools/color-palette-generator/tool.js" defer></script>
-<style>.relnote{margin-top:34px;padding:16px 20px;border:1px dashed var(--line);border-radius:14px;background:var(--alt);color:var(--mut);font-size:.95rem}.relnote b{display:block;color:var(--fg);margin-bottom:4px}.relnote a{color:var(--acc);font-weight:650}</style>
 </head>
 <body>
 <dc-header></dc-header>
 <main>
 <section class="ph"><div class="w">
-<nav class="crumb" aria-label="Breadcrumb"><a href="/">Home</a><span aria-hidden="true">/</span><a href="/color-palette-tools/">Color Palette Tools</a><span aria-hidden="true">/</span><span aria-current="page">Color Palette Generator</span></nav>
+<nav class="crumb" aria-label="Breadcrumb"><a href="/">Home</a><span aria-hidden="true">/</span><a href="/#tools">Tools</a><span aria-hidden="true">/</span><a href="/color-palette-tools/">Color Palette Tools</a><span aria-hidden="true">/</span><span aria-current="page">Palette Generator</span></nav>
 <p class="eyebrow">Generate matching palettes</p>
 <h1>Color Palette Generator</h1>
-<p class="lead">Fine-tune a set of colors one by one. Lock the colors you like, shuffle the rest, edit any shade by hand, then copy the result.</p>
+<p class="lead">Create a color palette from a base color, a harmony rule, a mood, a season or your brand, for websites, apps, logos, interiors and social media.</p>
 </div></section>
 
-<section class="pt"><div class="w">
-<div class="pbar">
-<button class="btn p" id="gen" type="button">Generate palette</button>
-<label class="fl">Colors <select class="sel" id="count"><option>3</option><option>4</option><option>5</option><option>6</option><option>7</option><option>8</option></select></label>
-<label class="fl">Style <select class="sel" id="style"><option value="balanced">Balanced</option><option value="pastel">Pastel</option><option value="vivid">Vivid</option><option value="dark">Dark</option><option value="muted">Muted</option></select></label>
-<span class="hint">or press the space bar</span>
+<section class="pg"><div class="w">
+<noscript><p>Please turn on JavaScript to use the color palette generator.</p></noscript>
+<div class="pg-panel">
+<div class="pg-tabs" role="tablist" aria-label="Palette mode">
+<button type="button" class="pg-tab" role="tab" data-mode="base" aria-selected="true">Base color</button>
+<button type="button" class="pg-tab" role="tab" data-mode="harmony" aria-selected="false">Harmony</button>
+<button type="button" class="pg-tab" role="tab" data-mode="mood" aria-selected="false">Mood</button>
+<button type="button" class="pg-tab" role="tab" data-mode="season" aria-selected="false">Season</button>
+<button type="button" class="pg-tab" role="tab" data-mode="brand" aria-selected="false">Brand</button>
 </div>
-<div class="pal" id="pal" aria-live="polite"></div>
-<div class="pexp">
-<div class="pexp-h"><p class="sub">Export</p><select class="sel" id="fmt" aria-label="Export format"><option value="hex">HEX list</option><option value="css">CSS variables</option><option value="json">JSON</option></select></div>
-<pre class="code" id="code" tabindex="0"></pre>
-<div class="acts"><button class="btn p sm" id="copy" type="button">Copy</button><button class="btn sm" id="png" type="button">Download PNG</button></div>
+<p class="pg-hint" id="pgHint"></p>
+<div class="pg-row">
+<div class="pg-f" id="pgBaseF"><label for="pgHex">Base color</label><div class="pg-color"><input type="color" id="pgPick" value="#7C3AED" aria-label="Pick a base color"><input type="text" id="pgHex" value="#7C3AED" maxlength="7" autocomplete="off" spellcheck="false" aria-label="Base color HEX code"></div></div>
+<div class="pg-f" id="pgUseF"><label for="pgUse">Use case</label><select id="pgUse">
+<option value="general">General</option>
+<option value="website">Website</option>
+<option value="ui">UI / App</option>
+<option value="logo">Logo</option>
+<option value="interior">Interior</option>
+<option value="social">Social media</option>
+</select></div>
+<div class="pg-f" id="pgSubF" hidden><label for="pgSub" id="pgSubL">Style</label><select id="pgSub"></select></div>
 </div>
-<aside class="relnote"><b>Related tools</b><p>Want colors chosen by color-wheel rules instead of shuffling? <a href="/color-palette-tools/color-harmony-generator/">Color Harmony Generator</a>.</p></aside>
+<label class="pg-chk"><input type="checkbox" id="pgAcc"> Accessible only (text contrast of at least 4.5:1)</label>
+<div class="pg-act">
+<button type="button" class="btn p" id="pgShuffle">Shuffle</button>
+<button type="button" class="btn" id="pgCopyHex">Copy HEX codes</button>
+<button type="button" class="btn" id="pgCopyCss">Copy CSS variables</button>
+</div>
+<p class="pg-msg" id="pgMsg" role="status" aria-live="polite"></p>
+</div>
+<div class="pg-out" id="pgOut" aria-live="polite"></div>
+<pre class="pg-code" id="pgCode" aria-label="CSS variables for this palette"></pre>
 </div></section>
 
-<section class="alt"><div class="w">
-<p class="eyebrow">How it works</p>
-<h2>Build a palette in three steps</h2>
-<div class="steps">
-<div class="step"><h3>1. Generate</h3><p>Choose how many colors you want and a style, then press Generate or the space bar.</p></div>
-<div class="step"><h3>2. Lock what you like</h3><p>Tap the lock on any color to keep it. Generate again and only the other colors change.</p></div>
-<div class="step"><h3>3. Fine-tune and copy</h3><p>Tap the pencil to adjust a color, then copy the HEX codes or CSS variables, or download a PNG.</p></div>
-</div></div></section>
-
-<section><div class="w">
-<p class="eyebrow">Questions</p>
-<h2>Color Palette Generator FAQ</h2>
-<div class="faq">
-<details><summary>What do the style options do?</summary><p>Style changes how saturated and light the colors are. Balanced is a mix, Pastel is soft and light, Vivid is bold, Dark is deep and moody, and Muted is calm and subtle.</p></details>
-<details><summary>How do I keep a color and change the rest?</summary><p>Tap the lock icon on the color you want to keep. When you generate again, the new colors are built around the locked one.</p></details>
-<details><summary>Can I share or save my palette?</summary><p>Yes. The page address updates with your colors, so you can bookmark it or send the link to someone and they will see the same palette.</p></details>
-<details><summary>Is my palette uploaded anywhere?</summary><p>No. The generator runs in your browser, and nothing you create is sent to a server.</p></details>
-</div>
-</div></section>
-
-<section class="alt"><div class="w">
-<p class="eyebrow">Keep exploring</p>
-<h2>More color palette tools</h2>
-<div class="grid"><article class="card tool"><div class="pv sw" aria-hidden="true"><i style="background:#7C3AED"></i><i style="background:#EC4899"></i><i style="background:#F59E0B"></i><i style="background:#10B981"></i></div><p class="tag">Build harmonious schemes</p><h3>Color Harmony Generator</h3><a class="btn p sm" href="/color-palette-tools/color-harmony-generator/" aria-label="Open Color Harmony Generator">Open Tool <span aria-hidden="true">→</span></a></article><article class="card tool"><div class="pv sw" aria-hidden="true"><i style="background:#EC4899"></i><i style="background:#F59E0B"></i><i style="background:#10B981"></i><i style="background:#3B82F6"></i></div><p class="tag">Extract colors from a photo</p><h3>Image Palette Extractor</h3><a class="btn p sm" href="/color-palette-tools/image-palette-extractor/" aria-label="Open Image Palette Extractor">Open Tool <span aria-hidden="true">→</span></a></article><article class="card tool"><div class="pv sw" aria-hidden="true"><i style="background:#F59E0B"></i><i style="background:#10B981"></i><i style="background:#3B82F6"></i><i style="background:#7C3AED"></i></div><p class="tag">Browse curated palettes</p><h3>Palette Explorer</h3><a class="btn p sm" href="/color-palette-tools/palette-explorer/" aria-label="Open Palette Explorer">Open Tool <span aria-hidden="true">→</span></a></article><article class="card tool"><div class="pv sw" aria-hidden="true"><i style="background:#10B981"></i><i style="background:#3B82F6"></i><i style="background:#7C3AED"></i><i style="background:#EC4899"></i></div><p class="tag">Match colors to a feeling</p><h3>Mood-based Palette Generator</h3><a class="btn p sm" href="/color-palette-tools/mood-based-palette-generator/" aria-label="Open Mood-based Palette Generator">Open Tool <span aria-hidden="true">→</span></a></article></div>
-<div class="ctr"><a class="btn" href="/color-palette-tools/">← All color palette tools</a></div>
+<section class="seo"><div class="w">
+<h2>Free color palette generator for websites, apps, logos and more</h2>
+<p>Build a color palette from a single base color, a color harmony rule such as complementary, analogous, triadic or tetradic, a mood, a season or your brand. Choose a use case to get a palette arranged for a website, an app or UI, a logo, an interior or social media posts, and turn on the accessible option to keep text readable.</p>
+<p>Every color shows its HEX code and how well text reads on it. Click a color to copy its HEX code, or copy the whole palette as CSS variables.</p>
+<h3>How to use the palette generator</h3>
+<ol>
+<li>Pick a base color with the color picker or type a HEX code.</li>
+<li>Choose a mode: Base color, Harmony, Mood, Season or Brand.</li>
+<li>Choose a use case, such as Website or Logo.</li>
+<li>Turn on accessible only if the colors will carry text.</li>
+<li>Press Shuffle until you like the result, then copy the HEX codes or CSS variables.</li>
+</ol>
+<h3>Palette modes</h3>
+<ul>
+<li><strong>Base color:</strong> five balanced colors built around your color.</li>
+<li><strong>Harmony:</strong> complementary, analogous, triadic, tetradic, split-complementary or monochromatic schemes from the color wheel.</li>
+<li><strong>Mood:</strong> calm, bold, playful, elegant or natural palettes that start from your hue.</li>
+<li><strong>Season:</strong> curated spring, summer, autumn and winter palettes.</li>
+<li><strong>Brand:</strong> primary, secondary, accent, background and text colors from one brand color.</li>
+</ul>
+<h3>Frequently asked questions</h3>
+<details><summary>How do I generate a color palette from one color?</summary><p>Pick your color in the Base color mode and the generator returns five balanced colors around it. Press Shuffle for new variations.</p></details>
+<details><summary>What is the difference between complementary, analogous, triadic and tetradic palettes?</summary><p>Complementary uses two opposite hues on the color wheel. Analogous uses hues that sit next to each other. Triadic uses three evenly spaced hues, and tetradic uses four hues made of two complementary pairs.</p></details>
+<details><summary>How do I choose a color palette for a website?</summary><p>Select the Website use case. The generator assigns background, text, primary, secondary and accent colors. Turn on accessible only so the text stays readable on the background.</p></details>
+<details><summary>What does accessible only do?</summary><p>It adjusts the text and background pair until the contrast ratio is at least 4.5:1, the WCAG AA level for normal text. For website, UI and social media palettes it also keeps the main colors at 3:1 or more against the background.</p></details>
+<details><summary>Is the color palette generator free?</summary><p>Yes. The tool is free, needs no sign-up, and the palettes you create are yours to use in your projects.</p></details>
+<h3>Related color tools</h3>
+<p>Browse ready-made options in the <a href="/color-palette-tools/palette-explorer/">Palette Explorer</a>, test your pairs in the <a href="/accessibility-tools/color-contrast-checker/">Contrast and WCAG Checker</a>, or convert any color with the <a href="/color-picker-converters/color-picker/">Color Picker and Converter</a>.</p>
 </div></section>
 </main>
 <dc-footer></dc-footer>
-<div id="toast" role="status" aria-live="polite"></div>
+<script id="pg-app">
+(function(){
+"use strict";
+var $=function(id){return document.getElementById(id)};
+var clamp=function(v,a,b){return Math.max(a,Math.min(b,v))};
+var esc=function(s){return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;")};
+
+function hexToRgb(h){h=h.replace("#","");if(h.length===3)h=h.split("").map(function(c){return c+c}).join("");var n=parseInt(h,16);return [(n>>16)&255,(n>>8)&255,n&255]}
+function rgbToHex(r,g,b){return "#"+[r,g,b].map(function(v){return Math.round(clamp(v,0,255)).toString(16).padStart(2,"0")}).join("").toUpperCase()}
+function rgbToHsl(r,g,b){r/=255;g/=255;b/=255;var M=Math.max(r,g,b),m=Math.min(r,g,b),d=M-m,l=(M+m)/2,s=d===0?0:d/(1-Math.abs(2*l-1)),h=0;
+ if(d!==0){if(M===r)h=((g-b)/d)%6;else if(M===g)h=(b-r)/d+2;else h=(r-g)/d+4;h*=60;if(h<0)h+=360}
+ return [h,s*100,l*100]}
+function hslToHex(h,s,l){h=((h%360)+360)%360;s=clamp(s,0,100)/100;l=clamp(l,0,100)/100;var a=s*Math.min(l,1-l);
+ var f=function(n){var k=(n+h/30)%12;return l-a*Math.max(-1,Math.min(k-3,Math.min(9-k,1)))};
+ return rgbToHex(f(0)*255,f(8)*255,f(4)*255)}
+function hexToHsl(hex){var c=hexToRgb(hex);return rgbToHsl(c[0],c[1],c[2])}
+function lum(hex){var c=hexToRgb(hex).map(function(v){v/=255;return v<=0.03928?v/12.92:Math.pow((v+0.055)/1.055,2.4)});return 0.2126*c[0]+0.7152*c[1]+0.0722*c[2]}
+function ratio(a,b){var x=lum(a),y=lum(b);return (Math.max(x,y)+0.05)/(Math.min(x,y)+0.05)}
+function chroma(hex){var c=hexToHsl(hex);return c[1]*(1-Math.abs(2*c[2]/100-1))}
+function mulberry32(a){return function(){a|=0;a=a+0x6D2B79F5|0;var t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296}}
+
+var HARM={complementary:[0,180],analogous:[-40,-20,0,20,40],triadic:[0,120,240],tetradic:[0,90,180,270],split:[0,150,210]};
+var MOODS={
+ calm:{o:[0,20,-20,40,180],s:[45,38,35,30,22],l:[72,62,80,52,90]},
+ bold:{o:[0,120,240,180,60],s:[88,84,80,70,12],l:[50,48,52,38,95]},
+ playful:{o:[0,90,180,270,45],s:[85,80,78,80,70],l:[62,60,66,64,80]},
+ elegant:{o:[0,0,30,180,0],s:[28,32,38,40,10],l:[22,36,70,42,94]},
+ natural:{o:[0,25,-25,60,-60],s:[42,46,50,36,22],l:[38,52,66,44,90]}
+};
+var SEASONS={
+ spring:[["#A7D676","#FFB5C2","#FFE08A","#8FD6C9","#F7F3E3"],["#B5E48C","#F9C6D0","#FFF1A8","#99D5F0","#EAF6EA"],["#9BD770","#FF9EB5","#FFD966","#7FD1AE","#FFF8EC"]],
+ summer:[["#1E90FF","#FF7F50","#FFD54A","#2EC4B6","#FFF8E7"],["#00A6FB","#FF6B6B","#FFE066","#06D6A0","#F1FAEE"],["#0077B6","#F4845F","#F7D154","#48CAE4","#FFFDF5"]],
+ autumn:[["#C1440E","#E8A33D","#8C5A2B","#6B7F3B","#F5E6CC"],["#B7410E","#DAA520","#7B3F00","#556B2F","#FAEBD7"],["#9C2C1B","#F2A541","#6F4E37","#A3A847","#FFF1DC"]],
+ winter:[["#1B2A49","#6EA8D9","#E8F1F8","#7A1F3D","#F5F7FA"],["#0B132B","#5BC0BE","#DDE6ED","#8E1B3A","#FFFFFF"],["#22304A","#9CC5E8","#EEF3F8","#5C2A4E","#F8FAFC"]]
+};
+var USES={
+ website:{roles:["Background","Text","Primary","Secondary","Accent"],a:true},
+ ui:{roles:["Surface","Text","Primary","Secondary","Highlight"],a:true},
+ logo:{roles:["Light","Dark","Main","Support","Accent"],a:false},
+ interior:{roles:["Walls","Floor & trim","Accent","Textile","Furniture"],a:false},
+ social:{roles:["Post background","Headline text","Brand color","Highlight","Accent"],a:true}
+};
+var BRAND_ROLES=["Primary","Secondary","Accent","Background","Text"];
+var SUBS={
+ harmony:{label:"Harmony rule",list:[["complementary","Complementary"],["analogous","Analogous"],["triadic","Triadic"],["tetradic","Tetradic"],["split","Split-complementary"],["monochromatic","Monochromatic"]]},
+ mood:{label:"Mood",list:[["calm","Calm"],["bold","Bold"],["playful","Playful"],["elegant","Elegant"],["natural","Natural"]]},
+ season:{label:"Season",list:[["spring","Spring"],["summer","Summer"],["autumn","Autumn"],["winter","Winter"]]}
+};
+var HINTS={
+ base:"Builds five balanced colors around your base color.",
+ harmony:"Follows the color wheel rule you choose, starting from your base color.",
+ mood:"Shifts saturation and lightness to match the feeling, starting from your base hue.",
+ season:"Uses curated seasonal colors. The base color is not used in this mode.",
+ brand:"Turns your brand color into primary, secondary, accent, background and text colors."
+};
+
+function baseMode(h,s,l){return [hslToHex(h,s,l),hslToHex(h+30,s,l),hslToHex(h+180,s,l),hslToHex(h,s*0.5,clamp(l+32,20,94)),hslToHex(h,s,clamp(l-30,10,70))]}
+function harmony(h,s,l,type){
+ if(type==="monochromatic")return [22,38,l,70,88].map(function(L){return hslToHex(h,s,L)});
+ var offs=HARM[type]||HARM.complementary,out=[],i,j=offs.length>1?1:0;
+ for(i=0;i<offs.length&&out.length<5;i++)out.push(hslToHex(h+offs[i],s,type==="analogous"?clamp(l+(i-2)*9,8,94):l));
+ var extra=[
+  function(){return hslToHex(h+offs[0],s*0.55,clamp(l+30,20,93))},
+  function(){return hslToHex(h+offs[j],s,clamp(l-28,12,80))},
+  function(){return hslToHex(h+offs[j],s*0.55,clamp(l+30,20,93))}];
+ var k=0;while(out.length<5){out.push(extra[k%3]());k++}
+ return out}
+function brand(h,s,l){return [hslToHex(h,s,l),hslToHex(h+30,s*0.9,l),hslToHex(h+180,clamp(s+10,0,100),clamp(l,35,60)),hslToHex(h,clamp(s*0.35,6,40),96),hslToHex(h,clamp(s*0.3,8,30),14)]}
+function jitter(cols,seed){
+ if(!seed)return cols;
+ var r=mulberry32(seed*7919+13);
+ return cols.map(function(c){var x=hexToHsl(c);return hslToHex(x[0]+(r()-0.5)*24,x[1]+(r()-0.5)*14,x[2]+(r()-0.5)*10)})}
+
+function assign(cols,def,mode){
+ if(mode==="brand")return cols.map(function(c,i){return {hex:c,role:BRAND_ROLES[i]}});
+ if(!def)return cols.map(function(c,i){return {hex:c,role:"Color "+(i+1)}});
+ var L=cols.map(lum),light=L.indexOf(Math.max.apply(null,L)),dark=L.indexOf(Math.min.apply(null,L));
+ if(light===dark)dark=(light+1)%cols.length;
+ var rest=[];cols.forEach(function(_,i){if(i!==light&&i!==dark)rest.push(i)});
+ rest.sort(function(a,b){return chroma(cols[b])-chroma(cols[a])});
+ var out=[{hex:cols[light],role:def.roles[0]},{hex:cols[dark],role:def.roles[1]}];
+ rest.forEach(function(i,k){out.push({hex:cols[i],role:def.roles[2+k]})});
+ return out}
+function adjustPair(items,iL,iD){
+ var n=0;
+ while(ratio(items[iL].hex,items[iD].hex)<4.5&&n<80){
+  var a=hexToHsl(items[iL].hex),b=hexToHsl(items[iD].hex);
+  items[iL].hex=hslToHex(a[0],a[1],Math.min(98,a[2]+1.5));
+  items[iD].hex=hslToHex(b[0],b[1],Math.max(4,b[2]-2.5));
+  n++}}
+function lift(items,i,iL,min){
+ var n=0;
+ while(ratio(items[i].hex,items[iL].hex)<min&&n<40){var c=hexToHsl(items[i].hex);items[i].hex=hslToHex(c[0],c[1],Math.max(8,c[2]-2.5));n++}}
+function makeAccessible(items,def,mode){
+ var iL,iD;
+ if(mode==="brand"){iL=3;iD=4;adjustPair(items,iL,iD);for(var b=0;b<3;b++)lift(items,b,iL,3);return}
+ if(def){iL=0;iD=1}
+ else{var L=items.map(function(it){return lum(it.hex)});iL=L.indexOf(Math.max.apply(null,L));iD=L.indexOf(Math.min.apply(null,L));if(iL===iD){iL=0;iD=1}}
+ adjustPair(items,iL,iD);
+ if(def&&def.a){for(var i=2;i<items.length;i++)lift(items,i,iL,3)}}
+
+function generate(o){
+ var mode=o.mode,sub=o.sub,seed=o.seed|0,hsl=hexToHsl(o.hex),h=hsl[0],s=hsl[1],l=hsl[2],cols;
+ if(mode==="season"){var S=SEASONS[sub]||SEASONS.spring;cols=S[seed%S.length].slice()}
+ else{
+  if(mode==="harmony")cols=harmony(h,s,l,sub);
+  else if(mode==="mood"){var M=MOODS[sub]||MOODS.calm;cols=M.o.map(function(of,i){return hslToHex(h+of,M.s[i],M.l[i])})}
+  else if(mode==="brand")cols=brand(h,s,l);
+  else cols=baseMode(h,s,l);
+  cols=jitter(cols,seed)}
+ var def=USES[o.use]||null,items=assign(cols,def,mode);
+ if(o.acc)makeAccessible(items,def,mode);
+ return {items:items}}
+
+function slug(role,i,general){return general?"color-"+(i+1):role.toLowerCase().replace(/&/g,"and").replace(/[^a-z0-9]+/g,"-").replace(/^-|-$/g,"")}
+function cssVars(items,general){return ":root {\n"+items.map(function(it,i){return "  --"+(general?"color-"+(i+1):slug(it.role))+": "+it.hex+";"}).join("\n")+"\n}"}
+function parseHex(v){v=(v||"").trim().replace(/^#/,"");if(/^[0-9a-f]{3}$/i.test(v))v=v.split("").map(function(c){return c+c}).join("");return /^[0-9a-f]{6}$/i.test(v)?"#"+v.toUpperCase():null}
+
+var mode="base",seed=0,lastHex="#7C3AED",items=[],timer;
+var out=$("pgOut"),code=$("pgCode"),msg=$("pgMsg");
+
+function read(){
+ var hex=parseHex($("pgHex").value)||lastHex;
+ return {mode:mode,sub:$("pgSub").value,use:$("pgUse").value,acc:!!$("pgAcc").checked,hex:hex,seed:seed}}
+function say(t){msg.textContent=t;clearTimeout(timer);timer=setTimeout(function(){msg.textContent=""},2200)}
+function render(){
+ var st=read(),res=generate(st);
+ items=res.items;
+ out.innerHTML=items.map(function(it){
+  var ink=ratio(it.hex,"#FFFFFF")>=ratio(it.hex,"#111111")?"#FFFFFF":"#111111",r=ratio(it.hex,ink),g=r>=7?"AAA":r>=4.5?"AA":r>=3?"AA Large":"Low";
+  return '<button type="button" class="pg-sw" style="background:'+it.hex+";color:"+ink+'" data-hex="'+it.hex+'" aria-label="Copy '+esc(it.role)+" "+it.hex+'"><span class="pg-role">'+esc(it.role)+"</span><b>"+it.hex+'</b><span class="pg-ct">Aa '+r.toFixed(1)+":1 "+g+"</span></button>"}).join("");
+ code.textContent=cssVars(items,items[0].role==="Color 1")}
+function copy(txt,label){
+ var ok=function(){say("Copied "+label)};
+ var fb=function(){var a=document.createElement("textarea");a.value=txt;a.style.cssText="position:fixed;opacity:0";document.body.appendChild(a);a.select();try{document.execCommand("copy");ok()}catch(e){say("Copy not supported")}a.remove()};
+ if(navigator.clipboard&&window.isSecureContext)navigator.clipboard.writeText(txt).then(ok,fb);else fb()}
+function setMode(m){
+ mode=m;seed=0;
+ document.querySelectorAll(".pg-tab").forEach(function(b){b.setAttribute("aria-selected",b.dataset.mode===m?"true":"false")});
+ var sub=SUBS[m],sel=$("pgSub");
+ $("pgSubF").hidden=!sub;
+ if(sub){$("pgSubL").textContent=sub.label;sel.innerHTML=sub.list.map(function(x){return '<option value="'+x[0]+'">'+x[1]+"</option>"}).join("")}
+ $("pgBaseF").classList.toggle("pg-off",m==="season");
+ $("pgHint").textContent=HINTS[m];
+ render()}
+
+document.querySelectorAll(".pg-tab").forEach(function(b){b.addEventListener("click",function(){setMode(b.dataset.mode)})});
+$("pgPick").addEventListener("input",function(){var h=this.value.toUpperCase();$("pgHex").value=h;lastHex=h;seed=0;render()});
+$("pgHex").addEventListener("input",function(){var h=parseHex(this.value);if(h){lastHex=h;$("pgPick").value=h.toLowerCase();seed=0;render()}});
+$("pgHex").addEventListener("blur",function(){if(!parseHex(this.value)){this.value=lastHex;say("Enter a valid HEX code, such as #7C3AED")}});
+$("pgUse").addEventListener("change",function(){seed=0;render()});
+$("pgSub").addEventListener("change",function(){seed=0;render()});
+$("pgAcc").addEventListener("change",function(){render()});
+$("pgShuffle").addEventListener("click",function(){seed++;render()});
+$("pgCopyHex").addEventListener("click",function(){copy(items.map(function(i){return i.hex}).join(", "),"HEX codes")});
+$("pgCopyCss").addEventListener("click",function(){copy(code.textContent,"CSS variables")});
+out.addEventListener("click",function(e){var b=e.target.closest(".pg-sw");if(b)copy(b.dataset.hex,b.dataset.hex)});
+
+setMode("base");
+})();
+</script>
 </body>
 </html>
