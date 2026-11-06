@@ -16,31 +16,33 @@ cols.forEach((k,i)=>{const cw=weights?w*weights[i]/tw:w/n;x.fillStyle=k;x.fillRe
 if(labels&&labels[i]){x.font="600 26px system-ui,sans-serif";x.fillText(labels[i],px+cw/2,h-92)}x.font="700 "+(cw<140?22:34)+"px ui-monospace,Menlo,monospace";x.fillText(k,px+cw/2,h-48);px+=cw});
 c.toBlob(b=>{const a=document.createElement("a");a.href=URL.createObjectURL(b);a.download=file;document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(a.href),1000);toast("PNG downloaded")})}
 document.addEventListener("click",e=>{const c=e.target.closest("[data-copy]");if(c)copy(c.dataset.copy)});
-const TR={"trustworthy": {"label": "Trustworthy", "h": [[205, 225]], "s": [55, 80], "l": [32, 46]}, "friendly": {"label": "Friendly", "h": [[25, 45]], "s": [75, 95], "l": [48, 58]}, "luxurious": {"label": "Luxurious", "h": [[262, 290], [40, 48]], "s": [30, 55], "l": [18, 34]}, "playful": {"label": "Playful", "h": [[300, 340], [170, 190]], "s": [70, 95], "l": [52, 66]}, "bold": {"label": "Bold", "h": [[350, 360], [0, 12]], "s": [75, 95], "l": [40, 50]}, "calm": {"label": "Calm", "h": [[165, 200]], "s": [35, 60], "l": [42, 56]}, "eco": {"label": "Eco-friendly", "h": [[95, 145]], "s": [40, 65], "l": [30, 42]}, "modern": {"label": "Modern", "h": [[225, 260]], "s": [65, 90], "l": [46, 58]}, "energetic": {"label": "Energetic", "h": [[10, 50]], "s": [85, 100], "l": [48, 56]}, "creative": {"label": "Creative", "h": [[265, 310]], "s": [60, 85], "l": [48, 60]}};
-const ROLES=[["Primary","Logo, headers and main buttons"],["Secondary","Supporting sections, icons and badges"],["Accent","Highlights, links and calls to action"],["Light","Page backgrounds and cards"],["Dark","Text and dark backgrounds"]];
-let sel=["trustworthy","modern"],C=[];
-const pick=r=>{const a=r[Math.floor(Math.random()*r.length)];return rnd(a[0],a[1])};
+
+const ROLES=[["Primary","Logo, headers and main buttons"],["Secondary","Supporting sections, icons and badges"],["Accent","Highlights, links and calls to action"],["Background","Page backgrounds and cards"],["Text","Text and dark backgrounds"]];
+let base="#4F46E5",style="balanced",C=[];
+const hexOk=v=>/^#?[0-9a-f]{6}$/i.test(v.trim()),norm=v=>("#"+v.trim().replace("#","")).toUpperCase();
 const lum=h=>{const c=rgb(h).map(v=>{v/=255;return v<=.03928?v/12.92:Math.pow((v+.055)/1.055,2.4)});return .2126*c[0]+.7152*c[1]+.0722*c[2]};
 const ratio=(a,b)=>{const x=lum(a),y=lum(b);return(Math.max(x,y)+.05)/(Math.min(x,y)+.05)};
 const grade=r=>r>=7?"AAA":r>=4.5?"AA":r>=3?"AA Large":"Low";
-const dist=(a,b)=>{const d=Math.abs(((a-b)%360+360)%360);return Math.min(d,360-d)};
-function make(){const T=sel.map(k=>TR[k]);if(!T.length)T.push(TR.trustworthy);
-let ph,ps,pl;if($("own").checked){[ph,ps,pl]=hsl($("ownc").value)}else{ph=pick(T[0].h);ps=rnd(T[0].s[0],T[0].s[1]);pl=rnd(T[0].l[0],T[0].l[1])}
-let sh,ss,sl;if(T[1]){sh=pick(T[1].h);ss=rnd(T[1].s[0],T[1].s[1]);sl=rnd(T[1].l[0],T[1].l[1])}else{sh=ph+(Math.random()<.5?1:-1)*rnd(28,45);ss=Math.max(25,ps-12);sl=Math.min(72,pl+14)}
-if(dist(sh,ph)<22)sh+=45;
-let ah,as,al;if(T[2]){ah=pick(T[2].h);as=rnd(T[2].s[0],T[2].s[1]);al=rnd(T[2].l[0],T[2].l[1])}else{ah=ph+180+rnd(-25,25);as=Math.min(95,Math.max(70,ps+8));al=rnd(48,58)}
-if(dist(ah,ph)<40)ah+=90;
-C=[$("own").checked?$("ownc").value.toUpperCase():hex(ph,ps,pl),hex(sh,ss,sl),hex(ah,as,al),hex(ph,22,96),hex(ph,28,12)];render()}
-function render(){const[p,s,a,l,d]=C,st=document.getElementById("bp").style;
+const cl=(v,a,b)=>Math.max(a,Math.min(b,v));
+function make(){const[h,s,l]=hsl(base);let sec,acc;
+if(style==="bold"){sec=hex(h+120,cl(s,55,95),cl(l,38,58));acc=hex(h+240,cl(s+10,70,95),52)}
+else if(style==="soft"){sec=hex(h-30,cl(s*.7,25,70),cl(l+14,40,76));acc=hex(h+150,cl(s*.8,40,80),cl(l+10,48,66))}
+else{sec=hex(h+30,cl(s*.9,30,90),cl(l+8,30,68));acc=hex(h+180,cl(s,65,95),52)}
+C=[base,sec,acc,hex(h,22,96),hex(h,28,12)];render()}
+function render(){const[p,s,a,l,d]=C,st=$("bp").style;
 st.setProperty("--p",p);st.setProperty("--s",s);st.setProperty("--a",a);st.setProperty("--l",l);st.setProperty("--d",d);st.setProperty("--pi",ink(p));st.setProperty("--si",ink(s));st.setProperty("--ai",ink(a));
 $("bp").innerHTML='<div class="bp-nav"><b>YourBrand</b><span><i>Home</i><i>Products</i><i>About</i></span></div><div class="bp-hero"><h3>A headline that sounds like your brand</h3><p>This is how your colors look together on a page, with a button, a badge and cards.</p><span class="bp-btn">Get started</span><span class="bp-badge">New</span></div><div class="bp-cards"><div><i></i><b>Feature one</b></div><div><i></i><b>Feature two</b></div><div><i></i><b>Feature three</b></div></div>';
 $("cards").innerHTML=C.map((c,i)=>{const w=ratio(c,"#FFFFFF"),k=ratio(c,"#0C0B1A"),best=w>=k?["white",w]:["dark",k];
-return'<article class="bk"><button type="button" class="bs" style="background:'+c+';color:'+ink(c)+'" data-copy="'+c+'" aria-label="Copy '+c+'"><small>'+ROLES[i][0]+'</small><b>'+c+'</b></button><div class="bi"><span class="use">'+ROLES[i][1]+'</span><span class="ct">Best text: '+best[0]+' · '+best[1].toFixed(1)+':1 · '+grade(best[1])+'</span></div></article>'}).join("");out()}
-function out(){const f=$("fmt").value,n=["primary","secondary","accent","light","dark"];
+return'<article class="bk"><button type="button" class="bs" style="background:'+c+';color:'+ink(c)+'" data-copy="'+c+'" aria-label="Copy '+c+'"><small>'+ROLES[i][0]+'</small><b>'+c+'</b></button><div class="bi"><span class="use">'+ROLES[i][1]+'</span><span class="ct">Best text: '+best[0]+' · '+best[1].toFixed(1)+':1 · '+grade(best[1])+'</span></div></article>'}).join("");
+$("pick").value=base;if(document.activeElement!==$("hx"))$("hx").value=base;
+document.querySelectorAll("[data-st]").forEach(x=>x.setAttribute("aria-pressed",x.dataset.st===style));out();
+try{history.replaceState(null,"","#"+base.slice(1)+"-"+style)}catch(e){}}
+function out(){const f=$("fmt").value,n=["primary","secondary","accent","background","text"];
 $("code").textContent=f==="css"?":root {\n"+C.map((c,i)=>"  --brand-"+n[i]+": "+c+";").join("\n")+"\n}":f==="hex"?C.join(", "):"{\n"+C.map((c,i)=>'  "'+n[i]+'": "'+c+'"').join(",\n")+"\n}"}
-document.querySelectorAll("[data-t]").forEach(b=>b.onclick=()=>{const k=b.dataset.t;if(sel.includes(k))sel=sel.filter(x=>x!==k);else{sel.push(k);if(sel.length>3)sel.shift()}
-document.querySelectorAll("[data-t]").forEach(x=>x.setAttribute("aria-pressed",sel.includes(x.dataset.t)));make()});
-$("gen").onclick=make;$("own").onchange=make;$("ownc").oninput=()=>{$("own").checked=true;make()};$("fmt").onchange=out;
-$("copy").onclick=()=>copy($("code").textContent,"Brand colors copied");
+document.querySelectorAll("[data-st]").forEach(b=>b.onclick=()=>{style=b.dataset.st;make()});
+$("pick").oninput=e=>{base=e.target.value.toUpperCase();make()};
+$("hx").oninput=e=>{if(hexOk(e.target.value)){base=norm(e.target.value);make()}};$("hx").onblur=()=>{$("hx").value=base};
+$("rnd").onclick=()=>{base=hex(Math.random()*360,rnd(55,85),rnd(38,56));make()};
+$("fmt").onchange=out;$("copy").onclick=()=>copy($("code").textContent,"Brand colors copied");
 $("png").onclick=()=>pngOf(C,"brand-palette.png",ROLES.map(r=>r[0]));
-make();
+(function(){const m=location.hash.slice(1).split("-");if(m.length===2&&hexOk(m[0])&&["balanced","bold","soft"].includes(m[1])){base=norm(m[0]);style=m[1]}make()})();

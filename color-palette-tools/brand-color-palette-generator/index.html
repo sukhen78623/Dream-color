@@ -3,10 +3,10 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Brand Color Palette Generator — Build a Brand Color System | Dream Color</title>
-<meta name="description" content="Choose your brand personality and get a primary, secondary and accent color plus light and dark neutrals, with a live preview, contrast checks and CSS export.">
-<meta property="og:title" content="Brand Color Palette Generator — Build a Brand Color System | Dream Color">
-<meta property="og:description" content="Choose your brand personality and get a primary, secondary and accent color plus light and dark neutrals, with a live preview, contrast checks and CSS export.">
+<title>Brand Color Palette Generator — Primary, Secondary, Accent and CSS Variables | yourColorsss</title>
+<meta name="description" content="Start from one brand color and get primary, secondary, accent, background and text colors with a live page preview, contrast checks and ready-to-copy CSS variables.">
+<meta property="og:title" content="Brand Color Palette Generator — Primary, Secondary, Accent and CSS Variables | yourColorsss">
+<meta property="og:description" content="Start from one brand color and get primary, secondary, accent, background and text colors with a live page preview, contrast checks and ready-to-copy CSS variables.">
 <meta property="og:type" content="website">
 <meta name="theme-color" content="#5b3df5">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
@@ -32,7 +32,7 @@
 .bg{display:grid;grid-template-columns:minmax(0,1fr);gap:24px;align-items:start}.bg>*{min-width:0}@media(min-width:900px){.bg{grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr)}}
 .bg-l{padding:24px;gap:0}.bg-l .sub:first-child{margin-top:0}.bg-l .sub small{text-transform:none;letter-spacing:0;font-weight:500}
 .bc2{display:flex;align-items:center;gap:14px}.bc2 input[type=color]{width:48px;height:44px;padding:2px;border:1px solid var(--line);border-radius:10px;background:var(--card);cursor:pointer}
-.bc2 input[type=checkbox]{width:20px;height:20px;accent-color:var(--acc)}
+.hxin{flex:1;min-width:0;height:44px;padding:0 12px;border-radius:10px;border:1px solid var(--line);background:var(--card);color:var(--fg);font:500 .95rem ui-monospace,monospace}
 .bp{border-radius:20px;overflow:hidden;border:1px solid var(--line);background:var(--l);color:var(--d);box-shadow:0 20px 40px -28px rgba(0,0,0,.4)}
 .bp-nav{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:14px 20px;background:var(--p);color:var(--pi)}
 .bp-nav span{display:flex;gap:14px;font-size:.82rem;opacity:.9}
@@ -54,6 +54,7 @@
 .bcards+.pexp{margin-top:30px}
 @media(max-width:520px){.bp-cards{grid-template-columns:1fr}.bp-nav span{display:none}}
 </style>
+<style>.relnote{margin-top:34px;padding:16px 20px;border:1px dashed var(--line);border-radius:14px;background:var(--alt);color:var(--mut);font-size:.95rem}.relnote b{display:block;color:var(--fg);margin-bottom:4px}.relnote a{color:var(--acc);font-weight:650}</style>
 </head>
 <body>
 <dc-header></dc-header>
@@ -62,47 +63,47 @@
 <nav class="crumb" aria-label="Breadcrumb"><a href="/">Home</a><span aria-hidden="true">/</span><a href="/color-palette-tools/">Color Palette Tools</a><span aria-hidden="true">/</span><span aria-current="page">Brand Color Palette Generator</span></nav>
 <p class="eyebrow">Build a brand color system</p>
 <h1>Brand Color Palette Generator</h1>
-<p class="lead">Choose your brand's personality and get a complete color system: primary, secondary, accent and two neutrals, shown on a live page preview.</p>
+<p class="lead">Start from one brand color. Get a full set of primary, secondary, accent, background and text colors, with a live preview and ready-to-copy CSS variables.</p>
 </div></section>
 
 <section class="pt"><div class="w">
 <div class="bg">
 <div class="bg-l card">
-<p class="sub">Brand personality <small class="hint">(choose up to 3)</small></p>
-<div class="chp" id="chips" role="group" aria-label="Brand personality"><button type="button" data-t="trustworthy" aria-pressed="true">Trustworthy</button><button type="button" data-t="friendly" aria-pressed="false">Friendly</button><button type="button" data-t="luxurious" aria-pressed="false">Luxurious</button><button type="button" data-t="playful" aria-pressed="false">Playful</button><button type="button" data-t="bold" aria-pressed="false">Bold</button><button type="button" data-t="calm" aria-pressed="false">Calm</button><button type="button" data-t="eco" aria-pressed="false">Eco-friendly</button><button type="button" data-t="modern" aria-pressed="true">Modern</button><button type="button" data-t="energetic" aria-pressed="false">Energetic</button><button type="button" data-t="creative" aria-pressed="false">Creative</button></div>
-<p class="sub">Your own main color <small class="hint">(optional)</small></p>
-<div class="bc2"><label class="fl"><input type="checkbox" id="own"> Use my color</label><input type="color" id="ownc" value="#4F46E5" aria-label="Your main color"></div>
-<div class="acts"><button class="btn p" id="gen" type="button">Generate brand palette</button></div>
+<p class="sub">Your brand color</p>
+<div class="bc2"><input type="color" id="pick" value="#4F46E5" aria-label="Pick your brand color"><input class="hxin" id="hx" type="text" maxlength="7" spellcheck="false" aria-label="Brand color HEX" value="#4F46E5"><button class="btn sm" id="rnd" type="button">Random</button></div>
+<p class="sub">Style</p>
+<div class="chp" id="chips" role="group" aria-label="Palette style"><button type="button" data-st="balanced" aria-pressed="true">Balanced</button><button type="button" data-st="bold" aria-pressed="false">Bold contrast</button><button type="button" data-st="soft" aria-pressed="false">Soft and friendly</button></div>
 </div>
 <div class="bg-r">
 <div class="bp" id="bp" aria-label="Preview of your brand colors"></div>
 </div>
 </div>
-<p class="sub gap2">Your brand colors</p>
+<p class="sub gap2">Your brand system</p>
 <div class="bcards" id="cards"></div>
 <div class="pexp">
 <div class="pexp-h"><p class="sub">Export</p><select class="sel" id="fmt" aria-label="Export format"><option value="css">CSS variables</option><option value="hex">HEX list</option><option value="json">JSON</option></select></div>
 <pre class="code" id="code" tabindex="0"></pre>
 <div class="acts"><button class="btn p sm" id="copy" type="button">Copy</button><button class="btn sm" id="png" type="button">Download PNG</button></div>
 </div>
+<aside class="relnote"><b>Related tools</b><p>Not sure which colors suit your brand? Answer a few questions in the <a href="/color-psychology/brand-color-finder/">Brand Color Finder</a>.</p></aside>
 </div></section>
 
 <section class="alt"><div class="w">
 <p class="eyebrow">How it works</p>
 <h2>Build a brand palette in three steps</h2>
-<div class="steps"><div class="step"><h3>1. Describe your brand</h3><p>Choose up to three personality words, such as trustworthy, bold or eco-friendly. You can also start from your own main color.</p></div><div class="step"><h3>2. Generate</h3><p>You get a primary, secondary and accent color, plus a light and a dark neutral, shown on a small page preview.</p></div><div class="step"><h3>3. Check and export</h3><p>See which text color reads best on each color, then copy CSS variables, a HEX list or JSON, or download a PNG.</p></div></div>
+<div class="steps"><div class="step"><h3>1. Pick your brand color</h3><p>Choose a color with the color box, type a HEX code, or press Random to start from a new color.</p></div><div class="step"><h3>2. Choose a style</h3><p>Balanced, Bold contrast or Soft and friendly decides how the secondary and accent colors relate to your brand color.</p></div><div class="step"><h3>3. Check and export</h3><p>See which text color reads best on each color, then copy ready-made CSS variables, a HEX list or JSON, or download a PNG.</p></div></div>
 </div></section>
 
 <section><div class="w">
 <p class="eyebrow">Questions</p>
 <h2>Brand Color Palette Generator FAQ</h2>
-<div class="faq"><details><summary>What do primary, secondary and accent colors do?</summary><p>The primary color is the main face of your brand, used for the logo, headers and main buttons. The secondary color supports it. The accent is used sparingly to draw attention, such as for calls to action. Light and dark neutrals handle backgrounds and text.</p></details><details><summary>How are the colors chosen from personality words?</summary><p>Each word maps to a range of hues, saturation and lightness that people often link with that feeling, for example blues for trust and warm oranges for friendliness. The tool picks colors inside those ranges.</p></details><details><summary>Can I start from my existing brand color?</summary><p>Yes. Turn on Use my color, pick it, and the other colors are built around it.</p></details><details><summary>What do the AA and AAA labels mean?</summary><p>They show the contrast of the best text color on that background, using the WCAG guidelines. AA is a good minimum for normal text. AAA is stronger. Low means text on that color may be hard to read.</p></details><details><summary>Should I use this as my final brand?</summary><p>Treat it as a strong starting point. Test the colors on your logo, website and print, and check that they are not too close to a competitor.</p></details></div>
+<div class="faq"><details><summary>What do primary, secondary and accent colors do?</summary><p>The primary color is the face of your brand, used for the logo, headers and main buttons. The secondary color supports it. The accent is used sparingly to draw attention, such as on calls to action. The background and text colors handle readability.</p></details><details><summary>Why do I start from one color?</summary><p>Most brands already have one color they love, such as the one in their logo. The generator builds the rest of the system around it, so your main color is never changed.</p></details><details><summary>What do the styles change?</summary><p>Balanced picks a neighbouring secondary color and a complementary accent. Bold contrast uses colors spread further around the color wheel. Soft and friendly uses gentler, lighter colors.</p></details><details><summary>What do the AA and AAA labels mean?</summary><p>They show the contrast of the best text color on that background, based on the WCAG guidelines. AA is a good minimum for normal text, AAA is stronger, and Low means text may be hard to read.</p></details><details><summary>Where do I paste the CSS variables?</summary><p>Paste them into your main stylesheet, then use them like color: var(--brand-primary). Changing a value updates every place that uses it.</p></details></div>
 </div></section>
 
 <section class="alt"><div class="w">
 <p class="eyebrow">Keep exploring</p>
 <h2>More color palette tools</h2>
-<div class="grid"><article class="card tool"><div class="pv sw" aria-hidden="true"><i style="background:#7C3AED"></i><i style="background:#EC4899"></i><i style="background:#F59E0B"></i><i style="background:#10B981"></i></div><p class="tag">Generate matching palettes</p><h3>Color Palette Generator</h3><p>Create balanced 5-color palettes from any starting color, then fine-tune each shade until the set feels right for your project.</p><a class="btn p sm" href="/color-palette-tools/color-palette-generator/" aria-label="Open Color Palette Generator">Open Tool <span aria-hidden="true">→</span></a></article><article class="card tool"><div class="pv sw" aria-hidden="true"><i style="background:#EC4899"></i><i style="background:#F59E0B"></i><i style="background:#10B981"></i><i style="background:#3B82F6"></i></div><p class="tag">Build harmonious schemes</p><h3>Color Harmony Generator</h3><p>Pick a base color and get complementary, analogous, triadic and tetradic schemes based on the color wheel.</p><a class="btn p sm" href="/color-palette-tools/color-harmony-generator/" aria-label="Open Color Harmony Generator">Open Tool <span aria-hidden="true">→</span></a></article><article class="card tool"><div class="pv sw" aria-hidden="true"><i style="background:#F59E0B"></i><i style="background:#10B981"></i><i style="background:#3B82F6"></i><i style="background:#7C3AED"></i></div><p class="tag">Extract colors from a photo</p><h3>Image Palette Extractor</h3><p>Upload an image and pull out its dominant colors as a ready-to-use palette with HEX values.</p><a class="btn p sm" href="/color-palette-tools/image-palette-extractor/" aria-label="Open Image Palette Extractor">Open Tool <span aria-hidden="true">→</span></a></article><article class="card tool"><div class="pv sw" aria-hidden="true"><i style="background:#10B981"></i><i style="background:#3B82F6"></i><i style="background:#7C3AED"></i><i style="background:#EC4899"></i></div><p class="tag">Browse curated palettes</p><h3>Palette Explorer</h3><p>Browse hand-picked palettes by style and theme, and find the ones that spark ideas for your next design.</p><a class="btn p sm" href="/color-palette-tools/palette-explorer/" aria-label="Open Palette Explorer">Open Tool <span aria-hidden="true">→</span></a></article></div>
+<div class="grid"><article class="card tool"><div class="pv sw" aria-hidden="true"><i style="background:#7C3AED"></i><i style="background:#EC4899"></i><i style="background:#F59E0B"></i><i style="background:#10B981"></i></div><p class="tag">Generate matching palettes</p><h3>Color Palette Generator</h3><a class="btn p sm" href="/color-palette-tools/color-palette-generator/" aria-label="Open Color Palette Generator">Open Tool <span aria-hidden="true">→</span></a></article><article class="card tool"><div class="pv sw" aria-hidden="true"><i style="background:#EC4899"></i><i style="background:#F59E0B"></i><i style="background:#10B981"></i><i style="background:#3B82F6"></i></div><p class="tag">Build harmonious schemes</p><h3>Color Harmony Generator</h3><a class="btn p sm" href="/color-palette-tools/color-harmony-generator/" aria-label="Open Color Harmony Generator">Open Tool <span aria-hidden="true">→</span></a></article><article class="card tool"><div class="pv sw" aria-hidden="true"><i style="background:#F59E0B"></i><i style="background:#10B981"></i><i style="background:#3B82F6"></i><i style="background:#7C3AED"></i></div><p class="tag">Extract colors from a photo</p><h3>Image Palette Extractor</h3><a class="btn p sm" href="/color-palette-tools/image-palette-extractor/" aria-label="Open Image Palette Extractor">Open Tool <span aria-hidden="true">→</span></a></article><article class="card tool"><div class="pv sw" aria-hidden="true"><i style="background:#10B981"></i><i style="background:#3B82F6"></i><i style="background:#7C3AED"></i><i style="background:#EC4899"></i></div><p class="tag">Browse curated palettes</p><h3>Palette Explorer</h3><a class="btn p sm" href="/color-palette-tools/palette-explorer/" aria-label="Open Palette Explorer">Open Tool <span aria-hidden="true">→</span></a></article></div>
 <div class="ctr"><a class="btn" href="/color-palette-tools/">← All color palette tools</a></div>
 </div></section>
 </main>
