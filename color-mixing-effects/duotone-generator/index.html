@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Duotone Generator – Free Online Duotone Image Maker | YourColorsss</title>
+<meta name="description" content="Turn any photo into a duotone online. Pick two colors, tune contrast and grain, download PNG, or copy CSS and SVG filter code. Free, private, no sign-up.">
+<meta property="og:title" content="Duotone Generator – Free Online Duotone Image Maker | YourColorsss">
+<meta property="og:description" content="Duotone and tritone effects for any photo. Smart color pairs, live preview, PNG download and CSS or SVG filter export.">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="YourColorsss">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Duotone Generator | YourColorsss">
+<meta name="twitter:description" content="Free duotone image maker with smart color pairs, grain, tritone and code export. Runs in your browser.">
+<meta name="theme-color" content="#5b3df5">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/css/styles.css">
+<style>
+.dt{--a:#5b3df5;--b:rgba(128,128,128,.32);--f:rgba(128,128,128,.09);display:block}
+.dt *{box-sizing:border-box}
+.dt-card{border:1px solid var(--b);background:var(--f);border-radius:16px;padding:16px;margin-bottom:18px}
+.dt-card h2{font-size:1.05rem;margin:0 0 12px}
+.dt-card h3{font-size:.95rem;margin:16px 0 8px}
+.dt-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-bottom:12px}
+.dt label{display:block;font-size:.84rem;opacity:.95}
+.dt label>:is(input,select){margin-top:5px}
+.dt select,.dt input[type=text]{font:inherit;font-size:.9rem;color:inherit;background:var(--f);border:1px solid var(--b);border-radius:10px;padding:8px 10px;width:100%;min-width:0}
+.dt input[type=color]{width:100%;height:40px;padding:2px;border:1px solid var(--b);border-radius:10px;background:transparent;cursor:pointer}
+.dt input[type=range]{width:100%;accent-color:var(--a)}
+.dt-btn{appearance:none;border:1px solid var(--b);background:var(--f);color:inherit;font:inherit;font-size:.9rem;padding:9px 14px;border-radius:10px;cursor:pointer;line-height:1.2;touch-action:manipulation;user-select:none}
+.dt-btn:hover,.dt-btn:focus-visible{border-color:var(--a)}
+.dt-btn.on,.dt-btn.p{background:var(--a);border-color:var(--a);color:#fff}
+.dt-row{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.dt-st{border:1px solid var(--b);border-radius:16px;overflow:hidden;background:var(--f);display:grid;place-items:center;min-height:180px}
+.dt-st.drag{outline:3px dashed var(--a);outline-offset:-6px}
+.dt-st canvas{max-width:100%;height:auto;display:block}
+.dt-info{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-top:12px;font-size:.86rem}
+.dt-info b{padding:4px 12px;border-radius:8px;font-size:1rem}
+.dt-pg{display:grid;grid-template-columns:repeat(auto-fill,minmax(96px,1fr));gap:8px}
+.dt-ps{appearance:none;height:56px;border-radius:12px;border:1px solid var(--b);color:#fff;font:600 .76rem system-ui,sans-serif;text-align:left;padding:8px;display:flex;align-items:flex-end;cursor:pointer;text-shadow:0 1px 3px rgba(0,0,0,.7)}
+.dt-ps:focus-visible{outline:3px solid var(--a);outline-offset:2px}
+.dt-rp{display:flex;height:76px;border-radius:12px;overflow:hidden;border:1px solid var(--b)}
+.dt-rp button{flex:1;border:0;writing-mode:vertical-rl;font:600 .62rem ui-monospace,Menlo,Consolas,monospace;cursor:pointer;padding:4px 0}
+.dt textarea{width:100%;min-height:200px;resize:vertical;font:12.5px/1.5 ui-monospace,Menlo,Consolas,monospace;color:inherit;background:var(--f);border:1px solid var(--b);border-radius:10px;padding:10px;margin:10px 0}
+.dt-note{font-size:.8rem;opacity:.75;margin:10px 0 0}
+#dToast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%) translateY(20px);background:#111;color:#fff;padding:10px 16px;border-radius:10px;font-size:.88rem;opacity:0;pointer-events:none;transition:.2s;z-index:99}
+#dToast.show{opacity:1;transform:translateX(-50%)}
+.seo{padding:40px 0 56px}.seo h2{margin:0 0 12px}.seo p{margin:0 0 14px;max-width:70ch}.seo h3{margin:28px 0 8px}.seo details{border-bottom:1px solid rgba(128,128,128,.28);padding:14px 0;max-width:70ch}.seo summary{cursor:pointer;font-weight:600}.seo details p{margin:10px 0 0}
+@media(prefers-reduced-motion:reduce){#dToast{transition:none}}
+</style>
+<script src="/js/components.js" defer></script>
+</head>
+<body>
+<dc-header></dc-header>
+<main>
+<section class="ph"><div class="w">
+<nav class="crumb" aria-label="Breadcrumb"><a href="/">Home</a><span aria-hidden="true">/</span><a href="/#tools">Tools</a><span aria-hidden="true">/</span><a href="/color-mixing-effects/">Color Mixing &amp; Effects</a><span aria-hidden="true">/</span><span aria-current="page">Duotone Generator</span></nav>
+<p class="eyebrow">Two colors, one bold look</p>
+<h1>Duotone Generator</h1>
+<p class="lead">Upload a photo and map its shadows and highlights to any two colors. Let the tool suggest a pair from your image, add a midtone for a tritone, then download a PNG or copy CSS and SVG filter code.</p>
+</div></section>
+
+<section class="pt"><div class="w">
+<div class="dt">
+<div class="dt-card">
+<h2>Your image</h2>
+<div class="dt-st" id="dSt"><canvas id="dCv" role="img" aria-label="Duotone preview of your image"></canvas></div>
+<div class="dt-row" style="margin-top:12px">
+<button class="dt-btn p" id="dUp" type="button">Upload image</button><input type="file" id="dF" accept="image/*" hidden>
+<button class="dt-btn" id="dCmp" type="button">Hold to compare</button>
+<button class="dt-btn" id="dPng" type="button">Download PNG</button>
+<button class="dt-btn" id="dJpg" type="button">JPG</button>
+<button class="dt-btn" id="dCi" type="button">Copy image</button>
+</div>
+<p class="dt-note">Drop, paste or upload a photo. It is processed in your browser and never uploaded. Large images are scaled to 1600 px.</p>
+<input type="file" hidden>
+</div>
+
+<div class="dt-card">
+<h2>Duotone colors</h2>
+<div class="dt-grid">
+<label>Shadow color<input type="color" id="dC1"></label>
+<label>Shadow HEX<input type="text" id="dH1" maxlength="7" spellcheck="false" autocomplete="off"></label>
+<label>Highlight color<input type="color" id="dC2"></label>
+<label>Highlight HEX<input type="text" id="dH2" maxlength="7" spellcheck="false" autocomplete="off"></label>
+</div>
+<label style="display:flex;gap:8px;align-items:center"><input type="checkbox" id="dTri"> Add a midtone color (tritone)</label>
+<div class="dt-grid" id="dMw" style="margin-top:12px">
+<label>Midtone color<input type="color" id="dC3"></label>
+<label>Midtone HEX<input type="text" id="dH3" maxlength="7" spellcheck="false" autocomplete="off"></label>
+</div>
+<div class="dt-row" style="margin-top:6px">
+<button class="dt-btn" id="dSw" type="button">Swap</button>
+<button class="dt-btn" id="dAuto" type="button">Auto from image</button>
+<button class="dt-btn" id="dRand" type="button">Random pair</button>
+<select id="dHar" aria-label="Match the shadow to the highlight" style="width:auto"><option value="">Match shadow…</option><option value="comp">Complementary</option><option value="ana">Analogous</option><option value="tri">Triadic</option><option value="split">Split complement</option><option value="mono">Same hue, darker</option></select>
+</div>
+<div class="dt-info" id="dInfo"></div>
+<h3>Presets</h3>
+<div class="dt-pg" id="dPg"></div>
+</div>
+
+<div class="dt-card">
+<h2>Fine-tune</h2>
+<div class="dt-grid">
+<label>Intensity <b id="dIv"></b><input type="range" id="dI" min="0" max="100"></label>
+<label>Contrast <b id="dCov"></b><input type="range" id="dCo" min="-50" max="100"></label>
+<label>Brightness <b id="dBrv"></b><input type="range" id="dBr" min="-50" max="50"></label>
+<label>Midtone balance <b id="dBav"></b><input type="range" id="dBa" min="0" max="100"></label>
+</div>
+<label>Film grain <b id="dGrv"></b><input type="range" id="dGr" min="0" max="100"></label>
+<div class="dt-row" style="margin-top:12px"><button class="dt-btn" id="dRs" type="button">Reset sliders</button></div>
+</div>
+
+<div class="dt-card">
+<h2>Color ramp</h2>
+<div class="dt-rp" id="dRp"></div>
+<p class="dt-note">Nine steps from shadow to highlight. Tap a step to copy its HEX.</p>
+</div>
+
+<div class="dt-card">
+<h2>Export code</h2>
+<div class="dt-row" id="dTabs"><button class="dt-btn on" data-f="svg" type="button">SVG filter</button><button class="dt-btn" data-f="css" type="button">CSS blend</button><button class="dt-btn" data-f="grad" type="button">Gradient</button><button class="dt-btn" data-f="json" type="button">JSON</button></div>
+<textarea id="dCode" readonly spellcheck="false" aria-label="Exported code"></textarea>
+<button class="dt-btn p" id="dCopy" type="button">Copy code</button>
+<p class="dt-note">The SVG filter matches this preview and works on any image. Contrast, grain and the other sliders apply to the downloaded file. Your link updates as you change things, so you can share or bookmark a look.</p>
+</div>
+
+<div style="text-align:center;margin-top:4px"><a class="btn" href="/color-mixing-effects/">← Back to Color Mixing &amp; Effects</a></div>
+</div>
+<div id="dToast" role="status" aria-live="polite"></div>
+</div></section>
+
+<section class="seo"><div class="w">
+<h2>Free duotone image generator</h2>
+<p>A duotone maps the dark parts of a photo to one color and the light parts to another, so the whole picture is built from just two hues and the tones between them. It is the look behind many album covers, posters and website hero images, because it makes any photo match your brand colors.</p>
+<p>This tool converts your image to light and dark values, then paints them with a smooth OKLab color ramp. You can add a third midtone color for a tritone, match a shadow to your highlight with color harmony, or let the tool pick a pair from your own photo. Export a PNG, or copy an SVG filter or CSS to apply the same effect live on your website.</p>
+<h3>Frequently asked questions</h3>
+<details><summary>What is a duotone image?</summary><p>A duotone is an image printed or shown with two colors. Dark areas take the shadow color, bright areas take the highlight color, and everything in between blends smoothly from one to the other.</p></details>
+<details><summary>How do I make a duotone photo online?</summary><p>Upload or drop your photo, choose a shadow and a highlight color or tap a preset, then adjust contrast and intensity. When you like the result, download it as a PNG or JPG.</p></details>
+<details><summary>Which colors work best for a duotone?</summary><p>Pick a dark shadow and a clearly lighter highlight. A contrast ratio of 4.5 or more usually keeps details readable, and the tool shows the ratio for your pair. The Auto from image button suggests colors based on your photo.</p></details>
+<details><summary>What is a tritone and what does the midtone do?</summary><p>A tritone adds a third color between the shadow and the highlight. It gives the image more depth and keeps midtones from looking flat. Turn on the midtone option to try it.</p></details>
+<details><summary>How do I add a duotone effect with CSS?</summary><p>Copy the SVG filter from the export section, add it once to your page, then apply filter: url(#duotone) to any image. The CSS blend option is a lighter alternative that works best when the shadow is darker than the highlight.</p></details>
+<details><summary>Is my photo uploaded anywhere?</summary><p>No. The image is processed entirely in your browser, so it never leaves your device.</p></details>
+</div></section>
+</main>
+<dc-footer></dc-footer>
+
+<script>
+(function(){
+'use strict';
+function $(s){return document.querySelector(s)}
+function clamp(v,a,b){return Math.min(b,Math.max(a,v))}
+function validHex(h){return /^#?([0-9a-f]{3}|[0-9a-f]{6})$/i.test((h||'').trim())}
+function normHex(h){h=h.trim().replace('#','');if(h.length===3)h=h.split('').map(function(x){return x+x}).join('');return '#'+h.toLowerCase()}
+function rgb(h){var n=parseInt(normHex(h).slice(1),16);return{r:(n>>16)&255,g:(n>>8)&255,b:n&255}}
+function toLin(c){c/=255;return c<=0.04045?c/12.92:Math.pow((c+0.055)/1.055,2.4)}
+function fromLin(c){c=clamp(c,0,1);return 255*(c<=0.0031308?12.92*c:1.055*Math.pow(c,1/2.4)-0.055)}
+function hex(r,g,b){return '#'+[r,g,b].map(function(v){return('0'+Math.round(clamp(v,0,255)).toString(16)).slice(-2)}).join('')}
+function ok(h){var c=rgb(h),r=toLin(c.r),g=toLin(c.g),b=toLin(c.b);
+ var l=Math.cbrt(0.4122214708*r+0.5363325363*g+0.0514459929*b),m=Math.cbrt(0.2119034982*r+0.6806995451*g+0.1073969566*b),s=Math.cbrt(0.0883024619*r+0.2817188376*g+0.6299787005*b);
+ return{L:0.2104542553*l+0.7936177850*m-0.0040720468*s,a:1.9779984951*l-2.4285922050*m+0.4505937099*s,b:0.0259040371*l+0.7827717662*m-0.8086757660*s}}
+function okHex(L,C,h){var r,g,b,i;
+ for(i=0;i<40;i++){var a=C*Math.cos(h),bb=C*Math.sin(h),
+  l=Math.pow(L+0.3963377774*a+0.2158037573*bb,3),m=Math.pow(L-0.1055613458*a-0.0638541728*bb,3),s=Math.pow(L-0.0894841775*a-1.2914855480*bb,3);
+  r=4.0767416621*l-3.3077115913*m+0.2309699292*s;g=-1.2684380046*l+2.6097574011*m-0.3413193965*s;b=-0.0041960863*l-0.7034186147*m+1.7076147010*s;
+  if(r>=-.002&&r<=1.002&&g>=-.002&&g<=1.002&&b>=-.002&&b<=1.002)break;C*=0.93}
+ return hex(fromLin(r),fromLin(g),fromLin(b))}
+function mix(h1,h2,t){var x=ok(h1),y=ok(h2),a=x.a+(y.a-x.a)*t,b=x.b+(y.b-x.b)*t;return okHex(x.L+(y.L-x.L)*t,Math.hypot(a,b),Math.atan2(b,a))}
+function lum(h){var c=rgb(h);return .2126*toLin(c.r)+.7152*toLin(c.g)+.0722*toLin(c.b)}
+function ratio(a,b){var x=lum(a),y=lum(b);return(Math.max(x,y)+.05)/(Math.min(x,y)+.05)}
+function ink(h){return ratio(h,'#ffffff')>=ratio(h,'#000000')?'#ffffff':'#000000'}
+function num(v,d){v=parseFloat(v);return isNaN(v)?d:v}
+
+var DEF={a:'#2a1a5e',b:'#ff7a9c',m:'#b04fd0',t:0,i:100,co:10,br:0,ba:50,gr:0};
+var PRE=[['Sunset','#3b1d6e','#ff9e5e'],['Ocean','#0b2447','#5eead4'],['Neon','#2d0a4e','#00f5d4'],['Retro','#2b2d42','#ffd166'],['Forest','#0f3d2e','#c7f464'],['Candy','#5b1a6b','#ffb3d9'],['Noir','#0a0a0a','#f5f5f5'],['Ember','#2a0a0a','#ff5a36'],['Lilac','#1e1b4b','#c4b5fd'],['Gold','#2a1b0a','#f6c453']];
+var SL=[['dI','i','%'],['dCo','co',''],['dBr','br',''],['dBa','ba',''],['dGr','gr','%']];
+var HAR={comp:Math.PI,ana:Math.PI/6,tri:Math.PI*2/3,split:Math.PI*5/6,mono:0};
+var IDX=[0,32,64,96,128,160,192,224,255];
+var S=Object.assign({},DEF),L=[],dirty=true,src=null,out=null,cmp=false,raf=0,fmt='svg';
+var cv=$('#dCv'),cx=cv.getContext('2d',{willReadFrequently:true});
+
+function toast(m){var t=$('#dToast');t.textContent=m;t.classList.add('show');clearTimeout(toast.t);toast.t=setTimeout(function(){t.classList.remove('show')},1800)}
+function copy(t,m){function f(){var x=document.createElement('textarea');x.value=t;x.style.cssText='position:fixed;opacity:0';document.body.appendChild(x);x.select();try{document.execCommand('copy');toast(m)}catch(e){toast('Copy failed')}x.remove()}
+ if(navigator.clipboard&&navigator.clipboard.writeText)navigator.clipboard.writeText(t).then(function(){toast(m)},f);else f()}
+
+function buildLut(){L=[];for(var i=0;i<256;i++){var u=i/255,h=S.t?(u<.5?mix(S.a,S.m,u*2):mix(S.m,S.b,(u-.5)*2)):mix(S.a,S.b,u),c=rgb(h);L.push([c.r,c.g,c.b,h])}dirty=false}
+function process(){if(!src)return;if(dirty)buildLut();
+ var d=src.data,o=out.data,n=d.length,k=S.i/100,cb=S.br/100,cf=1+S.co/100,ex=Math.pow(2,(50-S.ba)/50),g=S.gr/100*90,cur=[],j,p,v,c,r,gg,b;
+ for(j=0;j<256;j++)cur.push(Math.pow(clamp((j/255+cb-.5)*cf+.5,0,1),ex)*255);
+ for(p=0;p<n;p+=4){r=d[p];gg=d[p+1];b=d[p+2];v=cur[(.2126*r+.7152*gg+.0722*b)|0];
+  if(g)v+=(Math.random()-.5)*g;
+  c=L[v<0?0:v>255?255:v|0];
+  o[p]=r+(c[0]-r)*k;o[p+1]=gg+(c[1]-gg)*k;o[p+2]=b+(c[2]-b)*k;o[p+3]=d[p+3]}
+ cx.putImageData(out,0,0)}
+function show(){if(!src)return;if(cmp)cx.putImageData(src,0,0);else process()}
+function go(){cancelAnimationFrame(raf);raf=requestAnimationFrame(show)}
+
+function useImg(im){var w=im.naturalWidth||im.width,h=im.naturalHeight||im.height,s=Math.min(1,1600/Math.max(w,h));
+ cv.width=Math.round(w*s);cv.height=Math.round(h*s);cx.drawImage(im,0,0,cv.width,cv.height);
+ src=cx.getImageData(0,0,cv.width,cv.height);out=cx.createImageData(cv.width,cv.height);go()}
+function file(f){if(!f||!/^image\//.test(f.type)){toast('Please choose an image file');return}
+ var u=URL.createObjectURL(f),im=new Image();im.onload=function(){useImg(im);URL.revokeObjectURL(u)};im.onerror=function(){toast('Could not open that image');URL.revokeObjectURL(u)};im.src=u}
+function demo(){var c=document.createElement('canvas'),g,s;c.width=900;c.height=600;g=c.getContext('2d');
+ s=g.createLinearGradient(0,0,0,600);s.addColorStop(0,'#0f172a');s.addColorStop(.55,'#f59e0b');s.addColorStop(1,'#fef3c7');g.fillStyle=s;g.fillRect(0,0,900,600);
+ g.fillStyle='#fffbeb';g.beginPath();g.arc(620,330,90,0,7);g.fill();
+ [['#8a5a44',[[0,430],[200,300],[380,400],[560,280],[760,390],[900,330],[900,600],[0,600]]],['#3f2a2e',[[0,500],[240,400],[460,480],[700,380],[900,470],[900,600],[0,600]]],['#150f12',[[0,560],[300,500],[600,550],[900,510],[900,600],[0,600]]]].forEach(function(l){g.fillStyle=l[0];g.beginPath();l[1].forEach(function(p,i){i?g.lineTo(p[0],p[1]):g.moveTo(p[0],p[1])});g.fill()});
+ useImg(c)}
+
+function sync(){
+ [['a','1'],['b','2'],['m','3']].forEach(function(k){$('#dC'+k[1]).value=S[k[0]];$('#dH'+k[1]).value=S[k[0]].toUpperCase()});
+ $('#dTri').checked=!!S.t;$('#dMw').style.display=S.t?'':'none';
+ SL.forEach(function(s){$('#'+s[0]).value=S[s[1]];$('#'+s[0]+'v').textContent=S[s[1]]+s[2]})}
+function ui(){if(dirty)buildLut();
+ $('#dRp').innerHTML=IDX.map(function(i){var h=L[i][3];return'<button type="button" data-t="'+h.toUpperCase()+'" style="background:'+h+';color:'+ink(h)+'" title="Copy '+h.toUpperCase()+'">'+h.slice(1).toUpperCase()+'</button>'}).join('');
+ var r=ratio(S.a,S.b);
+ $('#dInfo').innerHTML='<b style="background:'+S.a+';color:'+S.b+'">Aa</b><span>Shadow to highlight contrast <strong>'+r.toFixed(1)+':1</strong> — '+(r>=7?'strong, punchy look':r>=4.5?'good, details stay clear':r>=3?'soft, a gentle look':'very flat, move the colors further apart')+'</span>';
+ code()}
+function code(){if(dirty)buildLut();
+ var tv=function(c){return IDX.map(function(i){return(L[i][c]/255).toFixed(3)}).join(' ')},s='',stops=S.t?[S.a,S.m,S.b]:[S.a,S.b];
+ if(fmt==='svg')s='<svg width="0" height="0" style="position:absolute" aria-hidden="true">\n  <filter id="duotone" color-interpolation-filters="sRGB">\n    <feColorMatrix type="matrix" values="0.2126 0.7152 0.0722 0 0  0.2126 0.7152 0.0722 0 0  0.2126 0.7152 0.0722 0 0  0 0 0 1 0"/>\n    <feComponentTransfer>\n      <feFuncR type="table" tableValues="'+tv(0)+'"/>\n      <feFuncG type="table" tableValues="'+tv(1)+'"/>\n      <feFuncB type="table" tableValues="'+tv(2)+'"/>\n    </feComponentTransfer>\n  </filter>\n</svg>\n\n.duotone{filter:url(#duotone)}';
+ else if(fmt==='css')s='/* Best when the shadow is darker than the highlight in every channel */\n.duo{position:relative;display:inline-block;background:'+S.b+'}\n.duo img{display:block;width:100%;filter:grayscale(1) contrast(1.1);mix-blend-mode:multiply}\n.duo::after{content:"";position:absolute;inset:0;background:'+S.a+';mix-blend-mode:lighten;pointer-events:none}\n\n<div class="duo"><img src="photo.jpg" alt=""></div>';
+ else if(fmt==='grad')s=':root{\n  --duo-shadow:'+S.a+';\n'+(S.t?'  --duo-mid:'+S.m+';\n':'')+'  --duo-highlight:'+S.b+';\n}\n\n.duo-bg{background:linear-gradient(135deg,'+stops.join(', ')+')}';
+ else s=JSON.stringify({shadow:S.a,midtone:S.t?S.m:null,highlight:S.b,ramp:IDX.map(function(i){return L[i][3]})},null,2);
+ $('#dCode').value=s}
+function hash(){var h=[S.a,S.b,S.m].map(function(x){return x.slice(1)}).concat([S.t,S.i,S.co,S.br,S.ba,S.gr]).join('_');try{history.replaceState(null,'','#d='+h)}catch(e){}}
+function load(){var m=/#d=([^&]+)/.exec(location.hash),p;if(!m)return;p=m[1].split('_');if(p.length<9)return;
+ ['a','b','m'].forEach(function(k,i){if(/^[0-9a-f]{6}$/i.test(p[i]))S[k]='#'+p[i].toLowerCase()});
+ S.t=num(p[3],0)?1:0;S.i=clamp(num(p[4],100),0,100);S.co=clamp(num(p[5],10),-50,100);S.br=clamp(num(p[6],0),-50,50);S.ba=clamp(num(p[7],50),0,100);S.gr=clamp(num(p[8],0),0,100)}
+function upd(){dirty=true;sync();go();ui();hash()}
+function setPair(a,b){S.a=a;S.b=b;if(S.t)S.m=mix(a,b,.5);upd()}
+
+/* colors */
+[['1','a'],['2','b'],['3','m']].forEach(function(k){
+ $('#dC'+k[0]).addEventListener('input',function(){S[k[1]]=this.value;upd()});
+ $('#dH'+k[0]).addEventListener('input',function(){if(/^#?[0-9a-f]{6}$/i.test(this.value.trim())){S[k[1]]=normHex(this.value);upd()}});
+ $('#dH'+k[0]).addEventListener('blur',sync)});
+$('#dTri').addEventListener('change',function(){S.t=this.checked?1:0;if(S.t)S.m=mix(S.a,S.b,.5);upd()});
+$('#dSw').addEventListener('click',function(){setPair(S.b,S.a)});
+$('#dRand').addEventListener('click',function(){var h=Math.random()*6.2832;setPair(okHex(.24+Math.random()*.08,.1,h),okHex(.78+Math.random()*.1,.15,h+.5+Math.random()*1.4))});
+$('#dHar').addEventListener('change',function(){var v=this.value,o,h;if(!v)return;o=ok(S.b);h=Math.atan2(o.b,o.a)+HAR[v];this.value='';setPair(okHex(.27,clamp(Math.hypot(o.a,o.b)*.85,.07,.18),h),S.b);toast('Shadow matched to your highlight')});
+$('#dAuto').addEventListener('click',function(){if(!src)return;
+ var d=src.data,st=4*Math.max(1,Math.floor(d.length/4/5000)),a=[],i,k,dk,lt;
+ for(i=0;i<d.length;i+=st)a.push([.2126*d[i]+.7152*d[i+1]+.0722*d[i+2],d[i],d[i+1],d[i+2]]);
+ a.sort(function(x,y){return x[0]-y[0]});k=Math.max(1,Math.floor(a.length*.12));
+ function avg(l){var r=0,g=0,b=0;l.forEach(function(p){r+=p[1];g+=p[2];b+=p[3]});return ok(hex(r/l.length,g/l.length,b/l.length))}
+ dk=avg(a.slice(0,k));lt=avg(a.slice(-k));
+ setPair(okHex(Math.min(dk.L,.3),clamp(Math.hypot(dk.a,dk.b)*1.6,.07,.18),Math.atan2(dk.b,dk.a)),okHex(Math.max(lt.L,.8),clamp(Math.hypot(lt.a,lt.b)*1.8,.09,.22),Math.atan2(lt.b,lt.a)));toast('Colors picked from your image')});
+$('#dPg').innerHTML=PRE.map(function(p,i){return'<button type="button" class="dt-ps" data-p="'+i+'" style="background:linear-gradient(135deg,'+p[1]+','+p[2]+')">'+p[0]+'</button>'}).join('');
+$('#dPg').addEventListener('click',function(e){var b=e.target.closest('[data-p]');if(b)setPair(PRE[+b.dataset.p][1],PRE[+b.dataset.p][2])});
+
+/* sliders */
+SL.forEach(function(s){$('#'+s[0]).addEventListener('input',function(){S[s[1]]=+this.value;$('#'+s[0]+'v').textContent=this.value+s[2];go();hash()})});
+$('#dRs').addEventListener('click',function(){['i','co','br','ba','gr'].forEach(function(k){S[k]=DEF[k]});sync();go();hash()});
+
+/* image in and out */
+$('#dUp').addEventListener('click',function(){$('#dF').click()});
+$('#dF').addEventListener('change',function(){file(this.files[0]);this.value=''});
+var st=$('#dSt');
+st.addEventListener('dragover',function(e){e.preventDefault();st.classList.add('drag')});
+st.addEventListener('dragleave',function(){st.classList.remove('drag')});
+st.addEventListener('drop',function(e){e.preventDefault();st.classList.remove('drag');file(e.dataTransfer.files[0])});
+document.addEventListener('paste',function(e){var f=e.clipboardData&&e.clipboardData.files&&e.clipboardData.files[0];if(f&&/^image\//.test(f.type)){e.preventDefault();file(f)}});
+var cb=$('#dCmp');function hold(v){cmp=v;go()}
+['pointerdown'].forEach(function(n){cb.addEventListener(n,function(){hold(true)})});
+['pointerup','pointerleave','pointercancel'].forEach(function(n){cb.addEventListener(n,function(){hold(false)})});
+cb.addEventListener('keydown',function(e){if(e.key===' '||e.key==='Enter'){e.preventDefault();hold(true)}});
+cb.addEventListener('keyup',function(e){if(e.key===' '||e.key==='Enter')hold(false)});
+cb.addEventListener('contextmenu',function(e){e.preventDefault()});
+function dl(type,name){if(!src)return;cmp=false;show();cv.toBlob(function(b){var a=document.createElement('a');a.href=URL.createObjectURL(b);a.download=name;document.body.appendChild(a);a.click();a.remove();setTimeout(function(){URL.revokeObjectURL(a.href)},1500);toast('Saved '+name)},type,.92)}
+$('#dPng').addEventListener('click',function(){dl('image/png','duotone.png')});
+$('#dJpg').addEventListener('click',function(){dl('image/jpeg','duotone.jpg')});
+$('#dCi').addEventListener('click',function(){if(!src)return;cmp=false;show();cv.toBlob(function(b){try{navigator.clipboard.write([new ClipboardItem({'image/png':b})]).then(function(){toast('Image copied')},function(){toast('Copy not supported here, use Download')})}catch(e){toast('Copy not supported here, use Download')}})});
+
+/* copy + export */
+document.addEventListener('click',function(e){var b=e.target.closest('[data-t]');if(b)copy(b.dataset.t,b.dataset.t+' copied')});
+$('#dTabs').addEventListener('click',function(e){var b=e.target.closest('[data-f]');if(!b)return;fmt=b.dataset.f;[].forEach.call($('#dTabs').children,function(x){x.classList.toggle('on',x===b)});code()});
+$('#dCopy').addEventListener('click',function(){copy($('#dCode').value,'Code copied')});
+
+load();sync();demo();ui();
+
+/* SEO: structured data built from the visible page so text and markup always match */
+(function(){var o=location.origin,p=location.pathname,
+ q=[].map.call(document.querySelectorAll('.seo details'),function(d){return{'@type':'Question',name:d.querySelector('summary').textContent,acceptedAnswer:{'@type':'Answer',text:d.querySelector('p').textContent}}}),
+ g={'@context':'https://schema.org','@graph':[
+  {'@type':'BreadcrumbList',itemListElement:[['Home','/'],['Tools','/#tools'],['Color Mixing & Effects','/color-mixing-effects/'],['Duotone Generator',p]].map(function(x,i){return{'@type':'ListItem',position:i+1,name:x[0],item:o+x[1]}})},
+  {'@type':'WebApplication',name:'Duotone Generator',url:o+p,applicationCategory:'DesignApplication',operatingSystem:'Any',browserRequirements:'Requires JavaScript',description:'Free duotone and tritone image generator with smart color pairs, grain, PNG download and CSS or SVG filter export.',offers:{'@type':'Offer',price:'0',priceCurrency:'USD'}},
+  {'@type':'FAQPage',mainEntity:q}]},
+ s=document.createElement('script'),l=document.createElement('link');
+ s.type='application/ld+json';s.text=JSON.stringify(g);document.head.appendChild(s);
+ l.rel='canonical';l.href=o+p;document.head.appendChild(l)})();
+})();
+</script>
+</body>
+</html>
