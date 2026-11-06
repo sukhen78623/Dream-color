@@ -13,6 +13,23 @@
 <meta name="theme-color" content="#5b3df5">
 <link rel="canonical" href="/color-palette-tools/palette-explorer/">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<style>
+/* Fallback base styles: site stylesheet (loaded next) overrides these; they keep the page usable if it fails to load */
+[hidden]{display:none!important}
+*,*::before,*::after{box-sizing:border-box}
+body{margin:0;font-family:system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;line-height:1.55;color:#111827;background:#fff}
+@media(prefers-color-scheme:dark){body{color:#e5e7eb;background:#0b1020}a{color:#a5b4fc}}
+a{color:#5b3df5}
+dc-header,dc-footer{display:block}
+.w{max-width:1120px;margin:0 auto;padding:0 16px}
+.ph{padding:28px 0 12px}
+.ph h1{margin:6px 0 10px;font-size:clamp(1.8rem,5vw,2.8rem);line-height:1.15}
+.crumb{display:flex;flex-wrap:wrap;gap:6px;font-size:.85rem;margin-bottom:14px}
+.crumb a{text-decoration:none}
+.eyebrow{margin:0;font-size:.8rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:#5b3df5}
+.lead{max-width:62ch;margin:0;opacity:.85}
+.btn{display:inline-block;border:0;border-radius:999px;background:#5b3df5;color:#fff;padding:12px 24px;font:inherit;font-weight:600;cursor:pointer}
+</style>
 <link rel="stylesheet" href="/css/styles.css">
 <style>
 .ex{padding:8px 0 24px}
@@ -20,7 +37,7 @@
 .ex-bar{display:flex;gap:10px;margin-bottom:12px}
 .ex-bar input,.ex-bar select,.ex-near input[type=text]{padding:11px 12px;border:1px solid rgba(128,128,128,.4);border-radius:10px;background:transparent;color:inherit;font:inherit;box-sizing:border-box;min-width:0}
 .ex-bar input{flex:1}
-.ex-chips,.ex-hues{display:flex;gap:8px;overflow-x:auto;padding-bottom:4px;margin-bottom:10px;scrollbar-width:none}
+.ex-chips,.ex-hues{display:flex;gap:8px;overflow-x:auto;padding:4px 4px 6px;margin-bottom:6px;scrollbar-width:none}
 .ex-chips::-webkit-scrollbar,.ex-hues::-webkit-scrollbar{display:none}
 .ex-chip{flex:none;border:1px solid rgba(128,128,128,.4);background:transparent;color:inherit;border-radius:999px;padding:7px 14px;font:inherit;font-size:.9rem;cursor:pointer}
 .ex-chip[aria-pressed=true]{background:#5b3df5;border-color:#5b3df5;color:#fff}
@@ -35,7 +52,7 @@
 @media(min-width:980px){.ex-grid{grid-template-columns:repeat(3,1fr)}}
 .ex-card{border:1px solid rgba(128,128,128,.3);border-radius:16px;overflow:hidden}
 .ex-strip{display:flex}
-.ex-strip button{flex:1;height:92px;border:0;padding:0;cursor:pointer;font:600 .62rem/1 inherit;letter-spacing:.02em;display:flex;align-items:flex-end;justify-content:center;padding-bottom:8px;opacity:1}
+.ex-strip button{flex:1;height:92px;border:0;padding:0;cursor:pointer;font-family:inherit;font-weight:600;font-size:.62rem;line-height:1;letter-spacing:.02em;display:flex;align-items:flex-end;justify-content:center;padding-bottom:8px;opacity:1}
 .ex-strip button span{opacity:0;transition:opacity .15s}
 .ex-strip button:hover span,.ex-strip button:focus-visible span{opacity:1}
 .ex-meta{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:12px 14px}
@@ -68,7 +85,7 @@
 .seo details p{margin:10px 0 0}
 </style>
 
-<script>(function(){var s=document.createElement("script");s.type="application/ld+json";s.text=JSON.stringify({"@context":"https://schema.org","@graph":[{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"__O__/"},{"@type":"ListItem","position":2,"name":"Tools","item":"__O__/#tools"},{"@type":"ListItem","position":3,"name":"Color Palette Tools","item":"__O__/color-palette-tools/"},{"@type":"ListItem","position":4,"name":"Palette Generator","item":"__O__/color-palette-tools/color-palette-generator/"}]},{"@type":"WebApplication","name":"Color Palette Generator","url":"__O__/color-palette-tools/color-palette-generator/","description":"Browse ready-made color palettes by category, color family and mood, find the closest match to your color, and copy HEX, RGB or CSS.","applicationCategory":"DesignApplication","operatingSystem":"Any","browserRequirements":"Requires JavaScript","isAccessibleForFree":true,"offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}]}).split("__O__").join(location.origin);document.head.appendChild(s)})();</script>
+<script>(function(){var s=document.createElement("script");s.type="application/ld+json";s.text=JSON.stringify({"@context":"https://schema.org","@graph":[{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"__O__/"},{"@type":"ListItem","position":2,"name":"Tools","item":"__O__/#tools"},{"@type":"ListItem","position":3,"name":"Color Palette Tools","item":"__O__/color-palette-tools/"},{"@type":"ListItem","position":4,"name":"Palette Explorer","item":"__O__/color-palette-tools/palette-explorer/"}]},{"@type":"WebApplication","name":"Color Palette Explorer","url":"__O__/color-palette-tools/palette-explorer/","description":"Browse ready-made color palettes by category, color family and mood, find the closest match to your color, and copy HEX, RGB or CSS.","applicationCategory":"DesignApplication","operatingSystem":"Any","browserRequirements":"Requires JavaScript","isAccessibleForFree":true,"offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}]}).split("__O__").join(location.origin);document.head.appendChild(s)})();</script>
 <script src="/js/components.js" defer></script>
 </head>
 <body>
@@ -182,6 +199,7 @@ function open(i){var p=P[i];st.cur=p;$("dN").textContent=p.name;
 function png(p){var W=1500,H=900,c=document.createElement("canvas"),x,w=W/5;c.width=W;c.height=H;x=c.getContext("2d");
  p.cols.forEach(function(h,i){x.fillStyle=h;x.fillRect(i*w,0,w,740);x.fillStyle=ink(h);x.textAlign="center";x.font="600 36px system-ui,Arial,sans-serif";x.fillText(h,i*w+w/2,688)});
  x.fillStyle="#fff";x.fillRect(0,740,W,160);x.fillStyle="#111";x.textAlign="left";x.font="700 48px Georgia,serif";x.fillText(p.name,60,836);
+ x.save();x.textAlign="right";x.fillStyle="#5b3df5";x.globalAlpha=.9;x.font="700 38px system-ui,Arial,sans-serif";x.fillText("yourColorsss",W-60,832);x.restore();
  c.toBlob(function(b){if(!b){say("Download not supported");return}var a=document.createElement("a");a.href=URL.createObjectURL(b);a.download="palette-"+p.name.toLowerCase().replace(/[^a-z0-9]+/g,"-")+".png";document.body.appendChild(a);a.click();a.remove();setTimeout(function(){URL.revokeObjectURL(a.href)},2000);say("PNG downloaded")},"image/png")}
 function parse(v){v=(v||"").trim().replace(/^#/,"");if(/^[0-9a-f]{3}$/i.test(v))v=v.replace(/./g,"$&$&");return/^[0-9a-f]{6}$/i.test(v)?"#"+v.toUpperCase():null}
 function go(){st.n=12;render()}
