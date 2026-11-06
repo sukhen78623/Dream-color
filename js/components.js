@@ -1,7 +1,10 @@
 /* Shared site shell. Every page loads this file, so header/footer/nav are defined once. */
 const NAV=[["Home","/"],["Tools","/#tools"],["Blog","/blog/"],["About","/about/"]];
 const LEGAL=[["Privacy Policy","/privacy/"],["Terms &amp; Conditions","/terms/"]];
-const brand=()=>'<a class="brand" href="/" aria-label="Dream Color home">Dream <span class="c">Color</span></a>';
+if(!document.getElementById("ycs-css")){const s=document.createElement("style");s.id="ycs-css";s.textContent=".ycs{display:inline-block;height:1.15em;width:2em;vertical-align:-.22em;margin-left:2px;overflow:visible}.ycs path{fill:none;stroke-linecap:round;stroke-linejoin:round}.ycs .g{stroke:currentColor;stroke-opacity:.2;stroke-width:2}.ycs .f{stroke-width:5;stroke-dasharray:100;stroke-dashoffset:100;animation:ycs 3.6s ease-in-out infinite}@keyframes ycs{0%{stroke-dashoffset:100;opacity:1}35%{stroke-dashoffset:0}85%{stroke-dashoffset:0;opacity:1}100%{stroke-dashoffset:0;opacity:0}}@media(prefers-reduced-motion:reduce){.ycs .f{animation:none;stroke-dashoffset:0}}";document.head.appendChild(s)}
+const S="M17 8C15 4 5 4 5 10C5 16 17 15 17 22C17 28 6 28 4 23";
+const SSS='<svg class="ycs" viewBox="0 0 56 32" aria-hidden="true">'+[["#ff4d8d",0],["#ffb020",18],["#2ea8ff",36]].map(([c,x],i)=>'<g transform="translate('+x+' 0)"><path class="g" d="'+S+'" pathLength="100"/><path class="f" style="stroke:'+c+';animation-delay:'+(i*0.3)+'s" d="'+S+'" pathLength="100"/></g>').join("")+"</svg>";
+const brand=()=>'<a class="brand" href="/" aria-label="yourColorsss home">your<span class="c">Color</span>'+SSS+"</a>";
 const list=a=>a.map(([t,h])=>'<a href="'+h+'">'+t+'</a>').join("");
 customElements.define("dc-header",class extends HTMLElement{connectedCallback(){
 const cta='<a class="btn p sm" href="/#tools">Explore Tools</a>';
@@ -11,4 +14,4 @@ b.onclick=()=>{b.setAttribute("aria-expanded",p.classList.toggle("o"))};
 p.onclick=e=>{if(e.target.closest("a")){p.classList.remove("o");b.setAttribute("aria-expanded","false")}};}});
 customElements.define("dc-footer",class extends HTMLElement{connectedCallback(){
 const f=a=>"<ul>"+a.map(([t,h])=>'<li><a href="'+h+'">'+t+"</a></li>").join("")+"</ul>";
-this.innerHTML='<div class="w"><div class="ft"><div>'+brand()+'<p class="lead" style="margin-top:12px">A complete color solution platform to discover, understand, create and use colors with confidence.</p></div><div><h2>Explore</h2>'+f(NAV)+"</div><div><h2>Legal</h2>"+f(LEGAL)+'</div></div><p class="cp">© '+new Date().getFullYear()+" Dream Color. All rights reserved.</p></div>";}});
+this.innerHTML='<div class="w"><div class="ft"><div>'+brand()+'<p class="lead" style="margin-top:12px">A complete color solution platform to discover, understand, create and use colors with confidence.</p></div><div><h2>Explore</h2>'+f(NAV)+"</div><div><h2>Legal</h2>"+f(LEGAL)+'</div></div><p class="cp">© '+new Date().getFullYear()+" yourColorsss. All rights reserved.</p></div>";}});
