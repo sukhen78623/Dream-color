@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Palette Explorer — Browse Curated Color Palettes | Dream Color</title>
+<meta name="description" content="Browse 48 hand-picked color palettes by style, from warm and pastel to dark, earthy, neon and vintage. Search, save and copy HEX codes in one tap.">
+<meta property="og:title" content="Palette Explorer — Browse Curated Color Palettes | Dream Color">
+<meta property="og:description" content="Browse 48 hand-picked color palettes by style, from warm and pastel to dark, earthy, neon and vintage. Search, save and copy HEX codes in one tap.">
+<meta property="og:type" content="website">
+<meta name="theme-color" content="#5b3df5">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/css/styles.css">
+<script src="/js/components.js" defer></script>
+<script src="/color-palette-tools/palette-explorer/tool.js" defer></script>
+<style>
+.prow{border:1px solid var(--line);border-radius:16px;overflow:hidden;background:var(--card)}
+.pstrip{display:flex;height:120px}
+.pstrip button{flex:1;min-width:0;border:0;cursor:pointer;display:flex;align-items:flex-end;justify-content:center;padding:0 0 8px;font:700 .7rem ui-monospace,Menlo,monospace;transition:flex .2s}
+.pstrip button:hover{flex:1.35}
+.pfoot{display:flex;gap:8px;align-items:center;justify-content:space-between;flex-wrap:wrap;padding:10px 12px}
+.pfoot small{color:var(--mut);font-weight:600}
+.rows{display:grid;gap:16px}
+.chp{display:flex;flex-wrap:wrap;gap:8px}
+.chp button{min-height:40px;padding:0 16px;border-radius:999px;border:1px solid var(--line);background:var(--card);color:var(--mut);font:600 .88rem inherit;cursor:pointer}
+.chp button[aria-pressed=true]{background:var(--acc);border-color:var(--acc);color:#fff}
+.info{padding:18px 20px;border:1px solid var(--line);border-radius:16px;background:var(--card);margin:20px 0 24px}
+.info b{display:block;font-size:1.05rem;margin-bottom:4px}.info p{color:var(--mut);font-size:.95rem}
+.gh2{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;margin:8px 0 14px}
+.gh2 h2{font-size:1.4rem;margin:0}
+
+.vh{position:absolute;width:1px;height:1px;opacity:0;overflow:hidden}
+.xp{display:grid;gap:14px;margin-bottom:10px}
+.srch{width:100%;max-width:420px;height:46px}
+.pgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:18px;margin-top:14px}
+.pc .pstrip{height:96px}
+.pc .phex{display:grid;grid-template-columns:repeat(5,1fr);padding:8px 8px 0;font:500 .62rem ui-monospace,Menlo,monospace;color:var(--mut);text-align:center}
+.pc .pfoot{padding:8px 12px 12px}
+.pn{display:grid;gap:0}.pn b{font-size:1rem}.pn small{color:var(--mut);font-weight:600;font-size:.78rem}
+.pa{display:flex;gap:6px}
+.pa .btn.sm{min-height:36px;padding:0 12px}
+.pa .heart[aria-pressed=true]{background:var(--acc);border-color:var(--acc);color:#fff}
+.empty{margin-top:30px;color:var(--mut);text-align:center}
+</style>
+</head>
+<body>
+<dc-header></dc-header>
+<main>
+<section class="ph"><div class="w">
+<nav class="crumb" aria-label="Breadcrumb"><a href="/">Home</a><span aria-hidden="true">/</span><a href="/color-palette-tools/">Color Palette Tools</a><span aria-hidden="true">/</span><span aria-current="page">Palette Explorer</span></nav>
+<p class="eyebrow">Browse curated palettes</p>
+<h1>Palette Explorer</h1>
+<p class="lead">Browse 48 hand-picked palettes by style. Search, save the ones you like, and copy any color or the whole palette in one tap.</p>
+</div></section>
+
+<section class="pt"><div class="w">
+<div class="xp">
+<label class="fl sw0"><span class="vh">Search palettes</span><input class="sel srch" id="q" type="search" placeholder="Search palettes by name" autocomplete="off"></label>
+<div class="chp" id="chips" role="group" aria-label="Palette category"><button type="button" data-c="All" aria-pressed="true">All</button><button type="button" data-c="Saved" aria-pressed="false">Saved</button><button type="button" data-c="Warm" aria-pressed="false">Warm</button><button type="button" data-c="Cool" aria-pressed="false">Cool</button><button type="button" data-c="Pastel" aria-pressed="false">Pastel</button><button type="button" data-c="Vivid" aria-pressed="false">Vivid</button><button type="button" data-c="Dark" aria-pressed="false">Dark</button><button type="button" data-c="Earthy" aria-pressed="false">Earthy</button><button type="button" data-c="Neon" aria-pressed="false">Neon</button><button type="button" data-c="Vintage" aria-pressed="false">Vintage</button></div>
+</div>
+<p class="hint" id="cnt" aria-live="polite"></p>
+<div class="pgrid" id="grid"></div>
+<p class="empty" id="empty" hidden>No palettes found. Try another word or category.</p>
+</div></section>
+
+<section class="alt"><div class="w">
+<p class="eyebrow">How it works</p>
+<h2>Find a palette in three steps</h2>
+<div class="steps"><div class="step"><h3>1. Browse</h3><p>Scroll through 48 hand-picked palettes, or choose a category such as Warm, Pastel, Dark or Vintage.</p></div><div class="step"><h3>2. Search or save</h3><p>Type a name to search. Tap Save on the palettes you like and find them again under Saved.</p></div><div class="step"><h3>3. Copy</h3><p>Tap any color to copy its HEX code, or tap Copy to take all five colors at once.</p></div></div>
+</div></section>
+
+<section><div class="w">
+<p class="eyebrow">Questions</p>
+<h2>Palette Explorer FAQ</h2>
+<div class="faq"><details><summary>How are the palettes chosen?</summary><p>They are hand-picked sets of five colors that work well together, grouped by look and feel, so you can browse by style instead of starting from scratch.</p></details><details><summary>Where are my saved palettes stored?</summary><p>Saved palettes are stored in your browser on this device. They are not uploaded, and they can be cleared if you clear your browser data.</p></details><details><summary>Can I use these palettes in my projects?</summary><p>Yes. Colors cannot be owned, so you can use them in your own designs, websites and documents.</p></details><details><summary>How do I copy a single color?</summary><p>Tap the color block. Its HEX code is copied and a short message confirms it.</p></details><details><summary>Can I change a palette I like?</summary><p>Yes. Copy the colors and open them in the Color Harmony Generator or Color Palette Generator to adjust them.</p></details></div>
+</div></section>
+
+<section class="alt"><div class="w">
+<p class="eyebrow">Keep exploring</p>
+<h2>More color palette tools</h2>
+<div class="grid"><article class="card tool"><div class="pv sw" aria-hidden="true"><i style="background:#7C3AED"></i><i style="background:#EC4899"></i><i style="background:#F59E0B"></i><i style="background:#10B981"></i></div><p class="tag">Generate matching palettes</p><h3>Color Palette Generator</h3><p>Create balanced 5-color palettes from any starting color, then fine-tune each shade until the set feels right for your project.</p><a class="btn p sm" href="/color-palette-tools/color-palette-generator/" aria-label="Open Color Palette Generator">Open Tool <span aria-hidden="true">→</span></a></article><article class="card tool"><div class="pv sw" aria-hidden="true"><i style="background:#EC4899"></i><i style="background:#F59E0B"></i><i style="background:#10B981"></i><i style="background:#3B82F6"></i></div><p class="tag">Build harmonious schemes</p><h3>Color Harmony Generator</h3><p>Pick a base color and get complementary, analogous, triadic and tetradic schemes based on the color wheel.</p><a class="btn p sm" href="/color-palette-tools/color-harmony-generator/" aria-label="Open Color Harmony Generator">Open Tool <span aria-hidden="true">→</span></a></article><article class="card tool"><div class="pv sw" aria-hidden="true"><i style="background:#F59E0B"></i><i style="background:#10B981"></i><i style="background:#3B82F6"></i><i style="background:#7C3AED"></i></div><p class="tag">Extract colors from a photo</p><h3>Image Palette Extractor</h3><p>Upload an image and pull out its dominant colors as a ready-to-use palette with HEX values.</p><a class="btn p sm" href="/color-palette-tools/image-palette-extractor/" aria-label="Open Image Palette Extractor">Open Tool <span aria-hidden="true">→</span></a></article><article class="card tool"><div class="pv sw" aria-hidden="true"><i style="background:#10B981"></i><i style="background:#3B82F6"></i><i style="background:#7C3AED"></i><i style="background:#EC4899"></i></div><p class="tag">Match colors to a feeling</p><h3>Mood-based Palette Generator</h3><p>Choose a mood such as calm, bold, playful or elegant and get palettes that express it.</p><a class="btn p sm" href="/color-palette-tools/mood-based-palette-generator/" aria-label="Open Mood-based Palette Generator">Open Tool <span aria-hidden="true">→</span></a></article></div>
+<div class="ctr"><a class="btn" href="/color-palette-tools/">← All color palette tools</a></div>
+</div></section>
+</main>
+<dc-footer></dc-footer>
+<div id="toast" role="status" aria-live="polite"></div>
+</body>
+</html>
