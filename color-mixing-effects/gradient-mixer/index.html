@@ -3,74 +3,582 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Gradient Mixer — Create CSS Gradients Online | yourColorsss</title>
-<meta name="description" content="Blend two or more colors into a smooth gradient. Choose linear, radial or conic, adjust angle and color stops, then copy the CSS or download a PNG.">
-<meta property="og:title" content="Gradient Mixer — Create CSS Gradients Online | yourColorsss">
-<meta property="og:description" content="Blend two or more colors into a smooth gradient. Choose linear, radial or conic, adjust angle and color stops, then copy the CSS or download a PNG.">
+<title>Free CSS Gradient Generator &amp; Color Mixer | YourColorsss</title>
+<meta name="description" content="Create linear, radial and conic CSS gradients with multiple color stops, mix two colors, and download PNG or SVG with no watermark. Free online gradient generator.">
+<meta property="og:title" content="Free CSS Gradient Generator &amp; Color Mixer | YourColorsss">
+<meta property="og:description" content="Create linear, radial and conic CSS gradients with multiple color stops, mix two colors, and download PNG or SVG with no watermark.">
 <meta property="og:type" content="website">
-<meta name="theme-color" content="#5b3df5">
+<meta name="theme-color" content="#5b3df5"><link rel="canonical" href="/color-mixing-effects/gradient-mixer/"><meta property="og:site_name" content="YourColorsss"><meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Free CSS Gradient Generator &amp; Color Mixer | YourColorsss">
+<meta name="twitter:description" content="Linear, radial and conic gradients, smooth OKLab blending, color mixer, copy CSS and download PNG or SVG with no watermark.">
+<script>(function(){var s=document.createElement("script");s.type="application/ld+json";s.text=JSON.stringify({"@context":"https://schema.org","@graph":[{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"__O__/"},{"@type":"ListItem","position":2,"name":"Tools","item":"__O__/#tools"},{"@type":"ListItem","position":3,"name":"Color Mixing & Gradient Generator","item":"__O__/color-mixing-effects/"},{"@type":"ListItem","position":4,"name":"Gradient Generator & Color Mixer","item":"__O__/color-mixing-effects/gradient-mixer/"}]},{"@type":"WebApplication","name":"Gradient Generator & Color Mixer","url":"__O__/color-mixing-effects/gradient-mixer/","applicationCategory":"DesignApplication","operatingSystem":"Any","browserRequirements":"Requires JavaScript","description":"Free CSS gradient generator with linear, radial and conic gradients, multiple color stops, OKLab blending, a two-color mixer and watermark-free PNG, SVG and CSS export.","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How do I create a CSS gradient?","acceptedAnswer":{"@type":"Answer","text":"Choose a gradient type, add and drag color stops on the stop bar, set the angle or position, then copy the generated CSS code."}},{"@type":"Question","name":"What is the difference between linear, radial and conic gradients?","acceptedAnswer":{"@type":"Answer","text":"A linear gradient blends colors along a straight line, a radial gradient blends outward from a center point, and a conic gradient sweeps colors around a center point like a color wheel."}},{"@type":"Question","name":"Why use OKLab or OKLCH interpolation?","acceptedAnswer":{"@type":"Answer","text":"OKLab and OKLCH blend colors in a way that matches human vision, so the middle of a gradient stays vivid instead of turning muddy gray, which can happen in plain sRGB."}},{"@type":"Question","name":"Can I download the gradient without a watermark?","acceptedAnswer":{"@type":"Answer","text":"Yes. PNG, SVG and CSS downloads are clean, free and have no watermark. Everything is generated in your browser."}},{"@type":"Question","name":"How do I mix two colors?","acceptedAnswer":{"@type":"Answer","text":"Use the color mixer section: pick two colors, move the ratio slider and copy the mixed color as HEX, RGB or HSL."}}]}]}).split("__O__").join(location.origin);document.head.appendChild(s)})();</script>
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="stylesheet" href="/css/styles.css">
+<style>
+.gx{--gxa:#5b3df5;--gxb:rgba(128,128,128,.32);--gxf:rgba(128,128,128,.09);display:block}
+.gx *{box-sizing:border-box}
+.gx-main{display:grid;gap:18px;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);align-items:start}
+@media(max-width:900px){.gx-main{grid-template-columns:minmax(0,1fr)}}
+.gx-card{border:1px solid var(--gxb);background:var(--gxf);border-radius:16px;padding:16px;margin-bottom:18px}
+.gx-card h2{font-size:1.05rem;margin:0 0 12px}
+.gx-card h3{font-size:.95rem;margin:14px 0 8px}
+.gx-checker{background-color:#fff;background-image:linear-gradient(45deg,#cfcfcf 25%,transparent 25%,transparent 75%,#cfcfcf 75%),linear-gradient(45deg,#cfcfcf 25%,transparent 25%,transparent 75%,#cfcfcf 75%);background-size:20px 20px;background-position:0 0,10px 10px}
+.gx-prev{height:340px;border-radius:16px;overflow:hidden;border:1px solid var(--gxb);margin-bottom:14px}
+@media(max-width:600px){.gx-prev{height:240px}}
+#gxPrev{width:100%;height:100%}
+.gx-row{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-bottom:14px}
+.gxb{appearance:none;border:1px solid var(--gxb);background:var(--gxf);color:inherit;font:inherit;font-size:.9rem;padding:9px 14px;border-radius:10px;cursor:pointer;line-height:1.2}
+.gxb:hover{border-color:var(--gxa)}
+.gxb.on,.gxb.p{background:var(--gxa);border-color:var(--gxa);color:#fff}
+.gxb.sm{padding:6px 10px;font-size:.82rem}
+.gx select,.gx input[type=text],.gx input[type=number]{font:inherit;font-size:.9rem;color:inherit;background:var(--gxf);border:1px solid var(--gxb);border-radius:10px;padding:8px 10px;width:100%;min-width:0}
+.gx input[type=color]{width:100%;height:40px;padding:2px;border:1px solid var(--gxb);border-radius:10px;background:transparent;cursor:pointer}
+.gx input[type=range]{width:100%;accent-color:var(--gxa)}
+.gx label{display:block;font-size:.84rem;opacity:.9}
+.gx label>:is(input,select){margin-top:5px;opacity:1}
+.gx-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-bottom:12px}
+.gx-seg{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px}
+.gx-track{position:relative;height:62px;margin:4px 9px 8px;touch-action:none;cursor:copy}
+.gx-bar{position:absolute;left:-9px;right:-9px;top:0;height:34px;border-radius:10px;border:1px solid var(--gxb)}
+.gx-bar-bg{position:absolute;left:-9px;right:-9px;top:0;height:34px;border-radius:10px}
+.gx-mk{position:absolute;top:30px;width:22px;height:26px;margin-left:-11px;border:3px solid #fff;border-radius:50% 50% 50% 50%;box-shadow:0 0 0 1px rgba(0,0,0,.45),0 2px 6px rgba(0,0,0,.3);cursor:grab;touch-action:none;outline:none}
+.gx-mk.on{box-shadow:0 0 0 3px var(--gxa),0 2px 6px rgba(0,0,0,.3);z-index:2}
+.gx-presets{display:grid;grid-template-columns:repeat(auto-fill,minmax(88px,1fr));gap:8px}
+.gx-pre{height:48px;border-radius:10px;border:1px solid var(--gxb);cursor:pointer;position:relative;padding:0}
+.gx-pre:hover{outline:2px solid var(--gxa)}
+.gx-tabs{display:flex;gap:6px;margin-bottom:10px}
+.gx textarea{width:100%;min-height:150px;resize:vertical;font:12.5px/1.5 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;color:inherit;background:var(--gxf);border:1px solid var(--gxb);border-radius:10px;padding:10px}
+.gx-note{font-size:.8rem;opacity:.75;margin:8px 0 0}
+.gx-hide{display:none!important}
+.gx-sw{height:120px;border-radius:14px;border:1px solid var(--gxb);margin-bottom:12px}
+.gx-vals{display:grid;gap:8px}
+.gx-val{display:flex;gap:8px;align-items:center}
+.gx-val b{width:42px;font-size:.8rem;opacity:.8}
+.gx-val input{flex:1}
+.gx-steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(70px,1fr));gap:8px;margin-top:14px}
+.gx-step{cursor:pointer;text-align:center;font-size:.72rem}
+.gx-step i{display:block;height:46px;border-radius:10px;border:1px solid var(--gxb);margin-bottom:4px}
+#gxToast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%) translateY(20px);background:#111;color:#fff;padding:10px 16px;border-radius:10px;font-size:.88rem;opacity:0;pointer-events:none;transition:.2s;z-index:99}
+#gxToast.show{opacity:1;transform:translateX(-50%)}
+.seo{padding:40px 0 56px}.seo h2{margin:0 0 12px}.seo p{margin:0 0 14px;max-width:70ch}.seo h3{margin:28px 0 8px}.seo details{border-bottom:1px solid rgba(128,128,128,.28);padding:14px 0;max-width:70ch}.seo summary{cursor:pointer;font-weight:600}.seo details p{margin:10px 0 0}
+</style>
 <script src="/js/components.js" defer></script>
-<script src="/color-mixing-effects/gradient-mixer/tool.js" defer></script>
 </head>
 <body>
 <dc-header></dc-header>
 <main>
 <section class="ph"><div class="w">
-<nav class="crumb" aria-label="Breadcrumb"><a href="/">Home</a><span aria-hidden="true">/</span><a href="/color-mixing-effects/">Color Mixing &amp; Effects</a><span aria-hidden="true">/</span><span aria-current="page">Gradient Mixer</span></nav>
-<p class="eyebrow">Create smooth gradients</p>
-<h1>Gradient Mixer</h1>
-<p class="lead">Blend two or more colors into a smooth gradient. Adjust the type, angle and color stops, then copy the CSS or download it as an image.</p>
+<nav class="crumb" aria-label="Breadcrumb"><a href="/">Home</a><span aria-hidden="true">/</span><a href="/#tools">Tools</a><span aria-hidden="true">/</span><a href="/color-mixing-effects/">Color Mixing &amp; Gradient Generator</a><span aria-hidden="true">/</span><span aria-current="page">Gradient Generator &amp; Color Mixer</span></nav>
+<p class="eyebrow">Blend colors and gradients</p>
+<h1>CSS Gradient Generator &amp; Color Mixer</h1>
+<p class="lead">Create linear, radial and conic gradients with unlimited color stops, blend colors smoothly with OKLab, mix two colors in any ratio, and download clean PNG, SVG or CSS — no watermark, no sign-up.</p>
 </div></section>
 
-<section class="pt"><div class="w gm">
-<div class="gm-l">
-<div id="prev" class="prev" role="img" aria-label="Live gradient preview"></div>
-<p class="sub">Presets</p>
-<div class="presets" id="presets"></div>
-<p class="sub">CSS</p>
-<pre class="code" id="code" tabindex="0"></pre>
-<div class="acts"><button class="btn p sm" id="copy" type="button">Copy CSS</button><button class="btn sm" id="png" type="button">Download PNG</button></div>
+<section class="pt"><div class="w">
+<div class="gx">
+<div class="gx-main">
+
+<!-- LEFT: preview + stops -->
+<div class="gx-left">
+<div class="gx-prev gx-checker"><div id="gxPrev"></div></div>
+
+<div class="gx-row">
+<button class="gxb p" id="gxGen" type="button">✨ Smart generate</button>
+<select id="gxHarm" style="width:auto" aria-label="Color harmony">
+<option value="any">Any harmony</option>
+<option value="analogous">Analogous</option>
+<option value="complementary">Complementary</option>
+<option value="triadic">Triadic</option>
+<option value="split">Split complementary</option>
+<option value="mono">Monochrome</option>
+</select>
+<button class="gxb" id="gxRev" type="button">⇄ Reverse</button>
+<button class="gxb" id="gxEven" type="button">Even spacing</button>
+<button class="gxb" id="gxAdd" type="button">+ Add stop</button>
 </div>
-<div class="gm-r card">
-<p class="sub">Type</p>
-<div class="seg" role="group" aria-label="Gradient type"><button type="button" data-t="linear" aria-pressed="true">Linear</button><button type="button" data-t="radial" aria-pressed="false">Radial</button><button type="button" data-t="conic" aria-pressed="false">Conic</button></div>
-<div id="angleRow"><label class="sub" for="angle">Angle <output id="angleVal">135°</output></label><input id="angle" class="rg" type="range" min="0" max="360" value="135"></div>
-<p class="sub">Colors</p>
-<div id="stops"></div>
-<div class="acts"><button class="btn sm" id="add" type="button">+ Add color</button><button class="btn sm" id="rev" type="button">Reverse</button><button class="btn sm" id="rnd" type="button">Random</button></div>
+
+<div class="gx-card">
+<h2>Color stops</h2>
+<div class="gx-track" id="gxTrack" aria-label="Gradient stop bar. Click to add a stop, drag a handle to move it.">
+<div class="gx-bar-bg gx-checker"></div>
+<div class="gx-bar" id="gxBar"></div>
 </div>
+<p class="gx-note" style="margin-top:0">Click the bar to add a stop. Drag a handle to move it. Arrow keys nudge the selected handle, Delete removes it.</p>
+<h3>Selected stop</h3>
+<div class="gx-grid">
+<label>Color<input type="color" id="selColor" value="#5b3df5"></label>
+<label>HEX<input type="text" id="selHex" maxlength="7" spellcheck="false" autocomplete="off"></label>
+<label>Opacity <span id="selAlphaV"></span><input type="range" id="selAlpha" min="0" max="100" value="100"></label>
+<label>Position (%)<input type="number" id="selPos" min="0" max="100" step="1"></label>
+</div>
+<button class="gxb sm" id="selDel" type="button">Delete this stop</button>
+</div>
+
+<div class="gx-card">
+<h2>Gradient presets</h2>
+<div class="gx-presets" id="gxPresets"></div>
+</div>
+</div>
+
+<!-- RIGHT: controls + export -->
+<div class="gx-right">
+<div class="gx-card">
+<h2>Type &amp; direction</h2>
+<div class="gx-seg" id="gxTypes">
+<button class="gxb on" type="button" data-type="linear">Linear</button>
+<button class="gxb" type="button" data-type="radial">Radial</button>
+<button class="gxb" type="button" data-type="conic">Conic</button>
+</div>
+<div id="grpAngle" style="margin-bottom:12px">
+<label>Angle: <b id="gxAngV">90°</b></label>
+<div class="gx-grid" style="grid-template-columns:1fr 90px;margin:5px 0 0"><input type="range" id="gxAng" min="0" max="360" value="90"><input type="number" id="gxAngN" min="0" max="360" value="90"></div>
+</div>
+<div id="grpShape" class="gx-hide" style="margin-bottom:12px"><label>Shape<select id="gxShape"><option value="circle">Circle</option><option value="ellipse">Ellipse</option></select></label></div>
+<div id="grpPos" class="gx-hide gx-grid">
+<label>Center X: <b id="gxXV">50%</b><input type="range" id="gxX" min="0" max="100" value="50"></label>
+<label>Center Y: <b id="gxYV">50%</b><input type="range" id="gxY" min="0" max="100" value="50"></label>
+</div>
+<label>Color blending (interpolation)
+<select id="gxSpace">
+<option value="oklab">OKLab — smooth &amp; natural (recommended)</option>
+<option value="oklch">OKLCH — vivid hue sweep</option>
+<option value="srgb">sRGB — classic CSS</option>
+</select></label>
+<p class="gx-note">OKLab and OKLCH keep the middle of a gradient bright instead of muddy gray.</p>
+</div>
+
+<div class="gx-card">
+<h2>Get the code &amp; download</h2>
+<div class="gx-tabs" id="gxTabs">
+<button class="gxb sm on" type="button" data-tab="css">CSS</button>
+<button class="gxb sm" type="button" data-tab="tw">Tailwind</button>
+<button class="gxb sm" type="button" data-tab="svg">SVG</button>
+</div>
+<textarea id="gxCode" readonly spellcheck="false" aria-label="Generated gradient code"></textarea>
+<div class="gx-row" style="margin:10px 0 0">
+<button class="gxb p" id="gxCopy" type="button">Copy code</button>
+<button class="gxb" id="gxLink" type="button">Copy share link</button>
+</div>
+<h3>Download (no watermark)</h3>
+<label>Image size
+<select id="gxSize">
+<option value="1920x1080">1920 × 1080 (Full HD)</option>
+<option value="3840x2160">3840 × 2160 (4K)</option>
+<option value="1080x1080">1080 × 1080 (Square)</option>
+<option value="1080x1920">1080 × 1920 (Story / Phone)</option>
+<option value="1200x630">1200 × 630 (Social share)</option>
+<option value="custom">Custom size…</option>
+</select></label>
+<div class="gx-grid gx-hide" id="gxCustom" style="margin-top:10px"><label>Width (px)<input type="number" id="gxW" min="1" max="8000" value="1920"></label><label>Height (px)<input type="number" id="gxH" min="1" max="8000" value="1080"></label></div>
+<div class="gx-row" style="margin:12px 0 0">
+<button class="gxb p" id="gxPng" type="button">Download PNG</button>
+<button class="gxb" id="gxSvg" type="button">Download SVG</button>
+<button class="gxb" id="gxCssF" type="button">Download CSS</button>
+</div>
+<p class="gx-note">Everything is made in your browser. Downloads are clean — free, no watermark and no sign-up. Conic gradients can be saved as PNG or CSS (SVG does not support them).</p>
+</div>
+</div>
+</div>
+
+<!-- COLOR MIXER -->
+<div class="gx-card" id="mixer" style="margin-top:6px">
+<h2>Color mixer — blend two colors</h2>
+<div class="gx-main" style="gap:20px">
+<div>
+<div class="gx-grid">
+<label>Color A<input type="color" id="mxA" value="#f43f5e"></label>
+<label>HEX A<input type="text" id="mxAh" maxlength="7" spellcheck="false" autocomplete="off"></label>
+<label>Color B<input type="color" id="mxB" value="#3b82f6"></label>
+<label>HEX B<input type="text" id="mxBh" maxlength="7" spellcheck="false" autocomplete="off"></label>
+</div>
+<label>Mix ratio — <b id="mxRV">50% of B</b><input type="range" id="mxR" min="0" max="100" value="50"></label>
+<div class="gx-grid" style="margin-top:12px">
+<label>Blending<select id="mxS"><option value="oklab">OKLab (natural)</option><option value="oklch">OKLCH</option><option value="srgb">sRGB (classic)</option></select></label>
+<label>Steps<select id="mxN"><option value="5">5</option><option value="7" selected>7</option><option value="9">9</option><option value="11">11</option></select></label>
+</div>
+<div class="gx-row" style="margin:6px 0 0">
+<button class="gxb" id="mxSwap" type="button">⇄ Swap A and B</button>
+<button class="gxb p" id="mxUse" type="button">Use A → B as gradient</button>
+</div>
+</div>
+<div>
+<div class="gx-sw" id="mxSw"></div>
+<div class="gx-vals">
+<div class="gx-val"><b>HEX</b><input type="text" id="mxHex" readonly><button class="gxb sm" type="button" data-copy="mxHex">Copy</button></div>
+<div class="gx-val"><b>RGB</b><input type="text" id="mxRgb" readonly><button class="gxb sm" type="button" data-copy="mxRgb">Copy</button></div>
+<div class="gx-val"><b>HSL</b><input type="text" id="mxHsl" readonly><button class="gxb sm" type="button" data-copy="mxHsl">Copy</button></div>
+</div>
+</div>
+</div>
+<h3>Mix steps from A to B <span style="font-weight:400;opacity:.7;font-size:.8rem">(click a swatch to copy its HEX)</span></h3>
+<div class="gx-steps" id="mxSteps"></div>
+</div>
+
+<div style="text-align:center;margin-top:4px"><a class="btn" href="/color-mixing-effects/">← Back to Color Mixing &amp; Gradient Generator</a></div>
+</div>
+<div id="gxToast" role="status" aria-live="polite"></div>
 </div></section>
 
-<section class="alt"><div class="w">
-<p class="eyebrow">How it works</p>
-<h2>Make a gradient in three steps</h2>
-<div class="steps">
-<div class="step"><h3>1. Pick your colors</h3><p>Choose colors with the color box or type a HEX code. Add up to six colors.</p></div>
-<div class="step"><h3>2. Shape the blend</h3><p>Switch between linear, radial and conic, set the angle and drag each color to its position.</p></div>
-<div class="step"><h3>3. Copy or download</h3><p>Copy the CSS into your project, or download the gradient as a PNG image.</p></div>
-</div></div></section>
-
-<section><div class="w">
-<p class="eyebrow">Questions</p>
-<h2>Gradient Mixer FAQ</h2>
-<div class="faq">
-<details><summary>What is the difference between linear, radial and conic gradients?</summary><p>A linear gradient blends colors along a straight line at an angle. A radial gradient spreads colors outward from the center. A conic gradient sweeps colors around the center, like a color wheel.</p></details>
-<details><summary>How do I use the CSS in my website?</summary><p>Paste the two lines into any rule, for example <code>.hero { ... }</code>. The first line is a solid fallback color for very old browsers, and the second is the gradient.</p></details>
-<details><summary>Is my gradient saved or uploaded?</summary><p>No. The Gradient Mixer runs in your browser, and nothing you create is sent to a server.</p></details>
-<details><summary>Can I use the PNG commercially?</summary><p>The PNG is generated from the colors you choose, so you can use it in your own projects.</p></details>
-</div>
-</div></section>
-
-<section class="alt"><div class="w">
-<p class="eyebrow">Keep exploring</p>
-<h2>More color mixing tools</h2>
-<div class="grid"><article class="card tool"><div class="pv sw" aria-hidden="true"><i style="background:#f43f5e"></i><i style="background:#f59e0b"></i><i style="background:#22c55e"></i><i style="background:#3b82f6"></i></div><p class="tag">Blend two colors</p><h3>Color Mixer</h3><a class="btn p sm" href="/color-mixing-effects/color-mixer/" aria-label="Open Color Mixer">Open Tool <span aria-hidden="true">→</span></a></article><article class="card tool"><div class="pv sw" aria-hidden="true"><i style="background:#f59e0b"></i><i style="background:#22c55e"></i><i style="background:#3b82f6"></i><i style="background:#a855f7"></i></div><p class="tag">Lighten and darken a color</p><h3>Tint &amp; Shade Generator</h3><a class="btn p sm" href="/color-mixing-effects/tint-shade-generator/" aria-label="Open Tint & Shade Generator">Open Tool <span aria-hidden="true">→</span></a></article><article class="card tool"><div class="pv sw" aria-hidden="true"><i style="background:#22c55e"></i><i style="background:#3b82f6"></i><i style="background:#a855f7"></i><i style="background:#f43f5e"></i></div><p class="tag">Create two-tone effects</p><h3>Duotone Generator</h3><a class="btn p sm" href="/color-mixing-effects/duotone-generator/" aria-label="Open Duotone Generator">Open Tool <span aria-hidden="true">→</span></a></article><article class="card tool"><div class="pv sw" aria-hidden="true"><i style="background:#3b82f6"></i><i style="background:#a855f7"></i><i style="background:#f43f5e"></i><i style="background:#f59e0b"></i></div><p class="tag">Create soft pastel colors</p><h3>Pastel Color Generator</h3><a class="btn p sm" href="/color-mixing-effects/pastel-color-generator/" aria-label="Open Pastel Color Generator">Open Tool <span aria-hidden="true">→</span></a></article></div>
-<div class="ctr"><a class="btn" href="/color-mixing-effects/">← All color mixing tools</a></div>
+<section class="seo"><div class="w">
+<h2>Free CSS gradient generator with a built-in color mixer</h2>
+<p>Build linear, radial and conic gradients visually, add as many color stops as you need, and copy production-ready CSS in one click. Switch the blending to OKLab or OKLCH for smoother, more natural transitions, then save your work as a PNG, SVG or CSS file with no watermark.</p>
+<p>Need a single in-between color instead? The color mixer blends any two colors in a custom ratio and gives you HEX, RGB and HSL values plus a row of mix steps, which is handy for color scales and UI themes.</p>
+<h3>Frequently asked questions</h3>
+<details><summary>How do I create a CSS gradient?</summary><p>Choose a gradient type, add and drag color stops on the stop bar, set the angle or center position, then copy the generated CSS code.</p></details>
+<details><summary>What is the difference between linear, radial and conic gradients?</summary><p>A linear gradient blends colors along a straight line, a radial gradient blends outward from a center point, and a conic gradient sweeps colors around a center point like a color wheel.</p></details>
+<details><summary>Why use OKLab or OKLCH blending?</summary><p>OKLab and OKLCH blend colors the way human vision works, so the middle of a gradient stays vivid instead of turning muddy gray, which can happen in plain sRGB.</p></details>
+<details><summary>Can I download the gradient without a watermark?</summary><p>Yes. PNG, SVG and CSS downloads are clean, free and have no watermark. Everything is generated in your browser.</p></details>
+<details><summary>How do I mix two colors?</summary><p>Use the color mixer: pick two colors, move the ratio slider and copy the mixed color as HEX, RGB or HSL.</p></details>
 </div></section>
 </main>
 <dc-footer></dc-footer>
-<div id="toast" role="status" aria-live="polite"></div>
+
+<script>
+(function(){
+'use strict';
+function $(s){return document.querySelector(s)}
+function $$(s){return Array.prototype.slice.call(document.querySelectorAll(s))}
+function clamp(v,a,b){return Math.min(b,Math.max(a,v))}
+function r1(v){return Math.round(v*10)/10}
+function r4(v){return Math.round(v*10000)/10000}
+
+/* ---------- color helpers ---------- */
+function validHex(h){return /^#?([0-9a-f]{3}|[0-9a-f]{6})$/i.test((h||'').trim())}
+function normHex(h){h=h.trim().replace('#','');if(h.length===3)h=h.split('').map(function(x){return x+x}).join('');return '#'+h.toLowerCase()}
+function hexToRgb(h){h=normHex(h).slice(1);var n=parseInt(h,16);return{r:(n>>16)&255,g:(n>>8)&255,b:n&255}}
+function toHex(r,g,b){return '#'+[r,g,b].map(function(v){return('0'+Math.round(clamp(v,0,255)).toString(16)).slice(-2)}).join('')}
+function toLin(c){c/=255;return c<=0.04045?c/12.92:Math.pow((c+0.055)/1.055,2.4)}
+function fromLin(c){c=clamp(c,0,1);return 255*(c<=0.0031308?12.92*c:1.055*Math.pow(c,1/2.4)-0.055)}
+function toOK(c){
+ var r=toLin(c.r),g=toLin(c.g),b=toLin(c.b);
+ var l=Math.cbrt(0.4122214708*r+0.5363325363*g+0.0514459929*b);
+ var m=Math.cbrt(0.2119034982*r+0.6806995451*g+0.1073969566*b);
+ var s=Math.cbrt(0.0883024619*r+0.2817188376*g+0.6299787005*b);
+ return{L:0.2104542553*l+0.7936177850*m-0.0040720468*s,a:1.9779984951*l-2.4285922050*m+0.4505937099*s,b:0.0259040371*l+0.7827717662*m-0.8086757660*s};
+}
+function fromOK(L,a,b){
+ var l=Math.pow(L+0.3963377774*a+0.2158037573*b,3);
+ var m=Math.pow(L-0.1055613458*a-0.0638541728*b,3);
+ var s=Math.pow(L-0.0894841775*a-1.2914855480*b,3);
+ return{r:fromLin(4.0767416621*l-3.3077115913*m+0.2309699292*s),g:fromLin(-1.2684380046*l+2.6097574011*m-0.3413193965*s),b:fromLin(-0.0041960863*l-0.7034186147*m+1.7076147010*s)};
+}
+function mix(c1,c2,t,sp){
+ var a=c1.a+(c2.a-c1.a)*t;
+ if(sp==='srgb')return{r:c1.r+(c2.r-c1.r)*t,g:c1.g+(c2.g-c1.g)*t,b:c1.b+(c2.b-c1.b)*t,a:a};
+ var A=toOK(c1),B=toOK(c2),L=A.L+(B.L-A.L)*t,x,y;
+ if(sp==='oklab'){x=A.a+(B.a-A.a)*t;y=A.b+(B.b-A.b)*t}
+ else{
+  var C1=Math.hypot(A.a,A.b),C2=Math.hypot(B.a,B.b),h1=Math.atan2(A.b,A.a),h2=Math.atan2(B.b,B.a);
+  if(C1<1e-4)h1=h2;if(C2<1e-4)h2=h1;
+  var d=h2-h1;while(d>Math.PI)d-=2*Math.PI;while(d<-Math.PI)d+=2*Math.PI;
+  var C=C1+(C2-C1)*t,h=h1+d*t;x=C*Math.cos(h);y=C*Math.sin(h);
+ }
+ var o=fromOK(L,x,y);o.a=a;return o;
+}
+function hslToRgb(h,s,l){h=((h%360)+360)%360;s/=100;l/=100;var k=function(n){return(n+h/30)%12},a=s*Math.min(l,1-l);
+ var f=function(n){return l-a*Math.max(-1,Math.min(k(n)-3,Math.min(9-k(n),1)))};return{r:f(0)*255,g:f(8)*255,b:f(4)*255}}
+function rgbToHsl(r,g,b){r/=255;g/=255;b/=255;var mx=Math.max(r,g,b),mn=Math.min(r,g,b),h=0,s=0,l=(mx+mn)/2,d=mx-mn;
+ if(d){s=d/(1-Math.abs(2*l-1));if(mx===r)h=((g-b)/d)%6;else if(mx===g)h=(b-r)/d+2;else h=(r-g)/d+4;h*=60;if(h<0)h+=360}
+ return{h:Math.round(h),s:Math.round(s*100),l:Math.round(l*100)}}
+function colStr(c){return c.a>=0.999?toHex(c.r,c.g,c.b):'rgba('+Math.round(clamp(c.r,0,255))+','+Math.round(clamp(c.g,0,255))+','+Math.round(clamp(c.b,0,255))+','+r4(c.a)+')'}
+
+/* ---------- state ---------- */
+var uid=0;
+var S={type:'linear',angle:90,shape:'circle',x:50,y:50,space:'oklab',stops:[],sel:null,tab:'css'};
+var NATIVE=false;
+try{NATIVE=!!(window.CSS&&CSS.supports&&CSS.supports('background-image','linear-gradient(in oklab, red, blue)'))}catch(e){}
+function mk(hex,a,p){return{id:++uid,hex:normHex(hex),a:a==null?1:a,p:p}}
+function byId(id){for(var i=0;i<S.stops.length;i++)if(S.stops[i].id===id)return S.stops[i];return null}
+function rgba(st){var c=hexToRgb(st.hex);return{r:c.r,g:c.g,b:c.b,a:st.a}}
+function sorted(){return S.stops.slice().sort(function(a,b){return a.p-b.p})}
+function setStops(arr){S.stops=arr.map(function(h,i){return mk(h,1,arr.length===1?0:Math.round(i/(arr.length-1)*1000)/10)});S.sel=S.stops[0].id}
+
+function expand(sp,steps){
+ var s=sorted(),out=[];
+ for(var i=0;i<s.length;i++){
+  out.push({p:s[i].p,c:rgba(s[i])});
+  if(sp!=='srgb'&&i<s.length-1){
+   for(var k=1;k<steps;k++){var t=k/steps;out.push({p:s[i].p+(s[i+1].p-s[i].p)*t,c:mix(rgba(s[i]),rgba(s[i+1]),t,sp)})}
+  }
+ }
+ return out;
+}
+function sample(p){
+ var s=sorted();
+ if(p<=s[0].p)return rgba(s[0]);
+ if(p>=s[s.length-1].p)return rgba(s[s.length-1]);
+ for(var i=0;i<s.length-1;i++){
+  if(p>=s[i].p&&p<=s[i+1].p){var span=s[i+1].p-s[i].p,t=span?(p-s[i].p)/span:0;return mix(rgba(s[i]),rgba(s[i+1]),t,S.space)}
+ }
+ return rgba(s[0]);
+}
+function stopsStr(list){return list.map(function(x){return colStr(x.c)+' '+r1(x.p)+'%'}).join(', ')}
+function cssFor(sp,native){
+ var useN=sp!=='srgb'&&native,list=useN?sorted().map(function(x){return{p:x.p,c:rgba(x)}}):expand(sp,12);
+ var pre=useN?'in '+sp+' ':'',st=stopsStr(list);
+ if(S.type==='linear')return 'linear-gradient('+pre+S.angle+'deg, '+st+')';
+ if(S.type==='radial')return 'radial-gradient('+pre+S.shape+' farthest-corner at '+S.x+'% '+S.y+'%, '+st+')';
+ return 'conic-gradient('+pre+'from '+S.angle+'deg at '+S.x+'% '+S.y+'%, '+st+')';
+}
+function barCss(){return 'linear-gradient(90deg, '+stopsStr(expand(S.space,12))+')'}
+
+/* ---------- geometry (shared by SVG + PNG) ---------- */
+function linGeo(w,h){
+ var t=S.angle*Math.PI/180,dx=Math.sin(t),dy=-Math.cos(t),L=Math.abs(w*Math.sin(t))+Math.abs(h*Math.cos(t));
+ return{x1:w/2-dx*L/2,y1:h/2-dy*L/2,x2:w/2+dx*L/2,y2:h/2+dy*L/2};
+}
+function radGeo(w,h){
+ var cx=S.x/100*w,cy=S.y/100*h,rx,ry;
+ if(S.shape==='circle'){rx=ry=Math.max(1,Math.max(Math.hypot(cx,cy),Math.hypot(w-cx,cy),Math.hypot(cx,h-cy),Math.hypot(w-cx,h-cy)))}
+ else{rx=Math.max(1,Math.max(cx,w-cx)*Math.SQRT2);ry=Math.max(1,Math.max(cy,h-cy)*Math.SQRT2)}
+ return{cx:cx,cy:cy,rx:rx,ry:ry};
+}
+function svgStr(w,h){
+ if(S.type==='conic')return null;
+ var st=expand(S.space,16).map(function(x){return '<stop offset="'+r4(clamp(x.p,0,100)/100)+'" stop-color="'+toHex(x.c.r,x.c.g,x.c.b)+'"'+(x.c.a<0.999?' stop-opacity="'+r4(x.c.a)+'"':'')+'/>'}).join('');
+ var def;
+ if(S.type==='linear'){var g=linGeo(w,h);def='<linearGradient id="g" gradientUnits="userSpaceOnUse" x1="'+r1(g.x1)+'" y1="'+r1(g.y1)+'" x2="'+r1(g.x2)+'" y2="'+r1(g.y2)+'">'+st+'</linearGradient>'}
+ else{var q=radGeo(w,h);def='<radialGradient id="g" gradientUnits="userSpaceOnUse" cx="0" cy="0" r="1" gradientTransform="translate('+r1(q.cx)+' '+r1(q.cy)+') scale('+r1(q.rx)+' '+r1(q.ry)+')">'+st+'</radialGradient>'}
+ return '<svg xmlns="http://www.w3.org/2000/svg" width="'+w+'" height="'+h+'" viewBox="0 0 '+w+' '+h+'">\n<defs>'+def+'</defs>\n<rect width="'+w+'" height="'+h+'" fill="url(#g)"/>\n</svg>';
+}
+function drawCanvas(w,h){
+ var c=document.createElement('canvas');c.width=w;c.height=h;
+ var x=c.getContext('2d');if(!x)return null;
+ var list=expand(S.space,16);
+ function add(g){list.forEach(function(s){g.addColorStop(clamp(s.p/100,0,1),'rgba('+Math.round(s.c.r)+','+Math.round(s.c.g)+','+Math.round(s.c.b)+','+r4(s.c.a)+')')})}
+ if(S.type==='linear'){var l=linGeo(w,h),g=x.createLinearGradient(l.x1,l.y1,l.x2,l.y2);add(g);x.fillStyle=g;x.fillRect(0,0,w,h)}
+ else if(S.type==='radial'){var q=radGeo(w,h);x.save();x.translate(q.cx,q.cy);x.scale(q.rx,q.ry);var rg=x.createRadialGradient(0,0,0,0,0,1);add(rg);x.fillStyle=rg;x.fillRect(-q.cx/q.rx,-q.cy/q.ry,w/q.rx,h/q.ry);x.restore()}
+ else{if(!x.createConicGradient)return null;var cg=x.createConicGradient((S.angle-90)*Math.PI/180,S.x/100*w,S.y/100*h);add(cg);x.fillStyle=cg;x.fillRect(0,0,w,h)}
+ return c;
+}
+
+/* ---------- UI refs ---------- */
+var prev=$('#gxPrev'),bar=$('#gxBar'),track=$('#gxTrack'),code=$('#gxCode');
+var selColor=$('#selColor'),selHex=$('#selHex'),selAlpha=$('#selAlpha'),selAlphaV=$('#selAlphaV'),selPos=$('#selPos');
+var drag=null;
+
+function toast(msg){var t=$('#gxToast');t.textContent=msg;t.classList.add('show');clearTimeout(toast.t);toast.t=setTimeout(function(){t.classList.remove('show')},1700)}
+function copyText(txt,msg){
+ function fb(){var ta=document.createElement('textarea');ta.value=txt;ta.style.position='fixed';ta.style.opacity='0';document.body.appendChild(ta);ta.select();try{document.execCommand('copy');toast(msg||'Copied!')}catch(e){toast('Press Ctrl+C to copy')}document.body.removeChild(ta)}
+ if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(txt).then(function(){toast(msg||'Copied!')},fb)}else fb();
+}
+function download(blob,name){var u=URL.createObjectURL(blob),a=document.createElement('a');a.href=u;a.download=name;document.body.appendChild(a);a.click();document.body.removeChild(a);setTimeout(function(){URL.revokeObjectURL(u)},2000)}
+function getSize(){
+ var v=$('#gxSize').value;
+ if(v==='custom')return{w:clamp(parseInt($('#gxW').value,10)||1920,1,8000),h:clamp(parseInt($('#gxH').value,10)||1080,1,8000)};
+ var p=v.split('x');return{w:+p[0],h:+p[1]};
+}
+
+/* ---------- rendering ---------- */
+function buildMarkers(){
+ $$('.gx-mk').forEach(function(m){m.parentNode.removeChild(m)});
+ S.stops.forEach(function(st){
+  var m=document.createElement('div');m.className='gx-mk';m.dataset.id=st.id;m.tabIndex=0;m.setAttribute('role','slider');m.setAttribute('aria-label','Color stop');
+  m.addEventListener('pointerdown',function(e){e.preventDefault();e.stopPropagation();S.sel=st.id;drag=st.id;try{m.setPointerCapture(e.pointerId)}catch(x){}m.focus();refresh()});
+  m.addEventListener('pointermove',function(e){if(drag!==st.id)return;var r=track.getBoundingClientRect();st.p=r1(clamp((e.clientX-r.left)/r.width*100,0,100));refresh()});
+  m.addEventListener('pointerup',function(){drag=null});
+  m.addEventListener('pointercancel',function(){drag=null});
+  m.addEventListener('focus',function(){if(S.sel!==st.id){S.sel=st.id;refresh()}});
+  m.addEventListener('keydown',function(e){
+   if(e.key==='ArrowLeft'||e.key==='ArrowDown'){e.preventDefault();st.p=clamp(st.p-(e.shiftKey?10:1),0,100);refresh()}
+   else if(e.key==='ArrowRight'||e.key==='ArrowUp'){e.preventDefault();st.p=clamp(st.p+(e.shiftKey?10:1),0,100);refresh()}
+   else if(e.key==='Delete'||e.key==='Backspace'){e.preventDefault();delStop(st.id)}
+  });
+  track.appendChild(m);
+ });
+}
+function rebuild(){buildMarkers();refresh()}
+function refresh(){
+ prev.style.background=cssFor(S.space,NATIVE);
+ bar.style.background=barCss();
+ $$('.gx-mk').forEach(function(m){var st=byId(+m.dataset.id);if(!st)return;m.style.left=st.p+'%';m.style.background=st.hex;m.classList.toggle('on',st.id===S.sel);m.setAttribute('aria-valuenow',Math.round(st.p));m.setAttribute('aria-valuemin','0');m.setAttribute('aria-valuemax','100')});
+ var st=byId(S.sel);
+ if(st){
+  selColor.value=st.hex;
+  if(document.activeElement!==selHex)selHex.value=st.hex;
+  selAlpha.value=Math.round(st.a*100);selAlphaV.textContent='('+Math.round(st.a*100)+'%)';
+  if(document.activeElement!==selPos)selPos.value=Math.round(st.p);
+ }
+ $$('#gxTypes .gxb').forEach(function(b){b.classList.toggle('on',b.dataset.type===S.type)});
+ $('#grpAngle').classList.toggle('gx-hide',S.type==='radial');
+ $('#grpShape').classList.toggle('gx-hide',S.type!=='radial');
+ $('#grpPos').classList.toggle('gx-hide',S.type==='linear');
+ if(document.activeElement!==$('#gxAngN'))$('#gxAngN').value=S.angle;
+ $('#gxAng').value=S.angle;$('#gxAngV').textContent=S.angle+'°';
+ $('#gxX').value=S.x;$('#gxY').value=S.y;$('#gxXV').textContent=S.x+'%';$('#gxYV').textContent=S.y+'%';
+ $('#gxShape').value=S.shape;$('#gxSpace').value=S.space;
+ updateCode();
+}
+function codeText(){
+ if(S.tab==='tw')return 'bg-['+cssFor(S.space,true).replace(/\s+/g,'_')+']';
+ if(S.tab==='svg'){var z=getSize(),s=svgStr(z.w,z.h);return s||'Conic gradients cannot be saved as SVG.\nUse the CSS tab, or download a PNG instead.'}
+ var lines=['background: '+colStr(rgba(sorted()[0]))+'; /* fallback */'];
+ if(S.space!=='srgb'){lines.push('background: '+cssFor(S.space,false)+';');lines.push('background: '+cssFor(S.space,true)+';')}
+ else lines.push('background: '+cssFor('srgb',false)+';');
+ return lines.join('\n');
+}
+function updateCode(){code.value=codeText();$$('#gxTabs .gxb').forEach(function(b){b.classList.toggle('on',b.dataset.tab===S.tab)})}
+
+/* ---------- stop actions ---------- */
+function addStopAt(p){
+ var c=sample(p),st=mk(toHex(c.r,c.g,c.b),c.a,r1(p));
+ S.stops.push(st);S.sel=st.id;rebuild();
+}
+function delStop(id){
+ if(S.stops.length<=2){toast('A gradient needs at least 2 stops');return}
+ S.stops=S.stops.filter(function(s){return s.id!==id});
+ S.sel=sorted()[0].id;rebuild();
+}
+track.addEventListener('pointerdown',function(e){
+ if(e.target.classList.contains('gx-mk'))return;
+ var r=track.getBoundingClientRect(),p=clamp((e.clientX-r.left)/r.width*100,0,100);
+ addStopAt(p);
+});
+$('#gxAdd').addEventListener('click',function(){
+ var s=sorted(),best=0,bp=50;
+ for(var i=0;i<s.length-1;i++){var g=s[i+1].p-s[i].p;if(g>best){best=g;bp=(s[i].p+s[i+1].p)/2}}
+ addStopAt(bp);
+});
+$('#gxRev').addEventListener('click',function(){S.stops.forEach(function(s){s.p=r1(100-s.p)});refresh()});
+$('#gxEven').addEventListener('click',function(){var s=sorted();s.forEach(function(x,i){x.p=r1(i/(s.length-1)*100)});refresh()});
+$('#selDel').addEventListener('click',function(){delStop(S.sel)});
+selColor.addEventListener('input',function(){var st=byId(S.sel);if(st){st.hex=normHex(selColor.value);selHex.value=st.hex;refresh()}});
+selHex.addEventListener('input',function(){var st=byId(S.sel);if(st&&validHex(selHex.value)){st.hex=normHex(selHex.value);refresh()}});
+selHex.addEventListener('blur',function(){var st=byId(S.sel);if(st)selHex.value=st.hex});
+selAlpha.addEventListener('input',function(){var st=byId(S.sel);if(st){st.a=selAlpha.value/100;refresh()}});
+selPos.addEventListener('input',function(){var st=byId(S.sel);if(st&&selPos.value!==''){st.p=clamp(+selPos.value,0,100);refresh()}});
+selPos.addEventListener('blur',function(){refresh()});
+
+/* ---------- type & direction ---------- */
+$$('#gxTypes .gxb').forEach(function(b){b.addEventListener('click',function(){S.type=b.dataset.type;refresh()})});
+$('#gxAng').addEventListener('input',function(){S.angle=+this.value;refresh()});
+$('#gxAngN').addEventListener('input',function(){if(this.value!==''){S.angle=clamp(Math.round(+this.value),0,360);refresh()}});
+$('#gxX').addEventListener('input',function(){S.x=+this.value;refresh()});
+$('#gxY').addEventListener('input',function(){S.y=+this.value;refresh()});
+$('#gxShape').addEventListener('change',function(){S.shape=this.value;refresh()});
+$('#gxSpace').addEventListener('change',function(){S.space=this.value;refresh()});
+
+/* ---------- smart generate ---------- */
+function gen(){
+ var kind=$('#gxHarm').value,kinds=['analogous','complementary','triadic','split','mono'];
+ if(kind==='any')kind=kinds[Math.floor(Math.random()*kinds.length)];
+ var h=Math.random()*360,s=58+Math.random()*30,l=50+Math.random()*10,hs,ls;
+ if(kind==='analogous'){hs=[h,h+32,h+64];ls=[l,l+4,l-2]}
+ else if(kind==='complementary'){hs=[h,h+180];ls=[l,l+2]}
+ else if(kind==='triadic'){hs=[h,h+120,h+240];ls=[l,l+3,l-3]}
+ else if(kind==='split'){hs=[h,h+150,h+210];ls=[l,l+3,l-3]}
+ else{hs=[h,h,h];ls=[l-24,l,l+22]}
+ setStops(hs.map(function(hh,i){var c=hslToRgb(hh,s,clamp(ls[i],18,88));return toHex(c.r,c.g,c.b)}));
+ if(S.type==='linear'||S.type==='conic')S.angle=Math.round(Math.random()*12)*30%360;
+ rebuild();
+}
+$('#gxGen').addEventListener('click',gen);
+
+/* ---------- presets ---------- */
+var PRE=[
+ ['Sunset','linear',135,['#ff5f6d','#ffc371']],
+ ['Ocean','linear',135,['#2193b0','#6dd5ed']],
+ ['Aurora','linear',120,['#00c6ff','#7b2ff7','#f107a3']],
+ ['Mint','linear',90,['#11998e','#38ef7d']],
+ ['Candy','linear',45,['#fc5c7d','#6a82fb']],
+ ['Peach','linear',135,['#ffecd2','#fcb69f']],
+ ['Midnight','linear',160,['#0f2027','#203a43','#2c5364']],
+ ['Lavender','linear',135,['#e0c3fc','#8ec5fc']],
+ ['Fire','linear',180,['#f12711','#f5af19']],
+ ['Neon','linear',90,['#12c2e9','#c471ed','#f64f59']],
+ ['Forest','linear',135,['#134e5e','#71b280']],
+ ['Spotlight','radial',0,['#ffffff','#5b3df5']],
+ ['Rainbow','conic',0,['#ff0000','#ffff00','#00ff00','#00ffff','#0000ff','#ff00ff','#ff0000']]
+];
+(function(){
+ var box=$('#gxPresets');
+ PRE.forEach(function(p){
+  var b=document.createElement('button');b.type='button';b.className='gx-pre';b.title=p[0];b.setAttribute('aria-label','Preset '+p[0]);
+  var st=p[3].map(function(c,i){return c+' '+Math.round(i/(p[3].length-1)*100)+'%'}).join(',');
+  b.style.background=p[1]==='radial'?'radial-gradient(circle,'+st+')':p[1]==='conic'?'conic-gradient('+st+')':'linear-gradient('+p[2]+'deg,'+st+')';
+  b.addEventListener('click',function(){S.type=p[1];if(p[1]==='linear')S.angle=p[2];if(p[1]==='conic')S.angle=0;if(p[1]!=='linear'){S.x=50;S.y=50}setStops(p[3]);rebuild()});
+  box.appendChild(b);
+ });
+})();
+
+/* ---------- export ---------- */
+$$('#gxTabs .gxb').forEach(function(b){b.addEventListener('click',function(){S.tab=b.dataset.tab;updateCode()})});
+$('#gxCopy').addEventListener('click',function(){copyText(code.value,'Code copied!')});
+$('#gxSize').addEventListener('change',function(){$('#gxCustom').classList.toggle('gx-hide',this.value!=='custom');updateCode()});
+$('#gxW').addEventListener('input',updateCode);$('#gxH').addEventListener('input',updateCode);
+$('#gxPng').addEventListener('click',function(){
+ var z=getSize(),c=drawCanvas(z.w,z.h);
+ if(!c){toast('Your browser cannot save this gradient as PNG');return}
+ c.toBlob(function(b){if(b){download(b,'gradient-'+z.w+'x'+z.h+'.png');toast('PNG downloaded')}else toast('Image too large for this device. Try a smaller size.')},'image/png');
+});
+$('#gxSvg').addEventListener('click',function(){
+ var z=getSize(),s=svgStr(z.w,z.h);
+ if(!s){toast('Conic gradients cannot be saved as SVG. Use PNG or CSS.');return}
+ download(new Blob([s],{type:'image/svg+xml'}),'gradient.svg');toast('SVG downloaded');
+});
+$('#gxCssF').addEventListener('click',function(){
+ var t='.gradient {\n  '+codeForCssFile().split('\n').join('\n  ')+'\n}\n';
+ download(new Blob([t],{type:'text/css'}),'gradient.css');toast('CSS downloaded');
+});
+function codeForCssFile(){var o=S.tab;S.tab='css';var t=codeText();S.tab=o;return t}
+
+/* ---------- share link ---------- */
+function stateStr(){
+ var o={t:S.type,a:S.angle,sh:S.shape,x:S.x,y:S.y,sp:S.space,s:S.stops.map(function(s){return[s.hex,r4(s.a),s.p]})};
+ return btoa(unescape(encodeURIComponent(JSON.stringify(o))));
+}
+$('#gxLink').addEventListener('click',function(){
+ try{var u=location.origin+location.pathname+'#g='+stateStr();copyText(u,'Share link copied!')}catch(e){toast('Could not create link')}
+});
+function loadHash(){
+ try{
+  var m=/#g=([^&]+)/.exec(location.hash);if(!m)return false;
+  var o=JSON.parse(decodeURIComponent(escape(atob(m[1]))));
+  if(!o||!o.s||o.s.length<2||o.s.length>30)return false;
+  var types=['linear','radial','conic'],sps=['srgb','oklab','oklch'];
+  S.type=types.indexOf(o.t)>-1?o.t:'linear';S.angle=clamp(+o.a||0,0,360);S.shape=o.sh==='ellipse'?'ellipse':'circle';
+  S.x=clamp(+o.x||50,0,100);S.y=clamp(+o.y||50,0,100);S.space=sps.indexOf(o.sp)>-1?o.sp:'oklab';
+  S.stops=o.s.map(function(a){if(!validHex(a[0]))throw 0;return mk(a[0],clamp(+a[1],0,1),clamp(+a[2],0,100))});
+  S.sel=S.stops[0].id;return true;
+ }catch(e){return false}
+}
+
+/* ---------- color mixer ---------- */
+var mxA=$('#mxA'),mxAh=$('#mxAh'),mxB=$('#mxB'),mxBh=$('#mxBh'),mxR=$('#mxR');
+function mxCol(inp){var c=hexToRgb(inp.value);c.a=1;return c}
+function mxUpdate(){
+ var A=mxCol(mxA),B=mxCol(mxB),t=mxR.value/100,sp=$('#mxS').value,m=mix(A,B,t,sp);
+ var hex=toHex(m.r,m.g,m.b),hsl=rgbToHsl(m.r,m.g,m.b);
+ $('#mxRV').textContent=mxR.value+'% of B';
+ $('#mxSw').style.background=hex;
+ $('#mxHex').value=hex.toUpperCase();
+ $('#mxRgb').value='rgb('+Math.round(m.r)+', '+Math.round(m.g)+', '+Math.round(m.b)+')';
+ $('#mxHsl').value='hsl('+hsl.h+', '+hsl.s+'%, '+hsl.l+'%)';
+ if(document.activeElement!==mxAh)mxAh.value=mxA.value;
+ if(document.activeElement!==mxBh)mxBh.value=mxB.value;
+ var n=+$('#mxN').value,box=$('#mxSteps');box.innerHTML='';
+ for(var i=0;i<n;i++){
+  var c=mix(A,B,i/(n-1),sp),h=toHex(c.r,c.g,c.b),d=document.createElement('div');
+  d.className='gx-step';d.title='Copy '+h.toUpperCase();
+  d.innerHTML='<i style="background:'+h+'"></i><span>'+h.toUpperCase()+'</span>';
+  (function(hh){d.addEventListener('click',function(){copyText(hh.toUpperCase(),hh.toUpperCase()+' copied')})})(h);
+  box.appendChild(d);
+ }
+}
+mxA.addEventListener('input',mxUpdate);mxB.addEventListener('input',mxUpdate);mxR.addEventListener('input',mxUpdate);
+$('#mxS').addEventListener('change',mxUpdate);$('#mxN').addEventListener('change',mxUpdate);
+mxAh.addEventListener('input',function(){if(validHex(mxAh.value)){mxA.value=normHex(mxAh.value);mxUpdate()}});
+mxBh.addEventListener('input',function(){if(validHex(mxBh.value)){mxB.value=normHex(mxBh.value);mxUpdate()}});
+mxAh.addEventListener('blur',mxUpdate);mxBh.addEventListener('blur',mxUpdate);
+$('#mxSwap').addEventListener('click',function(){var t=mxA.value;mxA.value=mxB.value;mxB.value=t;mxUpdate()});
+$('#mxUse').addEventListener('click',function(){S.type='linear';S.angle=90;S.space=$('#mxS').value;setStops([mxA.value,mxB.value]);rebuild();window.scrollTo({top:0,behavior:'smooth'});toast('Gradient updated')});
+$$('[data-copy]').forEach(function(b){b.addEventListener('click',function(){copyText($('#'+b.dataset.copy).value,'Copied!')})});
+
+/* ---------- init ---------- */
+if(!loadHash()){setStops(['#5b3df5','#ec4899','#f59e0b']);S.angle=120}
+rebuild();
+mxAh.value=mxA.value;mxBh.value=mxB.value;mxUpdate();
+})();
+</script>
 </body>
 </html>
