@@ -46,7 +46,6 @@ const ink=h=>{const[r,g,b]=rgb(h);return(r*299+g*587+b*114)/1000>150?"#0c0b1a":"
 (function(){
 const d=new Date(),dn=Math.floor(Date.UTC(d.getFullYear(),d.getMonth(),d.getDate())/864e5),C=COL[(dn*7)%COL.length],cx=C[1],R=rgb(cx),Hs=hsl(cx);
 const RGB="rgb("+R.join(", ")+")",HSL="hsl("+Hs[0]+", "+Hs[1]+"%, "+Hs[2]+"%)";
-$("codDate").textContent=d.toLocaleDateString("en-IN",{weekday:"long",day:"numeric",month:"long",year:"numeric"})+". A new color appears every day, and the same date always shows the same color.";
 const big=$("codBig");big.style.background=cx;big.style.color=ink(cx);big.style.textShadow="none";$("codName").textContent=C[0];$("codHex").textContent=cx;
 const cr=(l,v)=>'<div class="row"><small>'+l+"</small><code>"+v+'</code><button class="ic" type="button" aria-label="Copy '+l+' value" data-copy="'+v+'">'+IC+"</button></div>";
 $("codVals").innerHTML=cr("HEX",cx)+cr("RGB",RGB)+cr("HSL",HSL);
