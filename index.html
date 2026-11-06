@@ -12,14 +12,12 @@
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="stylesheet" href="/css/styles.css">
 <style>
-/* Hero palette: colors flow upward in a wave */
-@keyframes palflow{0%,100%{background-color:#4F2FE0}20%{background-color:#C026D3}40%{background-color:#F43F5E}60%{background-color:#F59E0B}80%{background-color:#10B981}}
-.mock .pal i{animation:palflow 10s ease-in-out infinite}
-.mock .pal i:nth-child(2){animation-delay:-2s}
-.mock .pal i:nth-child(3){animation-delay:-4s}
-.mock .pal i:nth-child(4){animation-delay:-6s}
-.mock .pal i:nth-child(5){animation-delay:-8s}
-@media (prefers-reduced-motion:reduce){.mock .pal i{animation:none}}
+/* Hero palette: colors slide slowly upward in a loop, with space around them */
+.hero .mock .pal{display:block!important;position:relative;height:150px!important;margin:16px!important;padding:0!important;overflow:hidden!important;border-radius:16px!important}
+.hero .mock .pal .trk{display:flex;flex-direction:column;animation:palup 14s linear infinite}
+.hero .mock .pal .trk i{display:block!important;flex:none!important;width:100%!important;height:30px!important;border-radius:0!important;animation:none!important}
+@keyframes palup{to{transform:translateY(-50%)}}
+@media (prefers-reduced-motion:reduce){.hero .mock .pal .trk{animation:none}}
 </style>
 <script src="/js/components.js" defer></script>
 <script src="/js/home.js" defer></script>
@@ -43,7 +41,7 @@
 </div>
 <div class="mock" aria-hidden="true">
 <div class="tb"><i></i><i></i><i></i></div>
-<div class="pal"><i style="background:#4F2FE0"></i><i style="background:#C026D3"></i><i style="background:#F43F5E"></i><i style="background:#F59E0B"></i><i style="background:#10B981"></i></div>
+<div class="pal"><div class="trk"><i style="background:#4F2FE0"></i><i style="background:#C026D3"></i><i style="background:#F43F5E"></i><i style="background:#F59E0B"></i><i style="background:#10B981"></i><i style="background:#4F2FE0"></i><i style="background:#C026D3"></i><i style="background:#F43F5E"></i><i style="background:#F59E0B"></i><i style="background:#10B981"></i></div></div>
 <div class="mr"><div><span>HEX</span><b>#4F2FE0</b></div><div><span>RGB</span><b>79, 47, 224</b></div><div><span>Contrast on white</span><b>7.4:1 · AAA</b></div></div>
 </div>
 </div>
