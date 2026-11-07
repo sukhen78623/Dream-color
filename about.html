@@ -15,43 +15,95 @@
 <meta name="twitter:description" content="Free color tools made with the help of AI, by Sukhendu Roy.">
 <meta name="theme-color" content="#5b3df5">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Pacifico&family=Poppins:wght@500;600;700;800&display=swap">
 <link rel="stylesheet" href="/css/styles.css">
 <style>
-.ab{display:block;--b:rgba(128,128,128,.3);--f:rgba(128,128,128,.1)}
+/* ===== About page: colors come from the site theme, so light and dark both work ===== */
+.ab{display:block;--b:var(--line);--p1:#7c5ce6;--p2:#ec4899;--p3:#f59e0b;--p4:#10b981;--p5:#3b82f6}
 .ab *{box-sizing:border-box}
-/* theme-neutral: text inherits from the site, fills are translucent, so light and dark both work */
-.ab-hero{position:relative;overflow:hidden;border-radius:24px;border:1px solid var(--b);padding:44px 22px 185px;margin-bottom:26px;background:linear-gradient(135deg,rgba(124,92,230,.16),rgba(61,143,224,.12) 50%,rgba(47,184,166,.14));background-size:250% 250%;animation:abBg 18s ease-in-out infinite alternate}
-.ab-ht{position:relative;z-index:2;max-width:540px}
-.ab-hi{font-size:clamp(2.1rem,8vw,3.7rem);line-height:1.1;margin:0 0 14px}
-.ab-lead{margin:0;font-size:1.05rem;opacity:.88;max-width:44ch}
-.ab-w{position:absolute;left:0;right:0;bottom:0;height:150px;overflow:hidden;pointer-events:none}
-.ab-w.mini{height:58px}
+.ab h1,.ab h2{font-family:"Poppins",ui-sans-serif,system-ui,sans-serif}
+
+/* HERO */
+.ab-hero{position:relative;overflow:hidden;isolation:isolate;border-radius:28px;border:1px solid var(--b);padding:48px 24px 120px;margin-bottom:28px;
+ background:
+  radial-gradient(60% 70% at 8% 0%,rgba(236,72,153,.22),transparent 70%),
+  radial-gradient(55% 70% at 95% 10%,rgba(59,130,246,.22),transparent 70%),
+  radial-gradient(60% 80% at 50% 110%,rgba(16,185,129,.18),transparent 70%),
+  var(--card)}
+.ab-dots span{position:absolute;z-index:-1;border-radius:50%;filter:blur(2px);opacity:.75;animation:abFloat var(--t) ease-in-out infinite alternate}
+.ab-ht{position:relative;z-index:2;max-width:620px}
+.ab-top{display:flex;align-items:center;gap:16px;margin-bottom:22px}
+.ab-av{position:relative;isolation:isolate;flex:none;width:96px;height:96px;border-radius:50%}
+.ab-av::before,.ab-av::after{content:"";position:absolute;border-radius:50%;background:conic-gradient(from 0deg,#ff0040,#ff8a00,#ffe600,#00ff6a,#00d4ff,#3b4cff,#c026ff,#ff0040);animation:abSpin 4s linear infinite}
+.ab-av::before{inset:-5px;z-index:-2}
+.ab-av::after{inset:-4px;z-index:-3;filter:blur(8px);opacity:.4}
+.ab-pic{position:relative;width:100%;height:100%;border-radius:50%;overflow:hidden;background:#fff;border:3px solid var(--card);display:grid;place-items:center;font:800 1.6rem "Poppins",sans-serif;color:#1a1830}
+.ab-pic img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 25%}
+.ab-hello{font:600 1.05rem "Poppins",sans-serif;color:var(--mut);letter-spacing:.02em}
+.ab-hello small{display:block;font-size:.78rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--acc);margin-bottom:2px}
+.ab-hi{font-size:clamp(1.3rem,4.6vw,1.9rem);font-weight:600;line-height:1.2;margin:0 0 4px;color:var(--fg)}
+.ab-name{display:block;font-family:"Pacifico","Brush Script MT",cursive;font-weight:400;font-size:clamp(3rem,13vw,5.6rem);line-height:1.15;letter-spacing:0;padding:0 .1em .12em 0;
+ background:linear-gradient(90deg,#f43f5e,#f97316,#10b981,#3b82f6,#a855f7,#f43f5e);background-size:300% 100%;-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;animation:abShine 7s linear infinite}
+.ab-role{display:flex;flex-wrap:wrap;gap:8px;margin:16px 0 18px}
+.ab-role svg{width:16px;height:16px;fill:none;stroke:var(--acc);stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.ab-role span{display:inline-flex;align-items:center;gap:7px;padding:6px 14px;border-radius:99px;font:600 .82rem "Poppins",sans-serif;color:var(--fg);background:color-mix(in srgb,var(--card) 70%,transparent);border:1px solid var(--b);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}
+.ab-lead{margin:0;font-size:1.08rem;color:var(--mut);max-width:46ch}
+.ab-w{position:absolute;left:0;right:0;bottom:0;height:90px;overflow:hidden;pointer-events:none;z-index:1}
+.ab-w.mini{height:40px;border-radius:0 0 20px 20px}
 .ab-w div{position:absolute;left:0;bottom:-12px;width:200%;background-repeat:repeat-x;background-position:bottom;animation:abFlow var(--t) linear infinite,abBob var(--u) ease-in-out infinite alternate;animation-delay:calc(var(--d)*-1s),calc(var(--d)*-.6s)}
 .ab-w div.rv{animation-direction:reverse,alternate}
-.ab-glass{position:relative;isolation:isolate;overflow:hidden;border-radius:24px;border:1px solid var(--b);padding:20px;margin-bottom:30px}
-.ab-bl{position:absolute;z-index:-1;width:260px;height:260px;border-radius:50%;background:var(--c);filter:blur(60px);opacity:.38;animation:abDrift var(--t) ease-in-out infinite alternate}
-.ab-cards{position:relative;display:grid;gap:16px}
+
+/* CARDS */
+.ab-glass{position:relative;isolation:isolate;overflow:hidden;border-radius:28px;border:1px solid var(--b);padding:22px;margin-bottom:34px;background:var(--alt)}
+.ab-bl{position:absolute;z-index:-1;width:280px;height:280px;border-radius:50%;background:var(--c);filter:blur(70px);opacity:.34;animation:abDrift var(--t) ease-in-out infinite alternate}
+.ab-cards{position:relative;display:grid;gap:18px}
 @media(min-width:800px){.ab-cards{grid-template-columns:repeat(2,minmax(0,1fr))}}
-.ab-card{position:relative;overflow:hidden;border-radius:20px;padding:20px;background:linear-gradient(135deg,rgba(255,255,255,.28),rgba(128,128,128,.08));border:1px solid var(--b);box-shadow:0 8px 28px rgba(0,0,0,.1),inset 0 1px 0 rgba(255,255,255,.45);-webkit-backdrop-filter:blur(16px) saturate(1.4);backdrop-filter:blur(16px) saturate(1.4)}
-.ab-card::before{content:"";position:absolute;left:0;right:0;top:0;height:4px;background:linear-gradient(90deg,#7c5ce6,#3d8fe0,#2fb8a6)}
-.ab-card h2{font-size:1.08rem;margin:4px 0 8px}
-.ab-card p{margin:0 0 12px;font-size:.96rem}
+.ab-card{position:relative;overflow:hidden;border-radius:22px;padding:24px 22px 22px;background:color-mix(in srgb,var(--card) 78%,transparent);border:1px solid var(--b);box-shadow:0 10px 30px -18px rgba(0,0,0,.35);-webkit-backdrop-filter:blur(16px) saturate(1.4);backdrop-filter:blur(16px) saturate(1.4);transition:transform .25s,border-color .25s}
+.ab-card:hover{transform:translateY(-4px);border-color:var(--k,var(--acc))}
+.ab-card::before{content:"";position:absolute;left:0;right:0;top:0;height:5px;background:var(--g,linear-gradient(90deg,#7c5ce6,#3b82f6,#10b981))}
+.ab-ic{display:grid;place-items:center;width:46px;height:46px;border-radius:14px;font-size:1.35rem;margin-bottom:12px;background:var(--g,linear-gradient(135deg,#7c5ce6,#3b82f6));box-shadow:0 8px 18px -8px var(--k,#7c5ce6)}
+.ab-ic svg{width:24px;height:24px;fill:none;stroke:#fff;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.ab-card h2{font-size:1.2rem;font-weight:700;letter-spacing:-.01em;margin:0 0 8px;color:var(--fg)}
+.ab-card p{margin:0 0 12px;font-size:.98rem;color:var(--mut)}
 .ab-card p:last-of-type{margin:0}
-.ab-card a{color:inherit;font-weight:600}
-.ab-btn{display:inline-block;padding:9px 16px;border-radius:12px;text-decoration:none;background:var(--f);border:1px solid var(--b);transition:border-color .2s}
-.ab-btn:hover,.ab-btn:focus-visible{border-color:#7c5ce6}
+.ab-card p b{color:var(--fg)}
+.ab-card a{color:var(--fg)}
+.ab-btn{display:inline-block;padding:10px 18px;border-radius:12px;text-decoration:none;font-weight:700;color:#fff!important;background:var(--g,linear-gradient(135deg,#7c5ce6,#3b82f6));box-shadow:0 8px 18px -10px var(--k,#7c5ce6);transition:transform .2s}
+.ab-btn:hover,.ab-btn:focus-visible{transform:translateY(-2px)}
 .ab-wide{grid-column:1/-1}
-.ab-sss{padding-bottom:82px}
-.ab-chips{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:8px}
-.ab-chips li{padding:6px 12px;border-radius:99px;font-size:.88rem;background:var(--f);border:1px solid var(--b)}
-.ab-s{font-weight:800;color:#7c5ce6}
+.ab-sss{padding-bottom:84px}
+
+/* tool chips */
+.ab-chips{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:10px}
+.ab-chips li{display:flex;align-items:center;gap:8px;padding:8px 14px;border-radius:99px;font-size:.9rem;font-weight:600;color:var(--fg);background:var(--card);border:1px solid var(--b);transition:transform .2s,border-color .2s}
+.ab-chips li:hover{transform:translateY(-2px);border-color:var(--dc)}
+.ab-chips li::before{content:"";width:10px;height:10px;border-radius:50%;background:var(--dc);box-shadow:0 0 0 3px color-mix(in srgb,var(--dc) 25%,transparent)}
+.ab-chips li:nth-child(5n+1){--dc:#f43f5e}
+.ab-chips li:nth-child(5n+2){--dc:#f59e0b}
+.ab-chips li:nth-child(5n+3){--dc:#10b981}
+.ab-chips li:nth-child(5n+4){--dc:#3b82f6}
+.ab-chips li:nth-child(5n+5){--dc:#a855f7}
+
+/* three s */
+.ab-s{font-weight:800;font-size:1.15em}
+.ab-s:nth-of-type(1){color:#f43f5e}
+.ab-s:nth-of-type(2){color:#10b981}
+.ab-s:nth-of-type(3){color:#3b82f6}
+
+/* END */
 .ab-end{text-align:center;padding:0 0 48px}
-.ab-end p{margin:0 0 14px}
-@keyframes abBg{to{background-position:100% 100%}}
+.ab-end p{margin:0 0 14px;font:600 1.1rem "Poppins",sans-serif;color:var(--fg)}
+
+@keyframes abShine{to{background-position:-300% 0}}
 @keyframes abFlow{to{transform:translateX(-50%)}}
 @keyframes abBob{from{translate:0 7px}to{translate:0 -7px}}
 @keyframes abDrift{to{transform:translate(70px,50px) scale(1.25)}}
-@media(prefers-reduced-motion:reduce){.ab-hero,.ab-bl,.ab-w div{animation:none}}
+@keyframes abFloat{from{transform:translate(0,0)}to{transform:translate(22px,-26px)}}
+@keyframes abSpin{to{transform:rotate(360deg)}}
+@keyframes abSpinBack{to{transform:rotate(-360deg)}}
+@media(prefers-reduced-motion:reduce){.ab-av::before,.ab-av::after,.ab-name,.ab-bl,.ab-w div,.ab-dots span{animation:none}}
 </style>
 <script src="/js/components.js" defer></script>
 </head>
@@ -63,29 +115,79 @@
 </div></section>
 
 <section class="pt"><div class="w"><div class="ab">
+
 <div class="ab-hero">
+<div class="ab-dots" aria-hidden="true">
+<span style="width:18px;height:18px;background:#f43f5e;right:12%;top:14%;--t:6s"></span>
+<span style="width:12px;height:12px;background:#f59e0b;right:26%;top:34%;--t:8s"></span>
+<span style="width:22px;height:22px;background:#10b981;right:8%;top:50%;--t:7s"></span>
+<span style="width:14px;height:14px;background:#3b82f6;right:34%;top:12%;--t:9s"></span>
+<span style="width:16px;height:16px;background:#a855f7;right:18%;top:66%;--t:10s"></span>
+</div>
 <div class="ab-ht">
-<h1 class="ab-hi">Hi, I am Sukhendu Roy</h1>
-<p class="ab-lead">I live in Howrah, West Bengal. YourColorsss is a free set of color tools I built with the help of my AI friends.</p>
+<div class="ab-top">
+<div class="ab-av"><div class="ab-pic"><b>SR</b><img src="/images/sukhendu.jpg" alt="Sukhendu Roy" width="96" height="96" onerror="this.remove()"></div></div>
+<div class="ab-hello"><small>About the creator</small>Howrah, West Bengal</div>
+</div>
+<h1 class="ab-hi">Hi, I am</h1>
+<span class="ab-name" role="presentation">Sukhendu Roy</span>
+<div class="ab-role"><span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8z"/></svg>Built with AI</span><span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s7-6.2 7-11.5A7 7 0 0 0 5 9.5C5 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg>West Bengal, India</span></div>
+<p class="ab-lead">YourColorsss is a free set of color tools I built with the help of my AI friends.</p>
 </div>
 <div class="ab-w" id="abWaves" aria-hidden="true"></div>
 </div>
 
 <div class="ab-glass">
 <span class="ab-bl" style="--c:#7c5ce6;left:-60px;top:-40px;--t:13s" aria-hidden="true"></span>
-<span class="ab-bl" style="--c:#3d8fe0;right:-70px;top:30%;--t:16s" aria-hidden="true"></span>
-<span class="ab-bl" style="--c:#2fb8a6;left:20%;bottom:-80px;--t:15s" aria-hidden="true"></span>
+<span class="ab-bl" style="--c:#ec4899;right:-70px;top:30%;--t:16s" aria-hidden="true"></span>
+<span class="ab-bl" style="--c:#10b981;left:20%;bottom:-80px;--t:15s" aria-hidden="true"></span>
 <div class="ab-cards">
-<div class="ab-card"><h2>Why I built this</h2><p>I had some free time and nothing in particular to do, so I started building. Colors were the fun part, so they got a home of their own.</p></div>
-<div class="ab-card"><h2>Also built with AI</h2><p><b>Save Your Trade</b> is a focused and advanced trading journal.</p><p><a class="ab-btn" href="https://saveyourtrade.in" target="_blank" rel="noopener">Visit saveyourtrade.in</a></p></div>
-<div class="ab-card ab-wide"><h2>What you will find</h2><p>10 free color tools that work right in your browser:</p>
-<ul class="ab-chips"><li>Color Palette Generator</li><li>Palette Explorer</li><li>Gradient &amp; Color Mixer</li><li>Tints, Shades &amp; Tones Generator</li><li>Duotone Generator</li><li>Color Picker &amp; Converter</li><li>Image Color Picker &amp; Extractor</li><li>Accessibility</li><li>Color Meaning</li><li>Color Psychology</li></ul></div>
-<div class="ab-card"><h2>Support</h2><p>Found a bug or have an idea? Write to <a href="mailto:sukhendu.roy@saveyourtrade.in">sukhendu.roy@saveyourtrade.in</a></p><p><a class="ab-btn" href="mailto:sukhendu.roy@saveyourtrade.in">Email support</a></p></div>
-<div class="ab-card ab-sss"><h2>Why three s in YourColorsss?</h2><p>It is not a typo. Your Color<span class="ab-s">s</span><span class="ab-s">s</span><span class="ab-s">s</span> carries the initials of <b>Sukhendu Software Solutions</b>, the company behind this site.</p><p>The funny part: the company does not have a single user yet, but the parent name was decided first. 😄</p><div class="ab-w mini" id="abMini" aria-hidden="true"></div></div>
+
+<div class="ab-card ab-wide" style="--g:linear-gradient(135deg,#ec4899,#7c5ce6);--k:#ec4899">
+<div class="ab-ic" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></svg></div>
+<h2>About the creator</h2>
+<p>I am <b>Sukhendu Roy</b>, and I live in Howrah, West Bengal. I enjoy turning small ideas into simple, free tools that anyone can open in a browser, and I build them with the help of AI.</p>
+<p>YourColorsss and <b>Save Your Trade</b> both come from my company, <b>Sukhendu Software Solutions</b>.</p>
+</div>
+
+<div class="ab-card" style="--g:linear-gradient(135deg,#7c5ce6,#ec4899);--k:#7c5ce6">
+<div class="ab-ic" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-4 10.5c.7.7 1 1.5 1 2.5h6c0-1 .3-1.8 1-2.5A6 6 0 0 0 12 3z"/></svg></div>
+<h2>Why I built this</h2>
+<p>I had some free time and nothing in particular to do, so I started building. Colors were the fun part, so they got a home of their own.</p>
+</div>
+
+<div class="ab-card" style="--g:linear-gradient(135deg,#10b981,#3b82f6);--k:#10b981">
+<div class="ab-ic" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M3 17l6-6 4 4 8-8M15 7h6v6"/></svg></div>
+<h2>Also built with AI</h2>
+<p><b>Save Your Trade</b> is a focused and advanced trading journal.</p>
+<p><a class="ab-btn" href="https://saveyourtrade.in" target="_blank" rel="noopener">Visit saveyourtrade.in</a></p>
+</div>
+
+<div class="ab-card ab-wide" style="--g:linear-gradient(90deg,#f43f5e,#f59e0b,#10b981,#3b82f6,#a855f7);--k:#f59e0b">
+<div class="ab-ic" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="2"/><rect x="14" y="3" width="7" height="7" rx="2"/><rect x="3" y="14" width="7" height="7" rx="2"/><rect x="14" y="14" width="7" height="7" rx="2"/></svg></div>
+<h2>What you will find</h2>
+<p>10 free color tools that work right in your browser:</p>
+<ul class="ab-chips"><li>Color Palette Generator</li><li>Palette Explorer</li><li>Gradient &amp; Color Mixer</li><li>Tints, Shades &amp; Tones Generator</li><li>Duotone Generator</li><li>Color Picker &amp; Converter</li><li>Image Color Picker &amp; Extractor</li><li>Accessibility</li><li>Color Meaning</li><li>Color Psychology</li></ul>
+</div>
+
+<div class="ab-card" style="--g:linear-gradient(135deg,#3b82f6,#a855f7);--k:#3b82f6">
+<div class="ab-ic" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M21 12a8 8 0 0 1-11.5 7.2L4 20l1-4.6A8 8 0 1 1 21 12z"/></svg></div>
+<h2>Support</h2>
+<p>Found a bug or have an idea? Write to <a href="mailto:sukhendu.roy@saveyourtrade.in">sukhendu.roy@saveyourtrade.in</a></p>
+<p><a class="ab-btn" href="mailto:sukhendu.roy@saveyourtrade.in">Email support</a></p>
+</div>
+
+<div class="ab-card ab-sss" style="--g:linear-gradient(135deg,#f43f5e,#f59e0b);--k:#f43f5e">
+<div class="ab-ic" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8zM19 16l.7 2 2 .7-2 .7-.7 2-.7-2-2-.7 2-.7z"/></svg></div>
+<h2>Why three s in YourColorsss?</h2>
+<p>It is not a typo. Your Color<span class="ab-s">s</span><span class="ab-s">s</span><span class="ab-s">s</span> carries the initials of <b>Sukhendu Software Solutions</b>, the company behind this site.</p>
+<div class="ab-w mini" id="abMini" aria-hidden="true"></div>
+</div>
+
 </div>
 </div>
 
-<div class="ab-end"><p>Thanks for stopping by.</p><a class="btn" href="/#tools">Explore the tools</a></div>
+<div class="ab-end"><p>Thanks for stopping by.</p><a class="btn p" href="/#tools">Explore the tools</a></div>
 </div></div></section>
 </main>
 <dc-footer></dc-footer>
@@ -103,9 +205,9 @@ function waves(el,L){L.forEach(function(g,i){
  if(g[5])d.className="rv";
  el.appendChild(d)})}
 waves(document.getElementById("abWaves"),[
- ["#7c5ce6",.45,2,26,100],["#3d8fe0",.5,4,20,80,1],["#2fb8a6",.55,2,30,60],["#e8749a",.7,4,16,36,1]]);
+ ["#7c5ce6",.35,2,34,100],["#3b82f6",.4,2,44,65,1]]);
 waves(document.getElementById("abMini"),[
- ["#3d8fe0",.45,2,16,100],["#7c5ce6",.55,4,11,60,1]]);
+ ["#3b82f6",.4,2,30,100]]);
 /* SEO: structured data and canonical built from the page URL */
 var u=location.origin,p=location.pathname,sc=document.createElement("script"),l=document.createElement("link");
 sc.type="application/ld+json";sc.text=JSON.stringify({"@context":"https://schema.org","@graph":[
