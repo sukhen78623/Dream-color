@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Color Picker &amp; Converter: HEX, RGB, HSL, CMYK, OKLCH | YourColorsss</title>
+<meta name="description" content="Free online color picker and color converter. Pick a color, convert HEX to RGB, HSL, HSV, CMYK, LAB and OKLCH, check WCAG contrast and get matching palettes. Private, no sign-up.">
+<meta name="keywords" content="color picker, online color picker, color converter, hex to rgb, rgb to hex, hex to hsl, rgb to hsl, rgb to cmyk, hex to cmyk, hsl to rgb, oklch converter, color code finder, color name finder, contrast checker, wcag contrast, color harmony, complementary color, triadic colors, html color picker, css color converter, hex color codes">
+<meta property="og:title" content="Color Picker &amp; Converter: HEX, RGB, HSL, CMYK, OKLCH | YourColorsss">
+<meta property="og:description" content="Pick a color and get every code instantly. Convert HEX, RGB, HSL, CMYK, LAB and OKLCH, check contrast and build matching palettes.">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="YourColorsss">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Color Picker &amp; Converter | YourColorsss">
+<meta name="twitter:description" content="Free color picker with HEX, RGB, HSL, CMYK, LAB and OKLCH converter, contrast checker and palettes.">
+<meta name="theme-color" content="#5b3df5">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/css/styles.css">
+<style>
+[hidden]{display:none!important}
+.cp{--a:#5b3df5;--b:rgba(128,128,128,.32);--f:rgba(128,128,128,.09);--c:#3b82f6;display:block}
+.cp *{box-sizing:border-box}
+.cp-grid{display:grid;gap:18px;margin-bottom:18px}
+@media(min-width:800px){.cp-grid{grid-template-columns:repeat(2,minmax(0,1fr));align-items:start}.cp-full{grid-column:1/-1}}
+.cp-card{border:1px solid var(--b);background:var(--f);border-radius:16px;padding:16px}
+.cp-card h2{font-size:1.05rem;margin:0 0 12px}
+.cp-sv{position:relative;width:100%;aspect-ratio:4/3;border-radius:12px;overflow:hidden;touch-action:none;cursor:crosshair}
+.cp-sv canvas{width:100%;height:100%;display:block}
+.cp-hd{position:absolute;width:24px;height:24px;border:3px solid #fff;border-radius:50%;box-shadow:0 0 0 1px #0007,inset 0 0 0 1px #0007;transform:translate(-50%,-50%);pointer-events:none}
+.cp input[type=range]{width:100%;height:16px;border-radius:8px;appearance:none;-webkit-appearance:none;margin:14px 0 0;background:var(--g)}
+.cp input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:24px;height:24px;border-radius:50%;background:#fff;border:3px solid #fff;box-shadow:0 0 0 1px #0007}
+.cp input[type=range]::-moz-range-thumb{width:20px;height:20px;border-radius:50%;background:#fff;border:2px solid #0007}
+#cpH{--g:linear-gradient(90deg,#f00,#ff0,#0f0,#0ff,#00f,#f0f,#f00)}
+#cpA{--g:linear-gradient(90deg,transparent,var(--c)),repeating-conic-gradient(#ccc 0 25%,#fff 0 50%) 0 0/10px 10px}
+.cp-row{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-top:12px}
+.cp-pv{width:52px;height:44px;border-radius:10px;border:1px solid var(--b);background:linear-gradient(var(--cc,#3b82f6),var(--cc,#3b82f6)),repeating-conic-gradient(#ccc 0 25%,#fff 0 50%) 0 0/10px 10px}
+.cp input[type=text]{flex:1;min-width:0;font:inherit;font-size:1rem;color:inherit;background:var(--f);border:1px solid var(--b);border-radius:10px;padding:10px 12px}
+.cp-btn{appearance:none;border:1px solid var(--b);background:var(--f);color:inherit;font:inherit;font-size:.9rem;padding:9px 14px;border-radius:10px;cursor:pointer;line-height:1.2;touch-action:manipulation}
+.cp-btn:hover,.cp-btn:focus-visible,.cp input:focus-visible{border-color:var(--a);outline:2px solid var(--a);outline-offset:1px}
+.cp-btn.p{background:var(--a);border-color:var(--a);color:#fff}
+.cp-nm{margin:12px 0 0;font-size:.9rem}.cp-nm small{opacity:.7}
+.cp-v button{display:flex;justify-content:space-between;gap:12px;width:100%;padding:11px 2px;border:0;border-bottom:1px solid var(--b);background:none;color:inherit;font:inherit;font-size:.92rem;text-align:left;cursor:pointer}
+.cp-v button:last-child{border:0}.cp-v span{opacity:.65;flex:none}.cp-v b{font-weight:600;word-break:break-all;text-align:right}
+.cp-sw{display:flex;flex-wrap:wrap;gap:8px}
+.cp-sw button{width:48px;height:48px;border-radius:10px;border:1px solid var(--b);cursor:pointer}
+.cp-sw button:focus-visible{outline:3px solid var(--a);outline-offset:2px}
+.cp-hg{margin-bottom:14px}.cp-hg p{font-size:.84rem;opacity:.75;margin:0 0 6px}
+.cp-ct{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.cp-ct>div{border-radius:12px;padding:12px;font-weight:600;border:1px solid var(--b)}
+.cp-ct strong{font-size:1.7rem;display:block;line-height:1.15}
+.cp-bd{display:flex;gap:4px;flex-wrap:wrap;margin-top:8px}.cp-bd i{font-style:normal;font-size:.72rem;padding:2px 8px;border-radius:99px;background:rgba(0,0,0,.3);color:inherit}
+.cp-bd i.ok{background:#16a34a;color:#fff}
+.cp-note{font-size:.8rem;opacity:.75;margin:10px 0 0}
+#cpToast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%) translateY(20px);background:#111;color:#fff;padding:10px 16px;border-radius:10px;font-size:.88rem;opacity:0;pointer-events:none;transition:.2s;z-index:99;max-width:90vw;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+#cpToast.show{opacity:1;transform:translateX(-50%)}
+.seo{padding:40px 0 56px}.seo h2{margin:0 0 12px}.seo p{margin:0 0 14px;max-width:70ch}.seo h3{margin:28px 0 8px}.seo ol{max-width:70ch;padding-left:20px;margin:0 0 14px}.seo details{border-bottom:1px solid rgba(128,128,128,.28);padding:14px 0;max-width:70ch}.seo summary{cursor:pointer;font-weight:600}.seo details p{margin:10px 0 0}
+@media(prefers-reduced-motion:reduce){#cpToast{transition:none}}
+</style>
+<script src="/js/components.js" defer></script>
+</head>
+<body>
+<dc-header></dc-header>
+<main>
+<section class="ph"><div class="w">
+<nav class="crumb" aria-label="Breadcrumb"><a href="/">Home</a><span aria-hidden="true">/</span><a href="/#tools">Tools</a><span aria-hidden="true">/</span><a href="/color-picker-converters/">Color Picker &amp; Converters</a><span aria-hidden="true">/</span><span aria-current="page">Color Picker</span></nav>
+<p class="eyebrow">Pick, convert, copy</p>
+<h1>Color Picker and Color Converter</h1>
+<p class="lead">Pick any color and get its HEX, RGB, HSL, HSV, HWB, CMYK, LAB and OKLCH codes in one tap. Check text contrast, find matching colors and save your favorites.</p>
+</div></section>
+
+<section class="pt"><div class="w">
+<div class="cp">
+<div class="cp-grid">
+<div class="cp-card">
+<h2>Pick a color</h2>
+<div class="cp-sv" id="cpSv"><canvas id="cpCv" width="400" height="300"></canvas><div class="cp-hd" id="cpHd"></div></div>
+<input type="range" id="cpH" min="0" max="360" step="1" aria-label="Hue">
+<input type="range" id="cpA" min="0" max="100" step="1" value="100" aria-label="Opacity">
+<div class="cp-row"><div class="cp-pv" id="cpPv"></div><input type="text" id="cpIn" aria-label="Color value" placeholder="#3b82f6, rgb(), hsl() or a name" autocomplete="off" spellcheck="false"></div>
+<p class="cp-nm" id="cpNm"></p>
+<div class="cp-row"><button class="cp-btn p" id="cpSave" type="button">Save color</button><button class="cp-btn" id="cpRnd" type="button">Random</button><button class="cp-btn" id="cpEye" type="button" hidden>Screen eyedropper</button><button class="cp-btn" id="cpLink" type="button">Copy link</button></div>
+<p class="cp-note">Want a color from a photo? Use the <a href="/color-picker-converters/image-color-picker/">image color picker</a>.</p>
+</div>
+
+<div class="cp-card cp-v"><h2>Color codes</h2><div id="cpVals"></div><p class="cp-note">Tap any code to copy it.</p></div>
+
+<div class="cp-card"><h2>Matching palettes</h2><div id="cpHm"></div><p class="cp-note">Tap a swatch to make it your color.</p></div>
+
+<div class="cp-card"><h2>Contrast checker (WCAG)</h2><div class="cp-ct" id="cpCt"></div><p class="cp-note">AA needs 4.5:1 for normal text and 3:1 for large text. AAA needs 7:1 and 4.5:1.</p></div>
+
+<div class="cp-card cp-full"><h2>Saved colors</h2><div class="cp-sw" id="cpSav"></div><p class="cp-note" id="cpEmpty">Nothing saved yet. Tap Save color to keep a color on this device.</p></div>
+</div>
+<div style="text-align:center;margin-top:4px"><a class="btn" href="/color-picker-converters/">← Back to Color Picker &amp; Converters</a></div>
+</div>
+<div id="cpToast" role="status" aria-live="polite"></div>
+</div></section>
+
+<section class="seo"><div class="w">
+<h2>Free online color picker and converter</h2>
+<p>A color picker lets you choose a color visually and get the code you need for your website, app or design. Drag on the square to set shade and brightness, move the hue slider to change the color, or type a code you already have. Every format updates live, so you can copy it straight into CSS, Figma, Canva or Photoshop.</p>
+<p>As a color converter it changes HEX to RGB, RGB to HEX, HEX to HSL, RGB to CMYK, HSL to RGB and more, including modern OKLCH for CSS. Everything runs in your browser, with no sign-up.</p>
+<h3>How to use the color picker</h3>
+<ol><li>Drag on the color square and move the hue slider.</li><li>Or type a HEX code, an RGB or HSL value, or a color name in the box.</li><li>Tap any code in the list to copy it.</li><li>Use Save color to keep it, and the palettes to find colors that match.</li></ol>
+<h3>Frequently asked questions</h3>
+<details><summary>How do I convert HEX to RGB?</summary><p>Type or paste the HEX code, for example #3B82F6, into the color box. The RGB, HSL, HSV, CMYK, LAB and OKLCH values appear instantly and can be copied with one tap.</p></details>
+<details><summary>What is the difference between RGB and CMYK?</summary><p>RGB mixes light and is used for screens. CMYK mixes ink and is used for print. The CMYK values here are a standard mathematical conversion, so real print results depend on the printer and paper.</p></details>
+<details><summary>What contrast ratio do I need for accessible text?</summary><p>WCAG AA needs at least 4.5:1 for normal text and 3:1 for large text. AAA needs 7:1 for normal text and 4.5:1 for large text.</p></details>
+<details><summary>What is OKLCH?</summary><p>OKLCH is a modern CSS color format based on human vision. Lightness, chroma and hue stay predictable, so palettes and gradients look more even than with HSL.</p></details>
+<details><summary>How do I pick a color from an image?</summary><p>Use the image color picker tool. Upload a photo, tap any spot, and send the exact color back here to convert it into every format.</p></details>
+<details><summary>Are my colors stored online?</summary><p>No. Saved colors stay in your own browser on your device and are never sent anywhere.</p></details>
+</div></section>
+</main>
+<dc-footer></dc-footer>
+
+<script>
+(function(){
+var $=function(i){return document.getElementById(i)},S={h:215,s:.76,v:.96,a:1},R,mx=Math.max,mn=Math.min;
+var NM="black:000000,white:ffffff,red:ff0000,lime:00ff00,blue:0000ff,yellow:ffff00,cyan:00ffff,magenta:ff00ff,gray:808080,silver:c0c0c0,maroon:800000,olive:808000,green:008000,purple:800080,teal:008080,navy:000080,orange:ffa500,pink:ffc0cb,brown:a52a2a,gold:ffd700,coral:ff7f50,salmon:fa8072,crimson:dc143c,indigo:4b0082,violet:ee82ee,turquoise:40e0d0,skyblue:87ceeb,royalblue:4169e1,steelblue:4682b4,khaki:f0e68c,beige:f5f5dc,tan:d2b48c,chocolate:d2691e,orchid:da70d6,lavender:e6e6fa,mint:98ff98,forestgreen:228b22,tomato:ff6347,slategray:708090".split(",").map(function(x){var p=x.split(":");return[p[0],parseInt(p[1],16)]});
+function h2r(h,s,v){var f=function(n){var k=(n+h/60)%6;return v-v*s*mx(0,mn(k,4-k,1))};return[f(5),f(3),f(1)].map(function(x){return Math.round(x*255)})}
+function r2h(r,g,b){r/=255;g/=255;b/=255;var m=mx(r,g,b),n=mn(r,g,b),d=m-n,h=0;if(d){h=m==r?((g-b)/d)%6:m==g?(b-r)/d+2:(r-g)/d+4;h=(h*60+360)%360}return{h:h,s:m?d/m:0,v:m,l:(m+n)/2,d:d}}
+function hex(r,g,b){return"#"+[r,g,b].map(function(x){return x.toString(16).padStart(2,"0")}).join("")}
+function lin(c){c/=255;return c<=.04045?c/12.92:Math.pow((c+.055)/1.055,2.4)}
+function lum(r,g,b){return .2126*lin(r)+.7152*lin(g)+.0722*lin(b)}
+function f(n,d){return+n.toFixed(d||0)}
+function hsl(r,g,b){var o=r2h(r,g,b),s=o.d?o.d/(1-Math.abs(2*o.l-1)):0;return[f(o.h),f(s*100),f(o.l*100)]}
+function hsl2rgb(h,s,l){h=(h%360+360)%360;var a=s*mn(l,1-l),k=function(n){var q=(n+h/30)%12;return l-a*mx(-1,mn(q-3,9-q,1))};return[k(0),k(8),k(4)].map(function(x){return Math.round(x*255)})}
+function lab(r,g,b){var R=lin(r),G=lin(g),B=lin(b),X=(.4124564*R+.3575761*G+.1804375*B)/.95047,Y=.2126729*R+.7151522*G+.072175*B,Z=(.0193339*R+.119192*G+.9503041*B)/1.08883,t=function(v){return v>.008856?Math.cbrt(v):7.787*v+16/116};return[f(116*t(Y)-16),f(500*(t(X)-t(Y))),f(200*(t(Y)-t(Z)))]}
+function oklch(r,g,b){var R=lin(r),G=lin(g),B=lin(b),l=Math.cbrt(.4122214708*R+.5363325363*G+.0514459929*B),m=Math.cbrt(.2119034982*R+.6806995451*G+.1073969566*B),s=Math.cbrt(.0883024619*R+.2817188376*G+.6299787005*B),L=.2104542553*l+.793617785*m-.0040720468*s,A=1.9779984951*l-2.428592205*m+.4505937099*s,Bb=.0259040371*l+.7827717662*m-.808675766*s,C=Math.hypot(A,Bb),H=(Math.atan2(Bb,A)*180/Math.PI+360)%360;return"oklch("+f(L*100,1)+"% "+f(C,3)+" "+f(C<.002?0:H,1)+")"}
+function parse(t){var e=document.createElement("i");e.style.color="";e.style.color=t.trim();if(!e.style.color&&/^[0-9a-f]{3,8}$/i.test(t.trim()))e.style.color="#"+t.trim();if(!e.style.color)return null;document.body.appendChild(e);var c=getComputedStyle(e).color;e.remove();var m=c.match(/[\d.]+/g);return m&&m.length>=3?m.map(Number):null}
+function setRGB(r,g,b,a){var o=r2h(r,g,b);if(o.d)S.h=o.h;S.s=o.s;S.v=o.v;if(a!=null)S.a=a;up()}
+function toast(m){var t=$("cpToast");t.textContent=m;t.classList.add("show");clearTimeout(toast.t);toast.t=setTimeout(function(){t.classList.remove("show")},1400)}
+function copy(v){var done=function(){toast("Copied "+v)};if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(v).then(done,function(){old(v);done()})}else{old(v);done()}}
+function old(v){var a=document.createElement("textarea");a.value=v;document.body.appendChild(a);a.select();try{document.execCommand("copy")}catch(e){}a.remove()}
+function drawSV(){var c=$("cpCv"),x=c.getContext("2d"),w=c.width,h=c.height;x.fillStyle="hsl("+S.h+",100%,50%)";x.fillRect(0,0,w,h);var a=x.createLinearGradient(0,0,w,0);a.addColorStop(0,"#fff");a.addColorStop(1,"rgba(255,255,255,0)");x.fillStyle=a;x.fillRect(0,0,w,h);a=x.createLinearGradient(0,0,0,h);a.addColorStop(0,"rgba(0,0,0,0)");a.addColorStop(1,"#000");x.fillStyle=a;x.fillRect(0,0,w,h)}
+function near(r,g,b){var best,bd=1e9;NM.forEach(function(n){var R=n[1]>>16,G=n[1]>>8&255,B=n[1]&255,d=(R-r)*(R-r)+(G-g)*(G-g)+(B-b)*(B-b);if(d<bd){bd=d;best=n[0]}});return best}
+function sw(el,list,fn){el.innerHTML="";list.forEach(function(h){var b=document.createElement("button");b.type="button";b.style.background=h;b.setAttribute("aria-label","Use "+h);b.title=h;b.onclick=function(){fn(h)};el.appendChild(b)})}
+function use(h){var p=parse(h);setRGB(p[0],p[1],p[2])}
+function sav(){try{return JSON.parse(localStorage.getItem("ycSaved")||"[]")}catch(e){return[]}}
+function drawSaved(){var l=sav();$("cpEmpty").hidden=l.length>0;sw($("cpSav"),l,function(h){var p=parse(h);setRGB(p[0],p[1],p[2],1)})}
+function up(){
+R=h2r(S.h,S.s,S.v);var r=R[0],g=R[1],b=R[2],H=hex(r,g,b),A=f(S.a,2),al=S.a<1?Math.round(S.a*255).toString(16).padStart(2,"0"):"";
+var o=r2h(r,g,b),L=hsl(r,g,b),k=1-o.v,cy=k<1?(1-r/255-k)/(1-k):0,mg=k<1?(1-g/255-k)/(1-k):0,ye=k<1?(1-b/255-k)/(1-k):0;
+var st=$("cpCv").closest(".cp").style;st.setProperty("--c",H);st.setProperty("--cc",S.a<1?"rgba("+r+","+g+","+b+","+A+")":H);
+$("cpPv").style.setProperty("--cc",S.a<1?"rgba("+r+","+g+","+b+","+A+")":H);
+drawSV();$("cpHd").style.left=S.s*100+"%";$("cpHd").style.top=(1-S.v)*100+"%";$("cpH").value=S.h;$("cpA").value=S.a*100;
+if(document.activeElement!==$("cpIn"))$("cpIn").value=H.toUpperCase()+al.toUpperCase();
+$("cpNm").innerHTML="Closest basic name: <b>"+near(r,g,b)+"</b>";
+var rows=[["HEX",H.toUpperCase()+al.toUpperCase()],["RGB",S.a<1?"rgba("+r+", "+g+", "+b+", "+A+")":"rgb("+r+", "+g+", "+b+")"],["HSL","hsl("+L[0]+", "+L[1]+"%, "+L[2]+"%)"],["HSV","hsv("+f(o.h)+", "+f(o.s*100)+"%, "+f(o.v*100)+"%)"],["HWB","hwb("+f(o.h)+" "+f((1-o.s)*o.v*100)+"% "+f(k*100)+"%)"],["CMYK","cmyk("+f(cy*100)+"%, "+f(mg*100)+"%, "+f(ye*100)+"%, "+f(k*100)+"%)"],["LAB","lab("+lab(r,g,b).join(" ")+")"],["OKLCH",oklch(r,g,b)],["CSS","color: "+H+";"],["Decimal",String(r*65536+g*256+b)]];
+var V=$("cpVals");V.innerHTML="";rows.forEach(function(x){var bt=document.createElement("button");bt.type="button";bt.innerHTML="<span>"+x[0]+"</span><b></b>";bt.lastChild.textContent=x[1];bt.onclick=function(){copy(x[1])};V.appendChild(bt)});
+var hs=[["Complementary",[0,180]],["Analogous",[-30,0,30]],["Triadic",[0,120,240]],["Split complementary",[0,150,210]],["Tetradic",[0,90,180,270]]],M=$("cpHm");M.innerHTML="";
+function grp(n,cols){var d=document.createElement("div"),p=document.createElement("p"),s=document.createElement("div");d.className="cp-hg";p.textContent=n;s.className="cp-sw";d.append(p,s);M.appendChild(d);sw(s,cols,use)}
+hs.forEach(function(x){grp(x[0],x[1].map(function(a){var c=hsl2rgb(L[0]+a,L[1]/100,L[2]/100);return hex(c[0],c[1],c[2])}))});
+grp("Monochrome",[15,30,45,60,75,90].map(function(l){var c=hsl2rgb(L[0],L[1]/100,l/100);return hex(c[0],c[1],c[2])}));
+var l1=lum(r,g,b),C=$("cpCt");C.innerHTML="";
+[["#fff",1.05/(l1+.05),"White text"],["#000",(l1+.05)/.05,"Black text"]].forEach(function(x){var e=document.createElement("div"),n=x[1];e.style.background=H;e.style.color=x[0];e.innerHTML="<strong>"+f(n,2)+":1</strong>"+x[2]+"<div class=cp-bd><i class="+(n>=4.5?"ok":"")+">AA</i><i class="+(n>=7?"ok":"")+">AAA</i><i class="+(n>=3?"ok":"")+">AA large</i></div>";C.appendChild(e)});
+history.replaceState(null,"","#"+H.slice(1))}
+var sv=$("cpSv");
+function mv(e){var b=sv.getBoundingClientRect();S.s=mn(1,mx(0,(e.clientX-b.left)/b.width));S.v=1-mn(1,mx(0,(e.clientY-b.top)/b.height));up()}
+sv.addEventListener("pointerdown",function(e){sv.setPointerCapture(e.pointerId);mv(e);sv.onpointermove=mv});
+sv.addEventListener("pointerup",function(){sv.onpointermove=null});
+$("cpH").oninput=function(){S.h=+this.value;up()};$("cpA").oninput=function(){S.a=this.value/100;up()};
+function fromIn(){var p=parse($("cpIn").value);if(p)setRGB(p[0],p[1],p[2],p.length>3?p[3]:S.a);else toast("Color not recognised")}
+$("cpIn").onchange=fromIn;$("cpIn").onkeydown=function(e){if(e.key=="Enter")fromIn()};
+$("cpRnd").onclick=function(){S.h=Math.random()*360;S.s=.4+Math.random()*.6;S.v=.5+Math.random()*.5;up()};
+$("cpLink").onclick=function(){copy(location.href)};
+$("cpSave").onclick=function(){var l=sav(),h=hex(R[0],R[1],R[2]);l=[h].concat(l.filter(function(x){return x!=h})).slice(0,24);try{localStorage.setItem("ycSaved",JSON.stringify(l))}catch(e){}drawSaved();toast("Saved "+h)};
+if(window.EyeDropper){$("cpEye").hidden=false;$("cpEye").onclick=function(){new EyeDropper().open().then(function(x){var p=parse(x.sRGBHex);setRGB(p[0],p[1],p[2],1)}).catch(function(){})}}
+var hm=location.hash.slice(1),pp=/^[0-9a-f]{6}$/i.test(hm)?parse("#"+hm):null;if(pp)setRGB(pp[0],pp[1],pp[2]);else up();
+drawSaved();
+
+/* SEO: structured data and canonical built from the visible page so text and markup always match */
+(function(){var o=location.origin,p=location.pathname,
+ q=[].map.call(document.querySelectorAll('.seo details'),function(d){return{'@type':'Question',name:d.querySelector('summary').textContent,acceptedAnswer:{'@type':'Answer',text:d.querySelector('p').textContent}}}),
+ g={'@context':'https://schema.org','@graph':[
+  {'@type':'BreadcrumbList',itemListElement:[['Home','/'],['Tools','/#tools'],['Color Picker & Converters','/color-picker-converters/'],['Color Picker',p]].map(function(x,i){return{'@type':'ListItem',position:i+1,name:x[0],item:o+x[1]}})},
+  {'@type':'WebApplication',name:'Color Picker & Converter',url:o+p,applicationCategory:'DesignApplication',operatingSystem:'Any',browserRequirements:'Requires JavaScript',description:'Free online color picker and converter for HEX, RGB, HSL, HSV, HWB, CMYK, LAB and OKLCH with contrast checker and matching palettes.',offers:{'@type':'Offer',price:'0',priceCurrency:'USD'}},
+  {'@type':'FAQPage',mainEntity:q}]},
+ s=document.createElement('script'),l=document.createElement('link');
+ s.type='application/ld+json';s.text=JSON.stringify(g);document.head.appendChild(s);
+ l.rel='canonical';l.href=o+p;document.head.appendChild(l)})();
+})();
+</script>
+</body>
+</html>
