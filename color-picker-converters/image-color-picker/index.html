@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Image Color Picker &amp; Palette Extractor: Get Colors from Photo | YourColorsss</title>
+<meta name="description" content="Free image color picker and palette extractor. Upload a photo, tap to get the exact HEX, RGB, HSL and CMYK, or extract the dominant colors as a palette. Export CSS, JSON or PNG. Private, runs in your browser.">
+<meta name="keywords" content="image color picker, color picker from image, extract colors from image, color palette from image, photo color picker, get hex code from image, dominant color extractor, palette generator from photo, image eyedropper, online eyedropper tool, find color in picture, hex from image, rgb from image">
+<meta property="og:title" content="Image Color Picker &amp; Palette Extractor | YourColorsss">
+<meta property="og:description" content="Pick exact colors from any photo with a zoom loupe and extract a dominant color palette. Export CSS, JSON or PNG.">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="YourColorsss">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Image Color Picker &amp; Palette Extractor | YourColorsss">
+<meta name="twitter:description" content="Free tool to pick colors from a photo and extract its palette. Nothing is uploaded.">
+<meta name="theme-color" content="#5b3df5">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/css/styles.css">
+<style>
+[hidden]{display:none!important}
+.ip{--a:#5b3df5;--b:rgba(128,128,128,.32);--f:rgba(128,128,128,.09);display:block}
+.ip *{box-sizing:border-box}
+.ip-card{border:1px solid var(--b);background:var(--f);border-radius:16px;padding:16px;margin-bottom:18px}
+.ip-card h2{font-size:1.05rem;margin:0 0 12px}
+.ip-two{display:grid;gap:18px}
+@media(min-width:800px){.ip-two{grid-template-columns:repeat(2,minmax(0,1fr));align-items:start}.ip-two .ip-card{margin:0}}
+.ip-drop{display:grid;place-items:center;text-align:center;gap:6px;min-height:200px;border:2px dashed var(--b);border-radius:14px;padding:20px;cursor:pointer}
+.ip-drop.drag{border-color:var(--a);background:var(--f)}
+.ip-drop b{font-size:1.05rem}.ip-drop span{opacity:.75;font-size:.88rem}
+.ip-st{position:relative;display:flex;justify-content:center;border-radius:12px;overflow:hidden;background:var(--f)}
+.ip-st canvas{max-width:100%;height:auto;max-height:70vh;display:block;touch-action:none;cursor:crosshair}
+.ip-lp{position:absolute;width:88px;height:88px;border-radius:50%;border:3px solid #fff;box-shadow:0 0 0 1px #0008,0 4px 14px #0006;pointer-events:none;overflow:hidden;display:none}
+.ip-lp canvas{width:100%;height:100%;display:block}
+.ip-row{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-top:12px}
+.ip-btn{appearance:none;border:1px solid var(--b);background:var(--f);color:inherit;font:inherit;font-size:.9rem;padding:9px 14px;border-radius:10px;cursor:pointer;line-height:1.2;touch-action:manipulation;text-decoration:none;display:inline-block}
+.ip-btn:hover,.ip-btn:focus-visible,.ip select:focus-visible{border-color:var(--a);outline:2px solid var(--a);outline-offset:1px}
+.ip-btn.p{background:var(--a);border-color:var(--a);color:#fff}
+.ip select{font:inherit;font-size:.9rem;color:inherit;background:var(--f);border:1px solid var(--b);border-radius:10px;padding:8px 10px}
+.ip-big{height:90px;border-radius:12px;border:1px solid var(--b);display:flex;align-items:flex-end;padding:10px;font-weight:700;font-size:1.1rem}
+.ip-v{margin-top:6px}
+.ip-v button{display:flex;justify-content:space-between;gap:12px;width:100%;padding:10px 2px;border:0;border-bottom:1px solid var(--b);background:none;color:inherit;font:inherit;font-size:.92rem;text-align:left;cursor:pointer}
+.ip-v button:last-child{border:0}.ip-v span{opacity:.65;flex:none}.ip-v b{font-weight:600;word-break:break-all;text-align:right}
+.ip-pg{display:grid;grid-template-columns:repeat(auto-fill,minmax(92px,1fr));gap:8px}
+.ip-ps{appearance:none;height:70px;border-radius:12px;border:1px solid var(--b);font:600 .78rem system-ui,sans-serif;text-align:left;padding:8px;display:flex;flex-direction:column;justify-content:flex-end;cursor:pointer}
+.ip-ps small{font-weight:400;opacity:.85}
+.ip-ps:focus-visible{outline:3px solid var(--a);outline-offset:2px}
+.ip-sw{display:flex;flex-wrap:wrap;gap:8px}
+.ip-sw button{width:46px;height:46px;border-radius:10px;border:1px solid var(--b);cursor:pointer}
+.ip-note{font-size:.8rem;opacity:.75;margin:10px 0 0}
+#ipToast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%) translateY(20px);background:#111;color:#fff;padding:10px 16px;border-radius:10px;font-size:.88rem;opacity:0;pointer-events:none;transition:.2s;z-index:99;max-width:90vw;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+#ipToast.show{opacity:1;transform:translateX(-50%)}
+.seo{padding:40px 0 56px}.seo h2{margin:0 0 12px}.seo p{margin:0 0 14px;max-width:70ch}.seo h3{margin:28px 0 8px}.seo ol{max-width:70ch;padding-left:20px;margin:0 0 14px}.seo details{border-bottom:1px solid rgba(128,128,128,.28);padding:14px 0;max-width:70ch}.seo summary{cursor:pointer;font-weight:600}.seo details p{margin:10px 0 0}
+@media(prefers-reduced-motion:reduce){#ipToast{transition:none}}
+</style>
+<script src="/js/components.js" defer></script>
+</head>
+<body>
+<dc-header></dc-header>
+<main>
+<section class="ph"><div class="w">
+<nav class="crumb" aria-label="Breadcrumb"><a href="/">Home</a><span aria-hidden="true">/</span><a href="/#tools">Tools</a><span aria-hidden="true">/</span><a href="/color-picker-converters/">Color Picker &amp; Converters</a><span aria-hidden="true">/</span><span aria-current="page">Image Color Picker</span></nav>
+<p class="eyebrow">Tap a photo, get the color</p>
+<h1>Image Color Picker and Palette Extractor</h1>
+<p class="lead">Upload any photo, tap a spot to get its exact color code, or let the tool extract the main colors as a palette. Copy HEX, RGB, HSL and CMYK, or export your palette as CSS, JSON or PNG.</p>
+</div></section>
+
+<section class="pt"><div class="w">
+<div class="ip">
+<div class="ip-card">
+<h2>Your image</h2>
+<label class="ip-drop" id="ipDrop"><b>Choose a photo</b><span>Tap to upload or take a photo. You can also drop or paste an image.</span><input type="file" id="ipF" accept="image/*" hidden></label>
+<div id="ipStage" hidden>
+<div class="ip-st" id="ipSt"><canvas id="ipCv" role="img" aria-label="Your image. Tap or drag to pick a color"></canvas><div class="ip-lp" id="ipLp"><canvas id="ipLc" width="88" height="88"></canvas></div></div>
+<div class="ip-row"><button class="ip-btn p" id="ipChg" type="button">Change image</button></div>
+</div>
+<div class="ip-row" id="ipDemoRow"><button class="ip-btn" id="ipDemo" type="button">Try a demo image</button></div>
+<p class="ip-note">Tap or drag on the image. A zoom circle shows the exact pixel. Your photo is processed in your browser and never uploaded.</p>
+</div>
+
+<div class="ip-two">
+<div class="ip-card">
+<h2>Picked color</h2>
+<div class="ip-big" id="ipBig">Tap the image</div>
+<div class="ip-v" id="ipV"></div>
+<div class="ip-row"><a class="ip-btn" id="ipOpen" href="/color-picker-converters/color-picker/">Open in Color Picker</a></div>
+<h2 style="margin-top:18px">Colors you picked</h2>
+<div class="ip-sw" id="ipPk"></div>
+<div class="ip-row"><button class="ip-btn" id="ipPkCopy" type="button">Copy all HEX</button><button class="ip-btn" id="ipPkClr" type="button">Clear</button></div>
+</div>
+
+<div class="ip-card">
+<h2>Extracted palette</h2>
+<div class="ip-row" style="margin:0 0 12px"><label for="ipK">Colors</label><select id="ipK"><option>4</option><option>5</option><option selected>6</option><option>8</option><option>10</option></select></div>
+<div class="ip-pg" id="ipPg"></div>
+<p class="ip-note">Sorted by how much of the image each color covers. Tap a color to copy its HEX.</p>
+<div class="ip-row"><button class="ip-btn p" id="eCss" type="button">Copy CSS</button><button class="ip-btn" id="eJson" type="button">Copy JSON</button><button class="ip-btn" id="eHex" type="button">Copy HEX list</button><button class="ip-btn" id="ePng" type="button">Download PNG</button></div>
+</div>
+</div>
+</div>
+<div style="text-align:center;margin-top:18px"><a class="btn" href="/color-picker-converters/">← Back to Color Picker &amp; Converters</a></div>
+<div id="ipToast" role="status" aria-live="polite"></div>
+</div></section>
+
+<section class="seo"><div class="w">
+<h2>Free image color picker</h2>
+<p>An image color picker finds the exact color of any pixel in a photo, screenshot or logo. Upload an image, tap the spot you want, and get its HEX, RGB, HSL, CMYK and OKLCH codes ready to paste into CSS, Figma, Canva or Photoshop. A zoom circle follows your finger so you can choose a single pixel with confidence.</p>
+<p>The palette extractor groups similar colors in your image and shows the main ones with their share of the picture. It is a quick way to build a color scheme from a product photo, a painting, a brand image or a landscape, then export it as CSS variables, JSON or a PNG strip.</p>
+<h3>How to get a color from an image</h3>
+<ol><li>Choose a photo, or drop or paste one.</li><li>Tap or drag on the image and watch the zoom circle.</li><li>Tap any code to copy it, or open the color in the Color Picker for more formats.</li><li>Use the extracted palette to copy or download the main colors.</li></ol>
+<h3>Frequently asked questions</h3>
+<details><summary>How do I get the HEX code of a color in an image?</summary><p>Upload the image and tap the spot you want. The HEX code appears right away and you can copy it with one tap.</p></details>
+<details><summary>How does the palette extractor work?</summary><p>It samples the pixels of your image and groups similar colors together. The center of each group becomes a palette color, and the groups are sorted by how much of the image they cover.</p></details>
+<details><summary>Can I pick a color from a screenshot or logo?</summary><p>Yes. Any image your device can open works, including screenshots, logos, photos and scans. For the most accurate result use the original image rather than a heavily compressed copy.</p></details>
+<details><summary>Why does the color look different from what I see on screen?</summary><p>Photos can include color profiles and compression, and displays show colors differently. The tool reads the pixel value exactly as your browser draws it.</p></details>
+<details><summary>Is my photo uploaded anywhere?</summary><p>No. The image is processed entirely in your browser, so it never leaves your device.</p></details>
+<details><summary>What can I do with the exported palette?</summary><p>Copy CSS variables for your website, JSON for an app or design tool, a simple HEX list, or download a PNG strip to share with your team.</p></details>
+</div></section>
+</main>
+<dc-footer></dc-footer>
+
+<script>
+(function(){
+var $=function(i){return document.getElementById(i)},mx=Math.max,mn=Math.min,cv=$("ipCv"),cx=cv.getContext("2d",{willReadFrequently:true}),lc=$("ipLc").getContext("2d"),PAL=[],PK=[],CUR=null;
+function f(n,d){return+n.toFixed(d||0)}
+function hex(r,g,b){return"#"+[r,g,b].map(function(x){return x.toString(16).padStart(2,"0")}).join("").toUpperCase()}
+function lin(c){c/=255;return c<=.04045?c/12.92:Math.pow((c+.055)/1.055,2.4)}
+function lum(c){return .2126*lin(c[0])+.7152*lin(c[1])+.0722*lin(c[2])}
+function ink(c){return lum(c)>.4?"#000":"#fff"}
+function hsl(r,g,b){r/=255;g/=255;b/=255;var m=mx(r,g,b),n=mn(r,g,b),d=m-n,l=(m+n)/2,h=0,s=d?d/(1-Math.abs(2*l-1)):0;if(d){h=m==r?((g-b)/d)%6:m==g?(b-r)/d+2:(r-g)/d+4;h=(h*60+360)%360}return[f(h),f(s*100),f(l*100)]}
+function cmyk(r,g,b){var k=1-mx(r,g,b)/255;if(k>=1)return[0,0,0,100];return[(1-r/255-k)/(1-k),(1-g/255-k)/(1-k),(1-b/255-k)/(1-k),k].map(function(x){return f(x*100)})}
+function oklch(r,g,b){var R=lin(r),G=lin(g),B=lin(b),l=Math.cbrt(.4122214708*R+.5363325363*G+.0514459929*B),m=Math.cbrt(.2119034982*R+.6806995451*G+.1073969566*B),s=Math.cbrt(.0883024619*R+.2817188376*G+.6299787005*B),L=.2104542553*l+.793617785*m-.0040720468*s,A=1.9779984951*l-2.428592205*m+.4505937099*s,Bb=.0259040371*l+.7827717662*m-.808675766*s,C=Math.hypot(A,Bb),H=(Math.atan2(Bb,A)*180/Math.PI+360)%360;return"oklch("+f(L*100,1)+"% "+f(C,3)+" "+f(C<.002?0:H,1)+")"}
+function toast(m){var t=$("ipToast");t.textContent=m;t.classList.add("show");clearTimeout(toast.t);toast.t=setTimeout(function(){t.classList.remove("show")},1400)}
+function copy(v,m){var ok=function(){toast(m||"Copied "+v)},o=function(){var a=document.createElement("textarea");a.value=v;document.body.appendChild(a);a.select();try{document.execCommand("copy")}catch(e){}a.remove();ok()};if(navigator.clipboard&&navigator.clipboard.writeText)navigator.clipboard.writeText(v).then(ok,o);else o()}
+function px(h){return[parseInt(h.slice(1,3),16),parseInt(h.slice(3,5),16),parseInt(h.slice(5,7),16)]}
+/* load */
+function draw(im,w,h){var s=mn(1,1400/mx(w,h));cv.width=Math.round(w*s);cv.height=Math.round(h*s);cx.drawImage(im,0,0,cv.width,cv.height);$("ipDrop").hidden=true;$("ipDemoRow").hidden=true;$("ipStage").hidden=false;extract();var d=cx.getImageData(cv.width>>1,cv.height>>1,1,1).data;show([d[0],d[1],d[2]])}
+function loadFile(fl){if(!fl||!/^image\//.test(fl.type)){toast("Please choose an image file");return}var im=new Image();im.onload=function(){draw(im,im.width,im.height);URL.revokeObjectURL(im.src)};im.onerror=function(){toast("This image could not be opened")};im.src=URL.createObjectURL(fl)}
+$("ipF").onchange=function(){loadFile(this.files[0]);this.value=""};
+$("ipChg").onclick=function(){$("ipF").click()};
+var dr=$("ipDrop");["dragover","dragenter"].forEach(function(e){document.addEventListener(e,function(ev){ev.preventDefault();dr.classList.add("drag")})});["dragleave","drop"].forEach(function(e){document.addEventListener(e,function(){dr.classList.remove("drag")})});
+document.addEventListener("drop",function(e){e.preventDefault();loadFile(e.dataTransfer.files[0])});
+document.addEventListener("paste",function(e){var it=[].filter.call(e.clipboardData?e.clipboardData.items:[],function(i){return/^image\//.test(i.type)})[0];if(it)loadFile(it.getAsFile())});
+$("ipDemo").onclick=function(){var c=document.createElement("canvas");c.width=800;c.height=500;var x=c.getContext("2d"),g=x.createLinearGradient(0,0,0,500);g.addColorStop(0,"#1b1f5e");g.addColorStop(.45,"#c2410c");g.addColorStop(.7,"#fbbf24");g.addColorStop(1,"#fde68a");x.fillStyle=g;x.fillRect(0,0,800,500);x.fillStyle="#fff7d6";x.beginPath();x.arc(560,300,60,0,7);x.fill();x.fillStyle="#2a1b4d";x.beginPath();x.moveTo(0,500);x.lineTo(0,380);x.lineTo(220,300);x.lineTo(420,390);x.lineTo(640,330);x.lineTo(800,400);x.lineTo(800,500);x.fill();x.fillStyle="#0f766e";x.beginPath();x.moveTo(0,500);x.lineTo(0,450);x.lineTo(300,420);x.lineTo(800,460);x.lineTo(800,500);x.fill();draw(c,800,500)};
+/* pick */
+function at(e){var b=cv.getBoundingClientRect();return[mx(0,mn(cv.width-1,Math.floor((e.clientX-b.left)*cv.width/b.width))),mx(0,mn(cv.height-1,Math.floor((e.clientY-b.top)*cv.height/b.height)))]}
+function loupe(e,p){var lp=$("ipLp"),sb=$("ipSt").getBoundingClientRect(),lx=e.clientX-sb.left,ly=e.clientY-sb.top;lp.style.display="block";lp.style.left=mx(0,mn(sb.width-88,lx-44))+"px";lp.style.top=(ly-120<0?ly+34:ly-120)+"px";lc.imageSmoothingEnabled=false;lc.clearRect(0,0,88,88);lc.drawImage(cv,p[0]-5,p[1]-5,11,11,0,0,88,88);lc.strokeStyle="#fff";lc.lineWidth=2;lc.strokeRect(40,40,8,8);lc.strokeStyle="#000";lc.lineWidth=1;lc.strokeRect(39,39,10,10)}
+function mv(e){var p=at(e),d=cx.getImageData(p[0],p[1],1,1).data;loupe(e,p);show([d[0],d[1],d[2]])}
+cv.addEventListener("pointerdown",function(e){cv.setPointerCapture(e.pointerId);mv(e);cv.onpointermove=mv});
+cv.addEventListener("pointerup",function(){cv.onpointermove=null;$("ipLp").style.display="none";if(CUR)addPick(hex(CUR[0],CUR[1],CUR[2]))});
+cv.addEventListener("pointercancel",function(){cv.onpointermove=null;$("ipLp").style.display="none"});
+function show(c){CUR=c;var h=hex(c[0],c[1],c[2]),L=hsl(c[0],c[1],c[2]),K=cmyk(c[0],c[1],c[2]),b=$("ipBig");b.style.background=h;b.style.color=ink(c);b.textContent=h;$("ipOpen").href="/color-picker-converters/color-picker/#"+h.slice(1);
+var rows=[["HEX",h],["RGB","rgb("+c.join(", ")+")"],["HSL","hsl("+L[0]+", "+L[1]+"%, "+L[2]+"%)"],["CMYK","cmyk("+K.join("%, ")+"%)"],["OKLCH",oklch(c[0],c[1],c[2])]],V=$("ipV");V.innerHTML="";rows.forEach(function(x){var t=document.createElement("button");t.type="button";t.innerHTML="<span>"+x[0]+"</span><b></b>";t.lastChild.textContent=x[1];t.onclick=function(){copy(x[1])};V.appendChild(t)})}
+function sw(el,list,fn){el.innerHTML="";list.forEach(function(h){var b=document.createElement("button");b.type="button";b.style.background=h;b.title=h;b.setAttribute("aria-label","Use "+h);b.onclick=function(){fn(h)};el.appendChild(b)})}
+function addPick(h){PK=[h].concat(PK.filter(function(x){return x!=h})).slice(0,16);sw($("ipPk"),PK,function(x){show(px(x))})}
+$("ipPkCopy").onclick=function(){if(PK.length)copy(PK.join(", "),"Copied "+PK.length+" colors");else toast("Tap the image to pick colors first")};
+$("ipPkClr").onclick=function(){PK=[];sw($("ipPk"),[],0)};
+/* palette (k-means) */
+function extract(){var k=+$("ipK").value,t=document.createElement("canvas"),s=mn(1,110/mx(cv.width,cv.height));t.width=mx(1,Math.round(cv.width*s));t.height=mx(1,Math.round(cv.height*s));var x=t.getContext("2d");x.drawImage(cv,0,0,t.width,t.height);var d=x.getImageData(0,0,t.width,t.height).data,P=[],i,j;
+for(i=0;i<d.length;i+=4)if(d[i+3]>125)P.push([d[i],d[i+1],d[i+2]]);if(!P.length)return;
+function ds(a,b){var r=a[0]-b[0],g=a[1]-b[1],bl=a[2]-b[2];return r*r+g*g+bl*bl}
+var C=[P[P.length>>1].slice()],md=P.map(function(p){return ds(p,C[0])});
+while(C.length<k){var bi=0;for(i=1;i<P.length;i++)if(md[i]>md[bi])bi=i;if(md[bi]==0)break;C.push(P[bi].slice());for(i=0;i<P.length;i++)md[i]=mn(md[i],ds(P[i],C[C.length-1]))}
+var cnt,sm,it;for(it=0;it<8;it++){cnt=C.map(function(){return 0});sm=C.map(function(){return[0,0,0]});for(i=0;i<P.length;i++){var b=0,bd=1e9;for(j=0;j<C.length;j++){var dd=ds(P[i],C[j]);if(dd<bd){bd=dd;b=j}}cnt[b]++;sm[b][0]+=P[i][0];sm[b][1]+=P[i][1];sm[b][2]+=P[i][2]}
+for(j=0;j<C.length;j++)if(cnt[j])C[j]=[Math.round(sm[j][0]/cnt[j]),Math.round(sm[j][1]/cnt[j]),Math.round(sm[j][2]/cnt[j])]}
+PAL=C.map(function(c,j){return{c:c,h:hex(c[0],c[1],c[2]),p:cnt[j]/P.length}}).filter(function(o){return o.p>0}).sort(function(a,b){return b.p-a.p});
+var G=$("ipPg");G.innerHTML="";PAL.forEach(function(o){var b=document.createElement("button");b.type="button";b.className="ip-ps";b.style.background=o.h;b.style.color=ink(o.c);b.innerHTML=o.h+"<small>"+(o.p<.01?"<1":f(o.p*100))+"%</small>";b.onclick=function(){copy(o.h);show(o.c)};G.appendChild(b)})}
+$("ipK").onchange=function(){if(!$("ipStage").hidden)extract()};
+/* export */
+function need(){if(!PAL.length){toast("Add an image first");return false}return true}
+$("eCss").onclick=function(){if(need())copy(":root{\n"+PAL.map(function(o,i){return"  --color-"+(i+1)+": "+o.h.toLowerCase()+";"}).join("\n")+"\n}","Copied CSS variables")};
+$("eJson").onclick=function(){if(need())copy(JSON.stringify(PAL.map(function(o){return{hex:o.h,rgb:o.c,share:f(o.p*100,1)}}),null,2),"Copied JSON")};
+$("eHex").onclick=function(){if(need())copy(PAL.map(function(o){return o.h}).join("\n"),"Copied HEX list")};
+$("ePng").onclick=function(){if(!need())return;var c=document.createElement("canvas"),w=1000,h=240,x,i;c.width=w;c.height=h;x=c.getContext("2d");var sw=w/PAL.length;PAL.forEach(function(o,i){x.fillStyle=o.h;x.fillRect(i*sw,0,sw+1,h);x.fillStyle=ink(o.c);x.font="600 "+mn(28,sw/5)+"px system-ui,sans-serif";x.textAlign="center";x.fillText(o.h,i*sw+sw/2,h-24)});c.toBlob(function(b){var a=document.createElement("a");a.href=URL.createObjectURL(b);a.download="palette.png";document.body.appendChild(a);a.click();a.remove();setTimeout(function(){URL.revokeObjectURL(a.href)},2000);toast("Palette downloaded")})};
+
+/* SEO: structured data and canonical built from the visible page so text and markup always match */
+(function(){var o=location.origin,p=location.pathname,
+ q=[].map.call(document.querySelectorAll('.seo details'),function(d){return{'@type':'Question',name:d.querySelector('summary').textContent,acceptedAnswer:{'@type':'Answer',text:d.querySelector('p').textContent}}}),
+ g={'@context':'https://schema.org','@graph':[
+  {'@type':'BreadcrumbList',itemListElement:[['Home','/'],['Tools','/#tools'],['Color Picker & Converters','/color-picker-converters/'],['Image Color Picker',p]].map(function(x,i){return{'@type':'ListItem',position:i+1,name:x[0],item:o+x[1]}})},
+  {'@type':'WebApplication',name:'Image Color Picker & Palette Extractor',url:o+p,applicationCategory:'DesignApplication',operatingSystem:'Any',browserRequirements:'Requires JavaScript',description:'Free image color picker and palette extractor. Pick exact colors from a photo and export the dominant colors as CSS, JSON or PNG.',offers:{'@type':'Offer',price:'0',priceCurrency:'USD'}},
+  {'@type':'FAQPage',mainEntity:q}]},
+ s=document.createElement('script'),l=document.createElement('link');
+ s.type='application/ld+json';s.text=JSON.stringify(g);document.head.appendChild(s);
+ l.rel='canonical';l.href=o+p;document.head.appendChild(l)})();
+})();
+</script>
+</body>
+</html>
