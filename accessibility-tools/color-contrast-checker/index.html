@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Color Contrast Checker: WCAG AA &amp; AAA Contrast Ratio Tester | YourColorsss</title>
+<meta name="description" content="Free color contrast checker for WCAG 2.2. Test text and background colors for AA and AAA, get the contrast ratio and APCA score, and auto-fix failing colors. Private, runs in your browser.">
+<meta name="keywords" content="color contrast checker, wcag contrast checker, contrast ratio calculator, wcag aa aaa, accessible color combinations, text contrast tester, color accessibility checker, apca contrast, 4.5:1 contrast ratio, non-text contrast, web accessibility color, contrast ratio checker">
+<meta property="og:title" content="Color Contrast Checker: WCAG AA &amp; AAA | YourColorsss">
+<meta property="og:description" content="Check text and background contrast against WCAG AA and AAA, see the APCA score and get accessible color fixes.">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="YourColorsss">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Color Contrast Checker | YourColorsss">
+<meta name="twitter:description" content="Free WCAG contrast ratio checker with APCA score and one-tap accessible color fixes.">
+<meta name="theme-color" content="#5b3df5">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/css/styles.css">
+<style>
+[hidden]{display:none!important}
+.cc{--a:#5b3df5;--b:rgba(128,128,128,.32);--f:rgba(128,128,128,.09);display:block}
+.cc *{box-sizing:border-box}
+.cc-grid{display:grid;gap:18px;margin-bottom:18px}
+@media(min-width:800px){.cc-grid{grid-template-columns:repeat(2,minmax(0,1fr));align-items:start}}
+.cc-card{border:1px solid var(--b);background:var(--f);border-radius:16px;padding:16px}
+.cc-card h2{font-size:1.05rem;margin:0 0 12px}
+.cc-fld{margin-bottom:14px}
+.cc-fld label{display:block;font-weight:600;font-size:.9rem;margin-bottom:6px}
+.cc-in{display:flex;gap:8px}
+.cc input[type=color]{width:52px;height:46px;padding:2px;border:1px solid var(--b);border-radius:10px;background:var(--f);cursor:pointer;flex:none}
+.cc input[type=text]{flex:1;min-width:0;font:inherit;font-size:1rem;color:inherit;background:var(--f);border:1px solid var(--b);border-radius:10px;padding:10px 12px}
+.cc input:focus-visible,.cc-btn:focus-visible,.cc-ch:focus-visible,.cc-sg:focus-visible{outline:2px solid var(--a);outline-offset:2px}
+.cc-row{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.cc-btn{appearance:none;border:1px solid var(--b);background:var(--f);color:inherit;font:inherit;font-size:.9rem;padding:9px 14px;border-radius:10px;cursor:pointer;line-height:1.2;touch-action:manipulation}
+.cc-btn:hover{border-color:var(--a)}
+.cc-btn.p{background:var(--a);border-color:var(--a);color:#fff}
+.cc-ch{appearance:none;display:inline-flex;align-items:center;gap:7px;border:1px solid var(--b);background:var(--f);color:inherit;font:inherit;font-size:.82rem;padding:5px 10px 5px 6px;border-radius:99px;cursor:pointer}
+.cc-ch i{width:20px;height:20px;border-radius:50%;border:1px solid var(--b);display:grid;place-items:center;font:700 .62rem system-ui,sans-serif;font-style:normal}
+.cc-big{font-size:clamp(2.2rem,9vw,3.2rem);font-weight:800;line-height:1.05}
+.cc-ver{margin:4px 0 14px;font-weight:600}
+.cc-t{width:100%;border-collapse:collapse;font-size:.92rem}
+.cc-t td{padding:9px 4px;border-bottom:1px solid var(--b)}
+.cc-t tr:last-child td{border:0}
+.cc-t td:last-child{text-align:right;white-space:nowrap}
+.cc-t small{opacity:.7}
+.cc-bd{display:inline-block;font-weight:700;font-size:.8rem;padding:3px 10px;border-radius:99px;border:1px solid}
+.cc-bd.ok{background:rgba(22,163,74,.18);border-color:#16a34a}
+.cc-bd.no{background:rgba(220,38,38,.16);border-color:#dc2626}
+.cc-pv{border-radius:12px;padding:22px 18px;border:1px solid var(--b);background:var(--bg);color:var(--fg)}
+.cc-pv h3{font-size:1.5rem;font-weight:700;margin:0 0 8px;color:inherit}
+.cc-pv p{margin:0 0 10px;color:inherit}
+.cc-pv .sm{font-size:.8rem}
+.cc-pv button{font:inherit;font-weight:600;padding:9px 18px;border-radius:10px;background:transparent;color:inherit;border:2px solid currentColor;margin-top:6px}
+.cc-sg-g{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:8px;margin-bottom:6px}
+.cc-sg{appearance:none;border:1px solid var(--b);border-radius:12px;padding:10px;text-align:left;cursor:pointer;font:inherit;font-size:.82rem;line-height:1.3}
+.cc-sg b{display:block;font-size:1.1rem}
+.cc-sg.off{opacity:.55;cursor:default}
+.cc-h{font-size:.85rem;font-weight:600;margin:12px 0 6px}
+.cc-note{font-size:.8rem;opacity:.75;margin:10px 0 0}
+.cc-full{grid-column:1/-1}
+#ccToast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%) translateY(20px);background:#111;color:#fff;padding:10px 16px;border-radius:10px;font-size:.88rem;opacity:0;pointer-events:none;transition:.2s;z-index:99;max-width:90vw;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+#ccToast.show{opacity:1;transform:translateX(-50%)}
+.seo{padding:40px 0 56px}.seo h2{margin:0 0 12px}.seo p{margin:0 0 14px;max-width:70ch}.seo h3{margin:28px 0 8px}.seo ol{max-width:70ch;padding-left:20px;margin:0 0 14px}.seo details{border-bottom:1px solid rgba(128,128,128,.28);padding:14px 0;max-width:70ch}.seo summary{cursor:pointer;font-weight:600}.seo details p{margin:10px 0 0}
+@media(prefers-reduced-motion:reduce){#ccToast{transition:none}}
+</style>
+<script src="/js/components.js" defer></script>
+</head>
+<body>
+<dc-header></dc-header>
+<main>
+<section class="ph"><div class="w">
+<nav class="crumb" aria-label="Breadcrumb"><a href="/">Home</a><span aria-hidden="true">/</span><a href="/#tools">Tools</a><span aria-hidden="true">/</span><a href="/accessibility-tools/">Accessibility Tools</a><span aria-hidden="true">/</span><span aria-current="page">Color Contrast Checker</span></nav>
+<p class="eyebrow">WCAG 2.2 and APCA</p>
+<h1>Color Contrast Checker and WCAG Tester</h1>
+<p class="lead">Test any text and background color pair for WCAG AA and AAA. See the exact contrast ratio, preview how it looks, and fix failing colors with one tap.</p>
+</div></section>
+
+<section class="pt"><div class="w"><div class="cc">
+<div class="cc-grid">
+<div class="cc-card">
+<h2>Your colors</h2>
+<div class="cc-fld"><label for="ccFt">Text color</label><div class="cc-in"><input type="color" id="ccFc" aria-label="Pick text color"><input type="text" id="ccFt" autocomplete="off" spellcheck="false" placeholder="#1f2937 or rgb() or name"></div></div>
+<div class="cc-fld"><label for="ccBt">Background color</label><div class="cc-in"><input type="color" id="ccBc" aria-label="Pick background color"><input type="text" id="ccBt" autocomplete="off" spellcheck="false" placeholder="#ffffff or rgb() or name"></div></div>
+<div class="cc-row"><button class="cc-btn p" id="ccSw" type="button">Swap colors</button><button class="cc-btn" id="ccCp" type="button">Copy result</button><button class="cc-btn" id="ccLk" type="button">Copy link</button></div>
+<p class="cc-h">Quick examples</p>
+<div class="cc-row" id="ccPr"></div>
+<p class="cc-note">Text color can be semi-transparent, for example rgba(0,0,0,0.6). It is blended over the background first. Need a color code? Use the <a href="/color-picker-converters/color-picker/">color picker</a>.</p>
+</div>
+
+<div class="cc-card">
+<h2>Contrast result</h2>
+<div class="cc-big" id="ccR">21:1</div>
+<p class="cc-ver" id="ccV"></p>
+<table class="cc-t"><tbody id="ccT"></tbody></table>
+<p class="cc-h">APCA <small style="font-weight:400;opacity:.7">(WCAG 3 draft, extra guide)</small></p>
+<p id="ccA" style="margin:0"></p>
+<p class="cc-note">Roughly: Lc 75+ for body text, 60+ for large text, 45+ for headlines and UI. WCAG 2 ratios above are the standard most laws refer to.</p>
+</div>
+
+<div class="cc-card cc-full">
+<h2>Live preview</h2>
+<div class="cc-pv" id="ccPv"><h3>Large heading, 24px bold</h3><p contenteditable="true" spellcheck="false">Normal text at 16px. Tap here and type your own words to test them.</p><p class="sm">Small text at 13px is the hardest to read.</p><button type="button">Button border</button></div>
+</div>
+
+<div class="cc-card cc-full">
+<h2>Fix it: nearest accessible colors</h2>
+<p class="cc-h" style="margin-top:0">Change the text color</p>
+<div class="cc-sg-g" id="ccSt"></div>
+<p class="cc-h">Or change the background</p>
+<div class="cc-sg-g" id="ccSb"></div>
+<p class="cc-note">Each option keeps the same hue and only changes lightness as little as possible. Tap one to use it.</p>
+</div>
+</div>
+<div style="text-align:center"><a class="btn" href="/accessibility-tools/">← Back to Accessibility Tools</a></div>
+</div>
+<div id="ccToast" role="status" aria-live="polite"></div>
+</div></section>
+
+<section class="seo"><div class="w">
+<h2>Free WCAG color contrast checker</h2>
+<p>Contrast is the difference in brightness between text and its background. Low contrast makes content hard to read for people with low vision, color blindness, or anyone on a phone in bright sunlight. This checker calculates the exact WCAG contrast ratio of any two colors and tells you whether the pair passes level AA and level AAA.</p>
+<p>It also shows the APCA Lc score, a newer method proposed for WCAG 3, and suggests the nearest accessible colors when your pair fails, so you can keep your brand color and still meet the standard.</p>
+<h3>WCAG contrast requirements</h3>
+<ol><li>Normal text: 4.5:1 for AA, 7:1 for AAA.</li><li>Large text (24px regular or 18.66px bold and bigger): 3:1 for AA, 4.5:1 for AAA.</li><li>User interface parts and graphics such as buttons, form borders and icons: 3:1 for AA.</li></ol>
+<h3>How to use the contrast checker</h3>
+<ol><li>Choose or type your text color and background color.</li><li>Read the ratio and the pass or fail result for each level.</li><li>Check the live preview, and edit its text to try your own wording.</li><li>If a pair fails, tap one of the suggested colors, then copy the result or the link.</li></ol>
+<h3>Frequently asked questions</h3>
+<details><summary>What is a good color contrast ratio?</summary><p>For normal body text aim for at least 4.5:1, which is WCAG AA. A ratio of 7:1 or more meets AAA and is more comfortable for many readers. The maximum possible ratio is 21:1, black on white.</p></details>
+<details><summary>What is the difference between WCAG AA and AAA?</summary><p>AA is the common legal and practical target and needs 4.5:1 for normal text and 3:1 for large text. AAA is stricter and needs 7:1 for normal text and 4.5:1 for large text.</p></details>
+<details><summary>What counts as large text in WCAG?</summary><p>Large text is at least 18 point (about 24px) in regular weight, or at least 14 point (about 18.66px) in bold.</p></details>
+<details><summary>Do buttons and icons need contrast too?</summary><p>Yes. WCAG 1.4.11 asks for at least 3:1 contrast for the visual parts of controls, such as input borders and button outlines, and for meaningful graphics like icons. Disabled controls and pure decoration are exempt.</p></details>
+<details><summary>Did WCAG 2.2 change the contrast ratios?</summary><p>No. WCAG 2.2 keeps the same contrast thresholds as WCAG 2.1: 4.5:1, 3:1 and 7:1 for text, and 3:1 for non-text parts.</p></details>
+<details><summary>What is APCA?</summary><p>APCA is a newer contrast method proposed for WCAG 3. It gives a lightness contrast score called Lc and takes text polarity into account, so dark on light and light on dark can score differently. It is still a draft, so use it as an extra guide beside the WCAG 2 ratio.</p></details>
+<details><summary>Are my colors saved anywhere?</summary><p>No. All calculations happen in your browser and nothing is sent to a server.</p></details>
+</div></section>
+</main>
+<dc-footer></dc-footer>
+
+<script>
+(function(){
+var $=function(i){return document.getElementById(i)},mx=Math.max,mn=Math.min,F=[31,41,55,1],B=[255,255,255,1],E,PRE=[["Black on white","#000000","#ffffff"],["White on black","#ffffff","#000000"],["Dark gray on white","#595959","#ffffff"],["Light gray on white","#999999","#ffffff"],["White on blue","#ffffff","#2563eb"],["White on orange","#ffffff","#f97316"],["Yellow on white","#facc15","#ffffff"],["Navy on yellow","#1e3a8a","#fde047"]];
+function f(n,d){return+n.toFixed(d||0)}
+function hex(c){return"#"+c.slice(0,3).map(function(x){return x.toString(16).padStart(2,"0")}).join("")}
+function lin(c){c/=255;return c<=.04045?c/12.92:Math.pow((c+.055)/1.055,2.4)}
+function lum(c){return .2126*lin(c[0])+.7152*lin(c[1])+.0722*lin(c[2])}
+function ratio(a,b){var x=lum(a),y=lum(b);return(mx(x,y)+.05)/(mn(x,y)+.05)}
+function comp(a,b){var t=a[3];return[0,1,2].map(function(i){return Math.round(a[i]*t+b[i]*(1-t))})}
+function apca(t,b){var y=function(c){var v=.2126729*Math.pow(c[0]/255,2.4)+.7151522*Math.pow(c[1]/255,2.4)+.072175*Math.pow(c[2]/255,2.4);return v>.022?v:v+Math.pow(.022-v,1.414)},yt=y(t),yb=y(b),s;if(yb>yt){s=(Math.pow(yb,.56)-Math.pow(yt,.57))*1.14;return s<.1?0:(s-.027)*100}s=(Math.pow(yb,.65)-Math.pow(yt,.62))*1.14;return s>-.1?0:(s+.027)*100}
+function toHsl(c){var r=c[0]/255,g=c[1]/255,b=c[2]/255,m=mx(r,g,b),n=mn(r,g,b),d=m-n,l=(m+n)/2,h=0,s=d?d/(1-Math.abs(2*l-1)):0;if(d){h=m==r?((g-b)/d)%6:m==g?(b-r)/d+2:(r-g)/d+4;h=(h*60+360)%360}return[h,s,l]}
+function fromHsl(h,s,l){var a=s*mn(l,1-l),k=function(n){var q=(n+h/30)%12;return l-a*mx(-1,mn(q-3,9-q,1))};return[k(0),k(8),k(4)].map(function(x){return Math.round(x*255)})}
+function fix(c,o,t){var h=toHsl(c),d,i,l,r;for(d=0;d<=1.0001;d+=.004){for(i=0;i<2;i++){l=h[2]+(i?-d:d);if(l<0||l>1)continue;r=fromHsl(h[0],h[1],l);if(ratio(r,o)>=t)return r}}return null}
+function parse(t){var e=document.createElement("i");e.style.color="";e.style.color=t.trim();if(!e.style.color&&/^[0-9a-f]{3,8}$/i.test(t.trim()))e.style.color="#"+t.trim();if(!e.style.color)return null;document.body.appendChild(e);var c=getComputedStyle(e).color;e.remove();var m=c.match(/[\d.]+/g);if(!m||m.length<3)return null;m=m.map(Number);if(m.length<4)m.push(1);return m}
+function toast(m){var t=$("ccToast");t.textContent=m;t.classList.add("show");clearTimeout(toast.t);toast.t=setTimeout(function(){t.classList.remove("show")},1500)}
+function copy(v,m){var ok=function(){toast(m)},o=function(){var a=document.createElement("textarea");a.value=v;document.body.appendChild(a);a.select();try{document.execCommand("copy")}catch(e){}a.remove();ok()};if(navigator.clipboard&&navigator.clipboard.writeText)navigator.clipboard.writeText(v).then(ok,o);else o()}
+var ROWS=[["Normal text","AA",4.5],["Normal text","AAA",7],["Large text","AA",3],["Large text","AAA",4.5],["UI parts and graphics","AA",3]],OUT=[];
+function up(skip){
+E=comp(F,B);var r=ratio(E,B),fl=Math.floor(r*100)/100,fh=hex(E),bh=hex(B);
+$("ccR").textContent=f(fl,2)+":1";
+$("ccV").textContent=r>=7?"Excellent: passes AA and AAA for all text":r>=4.5?"Good: passes AA for all text, AAA for large text":r>=3?"Limited: only large text and UI parts pass":"Fails: too low for text and UI parts";
+OUT=[];var T=$("ccT");T.innerHTML="";ROWS.forEach(function(x){var ok=r>=x[2];OUT.push(x[0]+" "+x[1]+": "+(ok?"pass":"fail"));var tr=document.createElement("tr");tr.innerHTML="<td>"+x[0]+" <small>"+x[1]+", "+x[2]+":1</small></td><td><span class='cc-bd "+(ok?"ok":"no")+"'>"+(ok?"✓ Pass":"✕ Fail")+"</span></td>";T.appendChild(tr)});
+var lc=apca(E,B);$("ccA").innerHTML="<b>Lc "+f(Math.abs(lc),1)+"</b> <small style='opacity:.75'>("+(lum(E)<lum(B)?"dark text on light":"light text on dark")+")</small>";
+var pv=$("ccPv");pv.style.setProperty("--bg",bh);pv.style.setProperty("--fg",F[3]<1?"rgba("+F[0]+","+F[1]+","+F[2]+","+F[3]+")":fh);
+if(!skip){if(document.activeElement!==$("ccFt"))$("ccFt").value=F[3]<1?"rgba("+F.join(", ")+")":fh;if(document.activeElement!==$("ccBt"))$("ccBt").value=bh}
+$("ccFc").value=hex(F);$("ccBc").value=bh;
+sug($("ccSt"),function(t){return fix(F,B,t)},function(n){return[n,B]},E,B,true);
+sug($("ccSb"),function(t){return fix(B,E,t)},function(n){return[E,n]},E,B,false);
+history.replaceState(null,"","#"+fh.slice(1)+"-"+bh.slice(1))}
+function sug(el,gen,pair,cur,bg,isText){el.innerHTML="";[[3,"3:1 large text, UI"],[4.5,"4.5:1 AA text"],[7,"7:1 AAA text"]].forEach(function(g){
+ var b=document.createElement("button");b.type="button";b.className="cc-sg";
+ if(ratio(cur,bg)>=g[0]){b.className+=" off";b.disabled=true;b.style.background=hex(bg);b.style.color=hex(cur);b.innerHTML="<b>Aa</b>"+g[1]+"<br>Already passes";el.appendChild(b);return}
+ var n=gen(g[0]);if(!n){b.className+=" off";b.disabled=true;b.innerHTML="<b>None</b>"+g[1]+"<br>Change the other color";el.appendChild(b);return}
+ var p=pair(n);b.style.background=hex(p[1]);b.style.color=hex(p[0]);b.innerHTML="<b>"+hex(n)+"</b>"+g[1]+"<br>"+f(Math.floor(ratio(p[0],p[1])*100)/100,2)+":1";
+ b.onclick=function(){if(isText)F=[n[0],n[1],n[2],1];else B=[n[0],n[1],n[2],1];up()};el.appendChild(b)})}
+$("ccFt").oninput=function(){var p=parse(this.value);if(p){F=p;up(true)}};
+$("ccBt").oninput=function(){var p=parse(this.value);if(p){B=[p[0],p[1],p[2],1];up(true)}};
+function h2(v){return[parseInt(v.slice(1,3),16),parseInt(v.slice(3,5),16),parseInt(v.slice(5,7),16)]}
+$("ccFc").oninput=function(){var c=h2(this.value);F=[c[0],c[1],c[2],1];up()};
+$("ccBc").oninput=function(){var c=h2(this.value);B=[c[0],c[1],c[2],1];up()};
+$("ccSw").onclick=function(){var t=E;F=[B[0],B[1],B[2],1];B=[t[0],t[1],t[2],1];up()};
+$("ccCp").onclick=function(){copy("Text "+hex(E)+" on background "+hex(B)+": contrast "+$("ccR").textContent+". "+OUT.join(". ")+".","Result copied")};
+$("ccLk").onclick=function(){copy(location.href,"Link copied")};
+var P=$("ccPr");PRE.forEach(function(x){var b=document.createElement("button");b.type="button";b.className="cc-ch";b.innerHTML="<i style='background:"+x[2]+";color:"+x[1]+"'>Aa</i>"+x[0];b.onclick=function(){F=parse(x[1]);B=parse(x[2]);up()};P.appendChild(b)});
+var m=location.hash.slice(1).match(/^([0-9a-f]{6})-([0-9a-f]{6})$/i);if(m){F=parse("#"+m[1]);B=parse("#"+m[2])}
+up();
+/* SEO: structured data and canonical built from the visible page so text and markup always match */
+(function(){var o=location.origin,p=location.pathname,
+ q=[].map.call(document.querySelectorAll('.seo details'),function(d){return{'@type':'Question',name:d.querySelector('summary').textContent,acceptedAnswer:{'@type':'Answer',text:d.querySelector('p').textContent}}}),
+ g={'@context':'https://schema.org','@graph':[
+  {'@type':'BreadcrumbList',itemListElement:[['Home','/'],['Tools','/#tools'],['Accessibility Tools','/accessibility-tools/'],['Color Contrast Checker',p]].map(function(x,i){return{'@type':'ListItem',position:i+1,name:x[0],item:o+x[1]}})},
+  {'@type':'WebApplication',name:'Color Contrast Checker',url:o+p,applicationCategory:'DesignApplication',operatingSystem:'Any',browserRequirements:'Requires JavaScript',description:'Free WCAG color contrast checker with AA and AAA results, APCA score and accessible color suggestions.',offers:{'@type':'Offer',price:'0',priceCurrency:'USD'}},
+  {'@type':'FAQPage',mainEntity:q}]},
+ s=document.createElement('script'),l=document.createElement('link');
+ s.type='application/ld+json';s.text=JSON.stringify(g);document.head.appendChild(s);
+ l.rel='canonical';l.href=o+p;document.head.appendChild(l)})();
+})();
+</script>
+</body>
+</html>
