@@ -21,16 +21,17 @@
 <link rel="stylesheet" href="/css/styles.css">
 <style>
 /* ===== About page: colors come from the site theme, so light and dark both work ===== */
-.ab{display:block;--b:var(--line);--p1:#7c5ce6;--p2:#ec4899;--p3:#f59e0b;--p4:#10b981;--p5:#3b82f6}
+.ab{display:block;--b:var(--line);--p1:#7c5ce6;--p2:#ec4899;--p3:#f59e0b;--p4:#10b981;--p5:#3b82f6;--oc:#0891b2;--mg:#c026d3}
+@media(prefers-color-scheme:dark){:root:not([data-theme=light]) .ab{--oc:#38bdf8;--mg:#e879f9}}
+:root[data-theme=dark] .ab{--oc:#38bdf8;--mg:#e879f9}
 .ab *{box-sizing:border-box}
 .ab h1,.ab h2{font-family:"Poppins",ui-sans-serif,system-ui,sans-serif}
 
 /* HERO */
 .ab-hero{position:relative;overflow:hidden;isolation:isolate;border-radius:28px;border:1px solid var(--b);padding:48px 24px 120px;margin-bottom:28px;
  background:
-  radial-gradient(60% 70% at 8% 0%,rgba(236,72,153,.22),transparent 70%),
-  radial-gradient(55% 70% at 95% 10%,rgba(59,130,246,.22),transparent 70%),
-  radial-gradient(60% 80% at 50% 110%,rgba(16,185,129,.18),transparent 70%),
+  radial-gradient(60% 80% at 0% 0%,color-mix(in srgb,var(--oc) 18%,transparent),transparent 70%),
+  radial-gradient(50% 70% at 100% 100%,color-mix(in srgb,var(--mg) 14%,transparent),transparent 70%),
   var(--card)}
 .ab-dots span{position:absolute;z-index:-1;border-radius:50%;filter:blur(2px);opacity:.75;animation:abFloat var(--t) ease-in-out infinite alternate}
 .ab-ht{position:relative;z-index:2;max-width:620px}
@@ -40,12 +41,12 @@
 .ab-doodle{position:absolute;inset:0;width:100%;height:100%}
 .ab-pic img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 25%}
 .ab-hello{font:600 1.05rem "Poppins",sans-serif;color:var(--mut);letter-spacing:.02em}
-.ab-hello small{display:block;font-size:.78rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--acc);margin-bottom:2px}
+.ab-hello small{display:block;font-size:.78rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--mg);margin-bottom:2px}
 .ab-hi{font-size:clamp(1.3rem,4.6vw,1.9rem);font-weight:600;line-height:1.2;margin:0 0 4px;color:var(--fg)}
 .ab-name{display:block;font-family:"Pacifico","Brush Script MT",cursive;font-weight:400;font-size:clamp(2.2rem,10.5vw,5.6rem);line-height:1.15;letter-spacing:0;padding:0 .1em .12em 0;
- color:var(--acc)}
+ color:var(--oc)}
 .ab-role{display:flex;flex-wrap:wrap;gap:8px;margin:16px 0 18px}
-.ab-role svg{width:16px;height:16px;fill:none;stroke:var(--acc);stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.ab-role svg{width:16px;height:16px;fill:none;stroke:var(--oc);stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
 .ab-role span{display:inline-flex;align-items:center;gap:7px;padding:6px 14px;border-radius:99px;font:600 .82rem "Poppins",sans-serif;color:var(--fg);background:color-mix(in srgb,var(--card) 70%,transparent);border:1px solid var(--b);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}
 .ab-lead{margin:0;font-size:1.08rem;color:var(--mut);max-width:46ch}
 .ab-w{position:absolute;left:0;right:0;bottom:0;height:90px;overflow:hidden;pointer-events:none;z-index:1}
@@ -55,42 +56,38 @@
 
 /* CARDS */
 .ab-glass{position:relative;isolation:isolate;overflow:hidden;border-radius:28px;border:1px solid var(--b);padding:22px;margin-bottom:34px;background:var(--alt)}
-.ab-bl{position:absolute;z-index:-1;width:280px;height:280px;border-radius:50%;background:var(--c);filter:blur(70px);opacity:.34;animation:abDrift var(--t) ease-in-out infinite alternate}
+.ab-bl{position:absolute;z-index:-1;width:280px;height:280px;border-radius:50%;background:var(--c);filter:blur(70px);opacity:.16;animation:abDrift var(--t) ease-in-out infinite alternate}
 .ab-cards{position:relative;display:grid;gap:18px}
 @media(min-width:800px){.ab-cards{grid-template-columns:repeat(2,minmax(0,1fr))}}
 .ab-card{position:relative;overflow:hidden;border-radius:22px;padding:24px 22px 22px;background:color-mix(in srgb,var(--card) 78%,transparent);border:1px solid var(--b);box-shadow:0 10px 30px -18px rgba(0,0,0,.35);-webkit-backdrop-filter:blur(16px) saturate(1.4);backdrop-filter:blur(16px) saturate(1.4);transition:transform .25s,border-color .25s}
-.ab-card:hover{transform:translateY(-4px);border-color:var(--k,var(--acc))}
-.ab-card::before{content:"";position:absolute;left:0;right:0;top:0;height:5px;background:var(--g,linear-gradient(90deg,#7c5ce6,#3b82f6,#10b981))}
-.ab-ic{display:grid;place-items:center;width:46px;height:46px;border-radius:14px;font-size:1.35rem;margin-bottom:12px;background:var(--g,linear-gradient(135deg,#7c5ce6,#3b82f6));box-shadow:0 8px 18px -8px var(--k,#7c5ce6)}
+.ab-card:hover{transform:translateY(-4px);border-color:var(--k,var(--oc))}
+.ab-card::before{content:"";position:absolute;left:0;right:0;top:0;height:5px;background:linear-gradient(90deg,var(--oc),var(--mg))}
+.ab-ic{display:grid;place-items:center;width:46px;height:46px;border-radius:14px;font-size:1.35rem;margin-bottom:12px;background:linear-gradient(135deg,var(--oc),var(--mg));box-shadow:0 8px 18px -8px var(--k,var(--oc))}
 .ab-ic svg{width:24px;height:24px;fill:none;stroke:#fff;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
 .ab-card h2{font-size:1.2rem;font-weight:700;letter-spacing:-.01em;margin:0 0 8px;color:var(--fg)}
 .ab-card p{margin:0 0 12px;font-size:.98rem;color:var(--mut)}
 .ab-card p:last-of-type{margin:0}
 .ab-card p b{color:var(--fg)}
 .ab-card a{color:var(--fg)}
-.ab-btn{display:inline-block;padding:10px 18px;border-radius:12px;text-decoration:none;font-weight:700;color:#fff!important;background:var(--g,linear-gradient(135deg,#7c5ce6,#3b82f6));box-shadow:0 8px 18px -10px var(--k,#7c5ce6);transition:transform .2s}
+.ab-btn{display:inline-block;padding:10px 18px;border-radius:12px;text-decoration:none;font-weight:700;color:#fff!important;background:linear-gradient(135deg,var(--oc),var(--mg));box-shadow:0 8px 18px -10px var(--k,var(--oc));transition:transform .2s}
 .ab-btn:hover,.ab-btn:focus-visible{transform:translateY(-2px)}
 .ab-wide{grid-column:1/-1}
 .ab-sss{padding-bottom:84px}
 
 /* tool chips */
 .ab-chips{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:10px}
-.ab-chips li{display:flex;align-items:center;gap:8px;padding:8px 14px;border-radius:99px;font-size:.9rem;font-weight:600;color:var(--fg);background:var(--card);border:1px solid var(--b);transition:transform .2s,border-color .2s}
+.ab-chips li{--dc:var(--oc);display:flex;align-items:center;gap:8px;padding:8px 14px;border-radius:99px;font-size:.9rem;font-weight:600;color:var(--fg);background:var(--card);border:1px solid var(--b);transition:transform .2s,border-color .2s}
 .ab-chips li:hover{transform:translateY(-2px);border-color:var(--dc)}
 .ab-chips li::before{content:"";width:10px;height:10px;border-radius:50%;background:var(--dc);box-shadow:0 0 0 3px color-mix(in srgb,var(--dc) 25%,transparent)}
-.ab-chips li:nth-child(5n+1){--dc:#f43f5e}
-.ab-chips li:nth-child(5n+2){--dc:#f59e0b}
-.ab-chips li:nth-child(5n+3){--dc:#10b981}
-.ab-chips li:nth-child(5n+4){--dc:#3b82f6}
-.ab-chips li:nth-child(5n+5){--dc:#a855f7}
+
+.ab-chips li:nth-child(even){--dc:var(--mg)}
 
 /* three s */
-.ab-s{font-weight:800;font-size:1.15em}
-.ab-s:nth-of-type(1){color:#f43f5e}
-.ab-s:nth-of-type(2){color:#10b981}
-.ab-s:nth-of-type(3){color:#3b82f6}
+.ab-s{font-weight:800;font-size:1.15em;color:var(--oc)}
+.ab-s:nth-of-type(2){color:var(--mg)}
 
 /* END */
+.ab-end .btn.p{background:linear-gradient(135deg,var(--oc),var(--mg));border-color:transparent;box-shadow:0 8px 18px -10px var(--mg)}
 .ab-end{text-align:center;padding:0 0 48px}
 .ab-end p{margin:0 0 14px;font:600 1.1rem "Poppins",sans-serif;color:var(--fg)}
 
@@ -141,16 +138,9 @@
 <section class="pt"><div class="w"><div class="ab">
 
 <div class="ab-hero">
-<div class="ab-dots" aria-hidden="true">
-<span style="width:18px;height:18px;background:#f43f5e;right:12%;top:14%;--t:6s"></span>
-<span style="width:12px;height:12px;background:#f59e0b;right:26%;top:34%;--t:8s"></span>
-<span style="width:22px;height:22px;background:#10b981;right:8%;top:50%;--t:7s"></span>
-<span style="width:14px;height:14px;background:#3b82f6;right:34%;top:12%;--t:9s"></span>
-<span style="width:16px;height:16px;background:#a855f7;right:18%;top:66%;--t:10s"></span>
-</div>
 <div class="ab-ht">
 <div class="ab-top">
-<div class="ab-av"><div class="ab-pic"><svg class="ab-doodle" viewBox="0 0 100 100" aria-hidden="true" fill="none" stroke="#1f1b2e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><defs><linearGradient id="abBgG" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#dfe6ff"/><stop offset="1" stop-color="#fbe3f1"/></linearGradient></defs><rect width="100" height="100" fill="url(#abBgG)" stroke="none"/><path d="M14 22l2 4 4 2-4 2-2 4-2-4-4-2 4-2z" fill="#f59e0b" stroke="none"/><path d="M84 30l1.5 3 3 1.5-3 1.5-1.5 3-1.5-3-3-1.5 3-1.5z" fill="#7c5ce6" stroke="none"/><path d="M8 62q4-5 8 0t8 0" stroke="#3b82f6"/><path d="M12 100C14 79 32 73 50 73s36 6 38 27z" fill="#2f4aa0"/><path d="M41 72l9 9 9-9" stroke="#14235e"/><path d="M42 60h16v14q-8 6-16 0z" fill="#c98a5e"/><circle cx="31" cy="48" r="4" fill="#d99a6c"/><circle cx="69" cy="48" r="4" fill="#d99a6c"/><ellipse cx="50" cy="46" rx="19" ry="22" fill="#d99a6c"/><path d="M30 42C27 24 40 16 53 18c13 1 19 11 17 24-4-8-10-12-20-12-8 0-15 4-20 12z" fill="#1f1b2e"/><path d="M46 20c4-6 13-6 17-1" stroke="#1f1b2e"/><rect x="34" y="42" width="14" height="9" rx="4" fill="#14121f"/><rect x="52" y="42" width="14" height="9" rx="4" fill="#14121f"/><path d="M48 46h4"/><path d="M37 45l3-1M55 45l3-1" stroke="#fff" stroke-width="1.5"/><path d="M42 57q8 7 16 0" stroke="#5a2d1c"/></svg><img src="/images/sukhendu.jpg" alt="Sukhendu Roy" width="96" height="96" onerror="this.remove()"></div></div>
+<div class="ab-av"><div class="ab-pic"><svg class="ab-doodle" viewBox="0 0 100 100" aria-hidden="true" fill="none" stroke="#1f1b2e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><defs><linearGradient id="abBgG" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#d9f3fb"/><stop offset="1" stop-color="#fbe0f4"/></linearGradient></defs><rect width="100" height="100" fill="url(#abBgG)" stroke="none"/><path d="M14 22l2 4 4 2-4 2-2 4-2-4-4-2 4-2z" fill="#0ea5e9" stroke="none"/><path d="M84 30l1.5 3 3 1.5-3 1.5-1.5 3-1.5-3-3-1.5 3-1.5z" fill="#d946ef" stroke="none"/><path d="M8 62q4-5 8 0t8 0" stroke="#0ea5e9"/><path d="M12 100C14 79 32 73 50 73s36 6 38 27z" fill="#2f4aa0"/><path d="M41 72l9 9 9-9" stroke="#14235e"/><path d="M42 60h16v14q-8 6-16 0z" fill="#c98a5e"/><circle cx="31" cy="48" r="4" fill="#d99a6c"/><circle cx="69" cy="48" r="4" fill="#d99a6c"/><ellipse cx="50" cy="46" rx="19" ry="22" fill="#d99a6c"/><path d="M30 42C27 24 40 16 53 18c13 1 19 11 17 24-4-8-10-12-20-12-8 0-15 4-20 12z" fill="#1f1b2e"/><path d="M46 20c4-6 13-6 17-1" stroke="#1f1b2e"/><rect x="34" y="42" width="14" height="9" rx="4" fill="#14121f"/><rect x="52" y="42" width="14" height="9" rx="4" fill="#14121f"/><path d="M48 46h4"/><path d="M37 45l3-1M55 45l3-1" stroke="#fff" stroke-width="1.5"/><path d="M42 57q8 7 16 0" stroke="#5a2d1c"/></svg><img src="/images/sukhendu.jpg" alt="Sukhendu Roy" width="96" height="96" onerror="this.remove()"></div></div>
 <div class="ab-hello"><small>About the creator</small>Howrah, West Bengal</div>
 </div>
 <h1 class="ab-hi">Hi, I am</h1>
@@ -162,46 +152,46 @@
 </div>
 
 <div class="ab-glass">
-<span class="ab-bl" style="--c:#7c5ce6;left:-60px;top:-40px;--t:13s" aria-hidden="true"></span>
-<span class="ab-bl" style="--c:#ec4899;right:-70px;top:30%;--t:16s" aria-hidden="true"></span>
-<span class="ab-bl" style="--c:#10b981;left:20%;bottom:-80px;--t:15s" aria-hidden="true"></span>
+<span class="ab-bl" style="--c:#0ea5e9;left:-60px;top:-40px;--t:13s" aria-hidden="true"></span>
+<span class="ab-bl" style="--c:#d946ef;right:-70px;top:30%;--t:16s" aria-hidden="true"></span>
+<span class="ab-bl" style="--c:#0ea5e9;left:20%;bottom:-80px;--t:15s" aria-hidden="true"></span>
 <div class="ab-cards">
 
-<div class="ab-card ab-wide" style="--g:linear-gradient(135deg,#ec4899,#7c5ce6);--k:#ec4899">
+<div class="ab-card ab-wide">
 <div class="ab-ic" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></svg></div>
 <h2>About the creator</h2>
-<p>I am <b>Sukhendu Roy</b>, and I live in Howrah, West Bengal. I enjoy turning small ideas into simple, free tools that anyone can open in a browser, and I build them with the help of AI.</p>
+<p>I am <b>Sukhendu Roy</b>, and I live in Howrah, West Bengal. I enjoy turning ideas into real-world products, and I build them with the help of AI.</p>
 <p>YourColorsss and <b>Save Your Trade</b> both come from my company, <b>Sukhendu Software Solutions</b>.</p>
 </div>
 
-<div class="ab-card" style="--g:linear-gradient(135deg,#7c5ce6,#ec4899);--k:#7c5ce6">
+<div class="ab-card">
 <div class="ab-ic" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-4 10.5c.7.7 1 1.5 1 2.5h6c0-1 .3-1.8 1-2.5A6 6 0 0 0 12 3z"/></svg></div>
 <h2>Why I built this</h2>
 <p>I had some free time and nothing in particular to do, so I started building. Colors were the fun part, so they got a home of their own.</p>
 </div>
 
-<div class="ab-card" style="--g:linear-gradient(135deg,#10b981,#3b82f6);--k:#10b981">
+<div class="ab-card">
 <div class="ab-ic" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M3 17l6-6 4 4 8-8M15 7h6v6"/></svg></div>
 <h2>Also built with AI</h2>
 <p><b>Save Your Trade</b> is a focused and advanced trading journal.</p>
 <p><a class="ab-btn" href="https://saveyourtrade.in" target="_blank" rel="noopener">Visit saveyourtrade.in</a></p>
 </div>
 
-<div class="ab-card ab-wide" style="--g:linear-gradient(90deg,#f43f5e,#f59e0b,#10b981,#3b82f6,#a855f7);--k:#f59e0b">
+<div class="ab-card ab-wide">
 <div class="ab-ic" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="2"/><rect x="14" y="3" width="7" height="7" rx="2"/><rect x="3" y="14" width="7" height="7" rx="2"/><rect x="14" y="14" width="7" height="7" rx="2"/></svg></div>
 <h2>What you will find</h2>
 <p>10 free color tools that work right in your browser:</p>
 <ul class="ab-chips"><li>Color Palette Generator</li><li>Palette Explorer</li><li>Gradient &amp; Color Mixer</li><li>Tints, Shades &amp; Tones Generator</li><li>Duotone Generator</li><li>Color Picker &amp; Converter</li><li>Image Color Picker &amp; Extractor</li><li>Accessibility</li><li>Color Meaning</li><li>Color Psychology</li></ul>
 </div>
 
-<div class="ab-card" style="--g:linear-gradient(135deg,#3b82f6,#a855f7);--k:#3b82f6">
+<div class="ab-card">
 <div class="ab-ic" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M21 12a8 8 0 0 1-11.5 7.2L4 20l1-4.6A8 8 0 1 1 21 12z"/></svg></div>
 <h2>Support</h2>
 <p>Found a bug or have an idea? Write to <a href="mailto:sukhendu.roy@saveyourtrade.in">sukhendu.roy@saveyourtrade.in</a></p>
 <p><a class="ab-btn" href="mailto:sukhendu.roy@saveyourtrade.in">Email support</a></p>
 </div>
 
-<div class="ab-card ab-sss" style="--g:linear-gradient(135deg,#f43f5e,#f59e0b);--k:#f43f5e">
+<div class="ab-card ab-sss">
 <div class="ab-ic" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8zM19 16l.7 2 2 .7-2 .7-.7 2-.7-2-2-.7 2-.7z"/></svg></div>
 <h2>Why three s in YourColorsss?</h2>
 <p>It is not a typo. Your Color<span class="ab-s">s</span><span class="ab-s">s</span><span class="ab-s">s</span> carries the initials of <b>Sukhendu Software Solutions</b>, the company behind this site.</p>
@@ -229,9 +219,9 @@ function waves(el,L){L.forEach(function(g,i){
  if(g[5])d.className="rv";
  el.appendChild(d)})}
 waves(document.getElementById("abWaves"),[
- ["#7c5ce6",.35,2,34,100],["#3b82f6",.4,2,44,65,1]]);
+ ["#0ea5e9",.25,2,34,100],["#d946ef",.2,2,44,65,1]]);
 waves(document.getElementById("abMini"),[
- ["#3b82f6",.4,2,30,100]]);
+ ["#0ea5e9",.25,2,30,100]]);
 /* SEO: structured data and canonical built from the page URL */
 var u=location.origin,p=location.pathname,sc=document.createElement("script"),l=document.createElement("link");
 sc.type="application/ld+json";sc.text=JSON.stringify({"@context":"https://schema.org","@graph":[
