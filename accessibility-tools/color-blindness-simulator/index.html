@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Color Blindness Simulator: See Images &amp; Colors Like Color Blind People | YourColorsss</title>
+<meta name="description" content="Free color blindness simulator. See any image or color palette as people with protanopia, deuteranopia, tritanopia or achromatopsia do. Adjust severity, compare before and after, and find colors that look alike.">
+<meta name="keywords" content="color blindness simulator, color blind simulator, protanopia simulator, deuteranopia simulator, tritanopia simulator, achromatopsia simulator, color vision deficiency simulator, color blind palette checker, red green color blindness, color blind friendly colors, accessibility color testing, color blind test image">
+<meta property="og:title" content="Color Blindness Simulator | YourColorsss">
+<meta property="og:description" content="See images and color palettes the way color blind people see them. Adjust severity and spot colors that look alike.">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="YourColorsss">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Color Blindness Simulator | YourColorsss">
+<meta name="twitter:description" content="Free tool to simulate protanopia, deuteranopia, tritanopia and achromatopsia on images and palettes.">
+<meta name="theme-color" content="#5b3df5">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/css/styles.css">
+<style>
+[hidden]{display:none!important}
+.cb{--a:#5b3df5;--b:rgba(128,128,128,.32);--f:rgba(128,128,128,.09);display:block}
+.cb *{box-sizing:border-box}
+.cb-card{border:1px solid var(--b);background:var(--f);border-radius:16px;padding:16px;margin-bottom:18px}
+.cb-card h2{font-size:1.05rem;margin:0 0 12px}
+.cb-drop{display:grid;place-items:center;text-align:center;gap:6px;min-height:170px;border:2px dashed var(--b);border-radius:14px;padding:20px;cursor:pointer}
+.cb-drop.drag{border-color:var(--a)}
+.cb-drop b{font-size:1.05rem}.cb-drop span{opacity:.75;font-size:.88rem}
+.cb-row{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-top:12px}
+.cb-btn{appearance:none;border:1px solid var(--b);background:var(--f);color:inherit;font:inherit;font-size:.9rem;padding:9px 14px;border-radius:10px;cursor:pointer;line-height:1.2;touch-action:manipulation}
+.cb-btn:hover,.cb-btn:focus-visible,.cb select:focus-visible,.cb textarea:focus-visible,.cb input:focus-visible{border-color:var(--a);outline:2px solid var(--a);outline-offset:1px}
+.cb-btn.p{background:var(--a);border-color:var(--a);color:#fff}
+.cb select,.cb textarea{font:inherit;font-size:.95rem;color:inherit;background:var(--f);border:1px solid var(--b);border-radius:10px;padding:9px 10px}
+.cb textarea{width:100%;min-height:64px;resize:vertical}
+.cb-ctl{display:grid;gap:12px;margin-bottom:12px}
+@media(min-width:700px){.cb-ctl{grid-template-columns:1fr 1fr}}
+.cb-ctl label{display:block;font-weight:600;font-size:.88rem;margin-bottom:6px}
+.cb-ctl select,.cb-ctl input[type=range]{width:100%}
+.cb-nm{font-weight:700;margin:0 0 10px}
+.cb-st{position:relative;display:grid;border-radius:12px;overflow:hidden;background:var(--f);--x:50%}
+.cb-st canvas{grid-area:1/1;width:100%;height:auto;max-height:68vh;object-fit:contain;display:block;margin:auto}
+.cb-st #cbS{clip-path:inset(0 0 0 var(--x))}
+.cb-ln{position:absolute;top:0;bottom:0;left:var(--x);width:3px;margin-left:-1.5px;background:#fff;box-shadow:0 0 0 1px #0007;pointer-events:none}
+.cb-lb{position:absolute;top:8px;font-size:.75rem;font-weight:700;background:rgba(0,0,0,.6);color:#fff;padding:3px 8px;border-radius:99px;pointer-events:none}
+.cb-tl{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+@media(min-width:700px){.cb-tl{grid-template-columns:repeat(4,minmax(0,1fr))}}
+.cb-tl figure{margin:0}.cb-tl canvas{width:100%;height:auto;border-radius:10px;border:1px solid var(--b);display:block}
+.cb-tl figcaption{font-size:.82rem;margin-top:4px;opacity:.85}
+.cb-pt{width:100%;border-collapse:collapse;font-size:.88rem;margin-top:12px}
+.cb-pt td,.cb-pt th{padding:7px 4px;border-bottom:1px solid var(--b);text-align:left;font-weight:400}
+.cb-pt th{font-weight:600;white-space:nowrap;padding-right:10px}
+.cb-sw{display:flex;gap:4px}.cb-sw i{width:34px;height:34px;border-radius:8px;border:1px solid var(--b);display:block}
+.cb-wn{margin:12px 0 0;padding:10px 12px;border-radius:10px;border:1px solid var(--b);font-size:.88rem}
+.cb-wn b{display:block;margin-bottom:2px}
+.cb-note{font-size:.8rem;opacity:.75;margin:10px 0 0}
+#cbToast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%) translateY(20px);background:#111;color:#fff;padding:10px 16px;border-radius:10px;font-size:.88rem;opacity:0;pointer-events:none;transition:.2s;z-index:99}
+#cbToast.show{opacity:1;transform:translateX(-50%)}
+.seo{padding:40px 0 56px}.seo h2{margin:0 0 12px}.seo p{margin:0 0 14px;max-width:70ch}.seo h3{margin:28px 0 8px}.seo ol{max-width:70ch;padding-left:20px;margin:0 0 14px}.seo details{border-bottom:1px solid rgba(128,128,128,.28);padding:14px 0;max-width:70ch}.seo summary{cursor:pointer;font-weight:600}.seo details p{margin:10px 0 0}
+@media(prefers-reduced-motion:reduce){#cbToast{transition:none}}
+</style>
+<script src="/js/components.js" defer></script>
+</head>
+<body>
+<dc-header></dc-header>
+<main>
+<section class="ph"><div class="w">
+<nav class="crumb" aria-label="Breadcrumb"><a href="/">Home</a><span aria-hidden="true">/</span><a href="/#tools">Tools</a><span aria-hidden="true">/</span><a href="/accessibility-tools/">Accessibility Tools</a><span aria-hidden="true">/</span><span aria-current="page">Color Blindness Simulator</span></nav>
+<p class="eyebrow">See it through their eyes</p>
+<h1>Color Blindness Simulator</h1>
+<p class="lead">Upload an image or test a color palette and see how it looks with protanopia, deuteranopia, tritanopia or achromatopsia. Adjust the severity and spot colors that people may confuse.</p>
+</div></section>
+
+<section class="pt"><div class="w"><div class="cb">
+<div class="cb-card">
+<h2>Simulate an image</h2>
+<label class="cb-drop" id="cbDrop"><b>Choose an image</b><span>Tap to upload, or drop or paste a picture. Nothing leaves your device.</span><input type="file" id="cbF" accept="image/*" hidden></label>
+<div id="cbBox" hidden>
+<div class="cb-ctl">
+<div><label for="cbT">Condition</label><select id="cbT"><option value="d">Green-blind or weak (deutan)</option><option value="p">Red-blind or weak (protan)</option><option value="t">Blue-blind or weak (tritan)</option><option value="a">No color (achromatopsia)</option></select></div>
+<div><label for="cbV">Severity: <span id="cbVv">100%</span></label><input type="range" id="cbV" min="10" max="100" step="5" value="100"></div>
+</div>
+<p class="cb-nm" id="cbNm"></p>
+<div class="cb-st" id="cbSt"><canvas id="cbO" aria-label="Original image"></canvas><canvas id="cbS" aria-label="Simulated image"></canvas><div class="cb-ln"></div><span class="cb-lb" style="left:8px">Original</span><span class="cb-lb" style="right:8px">Simulated</span></div>
+<input type="range" id="cbP" min="0" max="100" value="50" style="width:100%;margin-top:10px" aria-label="Drag to compare original and simulated">
+<div class="cb-row"><button class="cb-btn p" id="cbDl" type="button">Download simulated PNG</button><button class="cb-btn" id="cbCh" type="button">Change image</button></div>
+</div>
+<div class="cb-row" id="cbDemoRow"><button class="cb-btn" id="cbDemo" type="button">Try a demo image</button></div>
+</div>
+
+<div class="cb-card" id="cbAll" hidden>
+<h2>All conditions at a glance</h2>
+<div class="cb-tl" id="cbTl"></div>
+<p class="cb-note">Shown at the severity you chose. The first tile is the original.</p>
+</div>
+
+<div class="cb-card">
+<h2>Test a color palette</h2>
+<label for="cbPal" style="font-weight:600;font-size:.88rem;display:block;margin-bottom:6px">Colors (HEX, rgb() or names, separated by spaces or commas)</label>
+<textarea id="cbPal" spellcheck="false">#d32f2f #388e3c #1976d2 #f9a825 #7b1fa2</textarea>
+<div id="cbRes"></div>
+<p class="cb-note">Colors are flagged when they look clearly different normally but become very close for someone with the condition. Check text pairs with the <a href="/accessibility-tools/color-contrast-checker/">color contrast checker</a>.</p>
+</div>
+
+<div style="text-align:center"><a class="btn" href="/accessibility-tools/">← Back to Accessibility Tools</a></div>
+</div>
+<div id="cbToast" role="status" aria-live="polite"></div>
+</div></section>
+
+<section class="seo"><div class="w">
+<h2>Free color blindness simulator</h2>
+<p>Color blindness, or color vision deficiency, changes how people tell colors apart. A chart, a map or a button that looks clear to you can become confusing for someone who sees red and green as similar shades. This simulator shows your image or palette through the main types of color vision deficiency so you can find problems before your users do.</p>
+<p>Use the severity slider to move from full color blindness (like protanopia) to mild forms (like protanomaly), and drag the comparison bar to see the original and simulated image side by side.</p>
+<h3>Types of color blindness you can test</h3>
+<ol><li>Protanopia and protanomaly: reds look darker and are confused with greens and browns.</li><li>Deuteranopia and deuteranomaly: greens are confused with reds. This is the most common type.</li><li>Tritanopia and tritanomaly: blues and yellows are hard to tell apart. This is rare.</li><li>Achromatopsia: very little or no color is seen. This is very rare.</li></ol>
+<h3>How to use the simulator</h3>
+<ol><li>Upload an image, or try the demo image.</li><li>Pick a condition and adjust the severity.</li><li>Drag the bar to compare, or scroll to see every condition at once.</li><li>Paste your brand or chart colors into the palette test to find pairs that look alike.</li></ol>
+<h3>Frequently asked questions</h3>
+<details><summary>What is color blindness?</summary><p>Color blindness is the common name for color vision deficiency, where some colors are hard to tell apart. It is usually inherited and most often affects red and green. It does not mean a person sees only black and white.</p></details>
+<details><summary>How many people are color blind?</summary><p>Roughly 1 in 12 men and 1 in 200 women have some form of red-green color vision deficiency, though rates vary between populations. Blue-yellow and complete color blindness are much rarer.</p></details>
+<details><summary>How accurate is a color blindness simulator?</summary><p>It is a good approximation based on published color vision models, but real perception differs from person to person, and screens and lighting also matter. Treat it as a design check, not a medical test.</p></details>
+<details><summary>How do I make colors color blind friendly?</summary><p>Do not rely on color alone. Add labels, icons, patterns or different shapes, keep strong lightness contrast between neighboring colors, and test your palette here and with a contrast checker.</p></details>
+<details><summary>What is the difference between protanopia and protanomaly?</summary><p>The ending -opia means a type of cone cell is missing or not working, so the effect is strong. The ending -anomaly means it works partly, so the effect is milder. The severity slider moves between the two.</p></details>
+<details><summary>Is my image uploaded anywhere?</summary><p>No. The image is processed in your browser and never leaves your device.</p></details>
+</div></section>
+</main>
+<dc-footer></dc-footer>
+
+<script>
+(function(){
+var $=function(i){return document.getElementById(i)},mx=Math.max,mn=Math.min,SRC=null,raf;
+/* Machado et al. (2009) full-severity matrices in linear RGB; achromatopsia uses luminance */
+var FULL={d:[[.367322,.860646,-.227968],[.280085,.672501,.047413],[-.01182,.04294,.968881]],p:[[.152286,1.052583,-.204868],[.114503,.786281,.099216],[-.003882,-.048116,1.051998]],t:[[1.255528,-.076749,-.178779],[-.078411,.930809,.147602],[.004733,.691367,.3039]],a:[[.2126,.7152,.0722],[.2126,.7152,.0722],[.2126,.7152,.0722]]};
+var NAMES={d:["Deuteranopia","Deuteranomaly"],p:["Protanopia","Protanomaly"],t:["Tritanopia","Tritanomaly"],a:["Achromatopsia","Achromatomaly"]};
+var LIN=[],ENC=[],i;for(i=0;i<256;i++){var c=i/255;LIN[i]=c<=.04045?c/12.92:Math.pow((c+.055)/1.055,2.4)}
+for(i=0;i<=4096;i++){var v=i/4096;ENC[i]=Math.round(255*(v<=.0031308?12.92*v:1.055*Math.pow(v,1/2.4)-.055))}
+function mat(t,s){var I=[[1,0,0],[0,1,0],[0,0,1]];return FULL[t].map(function(r,a){return r.map(function(v,b){return I[a][b]*(1-s)+v*s})})}
+function sim1(r,g,b,M){var R=LIN[r],G=LIN[g],B=LIN[b];return[0,1,2].map(function(k){var v=M[k][0]*R+M[k][1]*G+M[k][2]*B;return ENC[Math.round(mx(0,mn(1,v))*4096)]})}
+function simData(d,M){var n=d.length,j,R,G,B,a,b,c;for(j=0;j<n;j+=4){R=LIN[d[j]];G=LIN[d[j+1]];B=LIN[d[j+2]];
+ a=M[0][0]*R+M[0][1]*G+M[0][2]*B;b=M[1][0]*R+M[1][1]*G+M[1][2]*B;c=M[2][0]*R+M[2][1]*G+M[2][2]*B;
+ d[j]=ENC[Math.round(mx(0,mn(1,a))*4096)];d[j+1]=ENC[Math.round(mx(0,mn(1,b))*4096)];d[j+2]=ENC[Math.round(mx(0,mn(1,c))*4096)]}}
+function nm(t,s){return NAMES[t][s>=.99?0:1]}
+function toast(m){var e=$("cbToast");e.textContent=m;e.classList.add("show");clearTimeout(toast.t);toast.t=setTimeout(function(){e.classList.remove("show")},1500)}
+/* image loading */
+function setSrc(img,w,h){var s=mn(1,900/mx(w,h)),c=document.createElement("canvas");c.width=Math.round(w*s);c.height=Math.round(h*s);c.getContext("2d").drawImage(img,0,0,c.width,c.height);SRC=c;
+ var o=$("cbO");o.width=c.width;o.height=c.height;o.getContext("2d").drawImage(c,0,0);$("cbS").width=c.width;$("cbS").height=c.height;
+ $("cbDrop").hidden=true;$("cbDemoRow").hidden=true;$("cbBox").hidden=false;$("cbAll").hidden=false;render()}
+function loadFile(fl){if(!fl||!/^image\//.test(fl.type)){toast("Please choose an image file");return}var im=new Image();im.onload=function(){setSrc(im,im.width,im.height);URL.revokeObjectURL(im.src)};im.onerror=function(){toast("This image could not be opened")};im.src=URL.createObjectURL(fl)}
+$("cbF").onchange=function(){loadFile(this.files[0]);this.value=""};
+$("cbCh").onclick=function(){$("cbF").click()};
+var dr=$("cbDrop");["dragover","dragenter"].forEach(function(e){document.addEventListener(e,function(ev){ev.preventDefault();dr.classList.add("drag")})});["dragleave","drop"].forEach(function(e){document.addEventListener(e,function(){dr.classList.remove("drag")})});
+document.addEventListener("drop",function(e){e.preventDefault();loadFile(e.dataTransfer.files[0])});
+document.addEventListener("paste",function(e){var it=[].filter.call(e.clipboardData?e.clipboardData.items:[],function(x){return/^image\//.test(x.type)})[0];if(it)loadFile(it.getAsFile())});
+$("cbDemo").onclick=function(){var c=document.createElement("canvas");c.width=800;c.height=520;var x=c.getContext("2d"),g=x.createLinearGradient(0,0,800,0),k;
+ for(k=0;k<=6;k++)g.addColorStop(k/6,"hsl("+(k*60)+",85%,50%)");x.fillStyle=g;x.fillRect(0,0,800,230);
+ g=x.createLinearGradient(0,0,0,230);g.addColorStop(0,"rgba(255,255,255,.55)");g.addColorStop(.5,"rgba(255,255,255,0)");g.addColorStop(1,"rgba(0,0,0,.45)");x.fillStyle=g;x.fillRect(0,0,800,230);
+ x.fillStyle="#f4f1ea";x.fillRect(0,230,800,290);
+ ["#d32f2f","#388e3c","#f9a825","#1976d2","#7b1fa2","#00897b","#e64a19"].forEach(function(col,j){x.fillStyle=col;x.beginPath();x.arc(70+j*110,375,48,0,7);x.fill()});
+ x.fillStyle="#d32f2f";x.fillRect(60,455,300,26);x.fillStyle="#388e3c";x.fillRect(440,455,300,26);setSrc(c,800,520)};
+/* render */
+function cur(){return{t:$("cbT").value,s:$("cbV").value/100}}
+function render(){if(!SRC)return;var q=cur(),M=mat(q.t,q.s);$("cbVv").textContent=Math.round(q.s*100)+"%";$("cbNm").textContent=nm(q.t,q.s);
+ var s=$("cbS"),x=s.getContext("2d");x.drawImage(SRC,0,0);var im=x.getImageData(0,0,s.width,s.height);simData(im.data,M);x.putImageData(im,0,0);
+ var T=$("cbTl");T.innerHTML="";
+ [["n","Original"],["p",nm("p",q.s)],["d",nm("d",q.s)],["t",nm("t",q.s)]].concat([["a",nm("a",q.s)]]).forEach(function(z){
+  var f=document.createElement("figure"),c=document.createElement("canvas"),w=240,h=Math.round(SRC.height*w/SRC.width),cx;c.width=w;c.height=h;cx=c.getContext("2d");cx.drawImage(SRC,0,0,w,h);
+  if(z[0]!="n"){var d=cx.getImageData(0,0,w,h);simData(d.data,mat(z[0],q.s));cx.putImageData(d,0,0)}
+  f.appendChild(c);var cp=document.createElement("figcaption");cp.textContent=z[1];f.appendChild(cp);T.appendChild(f)})}
+function sched(){cancelAnimationFrame(raf);raf=requestAnimationFrame(render)}
+$("cbT").onchange=function(){sched();pal()};$("cbV").oninput=function(){sched();pal()};
+$("cbP").oninput=function(){$("cbSt").style.setProperty("--x",this.value+"%")};
+$("cbDl").onclick=function(){$("cbS").toBlob(function(b){var a=document.createElement("a");a.href=URL.createObjectURL(b);a.download="color-blind-simulation.png";document.body.appendChild(a);a.click();a.remove();setTimeout(function(){URL.revokeObjectURL(a.href)},2000);toast("Image downloaded")})};
+/* palette test */
+function parse(t){var e=document.createElement("i");e.style.color="";e.style.color=t.trim();if(!e.style.color&&/^[0-9a-f]{3,8}$/i.test(t.trim()))e.style.color="#"+t.trim();if(!e.style.color)return null;document.body.appendChild(e);var c=getComputedStyle(e).color;e.remove();var m=c.match(/[\d.]+/g);return m&&m.length>=3?m.slice(0,3).map(Number):null}
+function hex(c){return"#"+c.map(function(x){return x.toString(16).padStart(2,"0")}).join("").toUpperCase()}
+function lab(c){var l=c.map(function(v){return LIN[v]}),X=(.4124564*l[0]+.3575761*l[1]+.1804375*l[2])/.95047,Y=.2126729*l[0]+.7151522*l[1]+.072175*l[2],Z=(.0193339*l[0]+.119192*l[1]+.9503041*l[2])/1.08883,t=function(v){return v>.008856?Math.cbrt(v):7.787*v+16/116};return[116*t(Y)-16,500*(t(X)-t(Y)),200*(t(Y)-t(Z))]}
+function de(a,b){var p=lab(a),q=lab(b);return Math.hypot(p[0]-q[0],p[1]-q[1],p[2]-q[2])}
+function tokens(s){return s.split(/[\s,;]+/).filter(Boolean)}
+function pal(){var C=[],T=tokens($("cbPal").value),q=cur(),R=$("cbRes"),k,j;
+ T.forEach(function(t){var p=parse(t);if(p&&C.length<8)C.push(p.map(Math.round))});
+ if(C.length<2){R.innerHTML="<p class='cb-note'>Add at least two colors.</p>";return}
+ var rows=[["Original",C]],warn=[];
+ [["p","d","t","a"]][0].forEach(function(t){var M=mat(t,q.s),S=C.map(function(c){return sim1(c[0],c[1],c[2],M)});rows.push([nm(t,q.s),S]);
+  for(k=0;k<C.length;k++)for(j=k+1;j<C.length;j++)if(de(C[k],C[j])>=20&&de(S[k],S[j])<12)warn.push(nm(t,q.s)+": "+hex(C[k])+" and "+hex(C[j]))});
+ var h="<table class='cb-pt'><tbody>";rows.forEach(function(r){h+="<tr><th scope='row'>"+r[0]+"</th><td><div class='cb-sw'>"+r[1].map(function(c){return"<i style='background:"+hex(c)+"' title='"+hex(c)+"'></i>"}).join("")+"</div></td></tr>"});h+="</tbody></table>";
+ h+=warn.length?"<div class='cb-wn'><b>May look alike</b>"+warn.join("<br>")+"</div>":"<div class='cb-wn'><b>No close pairs found</b>Every pair of colors stays clearly different. Still add labels or patterns where color carries meaning.</div>";
+ R.innerHTML=h}
+var pt;$("cbPal").oninput=function(){clearTimeout(pt);pt=setTimeout(pal,200)};
+pal();
+/* SEO: structured data and canonical built from the visible page so text and markup always match */
+(function(){var o=location.origin,p=location.pathname,
+ q=[].map.call(document.querySelectorAll('.seo details'),function(d){return{'@type':'Question',name:d.querySelector('summary').textContent,acceptedAnswer:{'@type':'Answer',text:d.querySelector('p').textContent}}}),
+ g={'@context':'https://schema.org','@graph':[
+  {'@type':'BreadcrumbList',itemListElement:[['Home','/'],['Tools','/#tools'],['Accessibility Tools','/accessibility-tools/'],['Color Blindness Simulator',p]].map(function(x,i){return{'@type':'ListItem',position:i+1,name:x[0],item:o+x[1]}})},
+  {'@type':'WebApplication',name:'Color Blindness Simulator',url:o+p,applicationCategory:'DesignApplication',operatingSystem:'Any',browserRequirements:'Requires JavaScript',description:'Free color blindness simulator for images and color palettes with protanopia, deuteranopia, tritanopia and achromatopsia.',offers:{'@type':'Offer',price:'0',priceCurrency:'USD'}},
+  {'@type':'FAQPage',mainEntity:q}]},
+ s=document.createElement('script'),l=document.createElement('link');
+ s.type='application/ld+json';s.text=JSON.stringify(g);document.head.appendChild(s);
+ l.rel='canonical';l.href=o+p;document.head.appendChild(l)})();
+})();
+</script>
+</body>
+</html>
